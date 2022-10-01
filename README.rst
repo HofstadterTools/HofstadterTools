@@ -3,7 +3,23 @@ HofstadterTools
 
 A numerical toolbox for analyzing the Hofstadter model.
 
-Prerequisites: Python 3.7.6+
+Python environment
+------------------
+
+In order to use the tried-and-tested packages for HofstadterTools, we recommend the conda environment ``HT`` in ``environment.yml``.
+
+1) If you have not already, you need to install Anaconda or `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ (recommended).
+
+2) On the first use, you need to create the ``HT`` environment: ``conda env create -f environment.yml``
+
+3) Whenever you would like to use the environment, you can then run: ``conda activate HT``
+
+We only include packages in the environment that are necessary for HofstadterTools. Currently installed packages:
+
+- python
+- numpy
+- matplotlib
+- prettytable
 
 References
 ----------
