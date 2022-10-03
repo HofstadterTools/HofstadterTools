@@ -40,9 +40,14 @@ def multi_berry_curv(ev1, ev1_alpha, ev1_beta, ev1_alpha_beta, ev2, ev2_alpha, e
     return multi_bc
 
 
-def fubini_study():
+def fubini_study(ev1, ev1_alpha, ev1_beta):
 
-    matrix = np.zeros((2, 2), dtype=np.complex128)
+    FS_matrix = np.zeros((2, 2))
+    FS_matrix[0][0] = np.real(np.conj(ev1_alpha).dot(ev1_alpha) - np.conj(ev1_alpha).dot(ev1)*np.conj(ev1).dot(ev1_alpha))
+    FS_matrix[0][1] = np.real(0.5 * (np.conj(ev1_alpha).dot(ev1_beta) + np.conj(ev1_beta).dot(ev1_alpha)
+                              - np.conj(ev1_alpha).dot(ev1)*np.conj(ev1).dot(ev1_beta) - np.conj(ev1_beta).dot(ev1)*np.conj(ev1).dot(ev1_alpha)))
+    FS_matrix[1][0] = np.real(0.5 * (np.conj(ev1_beta).dot(ev1_alpha) + np.conj(ev1_alpha).dot(ev1_beta)
+                              - np.conj(ev1_beta).dot(ev1)*np.conj(ev1).dot(ev1_alpha) - np.conj(ev1_alpha).dot(ev1)*np.conj(ev1).dot(ev1_beta)))
+    FS_matrix[1][1] = np.real(np.conj(ev1_beta).dot(ev1_beta) - np.conj(ev1_beta).dot(ev1)*np.conj(ev1).dot(ev1_beta))
 
-
-    return metric
+    return FS_matrix

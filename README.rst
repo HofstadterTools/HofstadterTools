@@ -20,6 +20,7 @@ We only include packages in the environment that are necessary for HofstadterToo
 - numpy
 - matplotlib
 - prettytable
+- tqdm
 
 References
 ----------
