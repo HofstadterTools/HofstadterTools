@@ -9,6 +9,19 @@ def berry_curv(eigvec, eigvec_alpha, eigvec_beta, eigvec_alpha_beta):
     return Berry_curv
 
 
+def explicit_berry_curv(eigvec, eigvec_alpha, eigvec_beta, eigvec_alpha_beta):
+
+    term1 = -np.angle(np.conj(eigvec).dot(eigvec_alpha))
+    term2 = -np.angle(np.conj(eigvec_alpha).dot(eigvec_alpha_beta))
+
+    term3 = -np.angle(np.conj(eigvec_alpha_beta).dot(eigvec_beta))
+    term4 = -np.angle(np.conj(eigvec_beta).dot(eigvec))
+
+    Berry_curv = term1 + term2 + term3 + term4
+
+    return Berry_curv
+
+
 def multi_berry_curv(ev1, ev1_alpha, ev1_beta, ev1_alpha_beta, ev2, ev2_alpha, ev2_beta, ev2_alpha_beta):
 
     matrix1 = np.zeros((2, 2), dtype=np.complex128)

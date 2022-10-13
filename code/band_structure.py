@@ -9,6 +9,9 @@ import functions.func_band_struc as fbs
 import functions.func_args as fa
 from models.hofstadter import Hofstadter
 
+# plt.rc('text', usetex=True)
+# plt.rc('text.latex', preamble=r'\usepackage{amsmath}')
+
 
 if __name__ == '__main__':
 
@@ -111,8 +114,22 @@ if __name__ == '__main__':
         kx, ky = np.meshgrid(idx_x, idx_y)
         for i in range(num_bands):
             ax.plot_surface(kx, ky, eigenvalues[i, kx, ky])
-        ax.set_xlabel('$k_x$')
-        ax.set_ylabel('$k_y$')
+        ax.set_xlabel('$k_1/|\mathbf{b}_1|$')
+        ax.set_ylabel('$k_2/|\mathbf{b}_2|$')
+
+
+        def normalize(value, tick_number):
+
+            if value == 0:
+                return "$0$"
+            elif value == num_samples - 1:
+                return "$1$"
+            else:
+                return f"${value / (num_samples - 1):.1g}$"
+
+        ax.xaxis.set_major_formatter(plt.FuncFormatter(normalize))
+        ax.yaxis.set_major_formatter(plt.FuncFormatter(normalize))
+
         ax.set_zlabel('$E$')
     elif args['display'] == "2D":
         # construct bands
