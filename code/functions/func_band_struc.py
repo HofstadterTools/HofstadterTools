@@ -9,15 +9,15 @@ def berry_curv(eigvec, eigvec_alpha, eigvec_beta, eigvec_alpha_beta):
     return Berry_curv
 
 
-def explicit_berry_curv(eigvec, eigvec_alpha, eigvec_beta, eigvec_alpha_beta):
+def exp_berry_curv(eigvec, eigvec_alpha, eigvec_beta, eigvec_alpha_beta):
 
-    term1 = -np.angle(np.conj(eigvec).dot(eigvec_alpha))
-    term2 = -np.angle(np.conj(eigvec_alpha).dot(eigvec_alpha_beta))
+    term1 = np.conj(eigvec_alpha).dot(eigvec_alpha_beta)
+    term2 = -np.conj(eigvec).dot(eigvec_beta)
 
-    term3 = -np.angle(np.conj(eigvec_alpha_beta).dot(eigvec_beta))
-    term4 = -np.angle(np.conj(eigvec_beta).dot(eigvec))
+    term3 = -np.conj(eigvec_beta).dot(eigvec_alpha_beta)
+    term4 = np.conj(eigvec).dot(eigvec_alpha)
 
-    Berry_curv = term1 + term2 + term3 + term4
+    Berry_curv = -1j*(term1 + term2 + term3 + term4)
 
     return Berry_curv
 

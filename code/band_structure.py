@@ -54,6 +54,7 @@ if __name__ == '__main__':
 
     # compute Berry fluxes
     berry_fluxes = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
+    exp_berry_fluxes = np.zeros((num_bands, num_samples - 1, num_samples - 1), dtype=complex)  # complex
     TISM = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
     DISM = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
     for band in tqdm(range(num_bands), desc="Band Properties", ascii=True):
@@ -64,6 +65,10 @@ if __name__ == '__main__':
                                                                       eigenvectors[:, band, idx_x + 1, idx_y],
                                                                       eigenvectors[:, band, idx_x, idx_y + 1],
                                                                       eigenvectors[:, band, idx_x + 1, idx_y + 1])
+                    exp_berry_fluxes[band, idx_x, idx_y] = fbs.exp_berry_curv(eigenvectors[:, band, idx_x, idx_y],
+                                                                              eigenvectors[:, band, idx_x + 1, idx_y],
+                                                                              eigenvectors[:, band, idx_x, idx_y + 1],
+                                                                              eigenvectors[:, band, idx_x + 1, idx_y + 1])
                     TISM[band, idx_x, idx_y] = np.trace(fbs.fubini_study(eigenvectors[:, band, idx_x, idx_y],
                                                                          eigenvectors[:, band, idx_x + 1, idx_y],
                                                                          eigenvectors[:, band, idx_x, idx_y + 1])) \
@@ -86,12 +91,14 @@ if __name__ == '__main__':
 
     # band properties
     chern_numbers = np.zeros(num_bands)
+    exp_chern_numbers = np.zeros(num_bands, dtype=complex)
     berry_fluc = np.zeros(num_bands)
     band_width = np.zeros(num_bands)
     TISM_average = np.zeros(num_bands)
     DISM_average = np.zeros(num_bands)
     for band_idx, band in enumerate(np.arange(num_bands)[::-1]):
         chern_numbers[band] = np.sum(berry_fluxes[band, :, :]) / (2 * np.pi)
+        exp_chern_numbers[band] = np.sum(exp_berry_fluxes[band, :, :]) / (2 * np.pi)
         berry_fluc[band] = np.std(berry_fluxes[band, :, :])/np.abs(np.average(berry_fluxes[band, :, :]))
         band_width[band] = np.max(eigenvalues[band]) - np.min(eigenvalues[band])
         TISM_average[band] = np.mean(TISM[band])
@@ -99,9 +106,9 @@ if __name__ == '__main__':
 
     # table
     table = PrettyTable()
-    table.field_names = ["band", "isolated", "C", "sigma_B/|mu_B|", "width", "gap", "gap/width", "<T>", "<D>"]
+    table.field_names = ["band", "isolated", "C", "explicit C", "sigma_B/|mu_B|", "width", "gap", "gap/width", "<T>", "<D>"]
     for band in np.arange(num_bands)[::-1]:
-        table.add_row([band, isolated[band], round(chern_numbers[band]), berry_fluc[band], band_width[band],
+        table.add_row([band, isolated[band], round(chern_numbers[band]), exp_chern_numbers[band], berry_fluc[band], band_width[band],
                        band_gap[band], band_gap[band]/band_width[band], TISM_average[band], DISM_average[band]])
     print(table)
 
