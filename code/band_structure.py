@@ -48,13 +48,16 @@ if __name__ == '__main__':
             band_gap[band] = "NaN"
         else:
             band_gap[band] = np.min(eigenvalues[band + 1]) - np.max(eigenvalues[band])
-        if band_gap[band] < 1e-10:
+        if band_gap[band] < 0.1:
             isolated[band] = False
             isolated[band + 1] = False
 
     # compute Berry fluxes
     berry_fluxes = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
-    exp_berry_fluxes = np.zeros((num_bands, num_samples - 1, num_samples - 1), dtype=complex)  # complex
+    fs_metric = np.zeros((num_bands, num_samples - 1, num_samples - 1, 2, 2))  # real
+    berry_fluxes_2 = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
+    tr_g = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
+    abs_B = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
     TISM = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
     DISM = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
     for band in tqdm(range(num_bands), desc="Band Properties", ascii=True):
@@ -65,18 +68,20 @@ if __name__ == '__main__':
                                                                       eigenvectors[:, band, idx_x + 1, idx_y],
                                                                       eigenvectors[:, band, idx_x, idx_y + 1],
                                                                       eigenvectors[:, band, idx_x + 1, idx_y + 1])
-                    exp_berry_fluxes[band, idx_x, idx_y] = fbs.exp_berry_curv(eigenvectors[:, band, idx_x, idx_y],
-                                                                              eigenvectors[:, band, idx_x + 1, idx_y],
-                                                                              eigenvectors[:, band, idx_x, idx_y + 1],
-                                                                              eigenvectors[:, band, idx_x + 1, idx_y + 1])
-                    TISM[band, idx_x, idx_y] = np.trace(fbs.fubini_study(eigenvectors[:, band, idx_x, idx_y],
-                                                                         eigenvectors[:, band, idx_x + 1, idx_y],
-                                                                         eigenvectors[:, band, idx_x, idx_y + 1])) \
-                                               - np.abs(berry_fluxes[band, idx_x, idx_y])
-                    DISM[band, idx_x, idx_y] = np.linalg.det(fbs.fubini_study(eigenvectors[:, band, idx_x, idx_y],
-                                                                              eigenvectors[:, band, idx_x + 1, idx_y],
-                                                                              eigenvectors[:, band, idx_x, idx_y + 1])) \
-                                               - 0.25*np.abs(berry_fluxes[band, idx_x, idx_y])**2
+                    # quantum geometry
+                    geom_tensor = fbs.geom_tensor(eigenvectors[:, band, idx_x, idx_y],
+                                                  eigenvectors[:, band, idx_x + 1, idx_y],
+                                                  eigenvectors[:, band, idx_x, idx_y + 1])
+                    fs_metric[band, idx_x, idx_y] = np.real(geom_tensor)
+                    berry_curv = -2*np.imag(geom_tensor)
+                    ###
+                    berry_fluxes_2[band, idx_x, idx_y] = berry_curv[0][1]
+                    tr_g[band, idx_x, idx_y] = np.trace(fs_metric[band, idx_x, idx_y])
+                    abs_B[band, idx_x, idx_y] = np.abs(berry_fluxes_2[band, idx_x, idx_y])
+                    TISM[band, idx_x, idx_y] = np.trace(fs_metric[band, idx_x, idx_y]) \
+                                               - np.abs(berry_fluxes_2[band, idx_x, idx_y])
+                    DISM[band, idx_x, idx_y] = np.linalg.det(fs_metric[band, idx_x, idx_y]) \
+                                               - 0.25*np.abs(berry_fluxes_2[band, idx_x, idx_y])**2
                 elif band == 0 or isolated[band-1]:
                     berry_fluxes[band, idx_x, idx_y] = fbs.multi_berry_curv(eigenvectors[:, band, idx_x, idx_y],
                                                                             eigenvectors[:, band, idx_x+1, idx_y],
@@ -91,25 +96,70 @@ if __name__ == '__main__':
 
     # band properties
     chern_numbers = np.zeros(num_bands)
-    exp_chern_numbers = np.zeros(num_bands, dtype=complex)
-    berry_fluc = np.zeros(num_bands)
+    chern_numbers_2 = np.zeros(num_bands)
+    std_B_norm = np.zeros(num_bands)
+    av_gxx = np.zeros(num_bands)
+    std_gxx = np.zeros(num_bands)
+    av_gxy = np.zeros(num_bands)
+    std_gxy = np.zeros(num_bands)
+    av_gyy = np.zeros(num_bands)
+    std_gyy = np.zeros(num_bands)
+    av_tr_g = np.zeros(num_bands)
+    av_abs_B = np.zeros(num_bands)
     band_width = np.zeros(num_bands)
-    TISM_average = np.zeros(num_bands)
-    DISM_average = np.zeros(num_bands)
+    av_TISM = np.zeros(num_bands)
+    av_DISM = np.zeros(num_bands)
     for band_idx, band in enumerate(np.arange(num_bands)[::-1]):
         chern_numbers[band] = np.sum(berry_fluxes[band, :, :]) / (2 * np.pi)
-        exp_chern_numbers[band] = np.sum(exp_berry_fluxes[band, :, :]) / (2 * np.pi)
-        berry_fluc[band] = np.std(berry_fluxes[band, :, :])/np.abs(np.average(berry_fluxes[band, :, :]))
+        chern_numbers_2[band] = np.sum(berry_fluxes_2[band, :, :]) / (2 * np.pi)
+        std_B_norm[band] = np.std(berry_fluxes[band, :, :])/np.abs(np.average(berry_fluxes[band, :, :]))
+        av_gxx[band] = np.mean(fs_metric[band, :, :, 0, 0])
+        std_gxx[band] = np.std(fs_metric[band, :, :, 0, 0])
+        av_gxy[band] = np.mean(fs_metric[band, :, :, 0, 1])
+        std_gxy[band] = np.std(fs_metric[band, :, :, 0, 1])
+        av_gyy[band] = np.mean(fs_metric[band, :, :, 1, 1])
+        std_gyy[band] = np.std(fs_metric[band, :, :, 1, 1])
+        av_tr_g[band] = np.mean(tr_g[band])
+        av_abs_B[band] = np.mean(abs_B[band])
         band_width[band] = np.max(eigenvalues[band]) - np.min(eigenvalues[band])
-        TISM_average[band] = np.mean(TISM[band])
-        DISM_average[band] = np.mean(DISM[band])
+        av_TISM[band] = np.sum(TISM[band])
+        av_DISM[band] = np.sum(DISM[band])
 
     # table
+    show_band = True
+    show_isolated = True
+    show_C = False
+    show_C_geom_tensor = False
+    show_std_B_norm = True
+    show_av_gxx = True
+    show_std_gxx = False
+    show_av_gxy = False
+    show_std_gxy = False
+    show_av_gyy = True
+    show_std_gyy = False
+    show_av_tr_g = True
+    show_av_abs_B = True
+    show_width = False
+    show_gap = False
+    show_gap_width = False
+    show_T = False
+    show_D = False
+
+    headers = ["band", "isolated", "C", "C (geom_tensor)", "std_B/|av_B|", "av_gxx", "std_gxx", "av_gxy", "std_gxy",
+               "av_gyy", "std_gyy", "av_tr_g", "av_abs_B", "width", "gap", "gap/width", "<T>", "<D>"]
+    bools = [show_band, show_isolated, show_C, show_C_geom_tensor, show_std_B_norm, show_av_gxx, show_std_gxx,
+             show_av_gxy, show_std_gxy, show_av_gyy, show_std_gyy, show_av_tr_g, show_av_abs_B, show_width, show_gap,
+             show_gap_width, show_T, show_D]
+
     table = PrettyTable()
-    table.field_names = ["band", "isolated", "C", "explicit C", "sigma_B/|mu_B|", "width", "gap", "gap/width", "<T>", "<D>"]
+    name_list = []
+    table.field_names = [j for i, j in enumerate(headers) if bools[i]]
     for band in np.arange(num_bands)[::-1]:
-        table.add_row([band, isolated[band], round(chern_numbers[band]), exp_chern_numbers[band], berry_fluc[band], band_width[band],
-                       band_gap[band], band_gap[band]/band_width[band], TISM_average[band], DISM_average[band]])
+        data = [band, isolated[band], round(chern_numbers[band]), chern_numbers_2[band], std_B_norm[band],
+                av_gxx[band], std_gxx[band], av_gxy[band], std_gxy[band], av_gyy[band], std_gyy[band],
+                av_tr_g[band], av_abs_B[band], band_width[band], band_gap[band], band_gap[band] / band_width[band],
+                av_TISM[band], av_DISM[band]]
+        table.add_row([j for i, j in enumerate(data) if bools[i]])
     print(table)
 
     # construct figure

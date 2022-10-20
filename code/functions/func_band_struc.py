@@ -1,23 +1,39 @@
 import numpy as np
+import cmath as cm
 
 
-def berry_curv(eigvec, eigvec_alpha, eigvec_beta, eigvec_alpha_beta):
+def _principal(log_sum):
+    # take the principal branch of a log sum, such that -pi<Im(z)<=pi
+    re = np.real(log_sum)
+    im = np.imag(log_sum)
+    if im <= -np.pi:
+        log_sum = re + 1j * (np.pi - np.abs((im + np.pi)) % (2 * np.pi))
+    elif im > np.pi:
+        log_sum = re + 1j * (-np.pi + np.abs((im + np.pi)) % (2 * np.pi))
 
-    Berry_curv = - np.imag(np.log(np.conj(eigvec).dot(eigvec_alpha) * np.conj(eigvec_alpha).dot(eigvec_alpha_beta)
-                           * np.conj(eigvec_alpha_beta).dot(eigvec_beta) * np.conj(eigvec_beta).dot(eigvec)))
+    return log_sum
+
+
+def berry_curv(ev, ev_alpha, ev_beta, ev_alpha_beta):
+
+    # Method from Fukui et al., J. Phys. Soc. Jpn. 74 (2005) pp. 1674-1677
+    # Link variables (eigenvectors are already normalized from numpy.linalg.eig)
+    U12 = np.conj(ev).dot(ev_alpha)
+    U23 = np.conj(ev_alpha).dot(ev_alpha_beta)
+    U34 = np.conj(ev_alpha_beta).dot(ev_beta)
+    U41 = np.conj(ev_beta).dot(ev)
+
+    Berry_curv = - np.imag(np.log(U12*U23*U34*U41))  # origin of minus sign?
+    # Berry_curv = - np.imag(_principal(np.log(U12) + np.log(U23) + np.log(U34) + np.log(U41)))
 
     return Berry_curv
 
 
-def exp_berry_curv(eigvec, eigvec_alpha, eigvec_beta, eigvec_alpha_beta):
+def berry_curv_2(ev, ev_alpha, ev_beta):
 
-    term1 = np.conj(eigvec_alpha).dot(eigvec_alpha_beta)
-    term2 = -np.conj(eigvec).dot(eigvec_beta)
-
-    term3 = -np.conj(eigvec_beta).dot(eigvec_alpha_beta)
-    term4 = np.conj(eigvec).dot(eigvec_alpha)
-
-    Berry_curv = -1j*(term1 + term2 + term3 + term4)
+    # Method using imaginary part of quantum geometric tensor
+    chi = np.conj(ev_alpha).dot(ev_beta) - np.conj(ev_alpha).dot(ev)*np.conj(ev).dot(ev_beta)
+    Berry_curv = -2 * np.imag(chi)
 
     return Berry_curv
 
@@ -53,14 +69,12 @@ def multi_berry_curv(ev1, ev1_alpha, ev1_beta, ev1_alpha_beta, ev2, ev2_alpha, e
     return multi_bc
 
 
-def fubini_study(ev1, ev1_alpha, ev1_beta):
+def geom_tensor(ev, ev_alpha, ev_beta):
 
-    FS_matrix = np.zeros((2, 2))
-    FS_matrix[0][0] = np.real(np.conj(ev1_alpha).dot(ev1_alpha) - np.conj(ev1_alpha).dot(ev1)*np.conj(ev1).dot(ev1_alpha))
-    FS_matrix[0][1] = np.real(0.5 * (np.conj(ev1_alpha).dot(ev1_beta) + np.conj(ev1_beta).dot(ev1_alpha)
-                              - np.conj(ev1_alpha).dot(ev1)*np.conj(ev1).dot(ev1_beta) - np.conj(ev1_beta).dot(ev1)*np.conj(ev1).dot(ev1_alpha)))
-    FS_matrix[1][0] = np.real(0.5 * (np.conj(ev1_beta).dot(ev1_alpha) + np.conj(ev1_alpha).dot(ev1_beta)
-                              - np.conj(ev1_beta).dot(ev1)*np.conj(ev1).dot(ev1_alpha) - np.conj(ev1_alpha).dot(ev1)*np.conj(ev1).dot(ev1_beta)))
-    FS_matrix[1][1] = np.real(np.conj(ev1_beta).dot(ev1_beta) - np.conj(ev1_beta).dot(ev1)*np.conj(ev1).dot(ev1_beta))
+    tensor = np.zeros((2, 2), dtype=np.complex128)
+    tensor[0][0] = np.conj(ev_alpha).dot(ev_alpha) - np.conj(ev_alpha).dot(ev)*np.conj(ev).dot(ev_alpha)
+    tensor[0][1] = np.conj(ev_alpha).dot(ev_beta) - np.conj(ev_alpha).dot(ev)*np.conj(ev).dot(ev_beta)
+    tensor[1][0] = np.conj(ev_beta).dot(ev_alpha) - np.conj(ev_beta).dot(ev)*np.conj(ev).dot(ev_alpha)
+    tensor[1][1] = np.conj(ev_beta).dot(ev_beta) - np.conj(ev_beta).dot(ev)*np.conj(ev).dot(ev_beta)
 
-    return FS_matrix
+    return tensor
