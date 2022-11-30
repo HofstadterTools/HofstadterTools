@@ -1,7 +1,7 @@
 HofstadterTools
 ===============
 
-A numerical toolbox for analyzing the Hofstadter model.
+HofstadterTools is a numerical toolbox for analyzing the Hofstadter model.
 
 Python environment
 ------------------
@@ -21,6 +21,16 @@ We only include packages in the environment that are necessary for HofstadterToo
 - matplotlib
 - prettytable
 - tqdm
+
+- furo
+- ipython
+- sphinx
+- sphinx_rtd_theme
+- pydata-sphinx-theme
+- sphinx-autodoc-typehints
+- nbsphinx
+- jupyter
+- jupytext
 
 References
 ----------

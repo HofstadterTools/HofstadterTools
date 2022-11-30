@@ -142,8 +142,8 @@ if __name__ == '__main__':
     show_width = False
     show_gap = False
     show_gap_width = False
-    show_T = False
-    show_D = False
+    show_T = True
+    show_D = True
 
     headers = ["band", "isolated", "C", "C (geom_tensor)", "std_B/|av_B|", "av_gxx", "std_gxx", "av_gxy", "std_gxy",
                "av_gyy", "std_gyy", "av_tr_g", "av_abs_B", "width", "gap", "gap/width", "<T>", "<D>"]

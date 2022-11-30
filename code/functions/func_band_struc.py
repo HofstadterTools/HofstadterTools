@@ -1,8 +1,19 @@
+"""Set of functions for band structure calculations."""
+
 import numpy as np
 import cmath as cm
 
 
 def _principal(log_sum):
+    """
+    Take the principal branch of a complex number, such that :math:`-\pi<\Im(z)\leq\pi`
+
+    :param log_sum: The original complex number.
+    :type log_sum: complex
+    :return: The principal complex number.
+    :rtype: complex
+
+    """
     # take the principal branch of a log sum, such that -pi<Im(z)<=pi
     re = np.real(log_sum)
     im = np.imag(log_sum)
@@ -15,7 +26,18 @@ def _principal(log_sum):
 
 
 def berry_curv(ev, ev_alpha, ev_beta, ev_alpha_beta):
+    """
+    Compute the Berry curvature using four vectors on the corners of a plaquette of a single band.
 
+    Method from Fukui et al., J. Phys. Soc. Jpn. 74 (2005) pp. 1674-1677
+    Link variables (eigenvectors are already normalized from numpy.linalg.eig)
+
+    :param ev: The eigenvector :math:`|u_{\mathbf{k}}>`
+    :type ev: np.array
+    :return: The Berry curvature.
+    :rtype: float
+
+    """
     # Method from Fukui et al., J. Phys. Soc. Jpn. 74 (2005) pp. 1674-1677
     # Link variables (eigenvectors are already normalized from numpy.linalg.eig)
     U12 = np.conj(ev).dot(ev_alpha)
