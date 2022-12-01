@@ -1,38 +1,42 @@
 HofstadterTools
 ===============
 
-HofstadterTools is a numerical toolbox for analyzing the Hofstadter model.
+**H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of python programs and classes for analyzing the Hofstadter model.
 
-Python environment
+Quick Start
+-----------
+
+Using HofstadterTools is quick and easy! Assuming the recommended scenario of a UNIX shell with `git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__ and `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ installed:
+
+.. code:: console
+
+		(base) user@domain:~$ git clone https://github.com/bartandrews/HofstadterTools.git
+		(base) user@domain:~$ cd HofstadterTools
+		(base) user@domain:~/HofstadterTools$ conda env create -f environment.yml
+		(base) user@domain:~/HofstadterTools$ conda activate HT
+		(HT) user@domain:~/HofstadterTools$ cd code
+		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -mod Hofstadter -nphi 1 4
+
+Voilà! You have just plotted the band structure of the Hofstadter model with a flux density of :math:`n_\phi=1/4`. Now you can explore the :doc:`programs <programs>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
+
+Python Environment
 ------------------
 
-In order to use the tried-and-tested packages for HofstadterTools, we recommend the conda environment ``HT`` in ``environment.yml``.
+We recommend the use of a python virtual environment to handle the package dependencies. In the following, we assume a UNIX shell, however these instructions may be readily adapted for Windows.
 
-1) If you have not already, you need to install Anaconda or `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ (recommended).
+Using ``conda``:
 
-2) On the first use, you need to create the ``HT`` environment: ``conda env create -f environment.yml``
+1) If you have not already, install Anaconda or `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ (recommended).
+2) On first use, create the ``HT`` environment: ``conda env create -f environment.yml``
+3) Whenever you would like to use the environment, run: ``conda activate HT``
 
-3) Whenever you would like to use the environment, you can then run: ``conda activate HT``
+Using ``pip``:
 
-We only include packages in the environment that are necessary for HofstadterTools. Currently installed packages:
+1) On most UNIX-based operating systems, ``pip`` is already installed. If not, install `pip <https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#installing-pip>`__.
+2) Create the virtual environment (recommended in the project root): ``python -m venv env``
+3) Activate the virtual environment: ``source env/bin/activate``
+4) Install the dependencies: ``pip install -r requirements.txt``
 
-- python
-- numpy
-- matplotlib
-- prettytable
-- tqdm
+.. note::
 
-- furo
-- ipython
-- sphinx
-- sphinx_rtd_theme
-- pydata-sphinx-theme
-- sphinx-autodoc-typehints
-- nbsphinx
-- jupyter
-- jupytext
-
-References
-----------
-
-`[Bauer2022] <https://arxiv.org/abs/2110.09565>`__ "Fractional Chern insulators with a non-Landau level continuum limit", by David Bauer et al., PRB **105**, 045144 (2022).
+		For compiling the documentation, ``sphinx_rtd_theme`` was installed using pip to get the newer version number (>=0.5.1). This fixes a minor bug with the formatting of unordered lists.

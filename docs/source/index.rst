@@ -6,15 +6,22 @@
 HofstadterTools
 ===============
 
+:Release: |release|
+:Date:    |today|
+
 .. toctree::
    :maxdepth: 2
    :caption: User Guide:
 
-   readme
+   intro
    theory
-   examples
+   programs
    troubleshooting
+   references
+   how_to_cite
+   acknowledgments
 
+.. _code_reference:
 
 .. toctree::
    :maxdepth: 2

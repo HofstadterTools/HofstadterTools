@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import inspect
 sys.path.insert(0, os.path.abspath('../../code/'))  # Source code dir relative to this file
 
 # -- Project information -----------------------------------------------------
@@ -30,28 +31,44 @@ release = '0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.doctest',
     'sphinx.ext.autodoc',  # Core library for html generation from docstrings
     'sphinx.ext.autosummary',  # Create neat summary tables
+    'sphinx.ext.doctest',
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',  # Link to other project's documentation (see mapping below)
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinx_rtd_theme',
+    'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
+    'sphinx_copybutton',
+    'sphinxcontrib.bibtex',
     'sphinx.ext.viewcode',  # Add a link to the Python source code for classes, functions etc.
     'sphinx_autodoc_typehints',  # Automatically document param types (less noise in class signature)
-    'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
-    'IPython.sphinxext.ipython_console_highlighting'
+    'IPython.sphinxext.ipython_console_highlighting',
+    'sphinx.ext.napoleon'
 ]
 
-# Mappings for sphinx.ext.intersphinx. Projects have to have Sphinx-generated doc! (.inv file)
+# -- sphinx.ext.napoleon --------------------------------------------------
+# numpy-like doc strings
+
+napoleon_use_admonition_for_examples = True
+napoleon_use_ivar = False  # otherwise :attr:`...` doesn't work anymore
+napoleon_custom_sections = ['Options']
+
+# -- sphinx.ext.intersphinx -----------------------------------------------
+# cross links to other sphinx documentations
+# this makes  e.g. :class:`numpy.ndarray` work
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3/", None)
+    'python': ('https://docs.python.org/3', None),
+    'numpy': ('https://numpy.org/doc/stable', None),
+    'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
+    'matplotlib': ('https://matplotlib.org', None),
+    'h5py': ('https://docs.h5py.org/en/stable/', None),
 }
 
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
 autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
-# html_show_sourcelink = False  # Remove 'view source code' from top of page (for html, not python)
+html_show_sourcelink = False  # Remove 'view source code' from top of page (for html, not python)
 autodoc_inherit_docstrings = True  # If no docstring, inherit from base class
 set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_typehints
 nbsphinx_allow_errors = True  # Continue through Jupyter errors
@@ -95,7 +112,7 @@ html_context = {
     "github_user": "bartandrews",  # Username
     "github_repo": "HofstadterTools",  # Repo name
     "github_version": "main",  # Version
-    "conf_py_path": "/docs/",  # Path in the checkout to the docs root
+    "conf_py_path": "/docs/source/",  # Path in the checkout to the docs root
 }
 
 html_theme_options = {
@@ -105,3 +122,45 @@ html_theme_options = {
 
 # EPUB options
 epub_show_urls = 'footnote'
+
+#-- sphinxcontrib.bibtex -------------------------------------------------
+
+bibtex_bibfiles = ['references.bib']
+
+from pybtex.style.formatting.unsrt import Style as UnsrtStyle
+from pybtex.style.labels import BaseLabelStyle
+from pybtex.style.sorting.author_year_title import SortingStyle
+from pybtex.plugin import register_plugin
+
+
+class CustomBibtexStyle1(UnsrtStyle):
+    default_sorting_style = 'key'
+    default_label_style = 'key'
+
+
+class CustomBibtexStyle2(UnsrtStyle):
+    default_sorting_style = 'year_author_title'
+    default_label_style = 'key'
+
+
+class KeyLabelStyle(BaseLabelStyle):
+    def format_labels(self, sorted_entries):
+        return [entry.key for entry in sorted_entries]
+
+
+class YearAuthorTitleSort(SortingStyle):
+    def sorting_key(self, entry):
+        author_key, year, title = super().sorting_key(entry)
+        return (year, author_key, title)
+
+
+class KeySort(SortingStyle):
+    def sorting_key(self, entry):
+        return entry.key
+
+
+register_plugin('pybtex.style.formatting', 'custom1', CustomBibtexStyle1)
+register_plugin('pybtex.style.formatting', 'custom2', CustomBibtexStyle2)
+register_plugin('pybtex.style.labels', 'key', KeyLabelStyle)
+register_plugin('pybtex.style.sorting', 'key', KeySort)
+register_plugin('pybtex.style.sorting', 'year_author_title', YearAuthorTitleSort)

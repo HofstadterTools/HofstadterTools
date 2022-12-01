@@ -6,15 +6,19 @@ import cmath as cm
 
 def _principal(log_sum):
     """
-    Take the principal branch of a complex number, such that :math:`-\pi<\Im(z)\leq\pi`
+    Compute the principal branch of a complex number :math:`z`, such that :math:`-\pi<\text{Im}(z)\leq\pi`.
 
-    :param log_sum: The original complex number.
-    :type log_sum: complex
-    :return: The principal complex number.
-    :rtype: complex
+    Parameters
+    ----------
+    log_sum: complex
+        The original complex number.
 
+    Returns
+    -------
+    log_sum: complex
+        The principal value of the complex number.
     """
-    # take the principal branch of a log sum, such that -pi<Im(z)<=pi
+
     re = np.real(log_sum)
     im = np.imag(log_sum)
     if im <= -np.pi:
@@ -26,20 +30,44 @@ def _principal(log_sum):
 
 
 def berry_curv(ev, ev_alpha, ev_beta, ev_alpha_beta):
+    r"""
+    Compute the Berry curvature around a plaquette, for a single band.
+
+    The Berry curvature around a square plaquette is computed using the formula from :cite:`Fukui05` (example applications in :cite:`SoluyanovPhD, AidelsburgerPhD`), such that
+
+    .. math::
+       \mathcal{B}_{\square}(\mathbf{k}) = - \text{Im}\;\log (\braket{u_{\mathbf{k}} | u_{\mathbf{k}+\Delta_\alpha}} \braket{u_{\mathbf{k}+\Delta_\alpha}|u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta}} \braket{u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta}|u_{\mathbf{k}+\Delta_\beta}} \braket{u_{\mathbf{k}+\Delta_\beta}|u_{\mathbf{k}}}),
+
+    where :math:`\ket{u_{\mathbf{k}}}` is the eigenvector at momentum :math:`\mathbf{k}` and :math:`\Delta_\alpha` is shorthand for :math:`\Delta \mathbf{k}_\alpha`. The Berry curvature at the point :math:`\mathbf{k}` can then be computed by taking the limit of small plaquette size.
+
+    .. note::
+        Input eigenvectors are already normalized from :class:`numpy.linalg.eig`.
+
+    .. note::
+        We may equivalently compute the Berry curvature around a plaquette using the log sum formula
+
+        .. math::
+            \mathcal{B}_{\square}(\mathbf{k}) = - \text{Im}\;\mathcal{P}\;(\log \braket{u_{\mathbf{k}} | u_{\mathbf{k}+\Delta_\alpha}} + \log\braket{u_{\mathbf{k}+\Delta_\alpha} | u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta}} + \log\braket{u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta} | u_{\mathbf{k}+\Delta_\beta}} + \log\braket{u_{\mathbf{k}+\Delta_\beta} | u_{\mathbf{k}}}),
+
+        where :math:`\mathcal{P}` denotes the principal value of the complex number :math:`z`, such that :math:`-\pi<\text{Im}(z)\leq\pi`.
+
+    Parameters
+    ----------
+    ev: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}}}`.
+    ev_alpha: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}+\Delta_\alpha}}`
+    ev_beta: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}+\Delta_\beta}}`.
+    ev_alpha_beta: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta}}`
+
+    Returns
+    -------
+    Berry_curv: float
+        The Berry curvature around a square plaquette.
     """
-    Compute the Berry curvature using four vectors on the corners of a plaquette of a single band.
 
-    Method from Fukui et al., J. Phys. Soc. Jpn. 74 (2005) pp. 1674-1677
-    Link variables (eigenvectors are already normalized from numpy.linalg.eig)
-
-    :param ev: The eigenvector :math:`|u_{\mathbf{k}}>`
-    :type ev: np.array
-    :return: The Berry curvature.
-    :rtype: float
-
-    """
-    # Method from Fukui et al., J. Phys. Soc. Jpn. 74 (2005) pp. 1674-1677
-    # Link variables (eigenvectors are already normalized from numpy.linalg.eig)
     U12 = np.conj(ev).dot(ev_alpha)
     U23 = np.conj(ev_alpha).dot(ev_alpha_beta)
     U34 = np.conj(ev_alpha_beta).dot(ev_beta)
@@ -52,8 +80,39 @@ def berry_curv(ev, ev_alpha, ev_beta, ev_alpha_beta):
 
 
 def berry_curv_2(ev, ev_alpha, ev_beta):
+    r"""
+    Compute the Berry curvature around a plaquette, for a single band, using the quantum metric.
 
-    # Method using imaginary part of quantum geometric tensor
+    The Berry curvature around a square plaquette is computed from the quantum metric :cite:`Parameswaran13` (example applications in :cite:`Claassen15`), such that
+
+    .. math::
+       \mathcal{B}_{\square}(\mathbf{k}) = - 2 \text{Im}[\mathcal{R}_{\alpha \beta}(\mathbf{k})],
+
+    where the quantum metric tensor is defined as
+
+    .. math::
+       \mathcal{R}_{\alpha \beta} = \braket{u_{\mathbf{k}+\Delta_\alpha}|u_{\mathbf{k}+\Delta_\beta}} - \braket{u_{\mathbf{k}+\Delta_\alpha}|u_\mathbf{k}}\braket{u_\mathbf{k}|u_{\mathbf{k}+\Delta_\beta}},
+
+    where :math:`\ket{u_{\mathbf{k}}}` is the eigenvector at momentum :math:`\mathbf{k}` and :math:`\Delta_\alpha` is shorthand for :math:`\Delta \mathbf{k}_\alpha`. The Berry curvature at the point :math:`\mathbf{k}` can then be computed by taking the limit of small plaquette size.
+
+    .. note::
+        This method converges significantly slower than :class:`berry_curv`.
+
+    Parameters
+    ----------
+    ev: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}}}`.
+    ev_alpha: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}+\Delta_\alpha}}`
+    ev_beta: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}+\Delta_\beta}}`.
+
+    Returns
+    -------
+    Berry_curv: float
+        The Berry curvature around a square plaquette.
+    """
+
     chi = np.conj(ev_alpha).dot(ev_beta) - np.conj(ev_alpha).dot(ev)*np.conj(ev).dot(ev_beta)
     Berry_curv = -2 * np.imag(chi)
 
@@ -92,6 +151,30 @@ def multi_berry_curv(ev1, ev1_alpha, ev1_beta, ev1_alpha_beta, ev2, ev2_alpha, e
 
 
 def geom_tensor(ev, ev_alpha, ev_beta):
+    r"""
+    Compute the quantum geometric tensor, for a single band.
+
+    The quantum geometric tensor is computed using the formula from :cite:`Parameswaran13` (example applications in :cite:`Claassen15`), such that
+
+    .. math::
+       \mathcal{R}_{\alpha \beta} = \braket{u_{\mathbf{k}+\Delta_\alpha}|u_{\mathbf{k}+\Delta_\beta}} - \braket{u_{\mathbf{k}+\Delta_\alpha}|u_\mathbf{k}}\braket{u_\mathbf{k}|u_{\mathbf{k}+\Delta_\beta}},
+
+    where :math:`\ket{u_{\mathbf{k}}}` is the eigenvector at momentum :math:`\mathbf{k}` and :math:`\Delta_\alpha` is shorthand for :math:`\Delta \mathbf{k}_\alpha`. The quantum geometric tensor at the point :math:`\mathbf{k}` can then be computed by taking the limit of small discretization.
+
+    Parameters
+    ----------
+    ev: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}}}`.
+    ev_alpha: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}+\Delta_\alpha}}`
+    ev_beta: ndarray
+        The normalized eigenvector :math:`\ket{u_{\mathbf{k}+\Delta_\beta}}`.
+
+    Returns
+    -------
+    tensor: ndarray
+        The (2,2) quantum geometric tensor.
+    """
 
     tensor = np.zeros((2, 2), dtype=np.complex128)
     tensor[0][0] = np.conj(ev_alpha).dot(ev_alpha) - np.conj(ev_alpha).dot(ev)*np.conj(ev).dot(ev_alpha)
