@@ -1,15 +1,53 @@
+"""The Hofstadter model classes."""
+
 import numpy as np
 
 
 class Hofstadter:
+    r"""The Hofstadter model class.
+
+    The Hamiltonian for the Hofstadter model is given as
+
+    .. math::
+        H = \sum_{\braket{ij}} e^{i \theta_{ij}} c_i^\dagger c_j + \mathrm{H.c.},
+
+    where :math:`\braket{ij}` denotes nearest neighbors on a lattice in the xy-plane, :math:`t` are the hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the (creation)annihilation operators for bosons / spinless fermions.
+    """
 
     def __init__(self, p, q, a0=1, t=1):
-        self.p = p
-        self.q = q
-        self.a0 = a0
-        self.t = t
+        """Constructor for the Hofstadter class.
+
+        Parameters
+        ----------
+        p: int
+            The numerator of the coprime flux density fraction.
+        q: int
+            The denominator of the coprime flux density fraction.
+        a0: float
+            The lattice constant (default=1).
+        t: float
+            The units of the hopping amplitudes (default=1).
+        """
+
+        self.p = p  #: int : The numerator of the coprime flux density fraction.
+        self.q = q  #: int : The denominator of the coprime flux density fraction.
+        self.a0 = a0  #: float :The lattice constant (default=1).
+        self.t = t  #: float : The units of the hopping amplitudes (default=1).
 
     def unit_cell(self):
+        """The unit cell of the Hofstadter model.
+
+        Returns
+        -------
+        num_bands_val: int
+            The number of sites.
+        avec_val: ndarray
+            The lattice vectors.
+        bvec_val: ndarray
+            The reciprocal lattice vectors.
+        sym_points_val: ndarray
+            The high symmetry points.
+        """
 
         num_bands_val = self.q
         # lattice vectors
@@ -30,6 +68,18 @@ class Hofstadter:
         return num_bands_val, avec_val, bvec_val, sym_points_val
 
     def hamiltonian(self, k_val):
+        """The Hamiltonian of the Hofstadter model.
+
+        Parameters
+        ----------
+        k_val: ndarray
+            The momentum vector.
+
+        Returns
+        -------
+        Hamiltonian: ndarray
+            The Hofstadter Hamiltonian matrix of dimension (num_bands, num_bands).
+        """
 
         # initialize the Hamiltonian
         num_bands_val = self.q

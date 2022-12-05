@@ -1,15 +1,25 @@
 {{ fullname | escape | underline}}
 
+- full name: {{ fullname | escape }}
+- parent module: :mod:`{{ module }}`
+- type: {{ objtype }}
+
 .. currentmodule:: {{ module }}
+
+.. rubric:: Inheritance Diagram
+
+.. inheritance-diagram:: {{ fullname }}
+    :parts: 1
+
+|
 
 .. autoclass:: {{ objname }}
    :members:
-   :show-inheritance:
    :inherited-members:
-   :undoc-members:
+   :show-inheritance:
+   :special-members: __init__
 
    {% block methods %}
-   .. automethod:: __init__
 
    {% if methods %}
    .. rubric:: {{ _('Methods') }}

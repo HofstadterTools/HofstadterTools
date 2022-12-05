@@ -38,6 +38,8 @@ extensions = [
     'sphinx.ext.intersphinx',  # Link to other project's documentation (see mapping below)
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
+    'sphinx.ext.graphviz',
+    'sphinx.ext.inheritance_diagram',
     'sphinx_rtd_theme',
     'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
     'sphinx_copybutton',
@@ -54,6 +56,7 @@ extensions = [
 napoleon_use_admonition_for_examples = True
 napoleon_use_ivar = False  # otherwise :attr:`...` doesn't work anymore
 napoleon_custom_sections = ['Options']
+napoleon_attr_attributes = True
 
 # -- sphinx.ext.intersphinx -----------------------------------------------
 # cross links to other sphinx documentations
@@ -67,7 +70,7 @@ intersphinx_mapping = {
 }
 
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
-autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
+# autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
 html_show_sourcelink = False  # Remove 'view source code' from top of page (for html, not python)
 autodoc_inherit_docstrings = True  # If no docstring, inherit from base class
 set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_typehints
@@ -164,3 +167,11 @@ register_plugin('pybtex.style.formatting', 'custom2', CustomBibtexStyle2)
 register_plugin('pybtex.style.labels', 'key', KeyLabelStyle)
 register_plugin('pybtex.style.sorting', 'key', KeySort)
 register_plugin('pybtex.style.sorting', 'year_author_title', YearAuthorTitleSort)
+
+# -- sphinx.ext.inheritance_diagram ---------------------------------------
+
+inheritance_graph_attrs = {
+    'rankdir': "TB",  # top-to-bottom
+    'fontsize': 14,
+    'ratio': 'compress',
+}

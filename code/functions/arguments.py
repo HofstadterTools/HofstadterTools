@@ -1,7 +1,24 @@
+"""Functions for argument parsing."""
+
 import argparse
 
 
 def parse_input_arguments(program):
+    """
+    Parse the input arguments to a given program.
+
+    Each program may be run with a given set of flags. This function parses those command-line arguments and returns them as a dictionary.
+
+    Parameters
+    ----------
+    program: string
+        The name of the program.
+
+    Returns
+    -------
+    args: dict
+        The dictionary of input arguments.
+    """
 
     parser = argparse.ArgumentParser(prog=program)
     models = ["Hofstadter"]
