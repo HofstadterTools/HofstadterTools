@@ -1,10 +1,10 @@
-# --- environment imports
+# --- external imports
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 from prettytable import PrettyTable
 from tqdm import tqdm
-# --- package imports
+# --- internal imports
 import functions.band_structure as fbs
 import functions.arguments as fa
 from models.hofstadter import Hofstadter
@@ -16,13 +16,13 @@ from configuration.band_structure import *
 if __name__ == '__main__':
 
     # input
-    band_gap_threshold = 0.01
     args = fa.parse_input_arguments("band_structure")
-    num_samples = args['samp']
     if args['model'] == "Hofstadter":
         model = Hofstadter(args['nphi'][0], args['nphi'][1])
     else:
         raise ValueError("model is not defined")
+    num_samples = args['samp']
+    band_gap_threshold = args['bgt']
 
     # define unit cell
     num_bands, avec, bvec, sym_points = model.unit_cell()
@@ -86,9 +86,9 @@ if __name__ == '__main__':
                         tr_g[band, idx_x, idx_y] = np.trace(fs_metric[band, idx_x, idx_y])
                         abs_B[band, idx_x, idx_y] = np.abs(berry_fluxes_2[band, idx_x, idx_y])
                         TISM[band, idx_x, idx_y] = np.trace(fs_metric[band, idx_x, idx_y]) \
-                                                   - np.abs(berry_fluxes_2[band, idx_x, idx_y])
+                            - np.abs(berry_fluxes_2[band, idx_x, idx_y])
                         DISM[band, idx_x, idx_y] = np.linalg.det(fs_metric[band, idx_x, idx_y]) \
-                                                   - 0.25*np.abs(berry_fluxes_2[band, idx_x, idx_y])**2
+                            - 0.25*np.abs(berry_fluxes_2[band, idx_x, idx_y])**2
                 else:
                     berry_fluxes[band, idx_x, idx_y] = berry_fluxes[band-1, idx_x, idx_y]
 
@@ -131,8 +131,8 @@ if __name__ == '__main__':
         table.add_row([j for i, j in enumerate(data) if bools[i]])
     print(table)
 
-    # construct figure
     if args['display'] == "3D":
+        # construct figure
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         idx_x = np.linspace(0, num_samples - 1, num_samples, dtype=int)
@@ -142,10 +142,9 @@ if __name__ == '__main__':
             ax.plot_surface(kx, ky, eigenvalues[i, kx, ky])
         ax.set_xlabel('$k_1/|\mathbf{b}_1|$')
         ax.set_ylabel('$k_2/|\mathbf{b}_2|$')
-
+        ax.set_zlabel('$E$')
 
         def normalize(value, tick_number):
-
             if value == 0:
                 return "$0$"
             elif value == num_samples - 1:
@@ -156,7 +155,6 @@ if __name__ == '__main__':
         ax.xaxis.set_major_formatter(plt.FuncFormatter(normalize))
         ax.yaxis.set_major_formatter(plt.FuncFormatter(normalize))
 
-        ax.set_zlabel('$E$')
     elif args['display'] == "2D":
         # construct bands
         num_paths = len(sym_points)

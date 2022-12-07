@@ -4,7 +4,7 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-# -- Path setup --------------------------------------------------------------
+# -- Path setup --------------------------------------------------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -12,10 +12,10 @@
 #
 import os
 import sys
-import inspect
+# import inspect
 sys.path.insert(0, os.path.abspath('../../code/'))  # Source code dir relative to this file
 
-# -- Project information -----------------------------------------------------
+# -- Project information -----------------------------------------------------------------------------------------------
 
 project = 'HofstadterTools'
 copyright = '2022, Bartholomew Andrews'
@@ -24,8 +24,7 @@ author = 'Bartholomew Andrews'
 # The full version, including alpha/beta/rc tags
 release = '0.1'
 
-
-# -- General configuration ---------------------------------------------------
+# -- General configuration ---------------------------------------------------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -41,36 +40,17 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinx.ext.inheritance_diagram',
     'sphinx_rtd_theme',
-    'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
     'sphinx_copybutton',
     'sphinxcontrib.bibtex',
     'sphinx.ext.viewcode',  # Add a link to the Python source code for classes, functions etc.
     'sphinx_autodoc_typehints',  # Automatically document param types (less noise in class signature)
+    'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
     'IPython.sphinxext.ipython_console_highlighting',
     'sphinx.ext.napoleon'
 ]
 
-# -- sphinx.ext.napoleon --------------------------------------------------
-# numpy-like doc strings
-
-napoleon_use_admonition_for_examples = True
-napoleon_use_ivar = False  # otherwise :attr:`...` doesn't work anymore
-napoleon_custom_sections = ['Options']
-napoleon_attr_attributes = True
-
-# -- sphinx.ext.intersphinx -----------------------------------------------
-# cross links to other sphinx documentations
-# this makes  e.g. :class:`numpy.ndarray` work
-intersphinx_mapping = {
-    'python': ('https://docs.python.org/3', None),
-    'numpy': ('https://numpy.org/doc/stable', None),
-    'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
-    'matplotlib': ('https://matplotlib.org', None),
-    'h5py': ('https://docs.h5py.org/en/stable/', None),
-}
-
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
-# autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
+# autoclass_content = "both"  # Add __init__ doc (i.e. params) to class summaries
 html_show_sourcelink = False  # Remove 'view source code' from top of page (for html, not python)
 autodoc_inherit_docstrings = True  # If no docstring, inherit from base class
 set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_typehints
@@ -86,8 +66,7 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-
-# -- Options for HTML output -------------------------------------------------
+# -- Options for HTML output -------------------------------------------------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes. e.g. furo
@@ -126,7 +105,19 @@ html_theme_options = {
 # EPUB options
 epub_show_urls = 'footnote'
 
-#-- sphinxcontrib.bibtex -------------------------------------------------
+# -- sphinx.ext.intersphinx --------------------------------------------------------------------------------------------
+# cross links to other sphinx documentations
+# this makes  e.g. :class:`numpy.ndarray` work
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'numpy': ('https://numpy.org/doc/stable', None),
+    'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
+    'matplotlib': ('https://matplotlib.org', None),
+    'h5py': ('https://docs.h5py.org/en/stable/', None),
+}
+
+# -- sphinxcontrib.bibtex ----------------------------------------------------------------------------------------------
 
 bibtex_bibfiles = ['references.bib']
 
@@ -154,7 +145,7 @@ class KeyLabelStyle(BaseLabelStyle):
 class YearAuthorTitleSort(SortingStyle):
     def sorting_key(self, entry):
         author_key, year, title = super().sorting_key(entry)
-        return (year, author_key, title)
+        return year, author_key, title
 
 
 class KeySort(SortingStyle):
@@ -168,10 +159,18 @@ register_plugin('pybtex.style.labels', 'key', KeyLabelStyle)
 register_plugin('pybtex.style.sorting', 'key', KeySort)
 register_plugin('pybtex.style.sorting', 'year_author_title', YearAuthorTitleSort)
 
-# -- sphinx.ext.inheritance_diagram ---------------------------------------
+# -- sphinx.ext.inheritance_diagram ------------------------------------------------------------------------------------
 
 inheritance_graph_attrs = {
     'rankdir': "TB",  # top-to-bottom
     'fontsize': 14,
     'ratio': 'compress',
 }
+
+# -- sphinx.ext.napoleon -----------------------------------------------------------------------------------------------
+# numpy-like doc strings
+
+napoleon_use_admonition_for_examples = True
+napoleon_use_ivar = False  # otherwise :attr:`...` doesn't work anymore
+napoleon_custom_sections = ['Options']
+napoleon_attr_attributes = True
