@@ -68,11 +68,12 @@ Directory Structure
 To-do List
 ----------
 
-* generalize the Hofstadter model to long-range hoppings
-* add butterfly script, with color option, and full color option
-* add wilson loop script
 * add g fluctuations
+* add butterfly script, with color option, (and full color option)
+* add wilson loop script
+* generalize the Hofstadter model to long-range hoppings
 * add capability for triangular and honeycomb lattices
+
 * add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry,
 and singular flat band inspired by LK-99")
 * implement quantum geometry tensor using projectors (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry,
