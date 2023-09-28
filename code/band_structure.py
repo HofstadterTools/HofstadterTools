@@ -30,16 +30,30 @@ if __name__ == '__main__':
     # construct bands
     eigenvalues = np.zeros((num_bands, num_samples, num_samples))  # real
     eigenvectors = np.zeros((num_bands, num_bands, num_samples, num_samples), dtype=np.complex128)  # complex
+    eigenvectors_dkx = np.zeros((num_bands, num_bands, num_samples, num_samples), dtype=np.complex128)  # complex
+    eigenvectors_dky = np.zeros((num_bands, num_bands, num_samples, num_samples), dtype=np.complex128)  # complex
+    Dkx = np.dot(np.array([1/(num_samples-1), 0]), bvec[0])
+    Dky = np.dot(np.array([0, 1/(num_samples-1)]), bvec[1])
     for band in tqdm(range(num_bands), desc="Band Construction", ascii=True):
         for idx_x in range(num_samples):
             frac_kx = idx_x / (num_samples-1)
+            frac_kx_dkx = (frac_kx + 1/(1000*(num_samples-1))) % 1
             for idx_y in range(num_samples):
                 frac_ky = idx_y / (num_samples-1)
+                frac_ky_dky = (frac_ky + 1/(1000*(num_samples-1))) % 1
                 k = np.matmul(np.array([frac_kx, frac_ky]), bvec)
+                k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bvec)
+                k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bvec)
                 eigvals, eigvecs = np.linalg.eig(model.hamiltonian(k))
+                eigvals_dkx, eigvecs_dkx = np.linalg.eig(model.hamiltonian(k_dkx))
+                eigvals_dky, eigvecs_dky = np.linalg.eig(model.hamiltonian(k_dky))
                 idx = np.argsort(eigvals)
+                idx_dkx = np.argsort(eigvals_dkx)
+                idx_dky = np.argsort(eigvals_dky)
                 eigenvalues[band][idx_x][idx_y] = np.real(eigvals[idx[band]])
                 eigenvectors[:, band, idx_x, idx_y] = eigvecs[:, idx[band]]
+                eigenvectors_dkx[:, band, idx_x, idx_y] = eigvecs_dkx[:, idx_dkx[band]]
+                eigenvectors_dky[:, band, idx_x, idx_y] = eigvecs_dky[:, idx_dky[band]]
 
     # band gap and isolated
     band_gap = np.zeros(num_bands)
@@ -78,7 +92,7 @@ if __name__ == '__main__':
                     berry_fluxes[band, idx_x, idx_y] = fbs.berry_curv(eigenvectors, band, idx_x, idx_y, group_size)
                     # quantum geometry
                     if group_size == 1:
-                        geom_tensor = fbs.geom_tensor(eigenvectors, band, idx_x, idx_y, group_size)
+                        geom_tensor = fbs.geom_tensor(eigenvectors, eigenvectors_dkx, eigenvectors_dky, bvec, band, idx_x, idx_y, group_size)
                         fs_metric[band, idx_x, idx_y] = np.real(geom_tensor)
                         berry_curv = -2*np.imag(geom_tensor)
                         ###
@@ -111,8 +125,8 @@ if __name__ == '__main__':
         std_gyy[band] = np.std(fs_metric[band, :, :, 1, 1])
         av_tr_g[band] = np.mean(tr_g[band])
         av_abs_B[band] = np.mean(abs_B[band])
-        av_TISM[band] = np.sum(TISM[band])
-        av_DISM[band] = np.sum(DISM[band])
+        av_TISM[band] = np.sum(TISM[band]) * Dkx * Dky / (2 * np.pi)
+        av_DISM[band] = np.sum(DISM[band]) * Dkx * Dky / (2 * np.pi)
 
     # table
     headers = ["band", "group", "isolated", "width", "gap", "gap/width", "C", "C (geom_tensor)", "std_B/|av_B|", "av_gxx",

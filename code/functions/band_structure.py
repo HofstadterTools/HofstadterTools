@@ -163,7 +163,7 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
     return Berry_curv
 
 
-def geom_tensor(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1):
+def geom_tensor(_eigenvectors, _eigenvectors_dkx, _eigenvectors_dky, _bvec, _band, _idx_x, _idx_y, _group_size=1):
     r"""
     Compute the quantum geometric tensor.
 
@@ -197,15 +197,25 @@ def geom_tensor(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1):
     """
 
     if _group_size == 1:
+
+        numb_samp_x = np.shape(_eigenvectors)[2]
+        numb_samp_y = np.shape(_eigenvectors)[3]
+
+        dkx = np.linalg.norm(_bvec[0]) / (1000*(numb_samp_x-1))
+        dky = np.linalg.norm(_bvec[1]) / (1000*(numb_samp_y-1))
+
         vec = _eigenvectors[:, _band, _idx_x, _idx_y]
-        vec1 = _eigenvectors[:, _band, _idx_x + 1, _idx_y]
-        vec2 = _eigenvectors[:, _band, _idx_x, _idx_y + 1]
+        vec_dkx = _eigenvectors_dkx[:, _band, _idx_x, _idx_y]
+        vec_dky = _eigenvectors_dky[:, _band, _idx_x, _idx_y]
+
+        grad_kx = (vec_dkx - vec) / dkx
+        grad_ky = (vec_dky - vec) / dky
 
         tensor = np.zeros((2, 2), dtype=np.complex128)
-        tensor[0][0] = np.conj(vec1).dot(vec1) - np.conj(vec1).dot(vec)*np.conj(vec).dot(vec1)
-        tensor[0][1] = np.conj(vec1).dot(vec2) - np.conj(vec1).dot(vec)*np.conj(vec).dot(vec2)
-        tensor[1][0] = np.conj(vec2).dot(vec1) - np.conj(vec2).dot(vec)*np.conj(vec).dot(vec1)
-        tensor[1][1] = np.conj(vec2).dot(vec2) - np.conj(vec2).dot(vec)*np.conj(vec).dot(vec2)
+        tensor[0][0] = np.vdot(grad_kx, grad_kx) - np.vdot(grad_kx, vec) * np.vdot(vec, grad_kx)
+        tensor[0][1] = np.vdot(grad_kx, grad_ky) - np.vdot(grad_kx, vec) * np.vdot(vec, grad_ky)
+        tensor[1][0] = np.vdot(grad_ky, grad_kx) - np.vdot(grad_ky, vec) * np.vdot(vec, grad_kx)
+        tensor[1][1] = np.vdot(grad_ky, grad_ky) - np.vdot(grad_ky, vec) * np.vdot(vec, grad_ky)
     else:
         raise ValueError("geom_tensor function is currently only implemented for _group_size=1.")
 

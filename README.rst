@@ -6,7 +6,7 @@ HofstadterTools
 Quick Start
 -----------
 
-Using HofstadterTools is quick and easy! Assuming the recommended scenario of a UNIX shell with `git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__ and `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ installed:
+Using HofstadterTools is quick and easy! Assuming the recommended scenario of a Linux kernel with `git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__ and `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ installed:
 
 .. code:: console
 
@@ -22,7 +22,7 @@ Voilà! You have just plotted the band structure of the Hofstadter model with a 
 Python Environment
 ------------------
 
-We recommend the use of a python virtual environment to handle the package dependencies. In the following, we assume a UNIX shell, however these instructions may be readily adapted for Windows.
+We recommend the use of a python virtual environment to handle the package dependencies. In the following, we assume a Linux kernel, however these instructions may be readily adapted for Windows.
 
 Using ``conda``:
 
@@ -32,7 +32,7 @@ Using ``conda``:
 
 Using ``pip``:
 
-1) On most UNIX-based operating systems, ``pip`` is already installed. If not, install `pip <https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#installing-pip>`__.
+1) On most Linux-based operating systems, ``pip`` is already installed. If not, install `pip <https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#installing-pip>`__.
 2) Create the virtual environment (recommended in the project root): ``python -m venv env``
 3) Activate the virtual environment: ``source env/bin/activate``
 4) Install the dependencies: ``pip install -r requirements.txt``
