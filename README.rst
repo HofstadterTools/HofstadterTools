@@ -68,9 +68,9 @@ Directory Structure
 To-do List
 ----------
 
-* add g fluctuations
 * add butterfly script, with color option, (and full color option)
-* add wilson loop script
+* add g fluctuations
+
 * generalize the Hofstadter model to long-range hoppings
 * add capability for triangular and honeycomb lattices
 

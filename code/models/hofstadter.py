@@ -32,7 +32,7 @@ class Hofstadter:
         self.p = p  #: int : The numerator of the coprime flux density fraction.
         self.q = q  #: int : The denominator of the coprime flux density fraction.
         self.a0 = a0  #: float :The lattice constant (default=1).
-        self.t = t  #: float : The units of the hopping amplitudes (default=1).
+        self.t = t  #: float : The units of the hopping amplitudes (default=-1).
 
     def unit_cell(self):
         """The unit cell of the Hofstadter model.
