@@ -20,7 +20,7 @@ show_av_gxx = False
 show_std_gxx = False
 show_av_gxy = False
 show_std_gxy = False
-show_T = True
+show_T = False
 show_D = False
 
 # column groups

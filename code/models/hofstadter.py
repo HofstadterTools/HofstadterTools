@@ -14,7 +14,7 @@ class Hofstadter:
     where :math:`\braket{ij}` denotes nearest neighbors on a lattice in the xy-plane, :math:`t` are the hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the (creation)annihilation operators for bosons / spinless fermions.
     """
 
-    def __init__(self, p, q, a0=1, t=1):
+    def __init__(self, p, q, a0=1, t=-1):
         """Constructor for the Hofstadter class.
 
         Parameters

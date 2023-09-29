@@ -23,6 +23,7 @@ def parse_input_arguments(program):
     parser = argparse.ArgumentParser(prog=program)
     models = ["Hofstadter"]
     parser.add_argument("-mod", "--model", type=str, default="Hofstadter", choices=models, help="name of model")
+    parser.add_argument("-wil", "--wilson", default=False, action='store_true', help="plot the wilson loops")
     displays = ["3D", "2D"]
     parser.add_argument("-disp", "--display", type=str, default="3D", choices=displays, help="how to display band structure")
     parser.add_argument("-nphi", nargs=2, type=int, default=[1, 4], help="flux density")

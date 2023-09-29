@@ -15,7 +15,7 @@ from configuration.band_structure import *
 
 if __name__ == '__main__':
 
-    # input
+    # input arguments
     args = fa.parse_input_arguments("band_structure")
     if args['model'] == "Hofstadter":
         model = Hofstadter(args['nphi'][0], args['nphi'][1])
@@ -23,6 +23,7 @@ if __name__ == '__main__':
         raise ValueError("model is not defined")
     num_samples = args['samp']
     band_gap_threshold = args['bgt']
+    wilson = args['wilson']
 
     # define unit cell
     num_bands, avec, bvec, sym_points = model.unit_cell()
@@ -43,9 +44,9 @@ if __name__ == '__main__':
             for idx_y in range(num_samples):
                 frac_ky = idx_y / (num_samples-1)
                 k = np.matmul(np.array([frac_kx, frac_ky]), bvec)
-                eigvals, eigvecs = np.linalg.eig(model.hamiltonian(k))
+                eigvals, eigvecs = np.linalg.eigh(model.hamiltonian(k))
                 idx = np.argsort(eigvals)
-                eigenvalues[band][idx_x][idx_y] = np.real(eigvals[idx[band]])
+                eigenvalues[band, idx_x, idx_y] = eigvals[idx[band]]
                 eigenvectors[:, band, idx_x, idx_y] = eigvecs[:, idx[band]]
                 if any(geometry_columns):
                     frac_ky_dky = (frac_ky + 1/(1000*(num_samples-1))) % 1
@@ -57,7 +58,6 @@ if __name__ == '__main__':
                     idx_dky = np.argsort(eigvals_dky)
                     eigenvectors_dkx[:, band, idx_x, idx_y] = eigvecs_dkx[:, idx_dkx[band]]
                     eigenvectors_dky[:, band, idx_x, idx_y] = eigvecs_dky[:, idx_dky[band]]
-
 
     # band gap and isolated
     band_gap = np.zeros(num_bands)
@@ -85,6 +85,8 @@ if __name__ == '__main__':
 
     # compute Berry fluxes
     berry_fluxes = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
+    if wilson:
+        wilson_loops = np.zeros((num_bands, num_samples))  # real
     if any(geometry_columns):
         fs_metric = np.zeros((num_bands, num_samples - 1, num_samples - 1, 2, 2))  # real
         berry_fluxes_2 = np.zeros((num_bands, num_samples - 1, num_samples - 1))  # real
@@ -92,6 +94,11 @@ if __name__ == '__main__':
     for band, group in tqdm(enumerate(band_group), desc="Band Properties", ascii=True):
         group_size = np.count_nonzero(band_group == group)
         for idx_x in range(num_samples - 1):
+            if wilson:
+                if group != band_group[band - 1]:
+                    wilson_loops[band, idx_x] = fbs.wilson_loop(eigenvectors, band, idx_x, group_size)
+                else:
+                    wilson_loops[band, idx_x] = wilson_loops[band - 1, idx_x]
             for idx_y in range(num_samples - 1):
                 if group != band_group[band - 1]:
                     berry_fluxes[band, idx_x, idx_y] = fbs.berry_curv(eigenvectors, band, idx_x, idx_y, group_size)
@@ -109,6 +116,11 @@ if __name__ == '__main__':
                                 - 0.25*np.abs(berry_fluxes_2[band, idx_x, idx_y])**2
                 else:
                     berry_fluxes[band, idx_x, idx_y] = berry_fluxes[band-1, idx_x, idx_y]
+        if wilson:
+            if group != band_group[band - 1]:
+                wilson_loops[band, num_samples-1] = fbs.wilson_loop(eigenvectors, band, num_samples-1, group_size)
+            else:
+                wilson_loops[band, num_samples-1] = wilson_loops[band - 1, num_samples-1]
 
     # band properties
     band_width = np.zeros(num_bands)
@@ -152,7 +164,7 @@ if __name__ == '__main__':
         idx_y = np.linspace(0, num_samples - 1, num_samples, dtype=int)
         kx, ky = np.meshgrid(idx_x, idx_y)
         for i in range(num_bands):
-            ax.plot_surface(kx, ky, eigenvalues[i, kx, ky])
+            ax.plot_surface(kx, ky, eigenvalues[i, kx, ky], alpha=0.5)
         ax.set_xlabel('$k_1/|\mathbf{b}_1|$')
         ax.set_ylabel('$k_2/|\mathbf{b}_2|$')
         ax.set_zlabel('$E$')
@@ -167,6 +179,17 @@ if __name__ == '__main__':
 
         ax.xaxis.set_major_formatter(plt.FuncFormatter(normalize))
         ax.yaxis.set_major_formatter(plt.FuncFormatter(normalize))
+
+        if wilson:
+            fig2 = plt.figure()
+            ax2 = fig2.add_subplot(111)
+            idx_x = np.linspace(0, num_samples - 1, num_samples, dtype=int)
+            for i in range(num_bands):
+                ax2.scatter(idx_x, wilson_loops[i])
+            ax2.set_xlabel('$k_1/|\mathbf{b}_1|$')
+            ax2.set_ylabel('$\prod \\theta_\\mathrm{B}$')
+            ax2.xaxis.set_major_formatter(plt.FuncFormatter(normalize))
+            ax2.yaxis.set_major_formatter(plt.FuncFormatter(normalize))
 
     elif args['display'] == "2D":
         # construct bands

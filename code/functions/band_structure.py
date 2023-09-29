@@ -29,6 +29,47 @@ def _principal(z):
     return z
 
 
+def U(var_num, _eigenvectors, _band, _idx_x, _idx_y, _group_size):
+    """Compute the link variable.
+
+    Parameters
+    ----------
+    var_num: [1, 2]
+        The link variable number.
+    _eigenvectors: ndarray
+        The array of eigenvectors with dimension (num_bands, num_bands, num_samples, num_samples).
+    _band: int
+        The band number. If part of a band group, this must refer to the lowest band of the group.
+    _idx_x: int
+        The x-momentum, with respect to the discretized grid.
+    _idx_y: int
+        The y-momentum, with respect to the discretized grid.
+    _group_size: int
+        The number of bands in the band group.
+
+    Returns
+    -------
+    link_var: complex
+        The U(1) link variable.
+    """
+
+    _num_samples = np.shape(_eigenvectors)[2]
+
+    link_matrix = np.zeros((_group_size, _group_size), dtype=complex)
+    for i in range(_group_size):
+        for j in range(_group_size):
+            vec1 = _eigenvectors[:, _band + i, _idx_x, _idx_y]
+            if var_num == 1:
+                vec2 = _eigenvectors[:, _band + j, (_idx_x + 1) % _num_samples, _idx_y]
+            elif var_num == 2:
+                vec2 = _eigenvectors[:, _band + j, _idx_x, (_idx_y + 1) % _num_samples]
+            else:
+                raise ValueError("link variable number must be in [1, 2].")
+            link_matrix[i, j] = np.conj(vec1).dot(vec2)
+    link_var = np.linalg.det(link_matrix)
+    return link_var
+
+
 def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
     r"""
     Compute the Berry curvature.
@@ -106,48 +147,10 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
     """
 
     if method == 1:
-        def _U(var_num, __eigenvectors, __band, __idx_x, __idx_y, __group_size):
-            """Compute the link variable.
-
-            Parameters
-            ----------
-            var_num: [1, 2]
-                The link variable number.
-            __eigenvectors: ndarray
-                The array of eigenvectors with dimension (num_bands, num_bands, num_samples, num_samples).
-            __band: int
-                The band number. If part of a band group, this must refer to the lowest band of the group.
-            __idx_x: int
-                The x-momentum, with respect to the discretized grid.
-            __idx_y: int
-                The y-momentum, with respect to the discretized grid.
-            __group_size: int
-                The number of bands in the band group.
-
-            Returns
-            -------
-            link_var: complex
-                The U(1) link variable.
-            """
-
-            link_matrix = np.zeros((__group_size, __group_size), dtype=complex)
-            for i in range(__group_size):
-                for j in range(__group_size):
-                    vec1 = __eigenvectors[:, __band+i, __idx_x, __idx_y]
-                    if var_num == 1:
-                        vec2 = __eigenvectors[:, __band+j, __idx_x + 1, __idx_y]
-                    elif var_num == 2:
-                        vec2 = __eigenvectors[:, __band + j, __idx_x, __idx_y + 1]
-                    else:
-                        raise ValueError("link variable number must be in [1, 2].")
-                    link_matrix[i, j] = np.conj(vec1).dot(vec2)
-            link_var = np.linalg.det(link_matrix)
-            return link_var
-
-        Berry_curv = - np.imag(np.log(_U(1, _eigenvectors, _band, _idx_x, _idx_y, _group_size)
-                                      * _U(2, _eigenvectors, _band, _idx_x+1, _idx_y, _group_size)
-                                      * _U(1, _eigenvectors, _band, _idx_x, _idx_y+1, _group_size)**-1
-                                      * _U(2, _eigenvectors, _band, _idx_x, _idx_y, _group_size)**-1))
+        Berry_curv = - np.imag(np.log(U(1, _eigenvectors, _band, _idx_x, _idx_y, _group_size)
+                                      * U(2, _eigenvectors, _band, _idx_x+1, _idx_y, _group_size)
+                                      * U(1, _eigenvectors, _band, _idx_x, _idx_y+1, _group_size)**-1
+                                      * U(2, _eigenvectors, _band, _idx_x, _idx_y, _group_size)**-1))
     elif method == 2:
         if _group_size == 1:
             vec = _eigenvectors[:, _band, _idx_x, _idx_y]
@@ -161,6 +164,20 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
         raise ValueError("method parameter in berry_curv is not in [1, 2].")
 
     return Berry_curv
+
+
+def wilson_loop(_eigenvectors, _band, _idx_x, _group_size=1):
+    r"""
+    Compute the Wilson loop.
+    """
+
+    numb_ky = np.shape(_eigenvectors)[3]
+    product = 1
+    for j in range(numb_ky):
+        product *= U(2, _eigenvectors, _band, _idx_x, j, _group_size)
+    Wilson_loop = -np.imag(np.log(product))
+
+    return Wilson_loop
 
 
 def geom_tensor(_eigenvectors, _eigenvectors_dkx, _eigenvectors_dky, _bvec, _band, _idx_x, _idx_y, _group_size=1):
