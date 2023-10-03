@@ -160,6 +160,7 @@ if __name__ == '__main__':
         # construct figure
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
+        ax.set_title(f"$n_\phi = {args['nphi'][0]}/{args['nphi'][1]}$")
         idx_x = np.linspace(0, num_samples - 1, num_samples, dtype=int)
         idx_y = np.linspace(0, num_samples - 1, num_samples, dtype=int)
         kx, ky = np.meshgrid(idx_x, idx_y)
@@ -183,6 +184,7 @@ if __name__ == '__main__':
         if wilson:
             fig2 = plt.figure()
             ax2 = fig2.add_subplot(111)
+            ax2.set_title(f"$n_\phi = {args['nphi'][0]}/{args['nphi'][1]}$")
             idx_x = np.linspace(0, num_samples - 1, num_samples, dtype=int)
             for i in range(num_bands):
                 ax2.scatter(idx_x, wilson_loops[i])
@@ -211,6 +213,7 @@ if __name__ == '__main__':
         # construct figure
         fig = plt.figure()
         ax = plt.subplot(111)
+        ax.set_title(f"$n_\phi = {args['nphi'][0]}/{args['nphi'][1]}$")
         for i in range(num_bands):
             ax.plot(eigenvalues[i])
         for i in range(1, num_paths):

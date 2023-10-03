@@ -68,7 +68,6 @@ Directory Structure
 To-do List
 ----------
 
-* add butterfly script, with color option, (and full color option)
 * add g fluctuations
 
 * generalize the Hofstadter model to long-range hoppings
