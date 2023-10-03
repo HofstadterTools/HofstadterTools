@@ -9,12 +9,12 @@ class Hofstadter:
     The Hamiltonian for the Hofstadter model is given as
 
     .. math::
-        H = \sum_{\braket{ij}} e^{i \theta_{ij}} c_i^\dagger c_j + \mathrm{H.c.},
+        H = - \sum_{\braket{ij}} t e^{i \theta_{ij}} c_i^\dagger c_j + \mathrm{H.c.},
 
     where :math:`\braket{ij}` denotes nearest neighbors on a lattice in the xy-plane, :math:`t` are the hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the (creation)annihilation operators for bosons / spinless fermions.
     """
 
-    def __init__(self, p, q, a0=1, t=-1):
+    def __init__(self, p, q, a0=1, t=1):
         """Constructor for the Hofstadter class.
 
         Parameters
@@ -96,13 +96,13 @@ class Hofstadter:
             return 2 * np.cos(2 * np.pi * nphi * m_val + k_val_val[1] * self.a0)
 
         for n in range(self.q):
-            Hamiltonian[n][n] = self.t * h(k_val, n)
+            Hamiltonian[n][n] = -self.t * h(k_val, n)
 
         for n in range(self.q - 1):
-            Hamiltonian[n][n + 1] = self.t * np.exp(+1j * k_val[0] * self.a0)
-            Hamiltonian[n + 1][n] = self.t * np.exp(-1j * k_val[0] * self.a0)
+            Hamiltonian[n][n + 1] = -self.t * np.exp(+1j * k_val[0] * self.a0)
+            Hamiltonian[n + 1][n] = -self.t * np.exp(-1j * k_val[0] * self.a0)
 
-        Hamiltonian[0][self.q - 1] = self.t * np.exp(-1j * k_val[0] * self.a0)
-        Hamiltonian[self.q - 1][0] = self.t * np.exp(+1j * k_val[0] * self.a0)
+        Hamiltonian[0][self.q - 1] = -self.t * np.exp(-1j * k_val[0] * self.a0)
+        Hamiltonian[self.q - 1][0] = -self.t * np.exp(+1j * k_val[0] * self.a0)
 
         return Hamiltonian

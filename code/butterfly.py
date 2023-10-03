@@ -77,8 +77,6 @@ if __name__ == '__main__':
             chern_list.append(cherns)
             tr_list.append(trs)
 
-    print(np.shape(E_list))
-
     if color == "plane":
         resx = np.shape(E_list)[0]
         resy = np.shape(E_list)[1]
