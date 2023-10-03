@@ -21,7 +21,7 @@ def nearest_neighbor_finder(lattice, numb):
 
     # data = data[data[:, 0].argsort()]  # sort by increasing r
 
-    # delete the r=0 row
+    # delete the first r=0 row
     mask = (data[:, 0] != 0)
     data = data[mask, :]
     # delete rows that exceed the NN number
@@ -55,19 +55,19 @@ def diag_func(nphi, vec_list, k, m):
     return term
 
 
-def Hamiltonian(vec_group_list, k_val, p_val, q_val):
+def Hamiltonian(p_val, q_val, vec_group_list, k_val):
 
     Hamiltonian = np.zeros((q_val, q_val), dtype=np.complex128)
 
     for m in range(q_val):
-        Hamiltonian[m][m] = - diag_func(p_val / q_val, k_val, vec_group_list[1], m)
+        Hamiltonian[m][m] = - diag_func(p_val / q_val, vec_group_list[1], k_val, m)
 
     for m in range(q_val-1):
-        Hamiltonian[m][m+1] = - diag_func(p_val / q_val, k_val, vec_group_list[2], m)
-        Hamiltonian[m+1][m] = - diag_func(p_val / q_val, k_val, vec_group_list[0], m+1)
+        Hamiltonian[m][m+1] = - diag_func(p_val / q_val, vec_group_list[2], k_val, m)
+        Hamiltonian[m+1][m] = - diag_func(p_val / q_val, vec_group_list[0], k_val, m+1)
 
-    Hamiltonian[0][q_val-1] = - diag_func(p_val / q_val, k_val, vec_group_list[0], 0)
-    Hamiltonian[q_val-1][0] = - diag_func(p_val / q_val, k_val, vec_group_list[2], q_val-1)
+    Hamiltonian[0][q_val-1] = - diag_func(p_val / q_val, vec_group_list[0], k_val, 0)
+    Hamiltonian[q_val-1][0] = - diag_func(p_val / q_val, vec_group_list[2], k_val, q_val-1)
 
     # print(Hamiltonian)
     # 1/0
@@ -80,8 +80,8 @@ if __name__ == '__main__':
     data2 = nearest_neighbor_finder("square", 1)
     print(data2)
 
-    min_term = np.min(data2[:, 4])
-    max_term = np.max(data2[:, 4])
+    min_term = np.min(data2[:, 2])
+    max_term = np.max(data2[:, 2])
 
     vec_group = np.zeros(max_term - min_term + 1, dtype=object)
     for i, vec_group_idx in enumerate(range(min_term, max_term + 1)):
@@ -95,6 +95,8 @@ if __name__ == '__main__':
     print(vec_group[0])
     print(vec_group[1])
     print(vec_group[2])
+
+    # print(vec_group)
 
     ###
 
@@ -114,7 +116,7 @@ if __name__ == '__main__':
                 frac_ky = idx_y / (num_samples - 1)
                 k = np.matmul(np.array([frac_kx, frac_ky]), bvec)
                 # print("k = ", k)
-                eigvals, eigvecs = np.linalg.eigh(Hamiltonian(vec_group, k, 1, num_bands))
+                eigvals, eigvecs = np.linalg.eigh(Hamiltonian(1, num_bands, vec_group, k))
                 idx = np.argsort(eigvals)
                 eigenvalues[band, idx_x, idx_y] = eigvals[idx[band]]
                 eigenvectors[:, band, idx_x, idx_y] = eigvecs[:, idx[band]]

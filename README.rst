@@ -68,10 +68,9 @@ Directory Structure
 To-do List
 ----------
 
-* add g fluctuations
-
 * generalize the Hofstadter model to long-range hoppings
 * add capability for triangular and honeycomb lattices
+* add g fluctuations
 
 * add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry,
 and singular flat band inspired by LK-99")
