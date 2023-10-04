@@ -17,8 +17,9 @@ if __name__ == '__main__':
 
     # input arguments
     args = fa.parse_input_arguments("band_structure")
+    t = args['t']
     if args['model'] == "Hofstadter":
-        model = Hofstadter(args['nphi'][0], args['nphi'][1])
+        model = Hofstadter(args['nphi'][0], args['nphi'][1], t=t)
     else:
         raise ValueError("model is not defined")
     num_samples = args['samp']

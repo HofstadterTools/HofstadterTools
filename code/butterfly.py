@@ -55,6 +55,7 @@ if __name__ == '__main__':
 
     # input arguments
     args = fa.parse_input_arguments("butterfly")
+    t = args['t']
     q = args['q']
     color = args['color']
 
@@ -64,7 +65,7 @@ if __name__ == '__main__':
         chern_list, tr_list = [], []
     for p in tqdm(range(1, q), desc="Butterfly Construction", ascii=True):
         if args['model'] == "Hofstadter":
-            model = Hofstadter(p, q)
+            model = Hofstadter(p, q, t=t)
         else:
             raise ValueError("model is not defined")
         if gcd(p, q) != 1:  # nphi must be a coprime fraction
