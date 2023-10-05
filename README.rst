@@ -71,6 +71,9 @@ To-do List
 * generalize the Hofstadter model to long-range hoppings
 * add capability for triangular and honeycomb lattices
 * add g fluctuations
+* implement anisotropy
+* add Wannier diagram, energy gaps in the butterfly
+* Landau fan
 
 * add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry,
 and singular flat band inspired by LK-99")

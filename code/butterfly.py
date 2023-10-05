@@ -56,6 +56,7 @@ if __name__ == '__main__':
     # input arguments
     args = fa.parse_input_arguments("butterfly")
     t = args['t']
+    lat = args['lattice']
     q = args['q']
     color = args['color']
 
@@ -65,7 +66,7 @@ if __name__ == '__main__':
         chern_list, tr_list = [], []
     for p in tqdm(range(1, q), desc="Butterfly Construction", ascii=True):
         if args['model'] == "Hofstadter":
-            model = Hofstadter(p, q, t=t)
+            model = Hofstadter(p, q, t=t, lat=lat)
         else:
             raise ValueError("model is not defined")
         if gcd(p, q) != 1:  # nphi must be a coprime fraction
@@ -83,7 +84,7 @@ if __name__ == '__main__':
         resy = np.shape(E_list)[1]
         res = [resx, resy]
 
-        E_vals = np.linspace(np.min(E_list[0]), np.max(E_list[0]), res[1])  # energy bins
+        E_vals = np.linspace(np.min(E_list), np.max(E_list), res[1])  # energy bins
         matrix = np.zeros((res[0], res[1]))
 
         for i, p in enumerate(range(1, res[0]+1)):  # p goes from 1 to 199
@@ -118,6 +119,9 @@ if __name__ == '__main__':
         cbar.set_ticks(tick_locs)
         cbar.set_ticklabels(cbar_tick_label)
     else:
+        nphi_list = list(np.concatenate(nphi_list).ravel())
+        E_list = list(np.concatenate(E_list).ravel())
+
         ax.scatter(nphi_list, E_list, s=1, marker='.')
 
     ax.set_ylabel('$E$')

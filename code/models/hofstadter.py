@@ -57,14 +57,26 @@ class Hofstadter:
 
         num_bands_val = self.q
         if self.lat == "square":
-            # lattice vectors (MUC)
-            a1 = self.a0 * np.array([num_bands_val, 0])
+            # lattice vectors
+            a1 = self.a0 * np.array([1, 0])
             a2 = self.a0 * np.array([0, 1])
             avec_val = np.vstack((a1, a2))
-            # reciprocal lattice vectors (MUC)
-            b1 = (2. * np.pi) / self.a0 * np.array([1 / num_bands_val, 0])
+            # reciprocal lattice vectors
+            b1 = (2. * np.pi) / self.a0 * np.array([1, 0])
             b2 = (2. * np.pi) / self.a0 * np.array([0, 1])
             bvec_val = np.vstack((b1, b2))
+            # lattice vectors (MUC)
+            aMUC1 = num_bands_val * a1
+            aMUC2 = a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
+            # reciprocal lattice vectors (MUC)
+            bMUC1 = b1 / num_bands_val
+            bMUC2 = b2
+            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            # cartesian vectors (for Peierls substitution)
+            acart1 = self.a0 * np.array([1, 0])
+            acart2 = self.a0 * np.array([0, 1])
+            acartvec_val = np.vstack((acart1, acart2))
             # symmetry points
             GA = np.array([0, 0])
             Y = np.array([0, 0.5])
@@ -72,14 +84,26 @@ class Hofstadter:
             X = np.array([0.5, 0])
             sym_points_val = [GA, Y, S, X]
         elif self.lat == "triangular":
-            # lattice vectors (MUC)
-            a1 = self.a0 * np.array([num_bands_val, 0])
-            a2 = self.a0 * np.array([1/2, np.sqrt(3)/2])
+            # lattice vectors
+            a1 = self.a0 * np.array([1, 0])
+            a2 = self.a0 * np.array([1 / 2, np.sqrt(3) / 2])
             avec_val = np.vstack((a1, a2))
-            # reciprocal lattice vectors (MUC)
-            b1 = (2. * np.pi) / self.a0 * np.array([1 / num_bands_val, -num_bands_val/np.sqrt(3)])
-            b2 = (2. * np.pi) / self.a0 * np.array([0, 2/np.sqrt(3)])
+            # reciprocal lattice vectors
+            b1 = (2. * np.pi) / self.a0 * np.array([1, -1 / np.sqrt(3)])
+            b2 = (2. * np.pi) / self.a0 * np.array([0, 2 / np.sqrt(3)])
             bvec_val = np.vstack((b1, b2))
+            # lattice vectors (MUC)
+            aMUC1 = num_bands_val * a1
+            aMUC2 = a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
+            # reciprocal lattice vectors (MUC)
+            bMUC1 = b1 / num_bands_val
+            bMUC2 = b2
+            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            # cartesian vectors (for Peierls substitution)
+            acart1 = self.a0 * np.array([1/2, 0])
+            acart2 = self.a0 * np.array([0, np.sqrt(3)/2])
+            acartvec_val = np.vstack((acart1, acart2))
             # symmetry points
             GA = np.array([0, 0])
             Y = np.array([0, 0.5])
@@ -87,7 +111,9 @@ class Hofstadter:
             X = np.array([0.5, 0])
             sym_points_val = [GA, Y, S, X]
 
-        return num_bands_val, avec_val, bvec_val, sym_points_val
+        self.avec = avec_val
+
+        return num_bands_val, avec_val, bvec_val, aMUCvec_val, bMUCvec_val, acartvec_val, sym_points_val
 
     def hamiltonian(self, k_val):
         """The Hamiltonian of the Hofstadter model.
@@ -103,9 +129,11 @@ class Hofstadter:
             The Hofstadter Hamiltonian matrix of dimension (num_bands, num_bands).
         """
 
+        _, avec, _, _, _, acartvec, _ = self.unit_cell()
+
         # nearest neighbors
-        vec_group = fm.nearest_neighbor_finder("square", self.t)
-        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, vec_group, k_val)
+        vec_group = fm.nearest_neighbor_finder(avec, acartvec, self.t)
+        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, acartvec, vec_group, k_val)
 
         return Hamiltonian
 

@@ -18,8 +18,9 @@ if __name__ == '__main__':
     # input arguments
     args = fa.parse_input_arguments("band_structure")
     t = args['t']
+    lat = args['lattice']
     if args['model'] == "Hofstadter":
-        model = Hofstadter(args['nphi'][0], args['nphi'][1], t=t)
+        model = Hofstadter(args['nphi'][0], args['nphi'][1], t=t, lat=lat)
     else:
         raise ValueError("model is not defined")
     num_samples = args['samp']
@@ -27,7 +28,7 @@ if __name__ == '__main__':
     wilson = args['wilson']
 
     # define unit cell
-    num_bands, avec, bvec, sym_points = model.unit_cell()
+    num_bands, _, _, aMUCvec, bMUCvec, sym_points = model.unit_cell()
 
     # construct bands
     eigenvalues = np.zeros((num_bands, num_samples, num_samples))  # real
@@ -35,8 +36,8 @@ if __name__ == '__main__':
     if any(geometry_columns):
         eigenvectors_dkx = np.zeros((num_bands, num_bands, num_samples, num_samples), dtype=np.complex128)  # complex
         eigenvectors_dky = np.zeros((num_bands, num_bands, num_samples, num_samples), dtype=np.complex128)  # complex
-        Dkx = np.dot(np.array([1/(num_samples-1), 0]), bvec[0])
-        Dky = np.dot(np.array([0, 1/(num_samples-1)]), bvec[1])
+        Dkx = np.dot(np.array([1/(num_samples-1), 0]), bMUCvec[0])
+        Dky = np.dot(np.array([0, 1/(num_samples-1)]), bMUCvec[1])
     for band in tqdm(range(num_bands), desc="Band Construction", ascii=True):
         for idx_x in range(num_samples):
             frac_kx = idx_x / (num_samples-1)
@@ -44,15 +45,15 @@ if __name__ == '__main__':
                 frac_kx_dkx = (frac_kx + 1/(1000*(num_samples-1))) % 1
             for idx_y in range(num_samples):
                 frac_ky = idx_y / (num_samples-1)
-                k = np.matmul(np.array([frac_kx, frac_ky]), bvec)
+                k = np.matmul(np.array([frac_kx, frac_ky]), bMUCvec)
                 eigvals, eigvecs = np.linalg.eigh(model.hamiltonian(k))
                 idx = np.argsort(eigvals)
                 eigenvalues[band, idx_x, idx_y] = eigvals[idx[band]]
                 eigenvectors[:, band, idx_x, idx_y] = eigvecs[:, idx[band]]
                 if any(geometry_columns):
                     frac_ky_dky = (frac_ky + 1/(1000*(num_samples-1))) % 1
-                    k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bvec)
-                    k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bvec)
+                    k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bMUCvec)
+                    k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bMUCvec)
                     eigvals_dkx, eigvecs_dkx = np.linalg.eig(model.hamiltonian(k_dkx))
                     eigvals_dky, eigvecs_dky = np.linalg.eig(model.hamiltonian(k_dky))
                     idx_dkx = np.argsort(eigvals_dkx)
@@ -106,7 +107,7 @@ if __name__ == '__main__':
                     # quantum geometry
                     if any(geometry_columns):
                         if group_size == 1:
-                            geom_tensor = fbs.geom_tensor(eigenvectors, eigenvectors_dkx, eigenvectors_dky, bvec, band, idx_x, idx_y, group_size)
+                            geom_tensor = fbs.geom_tensor(eigenvectors, eigenvectors_dkx, eigenvectors_dky, bMUCvec, band, idx_x, idx_y, group_size)
                             fs_metric[band, idx_x, idx_y] = np.real(geom_tensor)
                             berry_curv = -2*np.imag(geom_tensor)
                             ###
@@ -204,7 +205,7 @@ if __name__ == '__main__':
         for i in range(num_paths):
             for j in range(points_per_path):
                 k = sym_points[i] + (sym_points[(i+1) % num_paths] - sym_points[i]) * float(j) / float(points_per_path - 1)
-                k = np.matmul(k, bvec)
+                k = np.matmul(k, bMUCvec)
                 eigvals = np.linalg.eigvals(model.hamiltonian(k))
                 idx = np.argsort(eigvals)
                 for band in range(num_bands):
