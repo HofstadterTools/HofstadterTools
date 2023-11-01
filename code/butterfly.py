@@ -72,8 +72,24 @@ if __name__ == '__main__':
         if gcd(p, q) != 1:  # nphi must be a coprime fraction
             continue
         nphi = p / q
-        nphi_list.append([nphi] * q)
-        E_list.append(np.sort(np.linalg.eigvalsh(model.hamiltonian(np.array([0, 0])))))
+
+        if lat == "honeycomb":
+            M = 2 * q
+        else:
+            M = q
+
+        nphi_list.append([nphi] * M)
+
+        lmbda = np.sort(np.linalg.eigvalsh(model.hamiltonian(np.array([0, 0]))))
+
+        if lat == "honeycomb":
+            eenergies = np.zeros(2 * len(lmbda))
+            for i in range(len(lmbda)):
+                eenergies[i] = +np.sqrt(3 + lmbda[i])
+                eenergies[len(lmbda) + i] = -np.sqrt(3 + lmbda[i])
+            E_list.append(eenergies)
+        else:
+            E_list.append(lmbda)
         if color:
             cherns, trs = chern(p, q)
             chern_list.append(cherns)

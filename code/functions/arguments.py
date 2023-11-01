@@ -24,7 +24,7 @@ def parse_input_arguments(program):
     models = ["Hofstadter"]
     parser.add_argument("-mod", "--model", type=str, default="Hofstadter", choices=models, help="name of model")
     parser.add_argument("-t", nargs='+', type=float, default=[1], help="list of hopping amplitudes in order of ascending NN")
-    lattices = ["square", "triangular"]
+    lattices = ["square", "triangular", "honeycomb"]
     parser.add_argument("-lat", "--lattice", type=str, default="square", choices=lattices, help="name of lattice")
 
     if program == "band_structure":

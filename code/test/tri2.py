@@ -23,20 +23,29 @@ def hamiltonian(t, p, q, k_val):
 
     nphi = p / q
 
-    def B(k_val_val, m_val):
-        return - 2 * t * np.cos(2 * np.pi * nphi * (m_val + 1/2) + k_val_val[1]*np.sqrt(3)/2)
+    def A(k_val_val, m_val):
+        return -2 * t * np.cos(2 * np.pi * nphi * m_val + k_val_val[1])
+
+    def B_pos(k_val_val, m_val):
+        return -1 - 2 * np.cos(2 * np.pi * nphi * (m_val + 1/2))
+
+    # def B_neg(k_val_val, m_val):
+    #     return -1 - 2 * np.cos(2 * np.pi * nphi * (m_val - 1/2))
+
+    for i in range(M):
+        Hamiltonian[i][i] = A(k_val, i)
 
     for i in range(M - 1):
-        Hamiltonian[i][i + 1] = B(k_val, i+1)
-        Hamiltonian[i + 1][i] = B(k_val, i+1)
+        Hamiltonian[i][i + 1] = B_pos(k_val, i+1)
+        Hamiltonian[i + 1][i] = np.conj(B_pos(k_val, i+1))
 
     for i in range(M - 2):
         Hamiltonian[i][i + 2] = -t * np.exp(+1j * k_val[0])
         Hamiltonian[i + 2][i] = -t * np.exp(-1j * k_val[0])
 
     # boundary terms
-    Hamiltonian[0][M - 1] = B(k_val, M)
-    Hamiltonian[M - 1][0] = B(k_val, M)
+    Hamiltonian[0][M - 1] = np.conj(B_pos(k_val, M))
+    Hamiltonian[M - 1][0] = B_pos(k_val, M)
 
     Hamiltonian[0][M - 2] = -t * np.exp(-1j * k_val[0])
     Hamiltonian[1][M - 1] = -t * np.exp(-1j * k_val[0])

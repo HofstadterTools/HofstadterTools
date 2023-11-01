@@ -65,6 +65,13 @@ class Hofstadter:
             b1 = (2. * np.pi) / self.a0 * np.array([1, 0])
             b2 = (2. * np.pi) / self.a0 * np.array([0, 1])
             bvec_val = np.vstack((b1, b2))
+            # basis vector
+            basis = 1
+            abasis1 = self.a0 * np.array([0, 0])
+            abasisvec_val = abasis1
+            # reciprocal basis vectors
+            bbasis1 = (2. * np.pi) / self.a0 * np.array([0, 0])
+            bbasisvec_val = bbasis1
             # lattice vectors (MUC)
             aMUC1 = num_bands_val * a1
             aMUC2 = a2
@@ -84,6 +91,7 @@ class Hofstadter:
             X = np.array([0.5, 0])
             sym_points_val = [GA, Y, S, X]
         elif self.lat == "triangular":
+            basis = 1
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
             a2 = self.a0 * np.array([1 / 2, np.sqrt(3) / 2])
@@ -92,6 +100,13 @@ class Hofstadter:
             b1 = (2. * np.pi) / self.a0 * np.array([1, -1 / np.sqrt(3)])
             b2 = (2. * np.pi) / self.a0 * np.array([0, 2 / np.sqrt(3)])
             bvec_val = np.vstack((b1, b2))
+            # basis vector
+            basis = 1
+            abasis1 = self.a0 * np.array([0, 0])
+            abasisvec_val = abasis1
+            # reciprocal basis vectors
+            bbasis1 = (2. * np.pi) / self.a0 * np.array([0, 0])
+            bbasisvec_val = bbasis1
             # lattice vectors (MUC)
             aMUC1 = num_bands_val * a1
             aMUC2 = a2
@@ -110,10 +125,47 @@ class Hofstadter:
             S = np.array([0.5, 0.5])
             X = np.array([0.5, 0])
             sym_points_val = [GA, Y, S, X]
+        elif self.lat == "honeycomb":
+            # lattice vectors
+            a1 = self.a0 * np.array([1, 0])
+            a2 = self.a0 * np.array([1 / 2, np.sqrt(3) / 2])
+            avec_val = np.vstack((a1, a2))
+            # reciprocal lattice vectors
+            b1 = (2. * np.pi) / self.a0 * np.array([1, -1 / np.sqrt(3)])
+            b2 = (2. * np.pi) / self.a0 * np.array([0, 2 / np.sqrt(3)])
+            bvec_val = np.vstack((b1, b2))
+            # basis vector
+            basis = 2
+            abasis1 = self.a0 * np.array([0, 0])
+            abasis2 = self.a0 * np.array([1/2, np.sqrt(3)/6])
+            abasisvec_val = np.vstack((abasis1, abasis2))
+            # reciprocal basis vectors
+            bbasis1 = (2. * np.pi) / self.a0 * np.array([0, 0])
+            bbasis2 = (2. * np.pi) / self.a0 * np.array([1, np.sqrt(3)])
+            bbasisvec_val = np.vstack((bbasis1, bbasis2))
+            # lattice vectors (MUC)
+            aMUC1 = num_bands_val * a1
+            aMUC2 = a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
+            # reciprocal lattice vectors (MUC)
+            bMUC1 = b1 / num_bands_val
+            bMUC2 = b2
+            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            # cartesian vectors (for Peierls substitution)
+            acart1 = self.a0 * np.array([1/2, 0])
+            acart2 = self.a0 * np.array([0, np.sqrt(3)/6])
+            acartvec_val = np.vstack((acart1, acart2))
+            # symmetry points
+            GA = np.array([0, 0])
+            Y = np.array([0, 0.5])
+            S = np.array([0.5, 0.5])
+            X = np.array([0.5, 0])
+            sym_points_val = [GA, Y, S, X]
 
         self.avec = avec_val
 
-        return num_bands_val, avec_val, bvec_val, aMUCvec_val, bMUCvec_val, acartvec_val, sym_points_val
+        return (basis, num_bands_val, avec_val, bvec_val, abasisvec_val, bbasisvec_val,
+                aMUCvec_val, bMUCvec_val, acartvec_val, sym_points_val)
 
     def hamiltonian(self, k_val):
         """The Hamiltonian of the Hofstadter model.
@@ -129,11 +181,13 @@ class Hofstadter:
             The Hofstadter Hamiltonian matrix of dimension (num_bands, num_bands).
         """
 
-        _, avec, _, _, _, acartvec, _ = self.unit_cell()
+        basis, _, avec, _, abasisvec, _, _, _, acartvec, _ = self.unit_cell()
+
+        print("basis = ", basis)
 
         # nearest neighbors
         vec_group = fm.nearest_neighbor_finder(avec, acartvec, self.t)
-        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, acartvec, vec_group, k_val)
+        Hamiltonian = fm.Hamiltonian(basis, self.t, self.p, self.q, acartvec, vec_group, k_val)
 
         return Hamiltonian
 

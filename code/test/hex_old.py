@@ -22,20 +22,11 @@ def hamiltonian(t, p, M, k_val):
     nphi = p / q
 
     def B(nphi_val, k_val_val, m_val):
-        #print(t, nphi_val, m_val)
-        #print((- 2 * t * np.exp(1j * 2 * np.pi * nphi_val/3) * np.cos(2 * np.pi * nphi_val * (m_val + 1/2) + 3*k_val_val[1]*np.sqrt(3)/2)))
-        #1/0
-
-        value = - 2 * t * np.exp(1j * 2 * np.pi * nphi_val/3) * np.cos(2 * np.pi * nphi_val * (m_val + 1/2) + 3*k_val_val[1]*np.sqrt(3)/2)
-        # value = - 2 * t * np.exp(1j * np.pi * nphi_val/3) * np.cos(np.pi * nphi_val * (m_val + 1 / 2) + 3 * k_val_val[1] * np.sqrt(3) / 2)
-
-        return value
+        return (- 2 * t * np.exp(1j * np.pi * nphi_val/3)
+                * np.cos(np.pi * nphi_val * (m_val + 1/2) + 3*k_val_val[1]*np.sqrt(3)/2))
 
     def C(nphi_val):
-        value = -t * np.exp(1j * 2 * np.pi * nphi_val / 3)
-        # value = -t * np.exp(1j * np.pi * nphi_val / 3)
-
-        return value
+        return -t * np.exp(1j * np.pi * nphi_val / 3)
 
     for i in range(M - 1):
         Hamiltonian[i][i + 1] = B(nphi, k_val, i+1)
@@ -52,8 +43,6 @@ def hamiltonian(t, p, M, k_val):
     Hamiltonian[M - 1][0] = B(nphi, k_val, M)
     Hamiltonian[M - 2][0] = np.conj(C(nphi))
     Hamiltonian[M - 1][1] = np.conj(C(nphi))
-
-    #print(Hamiltonian)
 
     lmbda = np.real(np.linalg.eigvals(Hamiltonian))
     eenergies = np.zeros(2 * len(lmbda))
@@ -78,15 +67,12 @@ if __name__ == '__main__':
         if gcd(p, q) != 1:  # nphi must be a coprime fraction
             continue
 
-        # if p % 2 == 0:
-        #     M = q
-        # else:
-        #     M = 2 * q
-
-        M = q
+        if p % 2 == 0:
+            M = q
+        else:
+            M = 2 * q
 
         nphi = p / q
-        #print(nphi)
         nphi_list = [nphi for i in range(2*M)]
         eham = hamiltonian(-1, p, M, np.array([0, 0]))
         values.append((eham, nphi_list))
