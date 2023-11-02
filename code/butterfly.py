@@ -6,6 +6,7 @@ from math import gcd
 import matplotlib.ticker as ticker
 from fractions import Fraction
 from matplotlib.ticker import MaxNLocator
+from copy import deepcopy
 # --- internal imports
 import functions.arguments as fa
 from models.hofstadter import Hofstadter
@@ -85,17 +86,31 @@ if __name__ == '__main__':
         if lat == "honeycomb":
             eenergies = np.zeros(2 * len(lmbda))
             for i in range(len(lmbda)):
+                if lmbda[i] < -3:  # avoid taking sqrt of negative number
+                    lmbda[i] = -3
                 eenergies[i] = +np.sqrt(3 + lmbda[i])
                 eenergies[len(lmbda) + i] = -np.sqrt(3 + lmbda[i])
-            E_list.append(eenergies)
+            E_list.append(np.sort(eenergies))
         else:
             E_list.append(lmbda)
         if color:
             cherns, trs = chern(p, q)
-            chern_list.append(cherns)
-            tr_list.append(trs)
+            if model.lat == "honeycomb":
+                chern_list.append(cherns + [i for i in cherns[::-1]])
+                tr_list.append(trs + [-i for i in trs[::-1]])
+            else:
+                chern_list.append(cherns)
+                tr_list.append(trs)
 
     if color == "plane":
+
+        E_list_orig = deepcopy(E_list)
+
+        if model.lat == "honeycomb":
+            half_len = int(np.shape(E_list)[1]/2)
+            for i, val in enumerate(E_list):
+                E_list[i] = val[:half_len]  # consider only lower half
+
         resx = np.shape(E_list)[0]
         resy = np.shape(E_list)[1]
         res = [resx, resy]
@@ -109,6 +124,9 @@ if __name__ == '__main__':
                     if E <= El:  # if energy is lower than sorted E_list value
                         matrix[i][j] = tr_list[i][k]  # assign the corresponding tr of that E_list value
                         break
+
+        if model.lat == "honeycomb":
+            matrix = np.concatenate((matrix, -matrix[:, ::-1]), axis=1)  # double the spectrum
 
     # construct figure
     fig = plt.figure()
@@ -126,7 +144,7 @@ if __name__ == '__main__':
         cbar.set_ticklabels(cbar_tick_label)
     elif color == "plane":
         cmap = plt.get_cmap('jet', 21)
-        sc = ax.imshow(matrix.T, origin='lower', cmap=cmap, extent=[0, 1, np.min(E_list[0]), np.max(E_list[0])],
+        sc = ax.imshow(matrix.T, origin='lower', cmap=cmap, extent=[0, 1, np.min(E_list_orig[0]), np.max(E_list_orig[0])],
                        aspect="auto", vmin=-10, vmax=10)
         cbar = plt.colorbar(sc)
         cbar.set_label("$C$")
