@@ -3,73 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 
 
-def nearest_neighbor_finder(avec, acartvec, t_list):
-
-    # --- 1) Create list of NN to consider from t_list
-    numb_list = []
-    for i, t in enumerate(t_list):
-        if t != 0:
-            numb_list.append(i+1)
-    print("numb_list = ", numb_list)
-
-    # --- 2) Create grid of basis vectors from [-t_max, t_max]
-    vectors = []
-    vectors_unit = []
-    for i in range(-numb_list[-1], numb_list[-1]+1):
-        for j in range(-numb_list[-1], numb_list[-1]+1):
-            r_unit = np.array([i, j])
-            vectors_unit.append(r_unit)
-            r = np.matmul(r_unit, avec)
-            vectors.append(r)
-    print("vectors = ", vectors)
-
-    # --- 3) Define data array with info on each vector
-    data = np.zeros((len(vectors), 8), dtype=object)
-    for i, r in enumerate(vectors):
-        data[i, 0] = round(np.linalg.norm(r), 10)  # round so that we can use it for comparison
-        data[i, 1] = np.angle(r[0]+1j*r[1])
-        data[i, 2] = r[0]
-        data[i, 3] = r[1]
-        data[i, 4] = round(r[0] / acartvec[0][0])
-        data[i, 5] = round(r[1] / acartvec[1][1])
-    print("data = ", data)
-
-    # --- 4) Extract the NN groups (filter data based on radius)
-    data = data[data[:, 0].argsort()]  # sort by increasing r
-    # delete the first r=0 row
-    mask = (data[:, 0] != 0)
-    data = data[mask, :]
-    radii = np.sort(list(set(data[:, 0])))
-    # label the NN group
-    for i, row in enumerate(data):
-        for j, r in enumerate(radii):
-            if row[0] == r:
-                data[i, 6] = j+1
-    select_radii = [radii[i - 1] for i in numb_list]
-    # delete rows with other radii
-    rows_to_delete = []
-    for i, row in enumerate(data):
-        if row[0] not in select_radii:
-            rows_to_delete.append(i)
-    data = np.delete(data, rows_to_delete, axis=0)
-    print("filtered data = ", data)
-
-    # --- 5) Sort into vec groups (group based on total m value)
-    data = data[data[:, 4].argsort()]  # sort by m offset
-    m_values = np.sort(list(set(data[:, 4])))
-    vec_group = np.zeros(len(m_values), dtype=object)
-    for i in range(len(m_values)):
-        vec_group[i] = []
-    for i, vec_group_idx in enumerate(m_values):
-        for row in data:
-            if row[4] == vec_group_idx:
-                vec_group[i].append((np.array([row[2], row[3]]), np.array([row[4], row[5]]), row[6]))
-    print("vec_group = ", vec_group)
-
-    return vec_group
-
-
-def nearest_neighbor_finder_new(avec, acartvec, abasisvec, t_list, m_init, n_init):
+def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, m_init, n_init):
 
     # --- Create list of NN to consider from t_list
     numb_list = []
@@ -124,24 +58,12 @@ def nearest_neighbor_finder_new(avec, acartvec, abasisvec, t_list, m_init, n_ini
     data = np.delete(data, rows_to_delete, axis=0)
     # print("data = ", data)
 
-    # --- 5) Sort into vec groups (group based on total m value)
-    # data = data[data[:, 4].argsort()]  # sort by m offset
-    # m_values = np.sort(list(set(data[:, 4])))
-    # vec_group = np.zeros(len(m_values), dtype=object)
-    # for i in range(len(m_values)):
-    #     vec_group[i] = []
-    # for i, vec_group_idx in enumerate(m_values):
-    #     for row in data:
-    #         if row[4] == vec_group_idx:
-    #             vec_group[i].append((np.array([row[2], row[3]]), np.array([row[4], row[5]]), row[6]))
-    # print("vec_group = ", vec_group)
-
     return data
 
 
 def nearest_neighbor_sorter(data_array):
 
-    # delete backtrack vectors
+    # --- Delete backtrack vectors
     delete_list = []
     for i, val in enumerate(data_array):
         if val[7] + val[4] == 0 and val[8] + val[5] == 0:  # backtrack
@@ -149,7 +71,7 @@ def nearest_neighbor_sorter(data_array):
     data_array = np.delete(data_array, delete_list, axis=0)
     # print("filter data array = ", data_array)
 
-    # count the independent paths
+    # --- Count the independent paths
     numb_paths = 0
     # count double paths
     double = True
@@ -158,7 +80,7 @@ def nearest_neighbor_sorter(data_array):
             for j, val2 in enumerate(data_array):
                 if val[7] + val[4] == val2[7] and val[8] + val[5] == val2[8]:
                     numb_paths = numb_paths + 1
-    # count single paths
+    # --- Count single paths
     if numb_paths == 0:
         double = False
         for i, val in enumerate(data_array):
@@ -166,7 +88,7 @@ def nearest_neighbor_sorter(data_array):
                 numb_paths = numb_paths + 1
     # print("numb_paths = ", numb_paths)
 
-    # group the independent paths
+    # --- Group the independent paths
     paths = np.zeros(numb_paths, dtype=object)
     for i in range(numb_paths):
         paths[i] = []
@@ -189,7 +111,7 @@ def nearest_neighbor_sorter(data_array):
                 counter = counter + 1
     # print("paths = ", paths)
 
-    # count the number of total m
+    # --- Count the number of total m
     m_tot = []
     for i, val in enumerate(paths):
         m_tot.append(val[-1])
@@ -198,7 +120,7 @@ def nearest_neighbor_sorter(data_array):
     numb_m = len(m_tot)
     # print("numb_m = ", numb_m)
 
-    # group the independent paths by total m
+    # --- Group the independent paths by total m
     grouped_paths = np.zeros(numb_m, dtype=object)
     for i in range(numb_m):
         grouped_paths[i] = []
@@ -233,7 +155,6 @@ def diag_func(basis, t_val, nphi, vec_list, k, m):
     term = 0
     for vec_inf in vec_list:
         for inner_vec_inf in vec_inf:
-            # term += - t_val[int(vec_inf[2])-1] * peierls_factor(nphi, vec_inf[1], m) * np.exp(1j * np.vdot(vec_inf[0], k))
             NN_group = int(inner_vec_inf[6])
             xy_vector = np.array([inner_vec_inf[2], inner_vec_inf[3]])
             mn_vector = np.array([inner_vec_inf[4], inner_vec_inf[5]])
@@ -260,9 +181,8 @@ def Hamiltonian(basis, t_val, p_val, q_val, acartvec, vec_group_list, k_val):
             if i == 0:
                 Hamiltonian += np.diag(np.array([diag_func(basis, t_val, p_val / q_val, vec_group_list[len(vec_group_list)//2][:-1], k_val, m) for m in range(q_val)]))
             else:
-                offset = 0 if 0 in pos_m_vals else -1
                 # upper_diag_array
-                upper_diag_array = np.array([diag_func(basis, t_val, p_val / q_val, vec_group_list[len(vec_group_list)//2+offset+idx][:-1], k_val, (m+i) % q_val) for m in range(q_val)])
+                upper_diag_array = np.array([diag_func(basis, t_val, p_val / q_val, vec_group_list[len(vec_group_list)//2+idx][:-1], k_val, (m+i) % q_val) for m in range(q_val)])
                 Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
                 # lower_diag_array
                 Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), i, axis=0)

@@ -183,67 +183,22 @@ class Hofstadter:
 
         basis, _, avec, _, abasisvec, _, _, _, acartvec, _ = self.unit_cell()
 
-        # print("basis = ", basis)
-
         # nearest neighbors
-        # vec_group = fm.nearest_neighbor_finder(avec, acartvec, self.t)
-
         if basis == 1:  # square/triangular
-            data0 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, 0)
+            data0 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0)
             data = np.vstack([data0])
         elif basis == 2:  # honeycomb
-            data0 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, 0)
-            data1 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 1, 1)
-            data2 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, -1, 1)
-            data3 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, -2)
+            data0 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0)
+            data1 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 1, 1)
+            data2 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, -1, 1)
+            data3 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, -2)
             data = np.vstack([data0, data1, data2, data3])
         else:
             raise ValueError("basis not implemented")
-        # print("data = ", data)
 
+        # sorted groups
         vec_group = fm.nearest_neighbor_sorter(data)
-        # print("vec_group = ", vec_group)
 
         Hamiltonian = fm.Hamiltonian(basis, self.t, self.p, self.q, acartvec, vec_group, k_val)
 
         return Hamiltonian
-
-    # def hamiltonian(self, k_val):
-    #     """The Hamiltonian of the Hofstadter model.
-    #
-    #     Parameters
-    #     ----------
-    #     k_val: ndarray
-    #         The momentum vector.
-    #
-    #     Returns
-    #     -------
-    #     Hamiltonian: ndarray
-    #         The Hofstadter Hamiltonian matrix of dimension (num_bands, num_bands).
-    #     """
-    #
-    #     # initialize the Hamiltonian
-    #     num_bands_val = self.q
-    #     Hamiltonian = np.zeros((num_bands_val, num_bands_val), dtype=np.complex128)
-    #
-    #     # nearest neighbors
-    #     delta = np.zeros((2, 2))
-    #     delta[0, :] = self.a0 * np.array([1, 0])
-    #     delta[1, :] = self.a0 * np.array([0, 1])
-    #
-    #     nphi = self.p / self.q
-    #
-    #     def h(k_val_val, m_val):
-    #         return 2 * np.cos(2 * np.pi * nphi * m_val + k_val_val[1] * self.a0)
-    #
-    #     for n in range(self.q):
-    #         Hamiltonian[n][n] = -self.t * h(k_val, n)
-    #
-    #     for n in range(self.q - 1):
-    #         Hamiltonian[n][n + 1] = -self.t * np.exp(+1j * k_val[0] * self.a0)
-    #         Hamiltonian[n + 1][n] = -self.t * np.exp(-1j * k_val[0] * self.a0)
-    #
-    #     Hamiltonian[0][self.q - 1] = -self.t * np.exp(-1j * k_val[0] * self.a0)
-    #     Hamiltonian[self.q - 1][0] = -self.t * np.exp(+1j * k_val[0] * self.a0)
-    #
-    #     return Hamiltonian
