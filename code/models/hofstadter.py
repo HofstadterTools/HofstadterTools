@@ -68,10 +68,10 @@ class Hofstadter:
             # basis vector
             basis = 1
             abasis1 = self.a0 * np.array([0, 0])
-            abasisvec_val = abasis1
+            abasisvec_val = np.array([abasis1])
             # reciprocal basis vectors
             bbasis1 = (2. * np.pi) / self.a0 * np.array([0, 0])
-            bbasisvec_val = bbasis1
+            bbasisvec_val = np.array([bbasis1])
             # lattice vectors (MUC)
             aMUC1 = num_bands_val * a1
             aMUC2 = a2
@@ -103,10 +103,10 @@ class Hofstadter:
             # basis vector
             basis = 1
             abasis1 = self.a0 * np.array([0, 0])
-            abasisvec_val = abasis1
+            abasisvec_val = np.array([abasis1])
             # reciprocal basis vectors
             bbasis1 = (2. * np.pi) / self.a0 * np.array([0, 0])
-            bbasisvec_val = bbasis1
+            bbasisvec_val = np.array([bbasis1])
             # lattice vectors (MUC)
             aMUC1 = num_bands_val * a1
             aMUC2 = a2
@@ -187,12 +187,18 @@ class Hofstadter:
 
         # nearest neighbors
         # vec_group = fm.nearest_neighbor_finder(avec, acartvec, self.t)
-        data0 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, 0)
-        data1 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 1, 1)
-        data2 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, -1, 1)
-        data3 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, -2)
 
-        data = np.vstack([data0, data1, data2, data3])
+        if basis == 1:  # square/triangular
+            data0 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, 0)
+            data = np.vstack([data0])
+        elif basis == 2:  # honeycomb
+            data0 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, 0)
+            data1 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 1, 1)
+            data2 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, -1, 1)
+            data3 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, -2)
+            data = np.vstack([data0, data1, data2, data3])
+        else:
+            raise ValueError("basis not implemented")
         # print("data = ", data)
 
         vec_group = fm.nearest_neighbor_sorter(data)
