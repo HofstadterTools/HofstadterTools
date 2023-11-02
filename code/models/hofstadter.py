@@ -183,10 +183,21 @@ class Hofstadter:
 
         basis, _, avec, _, abasisvec, _, _, _, acartvec, _ = self.unit_cell()
 
-        print("basis = ", basis)
+        # print("basis = ", basis)
 
         # nearest neighbors
-        vec_group = fm.nearest_neighbor_finder(avec, acartvec, self.t)
+        # vec_group = fm.nearest_neighbor_finder(avec, acartvec, self.t)
+        data0 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, 0)
+        data1 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 1, 1)
+        data2 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, -1, 1)
+        data3 = fm.nearest_neighbor_finder_new(avec, acartvec, abasisvec, self.t, 0, -2)
+
+        data = np.vstack([data0, data1, data2, data3])
+        # print("data = ", data)
+
+        vec_group = fm.nearest_neighbor_sorter(data)
+        # print("vec_group = ", vec_group)
+
         Hamiltonian = fm.Hamiltonian(basis, self.t, self.p, self.q, acartvec, vec_group, k_val)
 
         return Hamiltonian

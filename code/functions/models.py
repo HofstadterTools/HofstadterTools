@@ -69,9 +69,144 @@ def nearest_neighbor_finder(avec, acartvec, t_list):
     return vec_group
 
 
+def nearest_neighbor_finder_new(avec, acartvec, abasisvec, t_list, m_init, n_init):
+
+    # --- 1) Create list of NN to consider from t_list
+    numb_list = []
+    for i, t in enumerate(t_list):
+        if t != 0:
+            numb_list.append(i+1)
+    # print("numb_list = ", numb_list)
+
+    # --- 2) Create grid of basis vectors from [-t_max, t_max]
+    vectors = []
+    vectors_unit = []
+    for i in range(-numb_list[-1], numb_list[-1]+1):
+        for j in range(-numb_list[-1], numb_list[-1]+1):
+            r_unit = np.array([i, j])
+            vectors_unit.append(r_unit)
+            r = np.matmul(r_unit, avec)
+            for k in abasisvec:
+                vectors.append(r+k)
+    # print("vectors = ", vectors)
+
+    # --- Shift the grid of vectors relative to an initial point (m_init, n_init)
+    vectors = [np.subtract(i, np.array(m_init * acartvec[0] + n_init * acartvec[1])) for i in vectors]
+    # print("shifted vectors = ", vectors)
+
+    # --- 3) Define data array with info on each vector
+    data = np.zeros((len(vectors), 10), dtype=object)
+    for i, r in enumerate(vectors):
+        data[i, 0] = round(np.linalg.norm(r), 10)  # round so that we can use it for comparison
+        data[i, 1] = np.angle(r[0]+1j*r[1])
+        data[i, 2] = r[0]
+        data[i, 3] = r[1]
+        data[i, 4] = round(r[0] / acartvec[0][0])
+        data[i, 5] = round(r[1] / acartvec[1][1])
+    # print("data = ", data)
+
+    # --- 4) Extract the NN groups (filter data based on radius)
+    data = data[data[:, 0].argsort()]  # sort by increasing r
+    # delete the first r=0 row
+    mask = (data[:, 0] != 0)
+    data = data[mask, :]
+    radii = np.sort(list(set(data[:, 0])))
+    # label the NN group
+    for i, row in enumerate(data):
+        for j, r in enumerate(radii):
+            if row[0] == r:
+                data[i, 6] = j+1
+                data[i, 7] = m_init
+                data[i, 8] = n_init
+                data[i, 9] = m_init + data[i, 4]
+    select_radii = [radii[i - 1] for i in numb_list]
+    # delete rows with other radii
+    rows_to_delete = []
+    for i, row in enumerate(data):
+        if row[0] not in select_radii:
+            rows_to_delete.append(i)
+    data = np.delete(data, rows_to_delete, axis=0)
+    # print("filtered data = ", data)
+
+    # --- 5) Sort into vec groups (group based on total m value)
+    # data = data[data[:, 4].argsort()]  # sort by m offset
+    # m_values = np.sort(list(set(data[:, 4])))
+    # vec_group = np.zeros(len(m_values), dtype=object)
+    # for i in range(len(m_values)):
+    #     vec_group[i] = []
+    # for i, vec_group_idx in enumerate(m_values):
+    #     for row in data:
+    #         if row[4] == vec_group_idx:
+    #             vec_group[i].append((np.array([row[2], row[3]]), np.array([row[4], row[5]]), row[6]))
+    # print("vec_group = ", vec_group)
+
+    return data
+
+
+def nearest_neighbor_sorter(data_array):
+
+    # delete backtrack vectors
+    delete_list = []
+    for i, val in enumerate(data_array):
+        if val[7] + val[4] == 0 and val[8] + val[5] == 0:  # backtrack
+            delete_list.append(i)
+
+    data_array = np.delete(data_array, delete_list, axis=0)
+    # print("filter data array = ", data_array)
+
+    # count the independent paths
+    numb_paths = 0
+    for i, val in enumerate(data_array):
+        if val[7] == 0 and val[8] == 0:  # origin
+            for j, val2 in enumerate(data_array):
+                if val[7] + val[4] == val2[7] and val[8] + val[5] == val2[8]:
+                    numb_paths = numb_paths + 1
+    # print("numb_paths = ", numb_paths)
+
+    # group the independent paths
+    paths = np.zeros(numb_paths, dtype=object)
+    for i in range(numb_paths):
+        paths[i] = []
+    counter = 0
+    for i, val in enumerate(data_array):
+        if val[7] == 0 and val[8] == 0:  # origin
+            for j, val2 in enumerate(data_array):
+                if val[7] + val[4] == val2[7] and val[8] + val[5] == val2[8]:
+                    if np.max([np.abs(val[9]), np.abs(val2[9])]) == np.abs(val2[9]):
+                        mtot = val2[9]
+                    else:
+                        mtot = val[9]
+                    paths[counter] = [val, val2, mtot]
+                    counter = counter + 1
+    # print("paths = ", paths)
+
+    # count the number of total m
+    m_tot = []
+    for i, val in enumerate(paths):
+        m_tot.append(val[2])
+    m_tot = np.sort(list(set(m_tot)))
+    # print("m_tot = ", m_tot)
+    numb_m = len(m_tot)
+    # print("numb_m = ", numb_m)
+
+    # group the independent paths by total m
+    grouped_paths = np.zeros(numb_m, dtype=object)
+    for i in range(numb_m):
+        grouped_paths[i] = []
+
+    for i, mval in enumerate(m_tot):
+        for j, val in enumerate(paths):
+            if val[2] == mval:
+                grouped_paths[i].append(val[:-1])
+        grouped_paths[i].append(mval)
+    # print("grouped_paths = ", grouped_paths)
+
+    return grouped_paths
+
+
 def peierls_factor(nphi, vec, m):
 
-    phase = 2 * np.pi * nphi * vec[1] * (m + vec[0]/2)
+    phase = 2 * np.pi * nphi * vec[1] * (m + vec[0]/2) / 3
     factor = np.exp(1j * phase)
 
     return factor
@@ -93,7 +228,7 @@ def Hamiltonian(basis, t_val, p_val, q_val, acartvec, vec_group_list, k_val):
     m_values = []
     for term in vec_group_list:
         m_values.append(term[0][1][0])
-    print("m_values = ", m_values)
+    # print("m_values = ", m_values)
 
     if basis == 1:  # single-particle basis
 
@@ -114,98 +249,49 @@ def Hamiltonian(basis, t_val, p_val, q_val, acartvec, vec_group_list, k_val):
 
     else:  # >1 particle basis
 
-        # calculate the number of independent paths
-        numb_paths = 0
-        for i, vec_group in enumerate(vec_group_list):
-            for vec in vec_group:
-                for vec_group2 in vec_group_list:
-                    for vec2 in vec_group2:
-                        if np.array_equal(vec2[1], vec[1]):  # no backtrack vectors
-                            continue
-                        else:
-                            numb_paths = numb_paths + 1
-
-        # initialize the new vec_group_list
-        vec_group_list_m = np.zeros(numb_paths, dtype=object)
-        for i in range(numb_paths):
-            vec_group_list_m[i] = []
-
-        # build the paths
-        for i, vec_group in enumerate(vec_group_list):
-            for vec in vec_group:
-                j = 0
-                for vec_group2 in vec_group_list:
-                    for vec2 in vec_group2:
-                        if np.array_equal(vec2[1], vec[1]):  # no backtrack vectors
-                            continue
-                        else:
-                            vec_group_list_m[2*i+j].append((vec[0], vec[1], vec[2], vec[3], 0))
-                            vec_group_list_m[2*i+j].append((-vec2[0], -vec2[1], vec2[2], vec2[3], vec[1][0]))
-                            vec_group_list_m[2*i+j].append(vec[1][0]-vec2[1][0])
-                            j = j+1
-
-        # convert to array (and sort by combined m)
-        vec_array = np.zeros((numb_paths, 3), dtype=object)
-        for i in range(numb_paths):
-            for j in range(3):
-                vec_array[i, j] = vec_group_list_m[i][j]
-        vec_array = vec_array[np.argsort(vec_array[:, -1])]
-
-        # print(vec_array)
-
         # extract comb m list
-        m_values_comb = np.sort(list(set(vec_array[:, -1])))
+        m_values_comb = []
+        for i, val in enumerate(vec_group_list):
+            m_values_comb.append(val[-1])
         pos_m_vals_comb = [i for i in m_values_comb if i >= 0]
         # print("pos_m_vals_comb = ", pos_m_vals_comb)
 
         for i in pos_m_vals_comb:
+
             # print("i = ", i)
 
             # upper_diag_array
             def upper_diag_func(nphi, m_val, k_val_val, i_val):
-                # remove irrelevant rows
-                vec_list = []
-                for j in range(np.shape(vec_array)[0]):
-                    if vec_array[j, 2] == i_val:
-                        vec_list.append(vec_array[j])
-
-                # print("vec_list = ", vec_list)
-
-                # generate term
                 term = 0
-                for k, vec_group in enumerate(vec_list):  # 2 for \pm 1, whereas 1 for \pm 2
-                    # print("k = ", k)
-                    # print("vec_group = ", vec_group)
-                    # print(vec_group[0][1], m_val + vec_group[0][4])
-                    # print(vec_group[1][1], m_val + vec_group[1][4])
-
-                    term += (-1 * peierls_factor(nphi, vec_group[0][1], (m_val + vec_group[0][4]) % q_val)
-                                * np.exp(1j * np.vdot(vec_group[0][0], k_val_val))
-                                * peierls_factor(nphi, vec_group[1][1], (m_val + vec_group[1][4]) % q_val)
-                                * np.exp(1j * np.vdot(vec_group[1][0], k_val_val)))
+                for idx, val in enumerate(vec_group_list):
+                    if val[-1] == i_val:
+                        for k, val2 in enumerate(val[:-1]):
+                            #print(f"mn vector k={k} 1 = ", np.array([val2[0][4], val2[0][5]]), val2[0][7])
+                            #print(f"mn vector k={k} 2 = ", np.array([val2[1][4], val2[1][5]]), val2[1][7])
+                            term += (peierls_factor(nphi, np.array([val2[0][4], val2[0][5]]), (m_val + val2[0][7]) % (q_val+1))
+                                     * np.exp(1j * np.vdot(np.array([val2[0][2], val2[0][3]]), k_val_val))
+                                     * peierls_factor(nphi, np.array([val2[1][4], val2[1][5]]), (m_val + val2[1][7]) % (q_val+1))
+                                     * np.exp(1j * np.vdot(np.array([val2[1][2], val2[1][3]]), k_val_val)))
+                # if i_val == 1:
+                #     term = 2 * np.exp(1j * 2 * np.pi * nphi / 3) * np.cos(2 * np.pi * nphi * (m_val + 1 / 2))
+                # elif i_val == 2:
+                #     term = np.exp(-1j * 2 * np.pi * nphi / 3)
+                # else:
+                #     raise ValueError("error")
+                #print(f"(nphi, term) = ({nphi}, {term})")
                 return term
 
-            upper_diag_array = np.array([upper_diag_func(p_val/q_val, m, k_val, i) for m in range(q_val)])
+            #print(upper_diag_func(p_val/q_val, (3+i) % q_val, k_val, i))
+            #1/0
+
+            upper_diag_array = np.array([upper_diag_func(p_val/q_val, (m+i) % q_val, k_val, i) for m in range(q_val)])
             Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
 
-            # lower_diag_array
-            def lower_diag_func(nphi, m_val, k_val_val, i_val):
-                # remove irrelevant rows
-                vec_list = []
-                for j in range(np.shape(vec_array)[0]):
-                    if vec_array[j, 2] == -i_val:
-                        vec_list.append(vec_array[j])
-                # generate term
-                term = 0
-                for k, vec_group in enumerate(vec_list):
-                    term += np.conj(-1 * peierls_factor(nphi, vec_group[0][1], (m_val + vec_group[0][4]) % q_val)
-                                       * np.exp(1j * np.vdot(vec_group[0][0], k_val_val))
-                                       * peierls_factor(nphi, vec_group[1][1], (m_val + vec_group[1][4]) % q_val)
-                                       * np.exp(1j * np.vdot(vec_group[1][0], k_val_val)))
-                return term
-
-            lower_diag_array = np.array([lower_diag_func(p_val/q_val, m, k_val, i) for m in range(q_val)])
+            lower_diag_array = np.array([np.conj(upper_diag_func(p_val/q_val, (m+i) % q_val, k_val, i)) for m in range(q_val)])
             Hamiltonian += np.roll(np.diag(lower_diag_array), i, axis=0)
+
+        #print(Hamiltonian)
+        #1/0
 
     return Hamiltonian
 
