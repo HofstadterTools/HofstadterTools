@@ -11,23 +11,22 @@ import functions.arguments as fa
 from models.hofstadter import Hofstadter
 
 
-def hamiltonian(t, p, M, k_val):
+def hamiltonian(p, M, k_val):
 
     # initialize the Hamiltonian
     Hamiltonian = np.zeros((M, M), dtype=np.complex128)
 
     nphi = p / q
 
-    def B(nphi_val, k_val_val, m_val):
-        value = (- 2 * t * np.exp(1j * np.pi * nphi_val/3)
-                 * np.cos(np.pi * nphi_val * (m_val + 1/2) + 3*k_val_val[1]*np.sqrt(3)/2))
+    def B(nphi_val, m_val):
+        value = + 2 * np.exp(1j * 2 * np.pi * nphi_val/3) * np.cos(2 * np.pi * nphi_val * (m_val + 1/2))
         return value
 
     def C(nphi_val):
-        value = -t * np.exp(-1j * np.pi * nphi_val / 3)
+        value = + np.exp(-1j * 2 * np.pi * nphi_val / 3)
         return value
 
-    upper_diag_array = np.array([B(nphi, k_val, m+1) for m in range(q)])
+    upper_diag_array = np.array([B(nphi, m+1) for m in range(q)])
     Hamiltonian += np.roll(np.diag(upper_diag_array), 1, axis=1)
     Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), 1, axis=0)
 
@@ -62,7 +61,7 @@ if __name__ == '__main__':
 
         nphi = p / q
         nphi_list = [nphi for i in range(2*M)]
-        eham = hamiltonian(-1, p, M, np.array([0, 0]))
+        eham = hamiltonian(p, M, np.array([0, 0]))
         values.append((eham, nphi_list))
 
     # construct figure

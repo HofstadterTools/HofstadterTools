@@ -10,6 +10,9 @@ from matplotlib.ticker import MaxNLocator
 import functions.arguments as fa
 from models.hofstadter import Hofstadter
 
+# plt.rc('text', usetex=True)
+# plt.rc('text.latex', preamble=r'\usepackage{amsmath}')
+
 
 def hamiltonian(t, p, M, k_val):
 
@@ -19,21 +22,31 @@ def hamiltonian(t, p, M, k_val):
     nphi = p / q
 
     def B(nphi_val, k_val_val, m_val):
-        value = (- 2 * t * np.exp(1j * np.pi * nphi_val/3)
-                 * np.cos(np.pi * nphi_val * (m_val + 1/2) + 3*k_val_val[1]*np.sqrt(3)/2))
+        value = - 2 * t * np.exp(1j * 2 * np.pi * nphi_val/3) * np.cos(2 * np.pi * nphi_val * (m_val + 1/2) + 3*k_val_val[1]*np.sqrt(3)/2)
+        # print(f"(nphi, term) = ({nphi_val}, {value})")
         return value
 
     def C(nphi_val):
-        value = -t * np.exp(-1j * np.pi * nphi_val / 3)
+        value = -t * np.exp(1j * 2 * np.pi * nphi_val / 3)
         return value
 
-    upper_diag_array = np.array([B(nphi, k_val, m+1) for m in range(q)])
-    Hamiltonian += np.roll(np.diag(upper_diag_array), 1, axis=1)
-    Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), 1, axis=0)
+    for i in range(M - 1):
+        Hamiltonian[i][i + 1] = B(nphi, k_val, i+1)
+        Hamiltonian[i + 1][i] = np.conj(B(nphi, k_val, i+1))
+    for i in range(M - 2):
+        Hamiltonian[i][i + 2] = np.conj(C(nphi))
+        Hamiltonian[i + 2][i] = C(nphi)
 
-    upper_diag_array2 = np.array([C(nphi) for m in range(q)])
-    Hamiltonian += np.roll(np.diag(upper_diag_array2), 2, axis=1)
-    Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array2)), 2, axis=0)
+    # boundary terms
+    Hamiltonian[0][M - 1] = np.conj(B(nphi, k_val, M))
+    Hamiltonian[0][M - 2] = C(nphi)
+    Hamiltonian[1][M - 1] = C(nphi)
+
+    Hamiltonian[M - 1][0] = B(nphi, k_val, M)
+    Hamiltonian[M - 2][0] = np.conj(C(nphi))
+    Hamiltonian[M - 1][1] = np.conj(C(nphi))
+
+    #print(Hamiltonian)
 
     lmbda = np.real(np.linalg.eigvals(Hamiltonian))
     eenergies = np.zeros(2 * len(lmbda))
@@ -58,9 +71,15 @@ if __name__ == '__main__':
         if gcd(p, q) != 1:  # nphi must be a coprime fraction
             continue
 
+        # if p % 2 == 0:
+        #     M = q
+        # else:
+        #     M = 2 * q
+
         M = q
 
         nphi = p / q
+        #print(nphi)
         nphi_list = [nphi for i in range(2*M)]
         eham = hamiltonian(-1, p, M, np.array([0, 0]))
         values.append((eham, nphi_list))

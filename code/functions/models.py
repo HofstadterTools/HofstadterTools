@@ -74,7 +74,7 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, m_init, n_init):
         for i, vec in enumerate(abasisvec):
             if i > 0:
                 abasis_mn[i-1] = np.array([vec[0]/acartx, vec[1]/acarty])
-        # define x an y identifiers
+        # define x and y identifiers
         x_identifiers, y_identifiers = [], []
         for i in range(x_unit):
             if i not in avec_mn[:, 0] and i % abasis_mn[:, 0] == 0 and i != 0:

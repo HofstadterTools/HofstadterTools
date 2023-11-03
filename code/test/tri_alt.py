@@ -20,19 +20,18 @@ def hamiltonian(t, p, q, k_val):
 
     nphi = p / q
 
+    def A(k_val_val, m_val):
+        return - 2 * np.cos(2 * np.pi * nphi * m_val)
+
     def B(k_val_val, m_val):
-        return - 2 * np.cos(np.pi * nphi * (m_val % (q+1) + 1/2))
+        return - 2 * np.cos(np.pi * nphi * (m_val + 1/2))
 
-    def C(k_val_val):
-        return - np.exp(+1j * k_val_val[0])
+    diag_array = np.array([A(k_val, m) for m in range(q)])
+    Hamiltonian += np.roll(np.diag(diag_array), 0, axis=1)
 
-    upper_diag_array = np.array([B(k_val, m+1) for m in range(q)])
+    upper_diag_array = np.array([B(k_val, m) for m in range(q)])
     Hamiltonian += np.roll(np.diag(upper_diag_array), 1, axis=1)
     Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), 1, axis=0)
-
-    upper_diag_array = np.array([C(k_val) for m in range(q)])
-    Hamiltonian += np.roll(np.diag(upper_diag_array), 2, axis=1)
-    Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), 2, axis=0)
 
     return Hamiltonian
 
