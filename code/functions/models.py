@@ -175,24 +175,35 @@ def peierls_factor(A_UC_val, nphi, vec, m):
     return factor
 
 
-def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, m_val, k_val_val, i_val):
+def rammal_factor(nphi, mval, minit, mtot, cos_theta):
+
+    phase = - np.pi * nphi * cos_theta * ((mval + mtot)**2 - (mval + minit)**2)
+    factor = np.exp(1j * phase)
+
+    return factor
+
+
+def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, m_val, k_val_val, i_val, cos_ang):
     nphi = p_val/q_val
     term = 0
     for idx, val in enumerate(vec_list):
         if val[-1] == i_val:  # extract rows with appropriate mtot
+            minits = []
             for k, val2 in enumerate(val[:-1]):  # for each path group
                 factor = 1
                 for val3 in val2:  # for each vector in path group (usually 2 for honeycomb)
+                    minits.append(val3[7])
                     NN_group = int(val3[6])
                     xy_vector = np.array([val3[2], val3[3]])
                     mn_vector = np.array([val3[4], val3[5]])
                     factor *= - t_val[NN_group - 1] * (peierls_factor(A_UC_val, nphi, mn_vector, (m_val + val3[7]) % (q_val+1))
                               * np.exp(1j * np.vdot(xy_vector, k_val_val)))
                 term += factor
+            term = term * rammal_factor(nphi, m_val, np.min(minits), val[-1], cos_ang)
     return term
 
 
-def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list, k_val):
+def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list, k_val, cos_angle):
 
     Hamiltonian = np.zeros((q_val, q_val), dtype=np.complex128)
 
@@ -203,7 +214,7 @@ def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list, k_val):
 
     for i in pos_m_vals_comb:
         # upper_diag_array
-        upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, (m+i) % q_val, k_val, i) for m in range(q_val)])
+        upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, m % q_val, k_val, i, cos_angle) for m in range(q_val)])
         Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
         # lower_diag_array
         if i > 0:

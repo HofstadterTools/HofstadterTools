@@ -199,11 +199,10 @@ class Hofstadter:
         vec_group = fm.nearest_neighbor_sorter(data)
 
         # compute A_UC in mn units
-        if self.lat == "square":
-            A_UC = 1.0
-        else:
-            A_UC = np.linalg.norm(np.cross(avec[0], avec[1])) / np.linalg.norm(np.cross(acartvec[0], acartvec[1])) / 2
+        A_UC = np.linalg.norm(np.cross(avec[0], avec[1])) / np.linalg.norm(np.cross(acartvec[0], acartvec[1]))
+        # compute cos(angle) between basis vectors
+        cos_angle = np.vdot(avec[0], avec[1]) / (np.linalg.norm(avec[0])*np.linalg.norm(avec[1]))
 
-        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group, k_val)
+        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group, k_val, cos_angle)
 
         return Hamiltonian, basis
