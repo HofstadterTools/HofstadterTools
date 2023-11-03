@@ -91,7 +91,6 @@ class Hofstadter:
             X = np.array([0.5, 0])
             sym_points_val = [GA, Y, S, X]
         elif self.lat == "triangular":
-            basis = 1
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
             a2 = self.a0 * np.array([1 / 2, np.sqrt(3) / 2])
@@ -184,21 +183,27 @@ class Hofstadter:
         basis, _, avec, _, abasisvec, _, _, _, acartvec, _ = self.unit_cell()
 
         # nearest neighbors
-        if basis == 1:  # square/triangular
-            data0 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0)
-            data = np.vstack([data0])
-        elif basis == 2:  # honeycomb
-            data0 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0)
-            data1 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 1, 1)
-            data2 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, -1, 1)
-            data3 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, -2)
-            data = np.vstack([data0, data1, data2, data3])
-        else:
-            raise ValueError("basis not implemented")
+        data0 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0)
+        data = [data0]
+        sublattice = False
+        for i, val in enumerate(data0):
+            if val[10] == 1:  # check if any jumps change sublattice
+                sublattice = True
+                data.append(fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, val[4], val[5]))
+        if not sublattice:
+            basis = 1
+
+        data = np.vstack(data)
 
         # sorted groups
         vec_group = fm.nearest_neighbor_sorter(data)
 
-        Hamiltonian = fm.Hamiltonian(basis, self.t, self.p, self.q, acartvec, vec_group, k_val)
+        # compute A_UC in mn units
+        if self.lat == "square":
+            A_UC = 1.0
+        else:
+            A_UC = np.linalg.norm(np.cross(avec[0], avec[1])) / np.linalg.norm(np.cross(acartvec[0], acartvec[1])) / 2
 
-        return Hamiltonian
+        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group, k_val)
+
+        return Hamiltonian, basis

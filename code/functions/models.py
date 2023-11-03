@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
+from copy import deepcopy
 
 
 def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, m_init, n_init):
@@ -26,7 +27,7 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, m_init, n_init):
     vectors = [np.subtract(i, np.array(m_init * acartvec[0] + n_init * acartvec[1])) for i in vectors]
 
     # --- Define data array with info on each vector
-    data = np.zeros((len(vectors), 10), dtype=object)
+    data = np.zeros((len(vectors), 11), dtype=object)
     for i, r in enumerate(vectors):
         data[i, 0] = round(np.linalg.norm(r), 10)  # round so that we can use it for comparison
         data[i, 1] = np.angle(r[0]+1j*r[1])
@@ -56,6 +57,37 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, m_init, n_init):
         if row[0] not in select_radii:
             rows_to_delete.append(i)
     data = np.delete(data, rows_to_delete, axis=0)
+
+    # --- Compute change sublattice flags
+    if len(abasisvec) > 1:  # if there is a multi-particle basis
+        # define unit cell in mn units
+        x_unit = int(avec[0][0]/acartvec[0][0])
+        y_unit = int(avec[1][1]/acartvec[1][1])
+        # define avecs in mn units
+        avec_mn = deepcopy(avec)
+        acartx = np.linalg.norm(acartvec[0])
+        acarty = np.linalg.norm(acartvec[1])
+        for i, vec in enumerate(avec):
+            avec_mn[i] = np.array([vec[0]/acartx, vec[1]/acarty])
+        # define abasis in mn units
+        abasis_mn = deepcopy(abasisvec)[1:]
+        for i, vec in enumerate(abasisvec):
+            if i > 0:
+                abasis_mn[i-1] = np.array([vec[0]/acartx, vec[1]/acarty])
+        # define x an y identifiers
+        x_identifiers, y_identifiers = [], []
+        for i in range(x_unit):
+            if i not in avec_mn[:, 0] and i % abasis_mn[:, 0] == 0 and i != 0:
+                x_identifiers.append(i)
+        for j in range(y_unit):
+            if j not in avec_mn[:, 1] and j % abasis_mn[:, 1] == 0 and j != 0:
+                y_identifiers.append(j)
+        # print("x, y = ", x_identifiers, y_identifiers)
+
+        for i, val in enumerate(data):
+            if ((np.abs(val[7] + val[4]) % x_unit in x_identifiers)
+                    or (np.abs(val[8] + val[5]) % y_unit in y_identifiers)):
+                data[i, 10] = 1
     # print("data = ", data)
 
     return data
@@ -135,85 +167,46 @@ def nearest_neighbor_sorter(data_array):
     return grouped_paths
 
 
-def peierls_factor(basis, nphi, vec, m):
+def peierls_factor(A_UC_val, nphi, vec, m):
 
-    if basis == 1:
-        area = 1
-    elif basis == 2:
-        area = 3
-    else:
-        raise ValueError("area factor in Peierls phase not implemented")
-
-    phase = 2 * np.pi * nphi * vec[1] * (m + vec[0]/2) / area
+    phase = 2 * np.pi * nphi * vec[1] * (m + vec[0]/2) / A_UC_val
     factor = np.exp(1j * phase)
 
     return factor
 
 
-def diag_func(basis, t_val, nphi, vec_list, k, m):
-
+def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, m_val, k_val_val, i_val):
+    nphi = p_val/q_val
     term = 0
-    for vec_inf in vec_list:
-        for inner_vec_inf in vec_inf:
-            NN_group = int(inner_vec_inf[6])
-            xy_vector = np.array([inner_vec_inf[2], inner_vec_inf[3]])
-            mn_vector = np.array([inner_vec_inf[4], inner_vec_inf[5]])
-            term += - t_val[NN_group - 1] * peierls_factor(basis, nphi, mn_vector, m) * np.exp(1j * np.vdot(xy_vector, k))
-
+    for idx, val in enumerate(vec_list):
+        if val[-1] == i_val:  # extract rows with appropriate mtot
+            for k, val2 in enumerate(val[:-1]):  # for each path group
+                factor = 1
+                for val3 in val2:  # for each vector in path group (usually 2 for honeycomb)
+                    NN_group = int(val3[6])
+                    xy_vector = np.array([val3[2], val3[3]])
+                    mn_vector = np.array([val3[4], val3[5]])
+                    factor *= - t_val[NN_group - 1] * (peierls_factor(A_UC_val, nphi, mn_vector, (m_val + val3[7]) % (q_val+1))
+                              * np.exp(1j * np.vdot(xy_vector, k_val_val)))
+                term += factor
     return term
 
 
-def Hamiltonian(basis, t_val, p_val, q_val, acartvec, vec_group_list, k_val):
+def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list, k_val):
 
     Hamiltonian = np.zeros((q_val, q_val), dtype=np.complex128)
 
     m_values = []
     for term in vec_group_list:
         m_values.append(term[-1])
-    # print("m_values = ", m_values)
+    pos_m_vals_comb = [i for i in m_values if i >= 0]
 
-    if basis == 1:  # single-particle basis
-
-        pos_m_vals = [i for i in m_values if i >= 0]
-        # print("pos_m_vals = ", pos_m_vals)
-
-        for idx, i in enumerate(pos_m_vals):
-            if i == 0:
-                Hamiltonian += np.diag(np.array([diag_func(basis, t_val, p_val / q_val, vec_group_list[len(vec_group_list)//2][:-1], k_val, m) for m in range(q_val)]))
-            else:
-                # upper_diag_array
-                upper_diag_array = np.array([diag_func(basis, t_val, p_val / q_val, vec_group_list[len(vec_group_list)//2+idx][:-1], k_val, (m+i) % q_val) for m in range(q_val)])
-                Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
-                # lower_diag_array
-                Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), i, axis=0)
-
-    else:  # >1 particle basis
-
-        # extract comb m list
-        m_values_comb = []
-        for i, val in enumerate(vec_group_list):
-            m_values_comb.append(val[-1])
-        pos_m_vals_comb = [i for i in m_values_comb if i >= 0]
-        # print("pos_m_vals_comb = ", pos_m_vals_comb)
-
-        for i in pos_m_vals_comb:
-
-            # upper_diag_array
-            def upper_diag_func(basis, nphi, m_val, k_val_val, i_val):
-                term = 0
-                for idx, val in enumerate(vec_group_list):
-                    if val[-1] == i_val:
-                        for k, val2 in enumerate(val[:-1]):
-                            term += (peierls_factor(basis, nphi, np.array([val2[0][4], val2[0][5]]), (m_val + val2[0][7]) % (q_val+1))
-                                     * np.exp(1j * np.vdot(np.array([val2[0][2], val2[0][3]]), k_val_val))
-                                     * peierls_factor(basis, nphi, np.array([val2[1][4], val2[1][5]]), (m_val + val2[1][7]) % (q_val+1))
-                                     * np.exp(1j * np.vdot(np.array([val2[1][2], val2[1][3]]), k_val_val)))
-                return term
-
-            # upper_diag_array
-            upper_diag_array = np.array([upper_diag_func(basis, p_val/q_val, (m+i) % q_val, k_val, i) for m in range(q_val)])
-            Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
-            # lower_diag_array
+    for i in pos_m_vals_comb:
+        # upper_diag_array
+        upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, (m+i) % q_val, k_val, i) for m in range(q_val)])
+        Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
+        # lower_diag_array
+        if i > 0:
             Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), i, axis=0)
 
     return Hamiltonian

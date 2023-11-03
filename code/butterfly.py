@@ -74,16 +74,15 @@ if __name__ == '__main__':
             continue
         nphi = p / q
 
-        if lat == "honeycomb":
+        ham, basis = model.hamiltonian(np.array([0, 0]))
+        if basis == 2:
             M = 2 * q
         else:
             M = q
-
         nphi_list.append([nphi] * M)
+        lmbda = np.sort(np.linalg.eigvalsh(ham))
 
-        lmbda = np.sort(np.linalg.eigvalsh(model.hamiltonian(np.array([0, 0]))))
-
-        if lat == "honeycomb":
+        if basis == 2:
             eenergies = np.zeros(2 * len(lmbda))
             for i in range(len(lmbda)):
                 if lmbda[i] < -3:  # avoid taking sqrt of negative number
@@ -106,7 +105,7 @@ if __name__ == '__main__':
 
         E_list_orig = deepcopy(E_list)
 
-        if model.lat == "honeycomb":
+        if basis == 2:
             half_len = int(np.shape(E_list)[1]/2)
             for i, val in enumerate(E_list):
                 E_list[i] = val[:half_len]  # consider only lower half
@@ -125,7 +124,7 @@ if __name__ == '__main__':
                         matrix[i][j] = tr_list[i][k]  # assign the corresponding tr of that E_list value
                         break
 
-        if model.lat == "honeycomb":
+        if basis == 2:
             matrix = np.concatenate((matrix, -matrix[:, ::-1]), axis=1)  # double the spectrum
 
     # construct figure

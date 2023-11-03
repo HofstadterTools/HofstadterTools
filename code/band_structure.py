@@ -46,7 +46,8 @@ if __name__ == '__main__':
             for idx_y in range(num_samples):
                 frac_ky = idx_y / (num_samples-1)
                 k = np.matmul(np.array([frac_kx, frac_ky]), bMUCvec)
-                eigvals, eigvecs = np.linalg.eigh(model.hamiltonian(k))
+                ham, _ = model.hamiltonian(k)
+                eigvals, eigvecs = np.linalg.eigh(ham)
                 idx = np.argsort(eigvals)
                 eigenvalues[band, idx_x, idx_y] = eigvals[idx[band]]
                 eigenvectors[:, band, idx_x, idx_y] = eigvecs[:, idx[band]]
@@ -54,8 +55,10 @@ if __name__ == '__main__':
                     frac_ky_dky = (frac_ky + 1/(1000*(num_samples-1))) % 1
                     k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bMUCvec)
                     k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bMUCvec)
-                    eigvals_dkx, eigvecs_dkx = np.linalg.eig(model.hamiltonian(k_dkx))
-                    eigvals_dky, eigvecs_dky = np.linalg.eig(model.hamiltonian(k_dky))
+                    ham_dkx, _ = model.hamiltonian(k_dkx)
+                    eigvals_dkx, eigvecs_dkx = np.linalg.eig(ham_dkx)
+                    ham_dky, _ = model.hamiltonian(k_dky)
+                    eigvals_dky, eigvecs_dky = np.linalg.eig(ham_dky)
                     idx_dkx = np.argsort(eigvals_dkx)
                     idx_dky = np.argsort(eigvals_dky)
                     eigenvectors_dkx[:, band, idx_x, idx_y] = eigvecs_dkx[:, idx_dkx[band]]
@@ -206,7 +209,8 @@ if __name__ == '__main__':
             for j in range(points_per_path):
                 k = sym_points[i] + (sym_points[(i+1) % num_paths] - sym_points[i]) * float(j) / float(points_per_path - 1)
                 k = np.matmul(k, bMUCvec)
-                eigvals = np.linalg.eigvals(model.hamiltonian(k))
+                ham, _ = model.hamiltonian(k)
+                eigvals = np.linalg.eigvals(ham)
                 idx = np.argsort(eigvals)
                 for band in range(num_bands):
                     eigenvalues[band, count] = np.real(eigvals[idx[band]])
