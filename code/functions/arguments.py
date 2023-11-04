@@ -24,8 +24,10 @@ def parse_input_arguments(program):
     models = ["Hofstadter"]
     parser.add_argument("-mod", "--model", type=str, default="Hofstadter", choices=models, help="name of model")
     parser.add_argument("-t", nargs='+', type=float, default=[1], help="list of hopping amplitudes in order of ascending NN")
-    lattices = ["square", "triangular", "honeycomb"]
-    parser.add_argument("-lat", "--lattice", type=str, default="square", choices=lattices, help="name of lattice")
+    lattices = ["square", "triangular", "bravais", "honeycomb"]
+    parser.add_argument("-lat", "--lattice", type=str, default="bravais", choices=lattices, help="name of lattice")
+    parser.add_argument("-alpha", type=float, default=1, help="length of a2 basis vector relative to a1 (Bravais lattice anisotropy)")
+    parser.add_argument("-theta", nargs=2, type=float, default=[1, 3], help="angle between Bravais basis vectors (in units of pi)")
 
     if program == "band_structure":
         parser.add_argument("-samp", type=int, default=101, help="number of samples in linear direction")

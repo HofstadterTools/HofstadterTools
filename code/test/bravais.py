@@ -13,9 +13,9 @@ from models.hofstadter import Hofstadter
 
 def hamiltonian(p, q, k_val):
 
-    t0, t1, t2, t3 = 0.0345, 0.0345, 0.0345, 0
+    t0, t1, t2, t3 = 0.5, 0.5, 0.2, 0.2
     M = q
-    theta = np.pi / 3
+    theta = (67/180) * np.pi
 
     # initialize the Hamiltonian
     Hamiltonian = np.zeros((M, M), dtype=np.complex128)

@@ -89,6 +89,7 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, m_init, n_init):
                     or (np.abs(val[8] + val[5]) % y_unit in y_identifiers)):
                 data[i, 10] = 1
     # print("data = ", data)
+    # 1/0
 
     return data
 

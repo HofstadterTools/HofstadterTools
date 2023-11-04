@@ -15,7 +15,7 @@ class Hofstadter:
     where :math:`\braket{ij}_n` denotes nth nearest neighbors on a lattice in the xy-plane, :math:`t_n` are the corresponding hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the particle (creation)annihilation operators.
     """
 
-    def __init__(self, p, q, a0=1, t=None, lat="square"):
+    def __init__(self, p, q, a0=1, t=None, lat="square", alpha=1, theta=(1, 2)):
         """Constructor for the Hofstadter class.
 
         Parameters
@@ -29,7 +29,11 @@ class Hofstadter:
         t: list
             The list of hopping amplitudes in order of ascending NN (default=[1]).
         lat: str
-            The name of the lattice (default="square")
+            The name of the lattice (default="square").
+        alpha: float
+            The anisotropy of the Bravais lattice vectors (default=1).
+        theta: float
+            The angle between Bravais lattice vectors in units of pi (default=0.5).
         """
 
         if t is None:
@@ -39,6 +43,9 @@ class Hofstadter:
         self.a0 = a0  #: float :The lattice constant (default=1).
         self.t = t  #: float : The units of the hopping amplitudes (default=[1]).
         self.lat = lat  #: str : The name of the lattice (default="square").
+        self.alpha = alpha  #: float : The anisotropy of the Bravais lattice vectors (default=1).
+        self.theta = (theta[0]/theta[1])*np.pi  #: float : The angle between Bravais lattice vectors (default=pi/2).
+
 
     def unit_cell(self):
         """The unit cell of the Hofstadter model.
@@ -124,14 +131,69 @@ class Hofstadter:
             S = np.array([0.5, 0.5])
             X = np.array([0.5, 0])
             sym_points_val = [GA, Y, S, X]
+        elif self.lat == "bravais":
+            # lattice vectors
+            a1 = self.a0 * np.array([1, 0])
+            a2 = self.a0 * self.alpha * np.array([np.cos(self.theta), np.sin(self.theta)])
+            avec_val = np.vstack((a1, a2))
+            # reciprocal lattice vectors
+            rec_factor = (2. * np.pi) / (a1[0]*a2[1] - a1[1]*a2[0])
+            b1 = rec_factor * np.array([a2[1], -a2[0]])
+            b2 = rec_factor * np.array([-a1[1], a1[0]])
+            bvec_val = np.vstack((b1, b2))
+            # basis vector
+            basis = 1
+            abasis1 = np.array([0, 0])
+            abasisvec_val = np.array([abasis1])
+            # reciprocal basis vectors
+            bbasis1 = np.array([0, 0])
+            bbasisvec_val = np.array([bbasis1])
+            # lattice vectors (MUC)
+            aMUC1 = num_bands_val * a1
+            aMUC2 = a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
+            # reciprocal lattice vectors (MUC)
+            bMUC1 = b1 / num_bands_val
+            bMUC2 = b2
+            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            # cartesian vectors (for Peierls substitution)
+            # acart1 = np.array([np.max([a1[0], a2[0]]) - np.min([a1[0], a2[0]]), 0])
+            # acart2 = np.array([0, np.max([a1[1], a2[1]]) - np.min([a1[1], a2[1]])])
+            # acartvec_val = np.vstack((acart1, acart2))
+            #
+            xs = np.sort(list({0, a1[0], a2[0]}))
+            # print(xs)
+            xs_diff = []
+            for i in range(len(xs) - 1):
+                xs_diff.append(xs[i + 1] - xs[i])
+            xcart = np.min(xs_diff)
+            #
+            ys = np.sort(list({0, a1[1], a2[1]}))
+            # print(ys)
+            ys_diff = []
+            for i in range(len(ys) - 1):
+                ys_diff.append(ys[i + 1] - ys[i])
+            ycart = np.min(ys_diff)
+            #
+            acart1 = np.array([xcart, 0])
+            acart2 = np.array([0, ycart])
+            acartvec_val = np.vstack((acart1, acart2))
+            # print("m, n = ", xcart, ycart)
+            # symmetry points
+            GA = np.array([0, 0])
+            Y = np.array([0, 0.5])
+            S = np.array([0.5, 0.5])
+            X = np.array([0.5, 0])
+            sym_points_val = [GA, Y, S, X]
         elif self.lat == "honeycomb":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
-            a2 = self.a0 * np.array([1 / 2, np.sqrt(3) / 2])
+            a2 = self.a0 * self.alpha * np.array([np.cos(self.theta), np.sin(self.theta)])
             avec_val = np.vstack((a1, a2))
             # reciprocal lattice vectors
-            b1 = (2. * np.pi) / self.a0 * np.array([1, -1 / np.sqrt(3)])
-            b2 = (2. * np.pi) / self.a0 * np.array([0, 2 / np.sqrt(3)])
+            rec_factor = (2. * np.pi) / (a1[0] * a2[1] - a1[1] * a2[0])
+            b1 = rec_factor * np.array([a2[1], -a2[0]])
+            b2 = rec_factor * np.array([-a1[1], a1[0]])
             bvec_val = np.vstack((b1, b2))
             # basis vector
             basis = 2
@@ -151,15 +213,31 @@ class Hofstadter:
             bMUC2 = b2
             bMUCvec_val = np.vstack((bMUC1, bMUC2))
             # cartesian vectors (for Peierls substitution)
-            acart1 = self.a0 * np.array([1/2, 0])
-            acart2 = self.a0 * np.array([0, np.sqrt(3)/6])
+            # acart1 = self.a0 * np.array([1/2, 0])
+            # acart2 = self.a0 * np.array([0, np.sqrt(3)/6])
+            # acartvec_val = np.vstack((acart1, acart2))
+            #
+            xs = np.sort(list({0, abasis1[0], a1[0] + abasis1[0], a1[0] + abasis2[0], a2[0] + abasis1[0], a2[0] + abasis2[0]}))
+            xs_diff = []
+            for i in range(len(xs)-1):
+                xs_diff.append(xs[i+1]-xs[i])
+            xcart = np.min(xs_diff)
+            #
+            ys = np.sort(list({0, abasis1[1], a1[1] + abasis1[1], a1[1] + abasis2[1], a2[1] + abasis1[1], a2[1] + abasis2[1]}))
+            ys_diff = []
+            for i in range(len(ys)-1):
+                ys_diff.append(ys[i+1]-ys[i])
+            ycart = np.min(ys_diff)
+            #
+            acart1 = np.array([xcart, 0])
+            acart2 = np.array([0, ycart])
             acartvec_val = np.vstack((acart1, acart2))
             # symmetry points
-            GA = np.array([0, 0])
-            Y = np.array([0, 0.5])
-            S = np.array([0.5, 0.5])
-            X = np.array([0.5, 0])
-            sym_points_val = [GA, Y, S, X]
+            K1 = np.array([2/3, 1/3])
+            GA = np.array([0., 0.])
+            MM = np.array([0.5, 0.5])
+            K2 = np.array([1/3, 2/3])
+            sym_points_val = [K1, GA, MM, K2]
 
         self.avec = avec_val
 
