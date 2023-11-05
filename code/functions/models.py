@@ -180,7 +180,7 @@ def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, 
                     NN_group = int(val3[6])
                     xy_vector = np.array([val3[2], val3[3]])
                     delta_n = val3[5]
-                    factor *= - t_val[NN_group - 1] * (peierls_factor(A_UC_val, nphi, xy_vector, delta_n, (n_val + val3[8]) % (q_val+1))
+                    factor *= - t_val[NN_group - 1] * (peierls_factor(A_UC_val, nphi, xy_vector, delta_n, n_val + val3[8])
                               * np.exp(1j * np.vdot(xy_vector, k_val_val)))
                 term += factor
             abs_ninits = [abs(j) for j in ninits]

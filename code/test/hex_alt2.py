@@ -19,19 +19,19 @@ def hamiltonian(p, M, k_val):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = 2 * np.cos(2 * np.pi * nphi_val * (m_val + 1/6))
+        value = 2 * np.cos(4 * np.pi * nphi_val * (m_val - 1/3))
         return value
 
-    def B(nphi_val, m_val):
-        value = 2 * np.cos(np.pi * nphi_val * (m_val + 1/6)) * np.exp(- 1j * np.pi * nphi * 0.5 * (2 * m_val + 1))
+    def C(nphi_val, m_val):
+        value = 2 * np.cos(2 * np.pi * nphi_val * (m_val + 5/3)) * np.exp(- 1j * np.pi * nphi * 0.5 * (4 * m_val + 4))
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
     Hamiltonian += np.roll(np.diag(upper_diag_array), 0, axis=1)
 
-    upper_diag_array2 = np.array([B(nphi, m) for m in range(q)])
-    Hamiltonian += np.roll(np.diag(upper_diag_array2), 1, axis=1)
-    Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array2)), 1, axis=0)
+    upper_diag_array2 = np.array([C(nphi, m) for m in range(q)])
+    Hamiltonian += np.roll(np.diag(upper_diag_array2), 2, axis=1)
+    Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array2)), 2, axis=0)
 
     lmbda = np.real(np.linalg.eigvals(Hamiltonian))
     eenergies = np.zeros(2 * len(lmbda))
