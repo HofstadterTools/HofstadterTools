@@ -65,9 +65,11 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
         for i, val in enumerate(data):
             for j, val2 in enumerate(abasisvec):
                 if j > 0:  # skip origin vector
-                    if round(abs(val[2]) % avec[0][0], 10) == 0 and round(abs(val[3]) % avec[1][1], 10) == 0:
+                    dx = round(abs(val[2]), 10)
+                    dy = round(abs(val[3]), 10)
+                    if round(dx % acartvec[0][0], 10) == 0 and round(dy % avec[1][1], 10) == 0:
                         data[i, 10] = 0
-                    elif round(abs(val[2]) % val2[0], 10) == 0 and round(abs(val[3]) % val2[1], 10) == 0:
+                    elif round(dx % val2[0], 10) == 0 and round(dy % val2[1], 10) == 0:
                         data[i, 10] = j  # label sublattice by number
                     else:
                         data[i, 10] = None  # point not on any sublattice

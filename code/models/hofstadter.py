@@ -200,7 +200,7 @@ class Hofstadter:
             # acart1 = self.a0 * np.array([1/2, 0])
             # acart2 = self.a0 * np.array([0, np.sqrt(3)/6])
             # acartvec_val = np.vstack((acart1, acart2))
-            acart1 = np.array([None, 0])
+            acart1 = np.array([(1/2)*a1[0], 0])
             acart2 = np.array([0, (1/3)*a2[1]])
             acartvec_val = np.vstack((acart1, acart2))
             # symmetry points
