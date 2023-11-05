@@ -160,25 +160,9 @@ class Hofstadter:
             # acart1 = np.array([np.max([a1[0], a2[0]]) - np.min([a1[0], a2[0]]), 0])
             # acart2 = np.array([0, np.max([a1[1], a2[1]]) - np.min([a1[1], a2[1]])])
             # acartvec_val = np.vstack((acart1, acart2))
-            #
-            xs = np.sort(list({0, a1[0], a2[0]}))
-            # print(xs)
-            xs_diff = []
-            for i in range(len(xs) - 1):
-                xs_diff.append(xs[i + 1] - xs[i])
-            xcart = np.min(xs_diff)
-            #
-            ys = np.sort(list({0, a1[1], a2[1]}))
-            # print(ys)
-            ys_diff = []
-            for i in range(len(ys) - 1):
-                ys_diff.append(ys[i + 1] - ys[i])
-            ycart = np.min(ys_diff)
-            #
-            acart1 = np.array([xcart, 0])
-            acart2 = np.array([0, ycart])
+            acart1 = np.array([None, 0])  # impossible to define gcd in general
+            acart2 = np.array([0, a2[0]])
             acartvec_val = np.vstack((acart1, acart2))
-            # print("m, n = ", xcart, ycart)
             # symmetry points
             GA = np.array([0, 0])
             Y = np.array([0, 0.5])
@@ -197,12 +181,12 @@ class Hofstadter:
             bvec_val = np.vstack((b1, b2))
             # basis vector
             basis = 2
-            abasis1 = self.a0 * np.array([0, 0])
-            abasis2 = self.a0 * np.array([1/2, np.sqrt(3)/6])
+            abasis1 = np.array([0, 0])
+            abasis2 = np.array([(1/2) * a1[0], (1/3) * a2[1]])  # centroid is 1/3 of the way up
             abasisvec_val = np.vstack((abasis1, abasis2))
             # reciprocal basis vectors
-            bbasis1 = (2. * np.pi) / self.a0 * np.array([0, 0])
-            bbasis2 = (2. * np.pi) / self.a0 * np.array([1, np.sqrt(3)])
+            bbasis1 = np.array([0, 0])
+            bbasis2 = (2. * np.pi) / self.a0 * np.array([1/abasis2[0], 3/(2*abasis2[1])])
             bbasisvec_val = np.vstack((bbasis1, bbasis2))
             # lattice vectors (MUC)
             aMUC1 = num_bands_val * a1
@@ -216,21 +200,8 @@ class Hofstadter:
             # acart1 = self.a0 * np.array([1/2, 0])
             # acart2 = self.a0 * np.array([0, np.sqrt(3)/6])
             # acartvec_val = np.vstack((acart1, acart2))
-            #
-            xs = np.sort(list({0, abasis1[0], a1[0] + abasis1[0], a1[0] + abasis2[0], a2[0] + abasis1[0], a2[0] + abasis2[0]}))
-            xs_diff = []
-            for i in range(len(xs)-1):
-                xs_diff.append(xs[i+1]-xs[i])
-            xcart = np.min(xs_diff)
-            #
-            ys = np.sort(list({0, abasis1[1], a1[1] + abasis1[1], a1[1] + abasis2[1], a2[1] + abasis1[1], a2[1] + abasis2[1]}))
-            ys_diff = []
-            for i in range(len(ys)-1):
-                ys_diff.append(ys[i+1]-ys[i])
-            ycart = np.min(ys_diff)
-            #
-            acart1 = np.array([xcart, 0])
-            acart2 = np.array([0, ycart])
+            acart1 = np.array([None, 0])
+            acart2 = np.array([0, (1/3)*a2[1]])
             acartvec_val = np.vstack((acart1, acart2))
             # symmetry points
             K1 = np.array([2/3, 1/3])
@@ -265,9 +236,11 @@ class Hofstadter:
         data = [data0]
         sublattice = False
         for i, val in enumerate(data0):
-            if val[10] == 1:  # check if any jumps change sublattice
+            if val[10] != 0:  # check if any jumps change sublattice (only one sublattice currently implemented)
                 sublattice = True
-                data.append(fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, val[4], val[5]))
+                x = val[11] + val[2]
+                y = val[12] + val[3]
+                data.append(fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, x, y))
         if not sublattice:
             basis = 1
 
@@ -276,8 +249,8 @@ class Hofstadter:
         # sorted groups
         vec_group = fm.nearest_neighbor_sorter(data)
 
-        # compute A_UC in mn units
-        A_UC = np.linalg.norm(np.cross(avec[0], avec[1])) / np.linalg.norm(np.cross(acartvec[0], acartvec[1]))
+        # compute A_UC in units of a
+        A_UC = np.linalg.norm(avec[1])
         # compute cos(angle) between basis vectors
         cos_angle = np.vdot(avec[0], avec[1]) / (np.linalg.norm(avec[0])*np.linalg.norm(avec[1]))
 
