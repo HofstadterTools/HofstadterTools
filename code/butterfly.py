@@ -9,6 +9,7 @@ from matplotlib.ticker import MaxNLocator
 from copy import deepcopy
 # --- internal imports
 import functions.arguments as fa
+import functions.band_structure as fb
 from models.hofstadter import Hofstadter
 
 # plt.rc('text', usetex=True)
@@ -76,23 +77,26 @@ if __name__ == '__main__':
             continue
         nphi = p / q
 
-        ham, basis = model.hamiltonian(np.array([0, 0]))
+        ham_list, basis = model.hamiltonian(np.array([0, 0]))
         if basis == 2:
             M = 2 * q
+            # M = q
         else:
             M = q
         nphi_list.append([nphi] * M)
-        lmbda = np.sort(np.linalg.eigvalsh(ham))
+        #lmbda = np.sort(np.linalg.eigvalsh(ham))
 
         if basis == 2:
-            eenergies = np.zeros(2 * len(lmbda))
-            for i in range(len(lmbda)):
-                if lmbda[i] < -3:  # avoid taking sqrt of negative number
-                    lmbda[i] = -3
-                eenergies[i] = +np.sqrt(3 + lmbda[i])
-                eenergies[len(lmbda) + i] = -np.sqrt(3 + lmbda[i])
+            # eenergies = np.zeros(2 * len(lmbda))
+            # for i in range(len(lmbda)):
+            #     if lmbda[i] < -3:  # avoid taking sqrt of negative number
+            #         lmbda[i] = -3
+            #     eenergies[i] = +np.sqrt(3 + lmbda[i])
+            #     eenergies[len(lmbda) + i] = -np.sqrt(3 + lmbda[i])
+            _, eenergies = fb.polyeig(-ham_list[1], -ham_list[0], np.eye(q))
             E_list.append(np.sort(eenergies))
         else:
+            lmbda = np.sort(np.linalg.eigvalsh(ham_list[0]))
             E_list.append(lmbda)
         if color:
             cherns, trs = chern(p, q)

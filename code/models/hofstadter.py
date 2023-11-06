@@ -237,23 +237,27 @@ class Hofstadter:
         sublattice = False
         for i, val in enumerate(data0):
             if val[10] != 0:  # check if any jumps change sublattice (only one sublattice currently implemented)
+                # print(f"row {i} = {val[10]}, {val[10]==0}")
+                NN_group = val[6]
+                t_list = [0]*len(self.t)
+                t_list[NN_group - 1] = self.t[NN_group - 1]
                 sublattice = True
                 x = val[11] + val[2]
                 y = val[12] + val[3]
-                data.append(fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, x, y))
+                data.append(fm.nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x, y))
         if not sublattice:
             basis = 1
 
         data = np.vstack(data)
 
         # sorted groups
-        vec_group = fm.nearest_neighbor_sorter(data)
+        vec_group_list, backtrack_list = fm.nearest_neighbor_sorter(data)
 
         # compute A_UC in units of a
         A_UC = np.linalg.norm(avec[1])
         # compute cos(angle) between basis vectors
         cos_angle = np.vdot(avec[0], avec[1]) / (np.linalg.norm(avec[0])*np.linalg.norm(avec[1]))
 
-        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group, k_val, cos_angle)
+        Hamiltonian_list = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_list, k_val, cos_angle, backtrack_list)
 
-        return Hamiltonian, basis
+        return Hamiltonian_list, basis

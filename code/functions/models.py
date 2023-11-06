@@ -81,74 +81,86 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
 
 def nearest_neighbor_sorter(data_array):
 
-    # --- Delete backtrack vectors
+    # --- Count backtrack vectors
     delete_list = []
+    backtrack_list = []
     for i, val in enumerate(data_array):
         if round(val[11] + val[2], 10) == 0 and round(val[12] + val[3], 10) == 0:  # backtrack
             delete_list.append(i)
+            backtrack_list.append(val[6])
     data_array = np.delete(data_array, delete_list, axis=0)
     # print("filter data array = ", data_array)
 
     # --- Count the independent paths
-    numb_paths = 0
-    # count double paths
-    double = True
+    numb_single_paths, numb_double_paths = 0, 0
+    # double paths
+    double_idx = []
     for i, val in enumerate(data_array):
         if round(val[11]) == 0 and round(val[12]) == 0:  # origin
             for j, val2 in enumerate(data_array):
                 if round(val[11] + val[2], 10) == round(val2[11], 10) and round(val[12] + val[3], 10) == round(val2[12], 10):
-                    numb_paths = numb_paths + 1
-    # count single paths
-    if numb_paths == 0:
-        double = False
-        for i, val in enumerate(data_array):
-            if round(val[11]) == 0 and round(val[12]) == 0:  # origin
-                numb_paths = numb_paths + 1
-    # print("numb_paths = ", numb_paths)
+                    numb_double_paths = numb_double_paths + 1
+                    double_idx.append(i)
+                    double_idx.append(j)
+    # single paths
+    double_idx_list = np.sort(list(set(double_idx)))
+    numb_single_paths = len(data_array) - len(double_idx_list)
 
     # --- Group the independent paths
-    paths = np.zeros(numb_paths, dtype=object)
-    for i in range(numb_paths):
-        paths[i] = []
+    single_paths = np.zeros(numb_single_paths, dtype=object)
+    for i in range(numb_single_paths):
+        single_paths[i] = []
+    double_paths = np.zeros(numb_double_paths, dtype=object)
+    for i in range(numb_double_paths):
+        double_paths[i] = []
+    # double paths
     counter = 0
-    if double:
-        for i, val in enumerate(data_array):
-            if round(val[11]) == 0 and round(val[12]) == 0:  # origin
-                for j, val2 in enumerate(data_array):
-                    if round(val[11] + val[2], 10) == round(val2[11], 10) and round(val[12] + val[3], 10) == round(val2[12], 10):
-                        ntot = val[5] + val2[5]
-                        paths[counter] = [val, val2, round(ntot)]
-                        counter = counter + 1
-    else:
-        for i, val in enumerate(data_array):
-            if round(val[11]) == 0 and round(val[12]) == 0:  # origin
-                paths[counter] = [val, round(val[9])]
-                counter = counter + 1
-    # print("paths = ", paths)
+    for i, val in enumerate(data_array):
+        if round(val[11]) == 0 and round(val[12]) == 0:  # origin
+            for j, val2 in enumerate(data_array):
+                if round(val[11] + val[2], 10) == round(val2[11], 10) and round(val[12] + val[3], 10) == round(val2[12], 10):
+                    ntot = val[5] + val2[5]
+                    double_paths[counter] = [val, val2, round(ntot)]
+                    counter = counter + 1
+    # single paths
+    single_idx_list = np.setdiff1d(np.arange(len(data_array)), np.array(double_idx_list))
+    for i, val in enumerate(single_idx_list):
+        single_paths[i] = [data_array[val], round(data_array[val][9])]
 
-    # --- Count the number of total n
-    n_tot = []
-    for i, val in enumerate(paths):
-        n_tot.append(val[-1])
-    n_tot = np.sort(list(set(n_tot)))
-    # print("n_tot = ", n_tot)
-    numb_n = len(n_tot)
-    # print("numb_n = ", numb_n)
+    # print("single paths = ", single_paths)
+    # print("double paths = ", double_paths)
 
-    # --- Group the independent paths by total n
-    grouped_paths = np.zeros(numb_n, dtype=object)
-    for i in range(numb_n):
-        grouped_paths[i] = []
+    paths_list = [single_paths, double_paths]
+    grouped_paths_list = []
 
-    for i, nval in enumerate(n_tot):
-        for j, val in enumerate(paths):
-            if val[-1] == nval:
-                grouped_paths[i].append(val[:-1])
-        grouped_paths[i].append(nval)
-    # print("grouped_paths = ", grouped_paths)
-    # 1/0
+    for paths in paths_list:
 
-    return grouped_paths
+        # --- Count the number of total n
+        n_tot = []
+        for i, val in enumerate(paths):
+            n_tot.append(val[-1])
+        n_tot = np.sort(list(set(n_tot)))
+        # print("n_tot = ", n_tot)
+        numb_n = len(n_tot)
+        # print("numb_n = ", numb_n)
+
+        # --- Group the independent paths by total n
+        grouped_paths = np.zeros(numb_n, dtype=object)
+        for i in range(numb_n):
+            grouped_paths[i] = []
+
+        for i, nval in enumerate(n_tot):
+            for j, val in enumerate(paths):
+                if val[-1] == nval:
+                    grouped_paths[i].append(val[:-1])
+            grouped_paths[i].append(nval)
+
+        grouped_paths_list.append(grouped_paths)
+
+    # print("grouped single paths = ", grouped_paths_list[0])
+    # print("grouped double paths = ", grouped_paths_list[1])
+
+    return grouped_paths_list, backtrack_list
 
 
 def peierls_factor(A_UC_val, nphi, xy_vec, delta_y, n):
@@ -167,7 +179,7 @@ def rammal_factor(nphi, nval, ninit, ntot, cos_theta):
     return factor
 
 
-def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, cos_ang):
+def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, cos_ang, backtrack_list):
     nphi = p_val/q_val
     term = 0
     for idx, val in enumerate(vec_list):
@@ -185,27 +197,38 @@ def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, 
                 term += factor
             abs_ninits = [abs(j) for j in ninits]
             term = term * rammal_factor(nphi, n_val, ninits[np.argmin(abs_ninits)], val[-1], cos_ang)
+    if i_val == 0:
+        for i in backtrack_list:
+            term = term + t_val[i-1]**2  # t^2 factor for every backtrack vector
     return term
 
 
-def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list, k_val, cos_angle):
+def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list_list, k_val, cos_angle, backtrack_list):
 
-    Hamiltonian = np.zeros((q_val, q_val), dtype=np.complex128)
+    Hamiltonian_list = []
 
-    n_values = []
-    for term in vec_group_list:
-        n_values.append(term[-1])
-    pos_n_vals_comb = [i for i in n_values if i >= 0]
+    for vec_group_list in vec_group_list_list:
+        if vec_group_list != []:
+            Hamiltonian = np.zeros((q_val, q_val), dtype=np.complex128)
 
-    for i in pos_n_vals_comb:
-        # upper_diag_array
-        upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, n % q_val, k_val, i, cos_angle) for n in range(q_val)])
-        Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
-        # lower_diag_array
-        if i > 0:
-            Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), i, axis=0)
+            n_values = []
+            for term in vec_group_list:
+                n_values.append(term[-1])
+            pos_n_vals_comb = [i for i in n_values if i >= 0]
 
-    return Hamiltonian
+            for i in pos_n_vals_comb:
+                # upper_diag_array
+                upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, n % q_val, k_val, i, cos_angle, backtrack_list) for n in range(q_val)])
+                Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
+                # lower_diag_array
+                if i > 0:
+                    Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), i, axis=0)
+
+            Hamiltonian_list.append(Hamiltonian)
+        else:
+            Hamiltonian_list.append(np.zeros((q_val, q_val)))
+
+    return Hamiltonian_list
 
 
 if __name__ == '__main__':
