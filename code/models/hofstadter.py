@@ -209,6 +209,49 @@ class Hofstadter:
             MM = np.array([0.5, 0.5])
             K2 = np.array([1/3, 2/3])
             sym_points_val = [K1, GA, MM, K2]
+        elif self.lat == "kagome":
+            # lattice vectors
+            a1 = self.a0 * np.array([1, 0])
+            a2 = self.a0 * self.alpha * np.array([np.cos(self.theta), np.sin(self.theta)])
+            avec_val = np.vstack((a1, a2))
+            # reciprocal lattice vectors
+            rec_factor = (2. * np.pi) / (a1[0] * a2[1] - a1[1] * a2[0])
+            b1 = rec_factor * np.array([a2[1], -a2[0]])
+            b2 = rec_factor * np.array([-a1[1], a1[0]])
+            bvec_val = np.vstack((b1, b2))
+            # basis vector
+            basis = 3
+            abasis1 = np.array([0, 0])
+            abasis2 = np.array([(1/2) * a1[0], 0])
+            abasis3 = np.array([(1/2) * a2[0], (1/2) * a2[1]])
+            abasisvec_val = np.vstack((abasis1, abasis2, abasis3))
+            # reciprocal basis vectors
+            bbasis1 = np.array([0, 0])
+            rec_factor = (2. * np.pi) / (abasis2[0] * abasis3[1] - abasis2[1] * abasis3[0])
+            bbasis2 = rec_factor * np.array([abasis3[1], -abasis3[0]])
+            bbasis3 = rec_factor * np.array([-abasis2[1], abasis2[0]])
+            bbasisvec_val = np.vstack((bbasis1, bbasis2, bbasis3))
+            # lattice vectors (MUC)
+            aMUC1 = num_bands_val * a1
+            aMUC2 = a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
+            # reciprocal lattice vectors (MUC)
+            bMUC1 = b1 / num_bands_val
+            bMUC2 = b2
+            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            # cartesian vectors (for Peierls substitution)
+            # acart1 = self.a0 * np.array([1/2, 0])
+            # acart2 = self.a0 * np.array([0, np.sqrt(3)/6])
+            # acartvec_val = np.vstack((acart1, acart2))
+            acart1 = np.array([(1/2)*a2[0], 0])
+            acart2 = np.array([0, (1/2)*a2[1]])
+            acartvec_val = np.vstack((acart1, acart2))
+            # symmetry points
+            K1 = np.array([2/3, 1/3])
+            GA = np.array([0., 0.])
+            MM = np.array([0.5, 0.5])
+            K2 = np.array([1/3, 2/3])
+            sym_points_val = [K1, GA, MM, K2]
 
         self.avec = avec_val
 
@@ -257,7 +300,9 @@ class Hofstadter:
         A_UC = np.linalg.norm(avec[1])
         # compute cos(angle) between basis vectors
         cos_angle = np.vdot(avec[0], avec[1]) / (np.linalg.norm(avec[0])*np.linalg.norm(avec[1]))
+        # return vertical component of y-Bravais vector
+        ay = avec[1][1]
 
-        Hamiltonian_list = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_list, k_val, cos_angle, backtrack_list)
+        Hamiltonian_list = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_list, k_val, cos_angle, backtrack_list, ay)
 
         return Hamiltonian_list, basis

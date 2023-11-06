@@ -171,15 +171,15 @@ def peierls_factor(A_UC_val, nphi, xy_vec, delta_y, n):
     return factor
 
 
-def rammal_factor(nphi, nval, ninit, ntot, cos_theta):
+def rammal_factor(nphi, nval, ninit, ntot, cos_theta, ay, k_val_val):
 
-    phase = - np.pi * nphi * cos_theta * ((nval + ntot)**2 - (nval + ninit)**2)
+    phase = k_val_val[1]*ay*(ntot - ninit) - np.pi * nphi * cos_theta * ((nval + ntot)**2 - (nval + ninit)**2)
     factor = np.exp(1j * phase)
 
     return factor
 
 
-def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, cos_ang, backtrack_list):
+def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, cos_ang, backtrack_list, ay):
     nphi = p_val/q_val
     term = 0
     for idx, val in enumerate(vec_list):
@@ -196,14 +196,14 @@ def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, 
                               * np.exp(1j * np.vdot(xy_vector, k_val_val)))
                 term += factor
             abs_ninits = [abs(j) for j in ninits]
-            term = term * rammal_factor(nphi, n_val, ninits[np.argmin(abs_ninits)], val[-1], cos_ang)
+            term = term * rammal_factor(nphi, n_val, ninits[np.argmin(abs_ninits)], val[-1], cos_ang, ay, k_val_val)
     if i_val == 0:
         for i in backtrack_list:
             term = term + t_val[i-1]**2  # t^2 factor for every backtrack vector
     return term
 
 
-def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list_list, k_val, cos_angle, backtrack_list):
+def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list_list, k_val, cos_angle, backtrack_list, ay):
 
     Hamiltonian_list = []
 
@@ -218,7 +218,7 @@ def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list_list, k_val, cos_a
 
             for i in pos_n_vals_comb:
                 # upper_diag_array
-                upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, n % q_val, k_val, i, cos_angle, backtrack_list) for n in range(q_val)])
+                upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, n % q_val, k_val, i, cos_angle, backtrack_list, ay) for n in range(q_val)])
                 Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
                 # lower_diag_array
                 if i > 0:
