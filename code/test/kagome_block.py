@@ -12,6 +12,8 @@ from models.hofstadter import Hofstadter
 
 
 factor = 8
+inner_factor = 1
+rammal_pre = 0
 
 
 def AB_block_func(p, q):
@@ -39,11 +41,11 @@ def AC_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = -np.exp(- 1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4))
+        value = -np.exp(- 1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4 * inner_factor))
         return value
 
     def B_minus(nphi_val, m_val):
-        value = -np.exp(+ 1j * np.pi * factor * nphi_val * 0.5 * (m_val - 1/4))
+        value = -np.exp(+ 1j * np.pi * factor * nphi_val * 0.5 * (m_val - 1/4 * inner_factor)) * np.exp(- 1j * np.pi * nphi * 0.5 * (-2*m_val + 1) * rammal_pre)
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -80,11 +82,11 @@ def BC_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = -np.exp(+ 1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4))
+        value = -np.exp(+ 1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4 * inner_factor))
         return value
 
     def B_minus(nphi_val, m_val):
-        value = -np.exp(- 1j * np.pi * factor * nphi_val * 0.5 * (m_val - 1/4))
+        value = -np.exp(- 1j * np.pi * factor * nphi_val * 0.5 * (m_val - 1/4 * inner_factor)) * np.exp(-1j * np.pi * nphi * 0.5 * (-2*m_val + 1) * rammal_pre)
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -104,11 +106,11 @@ def CA_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = -np.exp(+1j * np.pi * factor * nphi_val * 0.5 * (m_val+1/4))
+        value = -np.exp(+1j * np.pi * factor * nphi_val * 0.5 * (m_val+1/4 * inner_factor))
         return value
 
     def B_plus(nphi_val, m_val):
-        value = -np.exp(-1j * np.pi * factor * nphi_val * 0.5 * (m_val+3/4))
+        value = -np.exp(-1j * np.pi * factor * nphi_val * 0.5 * (m_val+3/4 * inner_factor)) * np.exp(- 1j * np.pi * nphi * 0.5 * (2*m_val + 1) * rammal_pre)
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -128,11 +130,11 @@ def CB_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = -np.exp(-1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4))
+        value = -np.exp(-1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4 * inner_factor))
         return value
 
     def B_plus(nphi_val, m_val):
-        value = -np.exp(+1j * np.pi * factor * nphi_val * 0.5 * (m_val + 3/4))
+        value = -np.exp(+1j * np.pi * factor * nphi_val * 0.5 * (m_val + 3/4 * inner_factor)) * np.exp(- 1j * np.pi * nphi * 0.5 * (2*m_val + 1) * rammal_pre)
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
