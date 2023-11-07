@@ -279,7 +279,7 @@ class Hofstadter:
         data = [data0]
         sublattice = False
         for i, val in enumerate(data0):
-            if val[10] != 0:  # check if any jumps change sublattice (only one sublattice currently implemented)
+            if val[10] != 0:  # check if any jumps change sublattice
                 # print(f"row {i} = {val[10]}, {val[10]==0}")
                 NN_group = val[6]
                 t_list = [0]*len(self.t)

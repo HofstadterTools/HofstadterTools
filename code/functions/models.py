@@ -20,21 +20,25 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
             r_unit = np.array([i, j])
             vectors_unit.append(r_unit)
             r = np.matmul(r_unit, avec)
-            for k in abasisvec:
-                vectors.append(r+k)
+            for idx, k in enumerate(abasisvec):
+                vectors.append([r+k, idx])  # add basis index
 
     # --- Shift the grid of vectors relative to an initial point (x_init, y_init)
-    vectors = [np.subtract(i, np.array([x_init, y_init])) for i in vectors]
+    # vectors = [np.subtract(i, np.array([x_init, y_init])) for i in vectors]
+    shift_vectors = []
+    for i, val in enumerate(vectors):
+        shift_vectors.append([np.subtract(val[0], np.array([x_init, y_init])), val[1]])
 
     # --- Define data array with info on each vector
-    data = np.zeros((len(vectors), 13), dtype=object)
-    for i, r in enumerate(vectors):
-        data[i, 0] = round(np.linalg.norm(r), 10)  # round so that we can use it for comparison
-        data[i, 1] = np.angle(r[0]+1j*r[1])
-        data[i, 2] = r[0]
-        data[i, 3] = r[1]
+    data = np.zeros((len(shift_vectors), 13), dtype=object)
+    for i, val in enumerate(shift_vectors):
+        data[i, 0] = round(np.linalg.norm(val[0]), 10)  # round so that we can use it for comparison
+        data[i, 1] = np.angle(val[0][0]+1j*val[0][1])
+        data[i, 2] = val[0][0]
+        data[i, 3] = val[0][1]
         data[i, 4] = None  # m
-        data[i, 5] = r[1] / avec[1][1]  # n
+        data[i, 5] = val[0][1] / avec[1][1]  # n
+        data[i, 10] = val[1]
 
     # --- Extract the NN groups (filter data based on radius)
     data = data[data[:, 0].argsort()]  # sort by increasing r
@@ -61,18 +65,18 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
     data = np.delete(data, rows_to_delete, axis=0)
 
     # --- Compute change sublattice flags
-    if len(abasisvec) > 1:  # if there is a multi-particle basis
-        for i, val in enumerate(data):
-            for j, val2 in enumerate(abasisvec):
-                if j > 0:  # skip origin vector
-                    dx = round(abs(val[2]), 10)
-                    dy = round(abs(val[3]), 10)
-                    if round(dx % acartvec[0][0], 10) == 0 and round(dy % avec[1][1], 10) == 0:
-                        data[i, 10] = 0
-                    elif round(dx % val2[0], 10) == 0 and round(dy % val2[1], 10) == 0:
-                        data[i, 10] = j  # label sublattice by number
-                    else:
-                        data[i, 10] = None  # point not on any sublattice
+    # if len(abasisvec) > 1:  # if there is a multi-particle basis
+    #     for i, val in enumerate(data):
+    #         for j, val2 in enumerate(abasisvec):
+    #             if j > 0:  # skip origin vector
+    #                 dx = round(abs(val[2]), 10)
+    #                 dy = round(abs(val[3]), 10)
+    #                 if round(dx % acartvec[0][0], 10) == 0 and round(dy % avec[1][1], 10) == 0:
+    #                     data[i, 10] = 0
+    #                 elif round(dx % val2[0], 10) == 0 and round(dy % val2[1], 10) == 0:
+    #                     data[i, 10] = j  # label sublattice by number
+    #                 else:
+    #                     data[i, 10] = None  # point not on any sublattice
     # print("data = ", data)
     # 1/0
 
