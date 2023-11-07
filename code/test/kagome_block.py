@@ -11,6 +11,9 @@ import functions.arguments as fa
 from models.hofstadter import Hofstadter
 
 
+factor = 8
+
+
 def AB_block_func(p, q):
 
     # initialize the Hamiltonian
@@ -19,7 +22,7 @@ def AB_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = 2 * np.cos(np.pi * nphi_val * m_val)
+        value = -2 * np.cos(np.pi * factor * nphi_val * m_val)
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -36,11 +39,11 @@ def AC_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = np.exp(1j * - np.pi * nphi_val * (m_val + 1/4)/2)
+        value = -np.exp(- 1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4))
         return value
 
     def B_minus(nphi_val, m_val):
-        value = np.exp(1j * np.pi * nphi_val * (m_val + 1/4)/2)
+        value = -np.exp(+ 1j * np.pi * factor * nphi_val * 0.5 * (m_val - 1/4))
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -60,7 +63,7 @@ def BA_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = 2 * np.cos(np.pi * nphi_val * m_val)
+        value = -2 * np.cos(np.pi * factor * nphi_val * m_val)
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -77,11 +80,11 @@ def BC_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = np.exp(1j * np.pi * nphi_val * (m_val - 1/4)/2)
+        value = -np.exp(+ 1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4))
         return value
 
     def B_minus(nphi_val, m_val):
-        value = np.exp(- 1j * np.pi * nphi_val * (m_val - 1/4)/2)
+        value = -np.exp(- 1j * np.pi * factor * nphi_val * 0.5 * (m_val - 1/4))
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -101,11 +104,11 @@ def CA_block_func(p, q):
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = np.exp(1j * np.pi * nphi_val * (m_val+3/4)/2)
+        value = -np.exp(+1j * np.pi * factor * nphi_val * 0.5 * (m_val+1/4))
         return value
 
     def B_plus(nphi_val, m_val):
-        value = np.exp(-1j * np.pi * nphi_val * (m_val+3/4)/2)
+        value = -np.exp(-1j * np.pi * factor * nphi_val * 0.5 * (m_val+3/4))
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -118,17 +121,18 @@ def CA_block_func(p, q):
 
 
 def CB_block_func(p, q):
+
     # initialize the Hamiltonian
     Hamiltonian = np.zeros((q, q), dtype=np.complex128)
 
     nphi = p / q
 
     def A(nphi_val, m_val):
-        value = np.exp(-1j * np.pi * nphi_val * (m_val + 3 / 4) / 2)
+        value = -np.exp(-1j * np.pi * factor * nphi_val * 0.5 * (m_val + 1/4))
         return value
 
     def B_plus(nphi_val, m_val):
-        value = np.exp(1j * np.pi * nphi_val * (m_val + 3 / 4) / 2)
+        value = -np.exp(+1j * np.pi * factor * nphi_val * 0.5 * (m_val + 3/4))
         return value
 
     upper_diag_array = np.array([A(nphi, m) for m in range(q)])
@@ -160,9 +164,11 @@ if __name__ == '__main__':
         AA_block = np.zeros((q, q))
         AB_block = AB_block_func(p, q)
         AC_block = AC_block_func(p, q)
+        #
         BA_block = BA_block_func(p, q)
         BB_block = np.zeros((q, q))
         BC_block = BC_block_func(p, q)
+        #
         CA_block = CA_block_func(p, q)
         CB_block = CB_block_func(p, q)
         CC_block = np.zeros((q, q))
