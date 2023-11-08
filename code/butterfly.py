@@ -53,7 +53,7 @@ def chern(pval, qval):
 if __name__ == '__main__':
 
     # input arguments
-    args = fa.parse_input_arguments("butterfly")
+    args = fa.parse_input_arguments("butterfly", "Plots the Hofstadter Butterfly.")
     t = args['t']
     lat = args['lattice']
     alpha = args['alpha']

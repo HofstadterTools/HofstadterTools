@@ -18,8 +18,6 @@ HofstadterTools
    programs
    troubleshooting
    references
-   how_to_cite
-   acknowledgments
 
 .. _code_reference:
 

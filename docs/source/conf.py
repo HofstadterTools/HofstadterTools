@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../../code/'))  # Source code dir relative t
 # -- Project information -----------------------------------------------------------------------------------------------
 
 project = 'HofstadterTools'
-copyright = '2022, Bartholomew Andrews'
+copyright = '2023, Bartholomew Andrews'
 author = 'Bartholomew Andrews'
 
 # The full version, including alpha/beta/rc tags
@@ -78,9 +78,10 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
     import sphinx_rtd_theme
     html_theme = "sphinx_rtd_theme"
     html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+    # html_theme = "furo"
 
-# html_logo = "images/logo.png"
-# html_favicon = "images/logo.ico"
+html_logo = "images/logo.png"
+html_favicon = "images/logo.png"
 
 html_css_files = ["custom.css"]
 
