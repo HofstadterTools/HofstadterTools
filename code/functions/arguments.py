@@ -40,6 +40,8 @@ def parse_input_arguments(program, description):
         parser.add_argument("-q", type=int, default=199, help="denominator of flux density (prime integer)")
         colors = [False, "point", "plane"]
         parser.add_argument("-col", "--color", type=str, default=False, choices=colors, help="how to color the Hofstadter butterfly")
+        palettes = ["avron", "jet", "red-blue"]
+        parser.add_argument("-pal", "--palette", type=str, default="avron", choices=palettes, help="color palette")
         parser.add_argument("-wan", "--wannier", default=False, action='store_true', help="plot the Wannier diagram")
 
     args = vars(parser.parse_args())

@@ -61,6 +61,7 @@ if __name__ == '__main__':
     theta = args['theta']
     q = args['q']
     color = args['color']
+    pal = args['palette']
     wan = args['wannier']
 
     # construct butterfly
@@ -146,8 +147,22 @@ if __name__ == '__main__':
     ax = plt.subplot(111)
 
     ax.set_title(f"$n_\phi = p/{q}$")
+    if color:  # define color palette
+        if pal == "jet":
+            cmap = plt.get_cmap('jet', 21)
+        elif pal == "red-blue":
+            colors1 = plt.cm.Reds(np.linspace(0., 1, 10))
+            colors2 = plt.cm.seismic([0.5])
+            colors3 = plt.cm.Blues_r(np.linspace(0, 1, 10))
+            colors = np.vstack((colors1, colors2, colors3))
+            cmap = mcolors.LinearSegmentedColormap.from_list('red-blue', colors, 21)
+        else:  # avron
+            colors1 = plt.cm.gist_rainbow(np.linspace(0., 0.5, 10)[::-1])
+            colors2 = plt.cm.seismic([0.5])
+            colors3 = plt.cm.gist_rainbow(np.linspace(0.75, 1, 10))
+            colors = np.vstack((colors1, colors2, colors3))
+            cmap = mcolors.LinearSegmentedColormap.from_list('avron', colors, 21)
     if color == "point":
-        cmap = plt.get_cmap('jet', 21)
         sc = ax.scatter(nphi_list, E_list, c=chern_list, cmap=cmap, s=1, marker='.', vmin=-10, vmax=10)
         cbar = plt.colorbar(sc, extend='both')
         cbar.set_label("$C$")
@@ -156,14 +171,7 @@ if __name__ == '__main__':
         cbar.set_ticks(tick_locs)
         cbar.set_ticklabels(cbar_tick_label)
     elif color == "plane":
-        colors1 = plt.cm.Reds(np.linspace(0., 1, 10))
-        colors2 = plt.cm.seismic([0.5])
-        colors3 = plt.cm.Blues_r(np.linspace(0, 1, 10))
-        colors = np.vstack((colors1, colors2, colors3))
-        mymap = mcolors.LinearSegmentedColormap.from_list('my_colormap', colors)
-        cmap = plt.get_cmap('jet', 21)
-
-        sc = ax.imshow(matrix.T, origin='lower', cmap=mymap, extent=[0, 1, np.min(E_list_orig[0]), np.max(E_list_orig[0])],
+        sc = ax.imshow(matrix.T, origin='lower', cmap=cmap, extent=[0, 1, np.min(E_list_orig[0]), np.max(E_list_orig[0])],
                        aspect="auto", vmin=-10, vmax=10)
         cbar = plt.colorbar(sc)
         cbar.set_label("$t$")
@@ -198,7 +206,7 @@ if __name__ == '__main__':
             ax2.scatter(nphi_DOS_list, DOS_list, s=[5*i for i in gaps_list], c='r', linewidths=0)
         else:
             tr_DOS_list = list(np.concatenate(tr_DOS_list).ravel())
-            sc2 = ax2.scatter(nphi_DOS_list, DOS_list, s=[10*i for i in gaps_list], c=tr_DOS_list, cmap=mymap, linewidths=0, vmin=-10, vmax=10)
+            sc2 = ax2.scatter(nphi_DOS_list, DOS_list, s=[10*i for i in gaps_list], c=tr_DOS_list, cmap=cmap, linewidths=0, vmin=-10, vmax=10)
             cbar2 = plt.colorbar(sc2, extend='both')
             cbar2.set_label("$t$")
             tick_locs = np.linspace(-10, 10, 2 * 21 + 1)[1::2]
