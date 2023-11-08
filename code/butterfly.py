@@ -7,6 +7,7 @@ import matplotlib.ticker as ticker
 from fractions import Fraction
 from matplotlib.ticker import MaxNLocator
 from copy import deepcopy
+import matplotlib.colors as mcolors
 # --- internal imports
 import functions.arguments as fa
 import functions.band_structure as fb
@@ -60,11 +61,14 @@ if __name__ == '__main__':
     theta = args['theta']
     q = args['q']
     color = args['color']
+    wan = args['wannier']
 
     # construct butterfly
     nphi_list, E_list = [], []
     if color:
         chern_list, tr_list = [], []
+    if wan:
+        nphi_DOS_list, DOS_list, gaps_list, tr_DOS_list = [], [], [], []
     for p in tqdm(range(1, q), desc="Butterfly Construction", ascii=True):
         if args['model'] == "Hofstadter":
             model = Hofstadter(p, q, t=t, lat=lat, alpha=alpha, theta=theta)
@@ -94,6 +98,12 @@ if __name__ == '__main__':
         else:
             lmbda = np.sort(np.linalg.eigvalsh(ham_list[0]))
             E_list.append(lmbda)
+
+        if wan:
+            nphi_DOS_list.append([nphi] * (M-1))
+            DOS_list.append([i/q for i in range(len(lmbda)-1)])
+            gaps_list.append([lmbda[i+1] - lmbda[i] for i in range(len(lmbda)-1)])
+
         if color:
             cherns, trs = chern(p, q)
             if model.lat == "honeycomb":
@@ -102,6 +112,8 @@ if __name__ == '__main__':
             else:
                 chern_list.append(cherns)
                 tr_list.append(trs)
+                if wan:
+                    tr_DOS_list.append(trs[1:-1])
 
     if color == "plane":
 
@@ -144,11 +156,17 @@ if __name__ == '__main__':
         cbar.set_ticks(tick_locs)
         cbar.set_ticklabels(cbar_tick_label)
     elif color == "plane":
+        colors1 = plt.cm.Reds(np.linspace(0., 1, 10))
+        colors2 = plt.cm.seismic([0.5])
+        colors3 = plt.cm.Blues_r(np.linspace(0, 1, 10))
+        colors = np.vstack((colors1, colors2, colors3))
+        mymap = mcolors.LinearSegmentedColormap.from_list('my_colormap', colors)
         cmap = plt.get_cmap('jet', 21)
-        sc = ax.imshow(matrix.T, origin='lower', cmap=cmap, extent=[0, 1, np.min(E_list_orig[0]), np.max(E_list_orig[0])],
+
+        sc = ax.imshow(matrix.T, origin='lower', cmap=mymap, extent=[0, 1, np.min(E_list_orig[0]), np.max(E_list_orig[0])],
                        aspect="auto", vmin=-10, vmax=10)
         cbar = plt.colorbar(sc)
-        cbar.set_label("$C$")
+        cbar.set_label("$t$")
         tick_locs = np.linspace(-10, 10, 2 * 21 + 1)[1::2]
         cbar_tick_label = np.arange(-10, 10 + 1)
         cbar.set_ticks(tick_locs)
@@ -156,12 +174,36 @@ if __name__ == '__main__':
     else:
         nphi_list = list(np.concatenate(nphi_list).ravel())
         E_list = list(np.concatenate(E_list).ravel())
-
         ax.scatter(nphi_list, E_list, s=1, marker='.')
 
     ax.set_ylabel('$E$')
     ax.set_xlabel('$n_\phi$')
     ax.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
+
+    if wan:
+        fig2 = plt.figure()
+        ax2 = fig2.add_subplot(111)
+        ax2.set_title(f"$n_\phi = p/{q}$")
+        ax2.set_ylabel('$D(E)$')
+        ax2.set_xlabel('$n_\phi$')
+        ax2.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
+        ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
+
+        nphi_DOS_list = list(np.concatenate(nphi_DOS_list).ravel())
+        DOS_list = list(np.concatenate(DOS_list).ravel())
+        gaps_list = list(np.concatenate(gaps_list).ravel())
+
+        if not color:
+            ax2.scatter(nphi_DOS_list, DOS_list, s=[5*i for i in gaps_list], c='r', linewidths=0)
+        else:
+            tr_DOS_list = list(np.concatenate(tr_DOS_list).ravel())
+            sc2 = ax2.scatter(nphi_DOS_list, DOS_list, s=[10*i for i in gaps_list], c=tr_DOS_list, cmap=mymap, linewidths=0, vmin=-10, vmax=10)
+            cbar2 = plt.colorbar(sc2, extend='both')
+            cbar2.set_label("$t$")
+            tick_locs = np.linspace(-10, 10, 2 * 21 + 1)[1::2]
+            cbar_tick_label = np.arange(-10, 10 + 1)
+            cbar2.set_ticks(tick_locs)
+            cbar2.set_ticklabels(cbar_tick_label)
 
     plt.show()
