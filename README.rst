@@ -3,6 +3,10 @@ HofstadterTools
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model. It can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
+.. note::
+
+		Philip Harper first derived the difference equation for the model :cite:`Harper55`, which was later analyzed in detail by Mark Azbel :cite:`Azbel64`, and finally plotted by Douglas Hofstadter :cite:`Hofstadter76`. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
+
 Quick Start
 -----------
 
@@ -110,8 +114,6 @@ The Hofstadter model is an active field of research and therefore HofstadterTool
 
 ..
 	* add g fluctuations
-	* add Wannier diagram, energy gaps in the butterfly
-	* Landau fan
 	* add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
 	* implement quantum geometry tensor using projectors (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
 
