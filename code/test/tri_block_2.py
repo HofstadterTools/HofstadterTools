@@ -10,7 +10,7 @@ from matplotlib.ticker import MaxNLocator
 import functions.arguments as fa
 from models.hofstadter import Hofstadter
 
-factor = 2
+factor = 1
 
 def AA_block_func(p, q):
 

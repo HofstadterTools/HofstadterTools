@@ -15,7 +15,7 @@ class Hofstadter:
     where :math:`\braket{ij}_n` denotes nth nearest neighbors on a lattice in the xy-plane, :math:`t_n` are the corresponding hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the particle (creation)annihilation operators.
     """
 
-    def __init__(self, p, q, a0=1, t=None, lat="square", alpha=1, theta=(1, 2)):
+    def __init__(self, p, q, a0=1, t=None, lat="square", alpha=1, theta=(1, 2), period=1):
         """Constructor for the Hofstadter class.
 
         Parameters
@@ -34,6 +34,8 @@ class Hofstadter:
             The anisotropy of the Bravais lattice vectors (default=1).
         theta: float
             The angle between Bravais lattice vectors in units of pi (default=0.5).
+        period: int
+            The factor by which to divide A_UC in the flux density (default=1).
         """
 
         if t is None:
@@ -45,6 +47,7 @@ class Hofstadter:
         self.lat = lat  #: str : The name of the lattice (default="square").
         self.alpha = alpha  #: float : The anisotropy of the Bravais lattice vectors (default=1).
         self.theta = (theta[0]/theta[1])*np.pi  #: float : The angle between Bravais lattice vectors (default=pi/2).
+        self.period = period  #: int : The factor by which to divide A_UC in the flux density (default=1).
 
 
     def unit_cell(self):
@@ -274,35 +277,31 @@ class Hofstadter:
 
         basis, _, avec, _, abasisvec, _, _, _, acartvec, _ = self.unit_cell()
 
-        # nearest neighbors
-        data0 = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0)
+        data0, bases = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0, 0)
         data = [data0]
-        sublattice = False
-        for i, val in enumerate(data0):
-            if val[10] != 0:  # check if any jumps change sublattice
-                # print(f"row {i} = {val[10]}, {val[10]==0}")
-                NN_group = val[6]
-                t_list = [0]*len(self.t)
-                t_list[NN_group - 1] = self.t[NN_group - 1]
-                sublattice = True
-                x = val[11] + val[2]
-                y = val[12] + val[3]
-                data.append(fm.nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x, y))
-        if not sublattice:
-            basis = 1
 
+        len_bases = len(bases)
+        if len_bases > 1:
+            for i, val in enumerate(bases[1:]):
+                data_set, _ = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, abasisvec[i+1][0], abasisvec[i+1][1], val)
+                data.append(data_set)
         data = np.vstack(data)
 
-        # sorted groups
-        vec_group_list, backtrack_list = fm.nearest_neighbor_sorter(data)
+        vec_group_matrix = np.zeros((len_bases, len_bases), dtype=object)
+        for i in range(len_bases):  # initial sublattice
+            mask_i = (data[:, 10] == i)
+            data_mask_i = data[mask_i, :]
+            for j in range(len_bases):  # final sublattice
+                mask_j = (data_mask_i[:, 11] == j)
+                data_mask_ij = data_mask_i[mask_j, :]
+                vec_group_list = fm.nearest_neighbor_sorter(data_mask_ij)
+                vec_group_matrix[i, j] = vec_group_list
 
         # compute A_UC in units of a
-        A_UC = np.linalg.norm(avec[1])
+        A_UC = np.linalg.norm(avec[1]) / self.period
         # compute cos(angle) between basis vectors
         cos_angle = np.vdot(avec[0], avec[1]) / (np.linalg.norm(avec[0])*np.linalg.norm(avec[1]))
-        # return vertical component of y-Bravais vector
-        ay = avec[1][1]
 
-        Hamiltonian_list = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_list, k_val, cos_angle, backtrack_list, ay)
+        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, cos_angle, vec_group_matrix, k_val)
 
-        return Hamiltonian_list, basis
+        return Hamiltonian

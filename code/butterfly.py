@@ -63,6 +63,7 @@ if __name__ == '__main__':
     color = args['color']
     pal = args['palette']
     wan = args['wannier']
+    period = args['periodicity']
 
     # construct butterfly
     nphi_list, E_list = [], []
@@ -72,33 +73,20 @@ if __name__ == '__main__':
         nphi_DOS_list, DOS_list, gaps_list, tr_DOS_list = [], [], [], []
     for p in tqdm(range(1, q), desc="Butterfly Construction", ascii=True):
         if args['model'] == "Hofstadter":
-            model = Hofstadter(p, q, t=t, lat=lat, alpha=alpha, theta=theta)
+            model = Hofstadter(p, q, t=t, lat=lat, alpha=alpha, theta=theta, period=period)
         else:
             raise ValueError("model is not defined")
         if gcd(p, q) != 1:  # nphi must be a coprime fraction
             continue
         nphi = p / q
 
-        ham_list, basis = model.hamiltonian(np.array([0, 0]))
+        ham = model.hamiltonian(np.array([0, 0]))
 
-        M = basis * q
+        M = len(ham)
         nphi_list.append([nphi] * M)
 
-        if basis == 2:
-            if not np.any(ham_list[0]):  # eigenproblem
-                lmbda = np.sort(np.linalg.eigvalsh(ham_list[1]))
-                eenergies = np.zeros(2*len(lmbda))
-                for i in range(len(lmbda)):
-                    if lmbda[i] < 0:  # avoid taking sqrt of negative number
-                        lmbda[i] = 0
-                    eenergies[i] = +np.sqrt(lmbda[i])
-                    eenergies[len(lmbda) + i] = -np.sqrt(lmbda[i])
-            else:  # polynomial eigenproblem
-                _, eenergies = fb.polyeig(-ham_list[1], -ham_list[0], np.eye(q))
-            E_list.append(np.sort(eenergies))
-        else:
-            lmbda = np.sort(np.linalg.eigvalsh(ham_list[0]))
-            E_list.append(lmbda)
+        lmbda = np.sort(np.linalg.eigvalsh(ham))
+        E_list.append(lmbda)
 
         if wan:
             nphi_DOS_list.append([nphi] * (M-1))

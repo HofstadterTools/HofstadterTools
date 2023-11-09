@@ -43,6 +43,7 @@ def parse_input_arguments(program, description):
         palettes = ["avron", "jet", "red-blue"]
         parser.add_argument("-pal", "--palette", type=str, default="avron", choices=palettes, help="color palette")
         parser.add_argument("-wan", "--wannier", default=False, action='store_true', help="plot the Wannier diagram")
+        parser.add_argument("-period", "--periodicity", type=int, default=1, help="factor by which to divide A_UC in the flux density")
 
     args = vars(parser.parse_args())
 

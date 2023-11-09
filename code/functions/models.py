@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import axes3d
 from copy import deepcopy
 
 
-def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
+def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init, basis_init):
 
     # --- Create list of NN to consider from t_list
     numb_list = []
@@ -12,7 +12,8 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
         if t != 0:
             numb_list.append(i+1)
 
-    # --- Create grid of basis vectors from [-t_max, t_max]
+    # --- Create grid of basis vectors from [-numb_t_max, numb_t_max]
+    abasisvec = [abasisvec[i] - abasisvec[basis_init] for i in range(len(abasisvec))]  # shift basis
     vectors = []
     vectors_unit = []
     for i in range(-numb_list[-1], numb_list[-1]+1):
@@ -21,24 +22,23 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
             vectors_unit.append(r_unit)
             r = np.matmul(r_unit, avec)
             for idx, k in enumerate(abasisvec):
-                vectors.append([r+k, idx])  # add basis index
-
-    # --- Shift the grid of vectors relative to an initial point (x_init, y_init)
-    # vectors = [np.subtract(i, np.array([x_init, y_init])) for i in vectors]
-    shift_vectors = []
-    for i, val in enumerate(vectors):
-        shift_vectors.append([np.subtract(val[0], np.array([x_init, y_init])), val[1]])
+                vectors.append([r+k, i, j, basis_init, idx])  # add basis index
 
     # --- Define data array with info on each vector
-    data = np.zeros((len(shift_vectors), 13), dtype=object)
-    for i, val in enumerate(shift_vectors):
-        data[i, 0] = round(np.linalg.norm(val[0]), 10)  # round so that we can use it for comparison
-        data[i, 1] = np.angle(val[0][0]+1j*val[0][1])
-        data[i, 2] = val[0][0]
-        data[i, 3] = val[0][1]
-        data[i, 4] = None  # m
-        data[i, 5] = val[0][1] / avec[1][1]  # n
-        data[i, 10] = val[1]
+    data = np.zeros((len(vectors), 13), dtype=object)
+    for i, val in enumerate(vectors):
+        data[i, 0] = round(np.linalg.norm(val[0]), 10)  # r (round so that we can use it for comparison)
+        data[i, 1] = np.angle(val[0][0]+1j*val[0][1])  # phi
+        data[i, 2] = x_init  # x_init
+        data[i, 3] = y_init  # y_init
+        data[i, 4] = y_init / avec[1][1]  # y_init / a2_y
+        data[i, 5] = val[0][0]  # dx
+        data[i, 6] = val[0][1]  # dy
+        data[i, 7] = val[0][1] / avec[1][1]  # dy / a2_y
+        data[i, 8] = val[1]  # dI
+        data[i, 9] = val[2]  # dJ
+        data[i, 10] = val[3]  # sub_init
+        data[i, 11] = val[4]  # sub_final
 
     # --- Extract the NN groups (filter data based on radius)
     data = data[data[:, 0].argsort()]  # sort by increasing r
@@ -50,12 +50,7 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
     for i, row in enumerate(data):
         for j, r in enumerate(radii):
             if row[0] == r:
-                data[i, 6] = j+1  # NN group
-                data[i, 7] = None  # m_init
-                data[i, 8] = y_init / avec[1][1]  # n_init
-                data[i, 9] = data[i, 8] + data[i, 5]  # n_total
-                data[i, 11] = x_init
-                data[i, 12] = y_init
+                data[i, 12] = j+1  # NN group
     select_radii = [radii[i - 1] for i in numb_list]
     # delete rows with other radii
     rows_to_delete = []
@@ -64,175 +59,99 @@ def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init):
             rows_to_delete.append(i)
     data = np.delete(data, rows_to_delete, axis=0)
 
-    # --- Compute change sublattice flags
-    # if len(abasisvec) > 1:  # if there is a multi-particle basis
-    #     for i, val in enumerate(data):
-    #         for j, val2 in enumerate(abasisvec):
-    #             if j > 0:  # skip origin vector
-    #                 dx = round(abs(val[2]), 10)
-    #                 dy = round(abs(val[3]), 10)
-    #                 if round(dx % acartvec[0][0], 10) == 0 and round(dy % avec[1][1], 10) == 0:
-    #                     data[i, 10] = 0
-    #                 elif round(dx % val2[0], 10) == 0 and round(dy % val2[1], 10) == 0:
-    #                     data[i, 10] = j  # label sublattice by number
-    #                 else:
-    #                     data[i, 10] = None  # point not on any sublattice
-    # print("data = ", data)
-    # 1/0
+    # --- Extract bases set
+    bases = []
+    for i, val in enumerate(data):
+        bases.append(val[10])
+        bases.append(val[11])
+    bases = np.sort(list(set(bases)))
 
-    return data
+    return data, bases
 
 
 def nearest_neighbor_sorter(data_array):
 
-    # --- Count backtrack vectors
-    delete_list = []
-    backtrack_list = []
+    # count the number of dJ
+    dJ_list = []
     for i, val in enumerate(data_array):
-        if round(val[11] + val[2], 10) == 0 and round(val[12] + val[3], 10) == 0:  # backtrack
-            delete_list.append(i)
-            backtrack_list.append(val[6])
-    data_array = np.delete(data_array, delete_list, axis=0)
-    # print("filter data array = ", data_array)
+        dJ_list.append(val[9])
+    dJ_list = np.sort(list(set(dJ_list)))
+    numb_dJ = len(dJ_list)
 
-    # --- Count the independent paths
-    numb_single_paths, numb_double_paths = 0, 0
-    # double paths
-    double_idx = []
-    for i, val in enumerate(data_array):
-        if round(val[11]) == 0 and round(val[12]) == 0:  # origin
-            for j, val2 in enumerate(data_array):
-                if round(val[11] + val[2], 10) == round(val2[11], 10) and round(val[12] + val[3], 10) == round(val2[12], 10):
-                    numb_double_paths = numb_double_paths + 1
-                    double_idx.append(i)
-                    double_idx.append(j)
-    # single paths
-    double_idx_list = np.sort(list(set(double_idx)))
-    numb_single_paths = len(data_array) - len(double_idx_list)
+    # group paths by dJ
+    grouped_paths = np.zeros(numb_dJ, dtype=object)
+    for i in range(numb_dJ):
+        grouped_paths[i] = []
 
-    # --- Group the independent paths
-    single_paths = np.zeros(numb_single_paths, dtype=object)
-    for i in range(numb_single_paths):
-        single_paths[i] = []
-    double_paths = np.zeros(numb_double_paths, dtype=object)
-    for i in range(numb_double_paths):
-        double_paths[i] = []
-    # double paths
-    counter = 0
-    for i, val in enumerate(data_array):
-        if round(val[11]) == 0 and round(val[12]) == 0:  # origin
-            for j, val2 in enumerate(data_array):
-                if round(val[11] + val[2], 10) == round(val2[11], 10) and round(val[12] + val[3], 10) == round(val2[12], 10):
-                    ntot = val[5] + val2[5]
-                    double_paths[counter] = [val, val2, round(ntot)]
-                    counter = counter + 1
-    # single paths
-    single_idx_list = np.setdiff1d(np.arange(len(data_array)), np.array(double_idx_list))
-    for i, val in enumerate(single_idx_list):
-        single_paths[i] = [data_array[val], round(data_array[val][9])]
+    for i, dJval in enumerate(dJ_list):
+        for j, val in enumerate(data_array):
+            if val[9] == dJval:
+                grouped_paths[i].append(val)
+        grouped_paths[i].append(dJval)
 
-    # print("single paths = ", single_paths)
-    # print("double paths = ", double_paths)
-
-    paths_list = [single_paths, double_paths]
-    grouped_paths_list = []
-
-    for paths in paths_list:
-
-        # --- Count the number of total n
-        n_tot = []
-        for i, val in enumerate(paths):
-            n_tot.append(val[-1])
-        n_tot = np.sort(list(set(n_tot)))
-        # print("n_tot = ", n_tot)
-        numb_n = len(n_tot)
-        # print("numb_n = ", numb_n)
-
-        # --- Group the independent paths by total n
-        grouped_paths = np.zeros(numb_n, dtype=object)
-        for i in range(numb_n):
-            grouped_paths[i] = []
-
-        for i, nval in enumerate(n_tot):
-            for j, val in enumerate(paths):
-                if val[-1] == nval:
-                    grouped_paths[i].append(val[:-1])
-            grouped_paths[i].append(nval)
-
-        grouped_paths_list.append(grouped_paths)
-
-    # print("grouped single paths = ", grouped_paths_list[0])
-    # print("grouped double paths = ", grouped_paths_list[1])
-
-    return grouped_paths_list, backtrack_list
+    return grouped_paths
 
 
-def peierls_factor(A_UC_val, nphi, xy_vec, delta_y, n):
+def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
 
-    phase = - 2 * np.pi * nphi * xy_vec[0] * (n + delta_y/2) / A_UC_val
+    phase = - 2 * np.pi * nphi * dx * (y_cart + dy_cart/2) / A_UC
     factor = np.exp(1j * phase)
 
     return factor
 
 
-def rammal_factor(nphi, nval, ninit, ntot, cos_theta, ay, k_val_val):
+def diag_func(t_val, p_val, q_val, A_UC_val, cos_ang, vec_group, k_val, dJ_val, J_idx_val):
 
-    phase = k_val_val[1]*ay*(ntot - ninit) - np.pi * nphi * cos_theta * ((nval + ntot)**2 - (nval + ninit)**2)
-    factor = np.exp(1j * phase)
-
-    return factor
-
-
-def diag_func(A_UC_val, t_val, p_val, q_val, vec_list, n_val, k_val_val, i_val, cos_ang, backtrack_list, ay):
     nphi = p_val/q_val
     term = 0
-    for idx, val in enumerate(vec_list):
-        if val[-1] == i_val:  # extract rows with appropriate ntot
-            ninits = []
-            for k, val2 in enumerate(val[:-1]):  # for each path group
-                factor = 1
-                for val3 in val2:  # for each vector in path group (usually 2 for honeycomb)
-                    ninits.append(val3[8])
-                    NN_group = int(val3[6])
-                    xy_vector = np.array([val3[2], val3[3]])
-                    delta_n = val3[5]
-                    factor *= - t_val[NN_group - 1] * (peierls_factor(A_UC_val, nphi, xy_vector, delta_n, n_val + val3[8])
-                              * np.exp(1j * np.vdot(xy_vector, k_val_val)))
-                term += factor
-            abs_ninits = [abs(j) for j in ninits]
-            term = term * rammal_factor(nphi, n_val, ninits[np.argmin(abs_ninits)], val[-1], cos_ang, ay, k_val_val)
-    if i_val == 0:
-        for i in backtrack_list:
-            term = term + t_val[i-1]**2  # t^2 factor for every backtrack vector
+    for idx, val in enumerate(vec_group):
+        if val[-1] == dJ_val:  # extract rows with appropriate dJ
+            for k, val2 in enumerate(val[:-1]):  # for each vector in path group
+                NN_group = int(val2[12])
+                term += - t_val[NN_group - 1] * (peierls_factor(nphi, val2[5], J_idx_val + val2[4], val2[7], A_UC_val)
+                                                 * np.exp(1j * np.vdot(np.array([val2[5], val2[6]]), k_val)))
+
     return term
 
 
-def Hamiltonian(t_val, p_val, q_val, A_UC_val, vec_group_list_list, k_val, cos_angle, backtrack_list, ay):
+def Hamiltonian(t, p, q, A_UC, cos_angle, vec_group_matrix, k):
 
-    Hamiltonian_list = []
+    I = np.shape(vec_group_matrix)[0]
+    J = np.shape(vec_group_matrix)[1]
 
-    for vec_group_list in vec_group_list_list:
-        if vec_group_list != []:
-            Hamiltonian = np.zeros((q_val, q_val), dtype=np.complex128)
+    Ham_matrix = []
+    for i in range(I):
+        Ham_row = []
+        for j in range(J):
+            Hamiltonian = np.zeros((q, q), dtype=np.complex128)
 
-            n_values = []
-            for term in vec_group_list:
-                n_values.append(term[-1])
-            pos_n_vals_comb = [i for i in n_values if i >= 0]
+            dJ_list = []
+            for term in vec_group_matrix[i, j]:
+                dJ_list.append(term[-1])
 
-            for i in pos_n_vals_comb:
+            HC_flag = False
+            for k1, val in enumerate(dJ_list):  # remove negative unit cell hoppings (for H.c. cases)
+                for k2, val2 in enumerate(dJ_list):
+                    if val == -val2 and val != 0:
+                        HC_flag = True
+                        if val2 < 0:
+                            del dJ_list[k2]
+                        else:
+                            del dJ_list[k1]
+
+            for dJ in dJ_list:
                 # upper_diag_array
-                upper_diag_array = np.array([diag_func(A_UC_val, t_val, p_val, q_val, vec_group_list, n % q_val, k_val, i, cos_angle, backtrack_list, ay) for n in range(q_val)])
-                Hamiltonian += np.roll(np.diag(upper_diag_array), i, axis=1)
+                diag_array = np.array([diag_func(t, p, q, A_UC, cos_angle, vec_group_matrix[i, j], k, dJ, J_idx) for J_idx in range(q)])
+                Hamiltonian += np.roll(np.diag(diag_array), abs(dJ), axis=int((np.sign(dJ)+1)/2))
                 # lower_diag_array
-                if i > 0:
-                    Hamiltonian += np.roll(np.diag(np.conj(upper_diag_array)), i, axis=0)
+                if HC_flag and dJ > 0:
+                    Hamiltonian += np.roll(np.diag(np.conj(diag_array)), abs(dJ), axis=0)
 
-            Hamiltonian_list.append(Hamiltonian)
-        else:
-            Hamiltonian_list.append(np.zeros((q_val, q_val)))
+            Ham_row.append(Hamiltonian)
+        Ham_matrix.append(Ham_row)
+    Hamiltonian = np.block(Ham_matrix)
 
-    return Hamiltonian_list
+    return Hamiltonian
 
 
 if __name__ == '__main__':
