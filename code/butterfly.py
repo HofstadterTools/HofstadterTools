@@ -108,7 +108,7 @@ if __name__ == '__main__':
 
         E_list_orig = deepcopy(E_list)
 
-        if basis == 2:
+        if round(M/q) == 2:
             half_len = int(np.shape(E_list)[1]/2)
             for i, val in enumerate(E_list):
                 E_list[i] = val[:half_len]  # consider only lower half
@@ -127,7 +127,7 @@ if __name__ == '__main__':
                         matrix[i][j] = tr_list[i][k]  # assign the corresponding tr of that E_list value
                         break
 
-        if basis == 2:
+        if round(M/q) == 2:
             matrix = np.concatenate((matrix, -matrix[:, ::-1]), axis=1)  # double the spectrum
 
     # construct figure

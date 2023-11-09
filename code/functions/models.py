@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import axes3d
 from copy import deepcopy
 
 
-def nearest_neighbor_finder(avec, acartvec, abasisvec, t_list, x_init, y_init, basis_init):
+def nearest_neighbor_finder(avec, abasisvec, t_list, x_init, y_init, basis_init):
 
     # --- Create list of NN to consider from t_list
     numb_list = []
@@ -100,7 +100,7 @@ def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
     return factor
 
 
-def diag_func(t_val, p_val, q_val, A_UC_val, cos_ang, vec_group, k_val, dJ_val, J_idx_val):
+def diag_func(t_val, p_val, q_val, A_UC_val, vec_group, k_val, dJ_val, J_idx_val):
 
     nphi = p_val/q_val
     term = 0
@@ -114,7 +114,7 @@ def diag_func(t_val, p_val, q_val, A_UC_val, cos_ang, vec_group, k_val, dJ_val, 
     return term
 
 
-def Hamiltonian(t, p, q, A_UC, cos_angle, vec_group_matrix, k):
+def Hamiltonian(t, p, q, A_UC, vec_group_matrix, k):
 
     I = np.shape(vec_group_matrix)[0]
     J = np.shape(vec_group_matrix)[1]
@@ -141,7 +141,7 @@ def Hamiltonian(t, p, q, A_UC, cos_angle, vec_group_matrix, k):
 
             for dJ in dJ_list:
                 # upper_diag_array
-                diag_array = np.array([diag_func(t, p, q, A_UC, cos_angle, vec_group_matrix[i, j], k, dJ, J_idx) for J_idx in range(q)])
+                diag_array = np.array([diag_func(t, p, q, A_UC, vec_group_matrix[i, j], k, dJ, J_idx) for J_idx in range(q)])
                 Hamiltonian += np.roll(np.diag(diag_array), abs(dJ), axis=int((np.sign(dJ)+1)/2))
                 # lower_diag_array
                 if HC_flag and dJ > 0:

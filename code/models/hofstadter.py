@@ -49,7 +49,6 @@ class Hofstadter:
         self.theta = (theta[0]/theta[1])*np.pi  #: float : The angle between Bravais lattice vectors (default=pi/2).
         self.period = period  #: int : The factor by which to divide A_UC in the flux density (default=1).
 
-
     def unit_cell(self):
         """The unit cell of the Hofstadter model.
 
@@ -275,15 +274,15 @@ class Hofstadter:
             The Hofstadter Hamiltonian matrix of dimension (num_bands, num_bands).
         """
 
-        basis, _, avec, _, abasisvec, _, _, _, acartvec, _ = self.unit_cell()
+        _, _, avec, _, abasisvec, _, _, _, _, _ = self.unit_cell()
 
-        data0, bases = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, 0, 0, 0)
+        data0, bases = fm.nearest_neighbor_finder(avec, abasisvec, self.t, 0, 0, 0)
         data = [data0]
 
         len_bases = len(bases)
         if len_bases > 1:
             for i, val in enumerate(bases[1:]):
-                data_set, _ = fm.nearest_neighbor_finder(avec, acartvec, abasisvec, self.t, abasisvec[i+1][0], abasisvec[i+1][1], val)
+                data_set, _ = fm.nearest_neighbor_finder(avec, abasisvec, self.t, abasisvec[i+1][0], abasisvec[i+1][1], val)
                 data.append(data_set)
         data = np.vstack(data)
 
@@ -297,11 +296,9 @@ class Hofstadter:
                 vec_group_list = fm.nearest_neighbor_sorter(data_mask_ij)
                 vec_group_matrix[i, j] = vec_group_list
 
-        # compute A_UC in units of a
+        # compute A_UC in units of a (scaled by periodicity factor)
         A_UC = np.linalg.norm(avec[1]) / self.period
-        # compute cos(angle) between basis vectors
-        cos_angle = np.vdot(avec[0], avec[1]) / (np.linalg.norm(avec[0])*np.linalg.norm(avec[1]))
 
-        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, cos_angle, vec_group_matrix, k_val)
+        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_matrix, k_val)
 
         return Hamiltonian
