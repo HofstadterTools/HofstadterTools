@@ -1,7 +1,7 @@
 HofstadterTools
 ===============
 
-**H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of python programs and classes for analyzing the Hofstadter model.
+**H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model. It can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
 Quick Start
 -----------
@@ -92,7 +92,7 @@ If you have found HofstadterTools useful, it would be greatly appreciated if you
 Acknowledgments
 ---------------
 
-We thank Gunnar Möller, Titus Neupert, Rahul Roy, Alexey Soluyanov, Mike Zaletel, and Mathi Raja, for useful discussions. This project was funded by the Swiss National Science Foundation under Grant No. `P500PT_203168 <https://data.snf.ch/grants/grant/203168>`__.
+We thank Gunnar Möller, Titus Neupert, Rahul Roy, Alexey Soluyanov, Mike Zaletel, Johannes Mitscherling, and Mathi Raja, for useful discussions. This project was funded by the Swiss National Science Foundation under Grant No. `P500PT_203168 <https://data.snf.ch/grants/grant/203168>`__.
 
 Coming Soon...
 --------------
@@ -108,10 +108,11 @@ The Hofstadter model is an active field of research and therefore HofstadterTool
 * capability to generate potential function corresponding to hopping amplitudes
 * implementation of other topological flat bands models for benchmarking (e.g. chiral pi-flux model)
 
-* add g fluctuations
-* add Wannier diagram, energy gaps in the butterfly
-* Landau fan
-* add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
-* implement quantum geometry tensor using projectors (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
+..
+	* add g fluctuations
+	* add Wannier diagram, energy gaps in the butterfly
+	* Landau fan
+	* add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
+	* implement quantum geometry tensor using projectors (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
 
 Contributions are always welcome! The easiest way to contribute is to submit a pull request on GitHub.

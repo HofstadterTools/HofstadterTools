@@ -28,6 +28,7 @@ def parse_input_arguments(program, description):
     parser.add_argument("-lat", "--lattice", type=str, default="bravais", choices=lattices, help="name of lattice")
     parser.add_argument("-alpha", type=float, default=1, help="length of a2 Bravais vector relative to a1 (Bravais lattice anisotropy)")
     parser.add_argument("-theta", nargs=2, type=float, default=[1, 3], help="angle between Bravais basis vectors as a fraction of pi (Bravais lattice obliqueness)")
+    parser.add_argument("-save", default=False, action='store_true', help="save the output data, logs, and plots")
 
     if program == "band_structure":
         parser.add_argument("-samp", type=int, default=101, help="number of samples in linear direction")

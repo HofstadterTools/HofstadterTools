@@ -59,6 +59,7 @@ if __name__ == '__main__':
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
+    save = args['save']
     q = args['q']
     color = args['color']
     pal = args['palette']
@@ -147,6 +148,7 @@ if __name__ == '__main__':
         else:  # avron
             colors1 = plt.cm.gist_rainbow(np.linspace(0., 0.5, 10)[::-1])
             colors2 = plt.cm.seismic([0.5])
+            # colors2[:, -1] = 0  # set transparent region background
             colors3 = plt.cm.gist_rainbow(np.linspace(0.75, 1, 10))
             colors = np.vstack((colors1, colors2, colors3))
             cmap = mcolors.LinearSegmentedColormap.from_list('avron', colors, 21)
@@ -177,6 +179,7 @@ if __name__ == '__main__':
     ax.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
 
+
     if wan:
         fig2 = plt.figure()
         ax2 = fig2.add_subplot(111)
@@ -202,4 +205,7 @@ if __name__ == '__main__':
             cbar2.set_ticks(tick_locs)
             cbar2.set_ticklabels(cbar_tick_label)
 
+    if save:
+        # plt.axis('off')
+        plt.savefig(f"../figs/butterfly_{lat}_q_{q:g}_t_{t}_alpha_{alpha}_theta_{theta}_col_{color}_{pal}_period_{period}.png", bbox_inches='tight', dpi=300, transparent=True)
     plt.show()
