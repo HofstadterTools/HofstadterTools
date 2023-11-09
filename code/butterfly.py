@@ -56,7 +56,10 @@ if __name__ == '__main__':
 
     # input arguments
     args = fa.parse_input_arguments("butterfly", "Plots the Hofstadter Butterfly.")
-    t = args['t']
+    if args['input']:
+        t = fa.read_t_from_file()
+    else:
+        t = args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
@@ -99,25 +102,19 @@ if __name__ == '__main__':
 
         if color:
             cherns, trs = chern(p, q)
-
-            chern_list.append(cherns)
-            tr_list.append(trs)
-            if wan:
-                tr_DOS_list.append(trs[1:-1])
-
-            # if model.lat == "honeycomb":
-            #     cherns_double = cherns + [i for i in cherns[::-1]]
-            #     chern_list.append(cherns_double)
-            #     trs_double = trs + [-i for i in trs[::-1]]
-            #     tr_list.append(trs_double)
-            #     if wan:
-            #         trs_double_wan = trs[1:] + [-i for i in trs[::-1]][1:]
-            #         tr_DOS_list.append(trs_double_wan[:-1])
-            # else:
-            #     chern_list.append(cherns)
-            #     tr_list.append(trs)
-            #     if wan:
-            #         tr_DOS_list.append(trs[1:-1])
+            if model.lat == "honeycomb":
+                cherns_double = cherns + [i for i in cherns[::-1]]
+                chern_list.append(cherns_double)
+                trs_double = trs + [-i for i in trs[::-1]]
+                tr_list.append(trs_double)
+                if wan:
+                    trs_double_wan = trs[1:] + [-i for i in trs[::-1]][1:]
+                    tr_DOS_list.append(trs_double_wan[:-1])
+            else:
+                chern_list.append(cherns)
+                tr_list.append(trs)
+                if wan:
+                    tr_DOS_list.append(trs[1:-1])
 
     if color == "plane":
 
@@ -212,6 +209,8 @@ if __name__ == '__main__':
             ax2.set_xlabel('$n_\phi$')
             ax2.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
             ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
+        else:
+            ax2.set_xlim([0, 1])
 
         nphi_DOS_list = list(np.concatenate(nphi_DOS_list).ravel())
         DOS_list = list(np.concatenate(DOS_list).ravel())
