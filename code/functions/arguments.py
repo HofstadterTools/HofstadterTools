@@ -13,6 +13,8 @@ def parse_input_arguments(program, description):
     ----------
     program: string
         The name of the program.
+    description: string
+        The description of the program.
 
     Returns
     -------
@@ -20,7 +22,7 @@ def parse_input_arguments(program, description):
         The dictionary of input arguments.
     """
 
-    parser = argparse.ArgumentParser(prog=program, description=description)
+    parser = argparse.ArgumentParser(prog=program, description=description, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     models = ["Hofstadter"]
     parser.add_argument("-mod", "--model", type=str, default="Hofstadter", choices=models, help="name of model")
     parser.add_argument("-t", nargs='+', type=float, default=[1], help="list of hopping amplitudes in ascending order [1NN, 2NN, 3NN, ...]")
@@ -45,6 +47,8 @@ def parse_input_arguments(program, description):
         parser.add_argument("-pal", "--palette", type=str, default="avron", choices=palettes, help="color palette")
         parser.add_argument("-wan", "--wannier", default=False, action='store_true', help="plot the Wannier diagram")
         parser.add_argument("-period", "--periodicity", type=int, default=1, help="factor by which to divide A_UC in the flux density")
+        parser.add_argument("-art", default=False, action='store_true', help="remove all plot axes and labels")
+        parser.add_argument("-dpi", type=int, default=300, help="dots-per-inch resolution of the saved output image")
 
     args = vars(parser.parse_args())
 

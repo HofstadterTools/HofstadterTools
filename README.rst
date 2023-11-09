@@ -3,7 +3,7 @@ HofstadterTools
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model. It can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
-.. note::
+.. admonition:: About the name
 
 		Philip Harper first derived the difference equation for the model :cite:`Harper55`, which was later analyzed in detail by Mark Azbel :cite:`Azbel64`, and finally plotted by Douglas Hofstadter :cite:`Hofstadter76`. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
 
@@ -22,7 +22,7 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 		(HT) user@domain:~/HofstadterTools/code$ python butterfly.py -mod Hofstadter -lat square -q 199
 		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -mod Hofstadter -lat square -nphi 1 4
 
-Voilà! You have just plotted the Hofstadter butterfly for nearest-neighbor hopping on the square lattice at :math:`q=199`, together with the corresponding band structure at flux density :math:`n_\phi=1/4`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`programs <programs>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
+Voilà! You have just plotted the Hofstadter butterfly for nearest-neighbor hopping on the square lattice at :math:`q=199`, together with the corresponding band structure at flux density :math:`n_\phi=1/4`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`tutorials <tutorials>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
 
 Python Environment
 ------------------
@@ -58,7 +58,7 @@ The first line ensures that the python path is set for the sources root director
 Directory Structure
 -------------------
 
-* **code** -- sources root directory where the python programs and their configuration settings are stored, as well as the namespace packages. A detailed description of the available :doc:`programs <programs>` and :ref:`namespace packages <code_reference>` is in the documentation.
+* **code** -- sources root directory where the python programs and their configuration settings are stored, as well as the namespace packages. A detailed description of the available :doc:`programs <tutorials>` and :ref:`namespace packages <code_reference>` is in the documentation.
 
 	* **configuration** -- user-defined configuration files for the programs.
 	* **functions** -- helper functions for the programs.
@@ -103,18 +103,20 @@ Coming Soon...
 
 The Hofstadter model is an active field of research and therefore HofstadterTools will never be complete. Here is a list of some features that we have on the pipeline to be implemented (in no particular order):
 
-* support for hyperbolic lattices
-* support for fractal lattices
-* support for higher-dimensional lattices
-* support for quasicrystals
-* support for open boundary conditions
-* capability to compute Chern numbers using bulk-edge correspondence
-* capability to generate potential function corresponding to hopping amplitudes
-* implementation of other topological flat bands models for benchmarking (e.g. chiral pi-flux model)
+* support for hyperbolic lattices :cite:`Stegmaier22`
+* support for fractal lattices :cite:`Chen20`
+* support for higher-dimensional lattices :cite:`DiColandrea22`
+* support for quasicrystals :cite:`Ghadimi22`
+* support for open boundary conditions :cite:`Pena23`
+* interface to quantum chemistry codes :cite:`Bodesheim23`
+* capability to compute the non-Abelian `Hofstadter moth` :cite:`Osterloh05` :cite:`Yang20`
+* capability to compute Chern numbers using bulk-edge correspondence :cite:`Agazzi14`
+* capability to generate potential function corresponding to hopping amplitudes :cite:`Yilmaz17`
+* implementation of other topological flat bands models for benchmarking (e.g. chiral pi-flux model) :cite:`Neupert11`
 
 ..
 	* add g fluctuations
 	* add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
 	* implement quantum geometry tensor using projectors (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
 
-Contributions are always welcome! The easiest way to contribute is to submit a pull request on GitHub.
+Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/bartandrews/HofstadterTools>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.

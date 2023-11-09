@@ -13,9 +13,10 @@ HofstadterTools
    :maxdepth: 2
    :caption: User Guide:
 
-   intro
+   overview
    theory
-   programs
+   tutorials
+   gallery
    troubleshooting
    references
 
