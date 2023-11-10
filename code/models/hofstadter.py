@@ -320,8 +320,8 @@ class Hofstadter:
         # --- Create grid of basis vectors from [-numb_t_max, numb_t_max]
         vectors = []
         vectors_unit = []
-        for i in range(-numb_list[-1], numb_list[-1] + 1):
-            for j in range(-numb_list[-1], numb_list[-1] + 1):
+        for i in range(-5*numb_list[-1], 5*numb_list[-1] + 1):
+            for j in range(-5*numb_list[-1], 5*numb_list[-1] + 1):
                 r_unit = np.array([i, j])
                 vectors_unit.append(r_unit)
                 r = np.matmul(r_unit, avec)
