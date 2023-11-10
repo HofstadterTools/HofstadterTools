@@ -55,7 +55,7 @@ def chern(pval, qval):
 if __name__ == '__main__':
 
     # input arguments
-    args = fa.parse_input_arguments("butterfly", "Plots the Hofstadter Butterfly.")
+    args = fa.parse_input_arguments("butterfly", "Plot the Hofstadter Butterfly.")
     if args['input']:
         t = fa.read_t_from_file()
     else:

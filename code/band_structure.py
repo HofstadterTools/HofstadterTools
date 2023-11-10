@@ -16,7 +16,7 @@ from configuration.band_structure import *
 if __name__ == '__main__':
 
     # input arguments
-    args = fa.parse_input_arguments("band_structure", "Plots the Hofstadter Band Structure.")
+    args = fa.parse_input_arguments("band_structure", "Plot the Hofstadter Band Structure.")
     t = args['t']
     lat = args['lattice']
     if args['model'] == "Hofstadter":
