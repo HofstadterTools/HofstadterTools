@@ -1,6 +1,9 @@
 """The Hofstadter model classes."""
 
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+from matplotlib.patches import Polygon
 import functions.models as fm
 
 
@@ -302,3 +305,67 @@ class Hofstadter:
         Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_matrix, k_val)
 
         return Hamiltonian
+
+    def plot_lattice(self):
+
+        _, _, avec, _, abasisvec, _, _, _, _, _ = self.unit_cell()
+        t_list = self.t
+
+        # --- Create list of NN to consider from t_list
+        numb_list = []
+        for i, t in enumerate(t_list):
+            if t != 0:
+                numb_list.append(i + 1)
+
+        # --- Create grid of basis vectors from [-numb_t_max, numb_t_max]
+        vectors = []
+        vectors_unit = []
+        for i in range(-numb_list[-1], numb_list[-1] + 1):
+            for j in range(-numb_list[-1], numb_list[-1] + 1):
+                r_unit = np.array([i, j])
+                vectors_unit.append(r_unit)
+                r = np.matmul(r_unit, avec)
+                for idx, k in enumerate(abasisvec):
+                    vectors.append([r + k, i, j, 0, idx])  # add basis index
+
+        fig_lat = plt.figure()
+        ax = fig_lat.add_subplot(111)
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
+        ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
+        ax.set_title(f"t = {t_list}")
+
+        r_list = []
+        for i, val in enumerate(vectors):
+            r = np.linalg.norm(val[0])
+            if r != 0:
+                r_list.append(r)
+            ax.scatter(val[0][0], val[0][1], c='k', s=5)
+
+        r_list = np.sort(list(set(r_list)))
+
+        r_used = []
+        for i, r in enumerate(r_list):
+            if i >= len(t_list):
+                break
+            elif t_list[i] != 0:
+                circle = plt.Circle((0, 0), r, color=f"C{i}", fill=False)
+                ax.add_patch(circle)
+                r_used.append(r)
+
+        UC_radius = np.linalg.norm(np.add(avec[0], avec[1]))
+        max_rad = max([max(r_used), UC_radius])
+        ax.set_xlim([-max_rad, max_rad])
+        ax.set_ylim([-max_rad, max_rad])
+
+        for i, val in enumerate(avec):
+            ax.annotate("", xy=(val[0], val[1]), xytext=(0, 0), arrowprops=dict(arrowstyle="->"))
+
+        UC = Polygon(((0, 0), (avec[0][0], avec[0][1]),
+                      (avec[0][0] + avec[1][0], avec[0][1] + avec[1][1]), (avec[1][0], avec[1][1])),
+                     fc=(1, 0, 0, 0.5), ec=(0, 0, 0, 0), lw=0)
+        ax.add_artist(UC)
+        ax.set_aspect('equal')
+
+        return None

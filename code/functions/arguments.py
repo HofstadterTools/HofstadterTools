@@ -1,9 +1,6 @@
 """Functions for argument parsing."""
 
 import argparse
-import os
-import csv
-import numpy as np
 
 
 def parse_input_arguments(program, description):
@@ -35,6 +32,7 @@ def parse_input_arguments(program, description):
     parser.add_argument("-theta", nargs=2, type=float, default=[1, 3], help="angle between Bravais basis vectors as a fraction of pi (Bravais lattice obliqueness)")
     parser.add_argument("-input", default=False, action='store_true', help="read hopping parameters from hopping_input.txt file")
     parser.add_argument("-save", default=False, action='store_true', help="save the output data, logs, and plots")
+    parser.add_argument("-plt_lat", "--plot_lattice", default=False, action='store_true', help="plot the lattice")
 
     if program == "band_structure":
         parser.add_argument("-samp", type=int, default=101, help="number of samples in linear direction")
@@ -57,20 +55,3 @@ def parse_input_arguments(program, description):
     args = vars(parser.parse_args())
 
     return args
-
-
-def read_t_from_file():
-
-    dir = "configuration/" if os.path.isdir('configuration') else ""
-    with open(dir+"hopping_input.txt", 'r') as csvfile:
-        data = csv.reader(csvfile, delimiter='\t')
-        NN, t = [], []
-        for i, row in enumerate(data):
-            NN.append(int(row[0]))
-            t.append(float(row[1]))
-
-    t_list = np.zeros(max(NN))
-    for i, val in enumerate(NN):
-        t_list[val-1] = t[i]
-
-    return t_list

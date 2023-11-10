@@ -64,6 +64,7 @@ if __name__ == '__main__':
     alpha = args['alpha']
     theta = args['theta']
     save = args['save']
+    plt_lat = args["plot_lattice"]
     q = args['q']
     color = args['color']
     pal = args['palette']
@@ -144,7 +145,7 @@ if __name__ == '__main__':
 
     # construct figure
     fig = plt.figure()
-    ax = plt.subplot(111)
+    ax = fig.add_subplot(111)
 
     if not art:
         ax.set_title(f"$n_\phi = p/{q}$")
@@ -249,4 +250,8 @@ if __name__ == '__main__':
         fig.savefig(dir+f"butterfly_{file_name}", bbox_inches='tight', dpi=dpi, transparent=transparent)
         if wan:
             fig2.savefig(dir + f"wannier_{file_name}", bbox_inches='tight', dpi=dpi, transparent=transparent)
+
+    if plt_lat:
+        model.plot_lattice()
+
     plt.show()
