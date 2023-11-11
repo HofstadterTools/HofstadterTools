@@ -30,7 +30,7 @@ def read_t_from_file():
     return t_list
 
 
-def create_filename(program, args):
+def create_filename(program, args, aux_text=""):
     """Create the filename string.
 
     Parameters
@@ -39,6 +39,8 @@ def create_filename(program, args):
         The name of the program.
     args: dict
         The arguments parsed to the program.
+    aux_text: str
+        The auxiliary text parsed to the filename.
 
     Returns
     -------
@@ -54,9 +56,12 @@ def create_filename(program, args):
     theta = args['theta']
     save = args['save']
     log = args['log']
+    dpi = args['dpi']
 
+    aux_str = aux_text if aux_text == "" else aux_text+"_"
     t_str = "t_" + '_'.join([f"{i:g}" for i in t]) + "_"
     brav_str = f"alpha_{alpha:g}_theta_{theta[0]:g}_{theta[1]:g}_" if lat not in ["square", "triangular"] else ""
+    dpi_str = f"dpi_{dpi:g}_" if dpi != 300 else ""
 
     if program == "band_structure":
         samp = args['samp']
@@ -71,7 +76,7 @@ def create_filename(program, args):
         bgt_str = f"bgt_{bgt:g}_"
         samp_str = f"samp_{samp:g}_" if samp != 101 else ""
 
-        filename = f"band_structure_{disp_str}{mod_str}{lat}_{nphi_str}{t_str}{brav_str}{bgt_str}{samp_str}"[:-1]  # remove last underscore
+        filename = f"band_structure_{aux_str}{disp_str}{mod_str}{lat}_{nphi_str}{t_str}{brav_str}{samp_str}{dpi_str}"[:-1]
 
     elif program == "butterfly":
         plt_lat = args["plot_lattice"]
@@ -83,12 +88,13 @@ def create_filename(program, args):
         art = args['art']
         dpi = args['dpi']
 
+        q_str = f"q_{q:g}_"
         col_str = f"col_{color}_{pal}_" if color else ""
         per_str = f"period_{period:g}_" if period != 1 else ""
         art_str = "art_" if art else ""
-        dpi_str = f"dpi_{dpi:g}_" if dpi != 300 else ""
 
-        filename = f"butterfly_{lat}_q_{q:g}_{t_str}{brav_str}{col_str}{per_str}{art_str}{dpi_str}"[:-1]  # remove last underscore
+        filename = f"butterfly_{aux_str}{lat}_{q_str}{t_str}{brav_str}{col_str}{per_str}{art_str}{dpi_str}"[:-1]
+
     else:
         raise ValueError("program is not defined")
 
@@ -112,10 +118,30 @@ def save_data(program, model, args, data):
 
     filename = create_filename(program, args)
     save_list = [model, args, data]
-    directory = "../data/" if os.path.isdir('../data') else ""
+    directory = f"../data/{program}/" if os.path.isdir(f"../data/{program}/") else ""
     np.save(directory+filename, save_list)
 
     return None
+
+
+def load_data(program, filename):
+    """Load data from file.
+
+    Parameters
+    ----------
+    program: str
+        The name of the program.
+    filename: str
+        The name of the file to be loaded.
+    """
+
+    directory = f"../data/{program}/" if os.path.isdir(f"../data/{program}/") else ""
+    file_data = np.load(directory+filename, allow_pickle=True)
+    model = file_data[0]
+    args = file_data[1]
+    data = file_data[2]
+
+    return model, args, data
 
 
 class Logger(object):
@@ -123,7 +149,7 @@ class Logger(object):
 
     def __init__(self, program, args):
         self.terminal = sys.stdout or sys.stderr
-        directory = "../logs/" if os.path.isdir('../logs') else ""
+        directory = f"../logs/{program}/" if os.path.isdir(f"../logs/{program}/") else ""
         filename = create_filename(program, args)
         self.log = open(directory+filename+".log", 'w', buffering=1)
 

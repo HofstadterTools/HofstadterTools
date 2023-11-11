@@ -34,7 +34,7 @@ if __name__ == '__main__':
     period = args['periodicity']
     # butterfly arguments
     q = args['q']
-    color = args['color']
+    col = args['color']
     pal = args['palette']
     wan = args['wannier']
     art = args['art']
@@ -78,7 +78,7 @@ if __name__ == '__main__':
             data['gaps_list'].append([lmbda[i+1] - lmbda[i] for i in range(M-1)])
 
         # color data lists
-        if color:
+        if col:
             cherns, trs = fb.chern(p, q)
             if round(M/q) == 2:
                 cherns_double = cherns + [i for i in cherns[::-1]]
@@ -95,7 +95,7 @@ if __name__ == '__main__':
                     data['tr_DOS_list'].append(trs[1:-1])
 
     # color plane data matrix
-    if color == "plane":
+    if col == "plane":
         data['E_list_orig'] = deepcopy(data['E_list'])
 
         if round(M/q) == 2:
@@ -114,11 +114,11 @@ if __name__ == '__main__':
             for j, E in enumerate(E_vals):  # E goes through energy bins
                 for k, El in enumerate(data['E_list'][i]):  # for each energy bin, compare it to the E_list
                     if E <= El:  # if energy is lower than sorted E_list value
-                        data['matrix'][i][j] = tr_list[i][k]  # assign the corresponding tr of that E_list value
+                        data['matrix'][i][j] = data['tr_list'][i][k]  # assign the corresponding tr of that E_list value
                         break
 
         if round(M/q) == 2:
-            data['matrix'] = np.concatenate((matrix, -matrix[:, ::-1]), axis=1)  # double the spectrum
+            data['matrix'] = np.concatenate((data['matrix'], -data['matrix'][:, ::-1]), axis=1)  # double the spectrum
 
     # save data
     if save:

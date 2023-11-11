@@ -8,11 +8,11 @@ Square Lattice
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat square -col plane -pal red-blue -save -wan``
 
-.. image:: ../../figs/butterfly_square_q_199_t_1_col_plane_red-blue.png
+.. image:: images/gallery/butterfly_square_q_199_t_1_col_plane_red-blue.png
 	:align: center
 	:width: 70%
 
-.. image:: ../../figs/wannier_square_q_199_t_1_col_plane_red-blue.png
+.. image:: images/gallery/wannier_square_q_199_t_1_col_plane_red-blue.png
 	:align: center
 	:width: 70%
 
@@ -24,7 +24,7 @@ Square Lattice
 
 		The Hofstadter Hamiltonian is defined with an overall minus sign in HofstadterTools. Hence, ``-t 1`` translates to a effective hopping strength of -1 for nearest-neighbor terms, and so on.
 
-.. image:: ../../figs/butterfly_square_q_199_t_1_0_-0.25_col_point_jet.png
+.. image:: images/gallery/butterfly_square_q_199_t_1_0_-0.25_col_point_jet.png
 	:align: center
 	:width: 70%
 
@@ -35,7 +35,7 @@ Triangular Lattice
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat triangular -col plane -pal jet -save``
 
-.. image:: ../../figs/butterfly_triangular_q_199_t_1_col_plane_jet.png
+.. image:: images/gallery/butterfly_triangular_q_199_t_1_col_plane_jet.png
 	:align: center
 	:width: 70%
 
@@ -46,7 +46,7 @@ Bravais Lattice
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat bravais -theta 67 180 -t 0.5 0.2 -save``
 
-.. image:: ../../figs/butterfly_bravais_q_199_t_0.5_0.2_alpha_1_theta_67_180.png
+.. image:: images/gallery/butterfly_bravais_q_199_t_0.5_0.2_alpha_1_theta_67_180.png
 	:align: center
 	:width: 70%
 
@@ -57,11 +57,11 @@ Honeycomb Lattice
 
 ``python butterfly.py -mod Hofstadter -q 299 -lat honeycomb -col plane -save -art -dpi 600 -wan``
 
-.. image:: ../../figs/butterfly_honeycomb_q_299_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_600.png
+.. image:: images/gallery/butterfly_honeycomb_q_299_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_600.png
 	:align: center
 	:width: 70%
 
-.. image:: ../../figs/wannier_honeycomb_q_299_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_600.png
+.. image:: images/gallery/wannier_honeycomb_q_299_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_600.png
 	:align: center
 	:width: 70%
 
@@ -69,7 +69,7 @@ Honeycomb Lattice
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat honeycomb -t 1 1 -save -period 6``
 
-.. image:: ../../figs/butterfly_honeycomb_q_199_t_1_1_alpha_1_theta_1_3_period_6.png
+.. image:: images/gallery/butterfly_honeycomb_q_199_t_1_1_alpha_1_theta_1_3_period_6.png
 	:align: center
 	:width: 70%
 
@@ -77,7 +77,7 @@ Honeycomb Lattice
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat honeycomb -t 0 0 0 0 1 -save -period 2``
 
-.. image:: ../../figs/butterfly_honeycomb_q_199_t_0_0_0_0_1_alpha_1_theta_1_3_period_2.png
+.. image:: images/gallery/butterfly_honeycomb_q_199_t_0_0_0_0_1_alpha_1_theta_1_3_period_2.png
 	:align: center
 	:width: 70%
 
@@ -88,7 +88,7 @@ Kagome Lattice
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat kagome -save -period 8``
 
-.. image:: ../../figs/butterfly_kagome_q_199_t_1_alpha_1_theta_1_3_period_8.png
+.. image:: images/gallery/butterfly_kagome_q_199_t_1_alpha_1_theta_1_3_period_8.png
 	:align: center
 	:width: 70%
 

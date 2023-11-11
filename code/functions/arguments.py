@@ -35,14 +35,16 @@ def parse_input_arguments(program, description):
     parser.add_argument("-log", default=False, action='store_true', help="save the output logs")
     parser.add_argument("-plt_lat", "--plot_lattice", default=False, action='store_true', help="plot the lattice")
     parser.add_argument("-period", "--periodicity", type=int, default=1, help="factor by which to divide A_UC in the flux density")
+    parser.add_argument("-dpi", type=int, default=300, help="dots-per-inch resolution of the saved output image")
 
     if program == "band_structure":
         parser.add_argument("-samp", type=int, default=101, help="number of samples in linear direction")
         parser.add_argument("-wil", "--wilson", default=False, action='store_true', help="plot the wilson loops")
-        displays = ["3D", "2D"]
+        displays = ["3D", "2D", "both"]
         parser.add_argument("-disp", "--display", type=str, default="3D", choices=displays, help="how to display band structure")
         parser.add_argument("-nphi", nargs=2, type=int, default=[1, 4], help="flux density")
         parser.add_argument("-bgt", type=float, default=0.01, help="band gap threshold")
+        parser.add_argument("-load", type=str, default=False, help="load data from file")
     if program == "butterfly":
         parser.add_argument("-q", type=int, default=199, help="denominator of flux density (prime integer)")
         colors = [False, "point", "plane"]
@@ -51,7 +53,6 @@ def parse_input_arguments(program, description):
         parser.add_argument("-pal", "--palette", type=str, default="avron", choices=palettes, help="color palette")
         parser.add_argument("-wan", "--wannier", default=False, action='store_true', help="plot the Wannier diagram")
         parser.add_argument("-art", default=False, action='store_true', help="remove all plot axes and labels")
-        parser.add_argument("-dpi", type=int, default=300, help="dots-per-inch resolution of the saved output image")
 
     args = vars(parser.parse_args())
 
