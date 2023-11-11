@@ -2,7 +2,6 @@
 
 import numpy as np
 import cmath as cm
-from scipy import linalg
 
 
 def _principal(z):
@@ -48,7 +47,7 @@ def U(var_num, _eigenvectors, _band, _idx_x, _idx_y, _group_size):
          \braket{u_M(\mathbf{k}_\alpha)|u_1(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})} & \dots & \braket{u_M(\mathbf{k}_\alpha)|u_M(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})}
         \end{pmatrix}.
 
-    Here, :math:`\mathbf{k}_\alpha` is the discretized momentum vector, :math:`\{\hat{\mathbf{e}}_1, \hat{\mathbf{e}}_2\}` are linearly independent unit vectors in the momentum grid, and :math:`\ket{u(\mathbf{k}_\alpha)}` is the eigenvector at momentum :math:`\mathbf{k}_\alpha`. The link variables are constructed for :math:`M` touching bands.
+    Here, :math:`\mathbf{k}_\alpha` is the discretized momentum vector, :math:`\{\hat{\mathbf{e}}_1, \hat{\mathbf{e}}_2\}` are linearly independent unit vectors in the momentum grid, and :math:`\ket{u(\mathbf{k}_\alpha)}` is the eigenvector at momentum :math:`\mathbf{k}_\alpha`. The link variables are constructed for :math:`M` touching bands. :cite:`Fukui05`
 
     .. note::
         Input eigenvectors are already normalized from :class:`numpy.linalg.eig`.
@@ -178,7 +177,7 @@ def wilson_loop(_eigenvectors, _band, _idx_x, _group_size=1):
     .. math::
         W = -\Im \log \prod_{\alpha} \tilde{\mathcal{U}}_2(\mathbf{k}_\alpha),
 
-    where :math:`\tilde{\mathcal{U}}_2` is the normalized link variable, :math:`\mathbf{k}_\alpha` is the momentum vector, and the product is taken on a Brillouin zone cycle in the :math:`\gamma=2` direction.
+    where :math:`\tilde{\mathcal{U}}_2` is the normalized link variable, :math:`\mathbf{k}_\alpha` is the momentum vector, and the product is taken on a Brillouin zone cycle in the :math:`\gamma=2` direction. :cite:`Gresch18`
 
     Returns
     -------

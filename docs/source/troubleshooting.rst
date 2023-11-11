@@ -50,6 +50,12 @@ band_structure Questions
 
 By default, the quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can edit the table column selector at ``code/configuration/band_structure.py``. Note that the table columns are grouped by computational expense. For example, if you would like to output the normalized Fubini-Study metric fluctuations ``std_g_norm``, then you could also output the Brillouin-zone-averaged trace inequality saturation measure ``T``  at negligible additional cost.
 
+.. admonition:: Question
+
+	I would like to compute the band structure of my custom Hamiltonian but it is running very slowly compared to standard examples. Why is this?
+
+The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor interactions. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its complete band structure more quickly, then consider adding it to ``functions/models.py`` in a similar format to the other hardcoded Hamiltonians, e.g. ``BasicKagomeHamiltonian``. We note that the ``butterfly`` program does not suffer from this issue, since the diagonalization is performed only at a single k point.
+
 butterfly Questions
 -------------------
 
@@ -63,4 +69,4 @@ By default, the flux density in HofstadterTools is defined with respect to the l
 
 	I have plotted a Hofstadter butterfly using the ``--color`` flag and the code runs surprisingly quickly. How are the Chern numbers computed?
 
-All of the Hofstadter butterflies are colored using the Streda-Widom Diophantine relation (see Appendix C of :cite:`DiColandrea22` for a derivation). We note that although the formula can unambiguously determine the Chern numbers for the case of the square lattice, the natural window condition is not uniquely resolved in general. This *may* lead to minor imperfections in the coloring for other lattices, especially when plotting with an extremely high resolution, as scrutinized in Fig.4 of :cite:`Agazzi14`. At the time of writing, there is no Diophantine equation that can uniquely determine the Chern numbers in the general case. For the ``--color`` flag, we make the choice of sacrificing precision for the sake of efficiency.
+All of the Hofstadter butterflies are colored using the Streda-Widom Diophantine relation (see Appendix C of :cite:`DiColandrea22` for a derivation). We note that although the formula can unambiguously determine the Chern numbers for the case of the rectangular lattice, the natural window condition is not uniquely resolved in general. This *may* lead to minor imperfections in the coloring for other lattices, especially when plotting with an extremely high resolution, as scrutinized in Fig.4 of :cite:`Agazzi14` or :cite:`Avron14`. At the time of writing, there is no Diophantine equation that can uniquely determine the Chern numbers in the general case. For the ``--color`` flag, we make the choice of sacrificing precision for the sake of efficiency.

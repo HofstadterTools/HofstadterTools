@@ -138,7 +138,7 @@ def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
     .. math::
         e^{\mathrm{i}\theta_{ij}} = \exp\left(-\frac{2\pi\mathrm{i}n_\phi}{A} \Delta X (Y_i + \Delta Y /2) \right),
 
-    where :math:`\theta_{ij}` is the Peierls phase from site :math:`i=(X_i, Y_i)`. to :math:`j=(X_j, Y_j)`, :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, :math:`n_\phi` is the flux density, and :math:`A` is the area.
+    where :math:`\theta_{ij}` is the Peierls phase from site :math:`i=(X_i, Y_i)`. to :math:`j=(X_j, Y_j)`, :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, :math:`n_\phi` is the flux density, and :math:`A` is the area. :cite:`Peierls33`
 
     Parameters
     ----------
@@ -295,6 +295,345 @@ def Hamiltonian(t, p, q, A_UC, vec_group_matrix, k):
             Ham_row.append(Hamiltonian)
         Ham_matrix.append(Ham_row)
     Hamiltonian = np.block(Ham_matrix)
+
+    return Hamiltonian
+
+
+def BasicSquareHamiltonian(t, p, q, k, period):
+    """The basic square lattice Hofstadter Hamiltonian.
+
+    The Hofstadter Hamiltonian for the square lattice with nearest-neighbor interactions.
+
+    .. note::
+
+        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+
+    Parameters
+    ----------
+    t: list
+        The list of hopping amplitudes in order of ascending NN.
+    p: int
+        The numerator of the flux density.
+    q: int
+        The denominator of the flux density.
+    k: ndarray
+        The momentum vector.
+    period: int
+        The factor by which to divide A_UC in the flux density.
+
+    Returns
+    -------
+    Hamiltonian: ndarray
+        The Hofstadter Hamiltonian matrix of dimension :math:`q \times q`.
+    """
+
+    Hamiltonian = np.zeros((q, q), dtype=np.complex128)
+    nphi = p / q
+
+    def A(t_val, nphi_val, m_val, k_val):
+        value = -t_val*np.exp(-1j*2*np.pi*period*nphi_val*m_val + 1j*k_val[0])
+        return value
+
+    def B_plus(t_val, k_val):
+        value = -t_val*np.exp(1j*k_val[1])
+        return value
+
+    diag_array = np.array([A(t[0], nphi, m, k) for m in range(q)])
+    Hamiltonian += np.roll(np.diag(diag_array), 0, axis=1)
+
+    upper_diag_array = np.array([B_plus(t[0], k) for _ in range(q)])
+    Hamiltonian += np.roll(np.diag(upper_diag_array), 1, axis=1)
+
+    Hamiltonian = Hamiltonian + np.conj(Hamiltonian).T
+
+    return Hamiltonian
+
+
+def BasicTriangularHamiltonian(t, p, q, k, period):
+    """The basic triangular lattice Hofstadter Hamiltonian.
+
+    The Hofstadter Hamiltonian for the triangular lattice with nearest-neighbor interactions.
+
+    .. note::
+
+        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+
+    Parameters
+    ----------
+    t: list
+        The list of hopping amplitudes in order of ascending NN.
+    p: int
+        The numerator of the flux density.
+    q: int
+        The denominator of the flux density.
+    k: ndarray
+        The momentum vector.
+    period: int
+        The factor by which to divide A_UC in the flux density.
+
+    Returns
+    -------
+    Hamiltonian: ndarray
+        The Hofstadter Hamiltonian matrix of dimension :math:`q \times q`.
+    """
+
+    Hamiltonian = np.zeros((q, q), dtype=np.complex128)
+    nphi = p / q
+
+    def A(t_val, nphi_val, m_val, k_val):
+        value = -t_val*np.exp(-1j*2*np.pi*period*nphi_val*m_val + 1j*k_val[0])
+        return value
+
+    def B_plus(t_val, nphi_val, m_val, k_val):
+        value = (-t_val*np.exp(-1j*np.pi*period*nphi_val*(m_val + 1/2) + 1j*(0.5*k_val[0] + np.sqrt(3)*k_val[1]/2))
+                 -t_val*np.exp(+1j*np.pi*period*nphi_val*(m_val + 1/2) + 1j*(-0.5*k_val[0] + np.sqrt(3)*k_val[1]/2)))
+        return value
+
+    diag_array = np.array([A(t[0], nphi, m, k) for m in range(q)])
+    Hamiltonian += np.roll(np.diag(diag_array), 0, axis=1)
+
+    upper_diag_array = np.array([B_plus(t[0], nphi, m, k) for m in range(q)])
+    Hamiltonian += np.roll(np.diag(upper_diag_array), 1, axis=1)
+
+    Hamiltonian = Hamiltonian + np.conj(Hamiltonian).T
+
+    return Hamiltonian
+
+
+def BasicHoneycombHamiltonian(t, p, q, k, period):
+    """The basic honeycomb lattice Hofstadter Hamiltonian.
+
+    The Hofstadter Hamiltonian for the honeycomb lattice with nearest-neighbor interactions.
+
+    .. note::
+
+        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+
+    Parameters
+    ----------
+    t: list
+        The list of hopping amplitudes in order of ascending NN.
+    p: int
+        The numerator of the flux density.
+    q: int
+        The denominator of the flux density.
+    k: ndarray
+        The momentum vector.
+    period: int
+        The factor by which to divide A_UC in the flux density.
+
+    Returns
+    -------
+    Hamiltonian: ndarray
+        The Hofstadter Hamiltonian matrix of dimension :math:`2q \times 2q`.
+    """
+
+    def AB_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = (-t_val * np.exp(-1j*np.pi*period*nphi_val*(m_val + 1/6) + 1j*(+k_val[0]/2 + np.sqrt(3)*k_val[1]/6))
+                     -t_val * np.exp(+1j*np.pi*period*nphi_val*(m_val + 1/6) + 1j*(-k_val[0]/2 + np.sqrt(3)*k_val[1]/6)))
+            return value
+
+        def B_minus(t_val, k_val):
+            value = -t_val * np.exp(-1j*2*np.sqrt(3)*k_val[1]/6)
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        upper_diag_array2 = np.array([B_minus(t_val, k_val) for _ in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array2), 1, axis=0)
+
+        return ham
+
+    def BA_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = (-t_val * np.exp(-1j*np.pi*period*nphi_val*(m_val + 1/6) + 1j*(+k_val[0]/2 - np.sqrt(3)*k_val[1]/6))
+                     -t_val * np.exp(+1j*np.pi*period*nphi_val*(m_val + 1/6) + 1j*(-k_val[0]/2 - np.sqrt(3)*k_val[1]/6)))
+            return value
+
+        def B_plus(t_val, k_val):
+            value = -t_val * np.exp(+1j*2*np.sqrt(3)*k_val[1]/6)
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        upper_diag_array2 = np.array([B_plus(t_val, k_val) for _ in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array2), 1, axis=1)
+
+        return ham
+
+    AA_block = np.zeros((q, q))
+    AB_block = AB_block_func(t[0], p, q, k)
+    BA_block = BA_block_func(t[0], p, q, k)
+    BB_block = np.zeros((q, q))
+
+    upper = np.concatenate((AA_block, AB_block), axis=1)
+    lower = np.concatenate((BA_block, BB_block), axis=1)
+    Hamiltonian = np.concatenate((upper, lower), axis=0)
+
+    return Hamiltonian
+
+
+def BasicKagomeHamiltonian(t, p, q, k, period):
+    """The basic kagome lattice Hofstadter Hamiltonian.
+
+    The Hofstadter Hamiltonian for the kagome lattice with nearest-neighbor interactions.
+
+    .. note::
+
+        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+
+    Parameters
+    ----------
+    t: list
+        The list of hopping amplitudes in order of ascending NN.
+    p: int
+        The numerator of the flux density.
+    q: int
+        The denominator of the flux density.
+    k: ndarray
+        The momentum vector.
+    period: int
+        The factor by which to divide A_UC in the flux density.
+
+    Returns
+    -------
+    Hamiltonian: ndarray
+        The Hofstadter Hamiltonian matrix of dimension :math:`3q \times 3q`.
+    """
+
+    def AB_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = (-t_val*np.exp(-1j*np.pi*period*nphi_val*m_val + 1j*k_val[0]/2)
+                     -t_val*np.exp(+1j*np.pi*period*nphi_val*m_val - 1j*k_val[0]/2))
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        return ham
+
+    def AC_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(-1j*np.pi*period*nphi_val*0.5*(m_val + 1/4) + 1j*(k_val[0]/4 + np.sqrt(3)*k_val[1]/4))
+            return value
+
+        def B_minus(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(+1j*np.pi*period*nphi_val*0.5*(m_val - 1/4) - 1j*(k_val[0]/4 + np.sqrt(3)*k_val[1]/4))
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        upper_diag_array2 = np.array([B_minus(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array2), 1, axis=0)
+
+        return ham
+
+    def BA_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = (-t_val*np.exp(-1j*np.pi*period*nphi_val*m_val + 1j*k_val[0]/2)
+                     -t_val*np.exp(+1j*np.pi*period*nphi_val*m_val - 1j*k_val[0]/2))
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        return ham
+
+    def BC_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(+1j*np.pi*period*nphi_val*0.5*(m_val + 1/4) + 1j*(-k_val[0]/4+np.sqrt(3)*k_val[1]/4))
+            return value
+
+        def B_minus(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(-1j*np.pi*period*nphi_val*0.5*(m_val - 1/4) + 1j*(+k_val[0]/4-np.sqrt(3)*k_val[1]/4))
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        upper_diag_array2 = np.array([B_minus(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array2), 1, axis=0)
+
+        return ham
+
+    def CA_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(+1j*np.pi*period*nphi_val*0.5*(m_val + 1/4) - 1j*(k_val[0]/4+np.sqrt(3)*k_val[1]/4))
+            return value
+
+        def B_plus(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(-1j*np.pi*period*nphi_val*0.5*(m_val + 3/4) + 1j*(k_val[0]/4+np.sqrt(3)*k_val[1]/4))
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        upper_diag_array2 = np.array([B_plus(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array2), 1, axis=1)
+
+        return ham
+
+    def CB_block_func(t_val, p_val, q_val, k_val):
+        ham = np.zeros((q_val, q_val), dtype=np.complex128)
+        nphi = p_val / q_val
+
+        def A(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(-1j*np.pi*period*nphi_val*0.5*(m_val + 1/4) + 1j*(k_val[0]/4-np.sqrt(3)*k_val[1]/4))
+            return value
+
+        def B_plus(t_val, nphi_val, m_val, k_val):
+            value = -t_val*np.exp(+1j*np.pi*period*nphi_val*0.5*(m_val + 3/4) + 1j*(-k_val[0]/4+np.sqrt(3)*k_val[1]/4))
+            return value
+
+        upper_diag_array = np.array([A(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array), 0, axis=1)
+
+        upper_diag_array2 = np.array([B_plus(t_val, nphi, m, k_val) for m in range(q_val)])
+        ham += np.roll(np.diag(upper_diag_array2), 1, axis=1)
+
+        return ham
+
+    AA_block = np.zeros((q, q))
+    AB_block = AB_block_func(t[0], p, q, k)
+    AC_block = AC_block_func(t[0], p, q, k)
+    #
+    BA_block = BA_block_func(t[0], p, q, k)
+    BB_block = np.zeros((q, q))
+    BC_block = BC_block_func(t[0], p, q, k)
+    #
+    CA_block = CA_block_func(t[0], p, q, k)
+    CB_block = CB_block_func(t[0], p, q, k)
+    CC_block = np.zeros((q, q))
+
+    upper = np.concatenate((AA_block, AB_block, AC_block), axis=1)
+    middle = np.concatenate((BA_block, BB_block, BC_block), axis=1)
+    lower = np.concatenate((CA_block, CB_block, CC_block), axis=1)
+    Hamiltonian = np.concatenate((upper, middle, lower), axis=0)
 
     return Hamiltonian
 

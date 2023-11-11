@@ -11,7 +11,7 @@ def chern(pval, qval):
     .. math::
         r = qs_r + pt_r, \;\;\; |t_r|\leq\frac{q}{2}, \;\;\; s_r,t_r\in\mathbb{Z},
 
-    where :math:`r` denotes the r-th energy gap and :math:`t_r=\sum_{i=1}^r C_i` is the cumulative Chern number or Hall conductivity.
+    where :math:`r` denotes the r-th energy gap and :math:`t_r=\sum_{i=1}^r C_i` is the cumulative Chern number or Hall conductivity. :cite:`DiColandrea22`
 
     Parameters
     ----------

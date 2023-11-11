@@ -224,32 +224,41 @@ class Hofstadter:
             The Hofstadter Hamiltonian matrix of dimension (num_bands, num_bands).
         """
 
-        _, avec, abasisvec, _, _ = self.unit_cell()
+        if self.lat == "square" and len(self.t) == 1:
+            Hamiltonian = fm.BasicSquareHamiltonian(self.t, self.p, self.q, k_val, self.period)
+        elif self.lat == "triangular" and len(self.t) == 1:
+            Hamiltonian = fm.BasicTriangularHamiltonian(self.t, self.p, self.q, k_val, self.period)
+        elif self.lat == "honeycomb" and len(self.t) == 1:
+            Hamiltonian = fm.BasicHoneycombHamiltonian(self.t, self.p, self.q, k_val, self.period)
+        elif self.lat == "kagome" and len(self.t) == 1:
+            Hamiltonian = fm.BasicKagomeHamiltonian(self.t, self.p, self.q, k_val, self.period)
+        else:  # general case
+            _, avec, abasisvec, _, _ = self.unit_cell()
 
-        data0, bases = fm.nearest_neighbor_finder(avec, abasisvec, self.t, 0, 0, 0)
-        data = [data0]
+            data0, bases = fm.nearest_neighbor_finder(avec, abasisvec, self.t, 0, 0, 0)
+            data = [data0]
 
-        len_bases = len(bases)
-        if len_bases > 1:
-            for i, val in enumerate(bases[1:]):
-                data_set, _ = fm.nearest_neighbor_finder(avec, abasisvec, self.t, abasisvec[i+1][0], abasisvec[i+1][1], val)
-                data.append(data_set)
-        data = np.vstack(data)
+            len_bases = len(bases)
+            if len_bases > 1:
+                for i, val in enumerate(bases[1:]):
+                    data_set, _ = fm.nearest_neighbor_finder(avec, abasisvec, self.t, abasisvec[i+1][0], abasisvec[i+1][1], val)
+                    data.append(data_set)
+            data = np.vstack(data)
 
-        vec_group_matrix = np.zeros((len_bases, len_bases), dtype=object)
-        for i in range(len_bases):  # initial sublattice
-            mask_i = (data[:, 10] == i)
-            data_mask_i = data[mask_i, :]
-            for j in range(len_bases):  # final sublattice
-                mask_j = (data_mask_i[:, 11] == j)
-                data_mask_ij = data_mask_i[mask_j, :]
-                vec_group_list = fm.nearest_neighbor_sorter(data_mask_ij)
-                vec_group_matrix[i, j] = vec_group_list
+            vec_group_matrix = np.zeros((len_bases, len_bases), dtype=object)
+            for i in range(len_bases):  # initial sublattice
+                mask_i = (data[:, 10] == i)
+                data_mask_i = data[mask_i, :]
+                for j in range(len_bases):  # final sublattice
+                    mask_j = (data_mask_i[:, 11] == j)
+                    data_mask_ij = data_mask_i[mask_j, :]
+                    vec_group_list = fm.nearest_neighbor_sorter(data_mask_ij)
+                    vec_group_matrix[i, j] = vec_group_list
 
-        # compute A_UC in units of a (scaled by periodicity factor)
-        A_UC = np.linalg.norm(avec[1]) / self.period
+            # compute A_UC in units of a (scaled by periodicity factor)
+            A_UC = np.linalg.norm(avec[1]) / self.period
 
-        Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_matrix, k_val)
+            Hamiltonian = fm.Hamiltonian(self.t, self.p, self.q, A_UC, vec_group_matrix, k_val)
 
         return Hamiltonian
 
