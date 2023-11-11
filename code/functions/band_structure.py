@@ -31,7 +31,27 @@ def _principal(z):
 
 
 def U(var_num, _eigenvectors, _band, _idx_x, _idx_y, _group_size):
-    """Compute the link variable.
+    r"""Compute the link variable.
+
+    The normalized link variables are defined as
+
+    .. math::
+        \tilde{\mathcal{U}}_\gamma(\mathbf{k}_\alpha) = \frac{\det U_\gamma(\mathbf{k}_\alpha)}{|\det U_\gamma(\mathbf{k}_\alpha)|}, \;\;\; \gamma = \{1, 2\},
+
+    with link matrices
+
+    .. math::
+        U_\gamma(\mathbf{k}_\alpha) =
+        \begin{pmatrix}
+        \braket{u_1(\mathbf{k}_\alpha)|u_1(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})} & \dots & \braket{u_1(\mathbf{k}_\alpha)|u_M(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})} \\
+        \vdots & \ddots & \vdots \\
+         \braket{u_M(\mathbf{k}_\alpha)|u_1(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})} & \dots & \braket{u_M(\mathbf{k}_\alpha)|u_M(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})}
+        \end{pmatrix}.
+
+    Here, :math:`\mathbf{k}_\alpha` is the discretized momentum vector, :math:`\{\hat{\mathbf{e}}_1, \hat{\mathbf{e}}_2\}` are linearly independent unit vectors in the momentum grid, and :math:`\ket{u(\mathbf{k}_\alpha)}` is the eigenvector at momentum :math:`\mathbf{k}_\alpha`. The link variables are constructed for :math:`M` touching bands.
+
+    .. note::
+        Input eigenvectors are already normalized from :class:`numpy.linalg.eig`.
 
     Parameters
     ----------
@@ -82,25 +102,7 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
     .. math::
        \mathcal{B}_{12}(\mathbf{k}_\alpha) \equiv - \text{Im}\;\log\;(\tilde{\mathcal{U}}_1(\mathbf{k}_\alpha)\tilde{\mathcal{U}}_2(\mathbf{k}_\alpha+\hat{\mathbf{e}}_1)\tilde{\mathcal{U}}_1(\mathbf{k}_\alpha+\hat{\mathbf{e}}_2)^{-1}\tilde{\mathcal{U}}_2(\mathbf{k}_\alpha)^{-1}),
 
-    where the normalized link variables are defined as
-
-    .. math::
-        \tilde{\mathcal{U}}_\gamma(\mathbf{k}_\alpha) = \frac{\det U_\gamma(\mathbf{k}_\alpha)}{|\det U_\gamma(\mathbf{k}_\alpha)|}, \;\;\; \gamma = \{1, 2\},
-
-    with link matrices
-
-    .. math::
-        U_\gamma(\mathbf{k}_\alpha) =
-        \begin{pmatrix}
-        \braket{u_1(\mathbf{k}_\alpha)|u_1(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})} & \dots & \braket{u_1(\mathbf{k}_\alpha)|u_M(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})} \\
-        \vdots & \ddots & \vdots \\
-         \braket{u_M(\mathbf{k}_\alpha)|u_1(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})} & \dots & \braket{u_M(\mathbf{k}_\alpha)|u_M(\mathbf{k}_\alpha+\hat{\mathbf{e}_\gamma})}
-        \end{pmatrix}.
-
-    Here, :math:`\mathbf{k}_\alpha` is the discretized momentum vector, :math:`\{\hat{\mathbf{e}}_1, \hat{\mathbf{e}}_2\}` are linearly independent unit vectors in the momentum grid, and :math:`\ket{u(\mathbf{k}_\alpha)}` is the eigenvector at momentum :math:`\mathbf{k}_\alpha`. The link variables are constructed for :math:`M` touching bands. The Berry curvature at a point :math:`\mathbf{k}` can then be computed by taking the limit of small plaquette size.
-
-    .. note::
-        Input eigenvectors are already normalized from :class:`numpy.linalg.eig`.
+    where :math:`\tilde{\mathcal{U}}` are the normalized link variables. The Berry curvature at a point :math:`\mathbf{k}` can then be computed by taking the limit of small plaquette size.
 
     .. note::
         The Berry curvature is defined within the principal branch of the logarithm. For example, the corresponding log sum formula for a single band would be
@@ -170,6 +172,18 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
 def wilson_loop(_eigenvectors, _band, _idx_x, _group_size=1):
     r"""
     Compute the Wilson loop.
+
+    The Wilson loop term is defined as the product of Berry phases around a cycle of the Brillouin zone, such that
+
+    .. math::
+        W = -\Im \log \prod_{\alpha} \tilde{\mathcal{U}}_2(\mathbf{k}_\alpha),
+
+    where :math:`\tilde{\mathcal{U}}_2` is the normalized link variable, :math:`\mathbf{k}_\alpha` is the momentum vector, and the product is taken on a Brillouin zone cycle in the :math:`\gamma=2` direction.
+
+    Returns
+    -------
+    Wilson_loop: complex
+        The Wilson loop term.
     """
 
     numb_ky = np.shape(_eigenvectors)[3]

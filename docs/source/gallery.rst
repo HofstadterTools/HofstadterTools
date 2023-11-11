@@ -1,6 +1,9 @@
 Gallery
 =======
 
+Square Lattice
+--------------
+
 * The traditional Hofstadter butterfly with nearest-neighbor hoppings on the square lattice. The red-blue color scheme is chosen to mimic Fig.1(a,b) from :cite:`DiColandrea22`.
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat square -col plane -pal red-blue -save -wan``
@@ -25,6 +28,9 @@ Gallery
 	:align: center
 	:width: 70%
 
+Triangular Lattice
+------------------
+
 * The Hofstadter model with nearest-neighbor hoppings on the triangular lattice. Note that in this case, we keep the default definition of the flux density defined with respect to the lattice unit cell area. In several works, e.g. :cite:`Stegmaier22`, the flux density is defined with respect to the minimal hopping plaquette area, which reveals the entire spectrum.
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat triangular -col plane -pal jet -save``
@@ -33,6 +39,9 @@ Gallery
 	:align: center
 	:width: 70%
 
+Bravais Lattice
+---------------
+
 * The Hofstadter model on a Bravais lattice with an obliqueness angle of 67/180 in units of pi, in between the square and triangular lattices. The hopping amplitudes are similar (but not identical) to those used in Fig.4(c) of :cite:`Yilmaz17`.
 
 ``python butterfly.py -mod Hofstadter -q 199 -lat bravais -theta 67 180 -t 0.5 0.2 -save``
@@ -40,6 +49,9 @@ Gallery
 .. image:: ../../figs/butterfly_bravais_q_199_t_0.5_0.2_alpha_1_theta_67_180.png
 	:align: center
 	:width: 70%
+
+Honeycomb Lattice
+-----------------
 
 * The Hofstadter model with nearest-neighbor hoppings on a honeycomb lattice. The color scheme is chosen to mimic the one made famous by Avron in his original paper :cite:`Avron03`. This butterfly is also plotted in Fig.5 of :cite:`Agazzi14`. For aesthetics, we plot the spectrum in ``art`` mode and increase the dpi to 600.
 
@@ -68,6 +80,9 @@ Gallery
 .. image:: ../../figs/butterfly_honeycomb_q_199_t_0_0_0_0_1_alpha_1_theta_1_3_period_2.png
 	:align: center
 	:width: 70%
+
+Kagome Lattice
+--------------
 
 * The Hofstadter model with nearest-neighbor hopping on the kagome lattice. In this case, the minimal plaquette area enclosed by particle hopping is 8 times smaller than the unit cell area, and so we append ``--periodicity 8`` to resolve the entire butterfly spectrum and fix any aperiodicity. This butterfly is also plotted in Fig.3 of :cite:`Jing-Min09` and Fig.2(a) of :cite:`Liang18`.
 

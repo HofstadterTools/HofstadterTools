@@ -26,13 +26,15 @@ def parse_input_arguments(program, description):
     models = ["Hofstadter"]
     parser.add_argument("-mod", "--model", type=str, default="Hofstadter", choices=models, help="name of model")
     parser.add_argument("-t", nargs='+', type=float, default=[1], help="list of hopping amplitudes in ascending order [1NN, 2NN, 3NN, ...]")
-    lattices = ["square", "triangular", "bravais", "honeycomb", "kagome"]
+    lattices = ["square", "triangular", "bravais", "honeycomb", "kagome", "custom"]
     parser.add_argument("-lat", "--lattice", type=str, default="bravais", choices=lattices, help="name of lattice")
     parser.add_argument("-alpha", type=float, default=1, help="length of a2 Bravais vector relative to a1 (Bravais lattice anisotropy)")
     parser.add_argument("-theta", nargs=2, type=float, default=[1, 3], help="angle between Bravais basis vectors as a fraction of pi (Bravais lattice obliqueness)")
     parser.add_argument("-input", default=False, action='store_true', help="read hopping parameters from hopping_input.txt file")
-    parser.add_argument("-save", default=False, action='store_true', help="save the output data, logs, and plots")
+    parser.add_argument("-save", default=False, action='store_true', help="save the output data and plots")
+    parser.add_argument("-log", default=False, action='store_true', help="save the output logs")
     parser.add_argument("-plt_lat", "--plot_lattice", default=False, action='store_true', help="plot the lattice")
+    parser.add_argument("-period", "--periodicity", type=int, default=1, help="factor by which to divide A_UC in the flux density")
 
     if program == "band_structure":
         parser.add_argument("-samp", type=int, default=101, help="number of samples in linear direction")
@@ -48,7 +50,6 @@ def parse_input_arguments(program, description):
         palettes = ["avron", "jet", "red-blue"]
         parser.add_argument("-pal", "--palette", type=str, default="avron", choices=palettes, help="color palette")
         parser.add_argument("-wan", "--wannier", default=False, action='store_true', help="plot the Wannier diagram")
-        parser.add_argument("-period", "--periodicity", type=int, default=1, help="factor by which to divide A_UC in the flux density")
         parser.add_argument("-art", default=False, action='store_true', help="remove all plot axes and labels")
         parser.add_argument("-dpi", type=int, default=300, help="dots-per-inch resolution of the saved output image")
 

@@ -7,6 +7,30 @@ from copy import deepcopy
 
 
 def nearest_neighbor_finder(avec, abasisvec, t_list, x_init, y_init, basis_init):
+    """Finds the relevant nearest neighbors for a given lattice.
+
+    Parameters
+    ----------
+    avec: ndarray
+        The lattice vectors.
+    abasisvec: ndarray
+        The basis vectors.
+    t_list: list
+        The list of hopping amplitudes in order of ascending NN.
+    x_init: float
+        The initial x-coordinate.
+    y_init: float
+        The initial y-coordinate.
+    basis_init: int
+        The initial sublattice index.
+
+    Returns
+    -------
+    data: ndarray
+        The array of relevant nearest neighbors.
+    bases: list
+        The list of unique sublattice indices.
+    """
 
     # --- Create list of NN to consider from t_list
     numb_list = []
@@ -72,6 +96,18 @@ def nearest_neighbor_finder(avec, abasisvec, t_list, x_init, y_init, basis_init)
 
 
 def nearest_neighbor_sorter(data_array):
+    """Sorts the relevant nearest neighbors array.
+
+    Parameters
+    ----------
+    data_array: ndarray
+        The array of relevant nearest neighbors.
+
+    Returns
+    -------
+    grouped_paths: ndarray
+        The array of relevant nearest neighbors grouped by dJ.
+    """
 
     # count the number of dJ
     dJ_list = []
@@ -95,6 +131,33 @@ def nearest_neighbor_sorter(data_array):
 
 
 def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
+    r"""The Peierls factor.
+
+    The Peierls factor in Landau gauge :math:`\mathbf{A}=-By\hat{\mathbf{e}}_x` is given by
+
+    .. math::
+        e^{\mathrm{i}\theta_{ij}} = \exp\left(-\frac{2\pi\mathrm{i}n_\phi}{A} \Delta X (Y_i + \Delta Y /2) \right),
+
+    where :math:`\theta_{ij}` is the Peierls phase from site :math:`i=(X_i, Y_i)`. to :math:`j=(X_j, Y_j)`, :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, :math:`n_\phi` is the flux density, and :math:`A` is the area.
+
+    Parameters
+    ----------
+    nphi: float
+        The flux density.
+    dx: float
+        The change in x-coordinates.
+    y_cart: int
+        The initial y-coordinate in units of a2[1].
+    dy_cart: int
+        The change in y-coordinates in units of a2[1].
+    A_UC: float
+        The unit cell area in units of a2 (possibly scaled by a periodicity factor).
+
+    Returns
+    -------
+    factor: complex
+        The Peierls factor.
+    """
 
     phase = - 2 * np.pi * nphi * dx * (y_cart + dy_cart/2) / A_UC
     factor = np.exp(1j * phase)
@@ -103,6 +166,39 @@ def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
 
 
 def diag_func(t_val, p_val, q_val, A_UC_val, vec_group, k_val, dJ_val, J_idx_val):
+    r"""The diagonal function.
+
+    The function that populates the diagonals of the Hamiltonian matrix is given by
+
+    .. math::
+        \Lambda_{l, n} = - \sum_{\langle ij \rangle_{n}^l} t_n e^{\mathrm{i}\theta_{ij}} e^{\mathrm{i}\mathbf{k}\cdot\mathbf{r}_{ij}},
+
+    where :math:`\langle ij \rangle^l_n` denotes the subset of n-th nearest neighbors with a net :math:`y` unit cell displacement of :math:`l`, :math:`\theta_{ij}` is the Peierls phase, :math:`\mathbf{k}` is the momentum vector, and :math:`\mathbf{r}` is the displacement vector.
+
+    Parameters
+    ----------
+    t_val: list
+        The list of hopping amplitudes in order of ascending NN.
+    p_val: int
+        The numerator of the flux density.
+    q_val: int
+        The denominator of the flux density.
+    A_UC_val: float
+        The unit cell area in units of a2 (possibly scaled by a periodicity factor).
+    vec_group: ndarray
+        The array of relevant nearest neighbors grouped by dJ.
+    k_val: ndarray
+        The momentum vector.
+    dJ_val: int
+        The y-displacement in terms of unit cells.
+    J_idx_val: int
+        The y-position in terms of unit cells.
+
+    Returns
+    -------
+    term: complex
+        The diagonal term.
+    """
 
     nphi = p_val/q_val
     term = 0
@@ -117,6 +213,53 @@ def diag_func(t_val, p_val, q_val, A_UC_val, vec_group, k_val, dJ_val, J_idx_val
 
 
 def Hamiltonian(t, p, q, A_UC, vec_group_matrix, k):
+    r"""The generalized Hofstadter Hamiltonian.
+
+    The generalized Hofstadter Hamiltonian is given by the :math:`N_b\times N_b` block matrix
+
+    .. math::
+        H = \begin{pmatrix}
+        H_{00} & H_{01} & \dots \\
+        H_{10} & H_{11} & \dots \\
+        \vdots & \vdots & \ddots
+        \end{pmatrix},
+
+    where :math:`N_b` is the number of sites in the basis. Each submatrix :math:`h=H_{\beta\gamma}` has dimensions :math:`q\times q` and represents the Harper equation for hoppings from the :math:`\beta` to the :math:`\gamma` sublatttice, such that
+
+    .. math::
+        h = \begin{pmatrix}
+        \Lambda_{0,0} & \Lambda_{0,1} & \dots \\
+        \Lambda_{1,0} & \Lambda_{1,1} & \dots \\
+        \vdots & \vdots & \ddots
+        \end{pmatrix} +
+        \begin{pmatrix}
+        \ddots & \Lambda_{0, q-1}^* & \Lambda_{0, q}^* \\
+        \Lambda_{q-1, 0} & \ddots & \Lambda_{1, q}^* \\
+        \Lambda_{q, 0} & \Lambda_{q, 1} & \ddots
+        \end{pmatrix},
+
+    where :math:`\Lambda_{l, n}` is the diagonal function. Note that we only populate the first matrix with unique hoppings in the positive J direction. If there are hoppings that are related by Hermitian conjugation in the same Harper equation, then the lower triangular matrix with simply be the conjugate of the upper triangular matrix. The second matrix represents rolled over boundary terms.
+
+    Parameters
+    ----------
+    t: list
+        The list of hopping amplitudes in order of ascending NN.
+    p: int
+        The numerator of the flux density.
+    q: int
+        The denominator of the flux density.
+    A_UC: float
+        The unit cell area in units of a2 (possibly scaled by a periodicity factor).
+    vec_group_matrix: ndarray
+        The matrix of grouped nearest neighbor arrays.
+    k: ndarray
+        The momentum vector.
+
+    Returns
+    -------
+    Hamiltonian: ndarray
+        The Hofstadter Hamiltonian matrix of dimension :math:`N_b q \times N_b q`.
+    """
 
     I = np.shape(vec_group_matrix)[0]
     J = np.shape(vec_group_matrix)[1]

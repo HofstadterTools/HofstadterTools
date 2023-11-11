@@ -10,25 +10,40 @@ import functions.arguments as fa
 from models.hofstadter import Hofstadter
 from configuration.band_structure import *
 
-# plt.rc('text', usetex=True)
-# plt.rc('text.latex', preamble=r'\usepackage{amsmath}')
 
 if __name__ == '__main__':
 
-    # input arguments
+    # parse input arguments
     args = fa.parse_input_arguments("band_structure", "Plot the Hofstadter Band Structure.")
-    t = args['t']
+    # general arguments
+    mod = args['model']
+    t = fa.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
-    if args['model'] == "Hofstadter":
-        model = Hofstadter(args['nphi'][0], args['nphi'][1], t=t, lat=lat)
+    alpha = args['alpha']
+    theta = args['theta']
+    save = args['save']
+    log = args['log']
+    plt_lat = args["plot_lattice"]
+    period = args['periodicity']
+    # band_structure arguments
+    num_samples = args['samp']
+    wilson = args['wilson']
+    disp = args['display']
+    nphi = args['nphi']
+    band_gap_threshold = args['bgt']
+
+    # initialize logger
+    if log:
+        sys.stdout = sys.stderr = fu.Logger("band_structure", args)
+
+    # construct model
+    if mod == "Hofstadter":
+        model = Hofstadter(nphi[0], nphi[1], t=t, lat=lat, alpha=alpha, theta=theta, period=period)
     else:
         raise ValueError("model is not defined")
-    num_samples = args['samp']
-    band_gap_threshold = args['bgt']
-    wilson = args['wilson']
 
     # define unit cell
-    num_bands, _, _, aMUCvec, bMUCvec, sym_points = model.unit_cell()
+    num_bands, _, _, bMUCvec, sym_points = model.unit_cell()
 
     # construct bands
     eigenvalues = np.zeros((num_bands, num_samples, num_samples))  # real
@@ -46,7 +61,7 @@ if __name__ == '__main__':
             for idx_y in range(num_samples):
                 frac_ky = idx_y / (num_samples-1)
                 k = np.matmul(np.array([frac_kx, frac_ky]), bMUCvec)
-                ham, _ = model.hamiltonian(k)
+                ham = model.hamiltonian(k)
                 eigvals, eigvecs = np.linalg.eigh(ham)
                 idx = np.argsort(eigvals)
                 eigenvalues[band, idx_x, idx_y] = eigvals[idx[band]]
@@ -55,9 +70,9 @@ if __name__ == '__main__':
                     frac_ky_dky = (frac_ky + 1/(1000*(num_samples-1))) % 1
                     k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bMUCvec)
                     k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bMUCvec)
-                    ham_dkx, _ = model.hamiltonian(k_dkx)
+                    ham_dkx = model.hamiltonian(k_dkx)
                     eigvals_dkx, eigvecs_dkx = np.linalg.eig(ham_dkx)
-                    ham_dky, _ = model.hamiltonian(k_dky)
+                    ham_dky = model.hamiltonian(k_dky)
                     eigvals_dky, eigvecs_dky = np.linalg.eig(ham_dky)
                     idx_dkx = np.argsort(eigvals_dkx)
                     idx_dky = np.argsort(eigvals_dky)
@@ -131,7 +146,7 @@ if __name__ == '__main__':
     band_width = np.zeros(num_bands)
     std_B_norm = np.zeros(num_bands)
     chern_numbers, chern_numbers_2 = np.zeros((2, num_bands))
-    av_gxx, std_gxx, av_gxy, std_gxy = np.zeros((4, num_bands))
+    std_g_norm, av_gxx, std_gxx, av_gxy, std_gxy = np.zeros((5, num_bands))
     av_TISM, av_DISM = np.zeros((2, num_bands))
     for band_idx, band in enumerate(np.arange(num_bands)[::-1]):
         band_width[band] = np.max(eigenvalues[band]) - np.min(eigenvalues[band])
@@ -139,6 +154,7 @@ if __name__ == '__main__':
         chern_numbers[band] = np.sum(berry_fluxes[band, :, :]) / (2 * np.pi)
         if any(geometry_columns):
             chern_numbers_2[band] = np.sum(berry_fluxes_2[band, :, :]) * Dkx * Dky / (2 * np.pi)
+            std_g_norm[band] = np.std(fs_metric[band, :, :]) / np.abs(np.average(fs_metric[band, :, :]))
             av_gxx[band] = np.mean(fs_metric[band, :, :, 0, 0])
             std_gxx[band] = np.std(fs_metric[band, :, :, 0, 0])
             av_gxy[band] = np.mean(fs_metric[band, :, :, 0, 1])
@@ -148,15 +164,15 @@ if __name__ == '__main__':
 
     # table
     headers = ["band", "group", "isolated", "width", "gap", "gap/width", "std_B/|av_B|", "C",
-               "C (geom_tensor)", "av_gxx", "std_gxx", "av_gxy", "std_gxy", "<T>", "<D>"]
+               "C (geom_tensor)", "std_g/|av_g|", "av_gxx", "std_gxx", "av_gxy", "std_gxy", "<T>", "<D>"]
     bools = [show_band, show_group, show_isolated, show_width, show_gap, show_gap_width, show_std_B_norm, show_C,
-             show_C_geom_tensor, show_av_gxx, show_std_gxx, show_av_gxy, show_std_gxy, show_T, show_D]
+             show_C_geom_tensor, show_std_g_norm, show_av_gxx, show_std_gxx, show_av_gxy, show_std_gxy, show_T, show_D]
     table = PrettyTable()
     name_list = []
     table.field_names = [j for i, j in enumerate(headers) if bools[i]]
     for band in np.arange(num_bands)[::-1]:
         data = [band, band_group[band], isolated[band], band_width[band], band_gap[band], band_gap[band] / band_width[band],
-                std_B_norm[band], round(chern_numbers[band]), chern_numbers_2[band],
+                std_B_norm[band], round(chern_numbers[band]), chern_numbers_2[band], std_g_norm[band],
                 av_gxx[band], std_gxx[band], av_gxy[band], std_gxy[band], av_TISM[band], av_DISM[band]]
         table.add_row([j for i, j in enumerate(data) if bools[i]])
     print(table)
@@ -209,7 +225,7 @@ if __name__ == '__main__':
             for j in range(points_per_path):
                 k = sym_points[i] + (sym_points[(i+1) % num_paths] - sym_points[i]) * float(j) / float(points_per_path - 1)
                 k = np.matmul(k, bMUCvec)
-                ham, _ = model.hamiltonian(k)
+                ham = model.hamiltonian(k)
                 eigvals = np.linalg.eigvals(ham)
                 idx = np.argsort(eigvals)
                 for band in range(num_bands):

@@ -4,6 +4,29 @@ from fractions import Fraction
 
 
 def chern(pval, qval):
+    r"""Compute Chern numbers using the Diophantine equation.
+
+    For a rational flux, the energy gaps in the Hofstadter spectrum are characterized by the integers s and t, which are related by the following Diophantine equation,
+
+    .. math::
+        r = qs_r + pt_r, \;\;\; |t_r|\leq\frac{q}{2}, \;\;\; s_r,t_r\in\mathbb{Z},
+
+    where :math:`r` denotes the r-th energy gap and :math:`t_r=\sum_{i=1}^r C_i` is the cumulative Chern number or Hall conductivity.
+
+    Parameters
+    ----------
+    pval: int
+        The numerator of the flux density.
+    qval: int
+        The denominator of the flux density.
+
+    Returns
+    -------
+    Chern_list: list
+        The list of Chern numbers for each band (length M).
+    tr_list: list
+        The list of cumulative Chern numbers for each band gap (length M-1).
+    """
 
     nphi = Fraction(pval, qval)
     p = nphi.numerator

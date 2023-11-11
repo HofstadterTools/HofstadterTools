@@ -7,19 +7,30 @@ import os
 from matplotlib.ticker import MaxNLocator
 from copy import deepcopy
 import matplotlib.colors as mcolors
+import functions.utility as fu
 
 
-def butterfly(model, args, nphi_list, E_list, E_list_orig, chern_list, matrix, nphi_DOS_list, DOS_list, gaps_list, tr_DOS_list):
+def butterfly(model, args, data):
+    """Plot the Hofstadter butterfly.
+
+    Parameters
+    ----------
+    model: Hofstadter.hamiltonian
+        The Hofstadter Hamiltonian class attribute.
+    args: dict
+        The arguments parsed to the program.
+    data: ndarray
+        The data array.
+    """
 
     # read input arguments
-    if args['input']:
-        t = fa.read_t_from_file()
-    else:
-        t = args['t']
+    mod = args['model']
+    t = fa.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
     save = args['save']
+    log = args['log']
     plt_lat = args["plot_lattice"]
     q = args['q']
     color = args['color']
@@ -28,6 +39,17 @@ def butterfly(model, args, nphi_list, E_list, E_list_orig, chern_list, matrix, n
     period = args['periodicity']
     art = args['art']
     dpi = args['dpi']
+
+    # read data entries
+    nphi_list = data['nphi_list']
+    E_list = data['E_list']
+    E_list_orig = data['E_list_orig']
+    chern_list = data['chern_list']
+    matrix = data['matrix']
+    nphi_DOS_list = data['nphi_DOS_list']
+    DOS_list = data['DOS_list']
+    gaps_list = data['gaps_list']
+    tr_DOS_list = data['tr_DOS_list']
 
     # construct figure
     fig = plt.figure()
@@ -124,18 +146,12 @@ def butterfly(model, args, nphi_list, E_list, E_list_orig, chern_list, matrix, n
             ax2.axis('off')
 
     if save:
-        t_str = "t_"+'_'.join([f"{i:g}" for i in t])+"_"
-        brav_str = f"alpha_{alpha:g}_theta_{theta[0]:g}_{theta[1]:g}_" if lat not in ["square", "triangular"] else ""
-        col_str = f"col_{color}_{pal}_" if color else ""
-        per_str = f"period_{period:g}_" if period != 1 else ""
-        art_str = "art_" if art else ""
-        dpi_str = f"dpi_{dpi:g}" if dpi != 300 else ""
-        # create file name
-        file_name = f"{lat}_q_{q:g}_{t_str}{brav_str}{col_str}{per_str}{art_str}{dpi_str}.png".replace("_.", ".")
+        filename = fu.butterfly_filename(args)
         dir = "../figs/" if os.path.isdir('../figs') else ""
-        fig.savefig(dir+f"butterfly_{file_name}", bbox_inches='tight', dpi=dpi, transparent=transparent)
+        fig.savefig(dir+filename+".png", bbox_inches='tight', dpi=dpi, transparent=transparent)
         if wan:
-            fig2.savefig(dir + f"wannier_{file_name}", bbox_inches='tight', dpi=dpi, transparent=transparent)
+            fig2.savefig(dir+filename.replace("butterfly", "wannier")+".png",
+                         bbox_inches='tight', dpi=dpi, transparent=transparent)
 
     if plt_lat:
         model.plot_lattice()

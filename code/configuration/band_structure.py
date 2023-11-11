@@ -10,12 +10,13 @@ show_width = True
 show_gap = True
 show_gap_width = True
 
-# band topology
+# band topology properties
 show_std_B_norm = True
 show_C = True
 
 # quantum geometry tensor properties
 show_C_geom_tensor = False
+show_std_g_norm = False
 show_av_gxx = False
 show_std_gxx = False
 show_av_gxy = False
