@@ -171,7 +171,7 @@ def diag_func(t_val, p_val, q_val, A_UC_val, vec_group, k_val, dJ_val, J_idx_val
     The function that populates the diagonals of the Hamiltonian matrix is given by
 
     .. math::
-        \Lambda_{l, n} = - \sum_{\langle ij \rangle_{n}^l} t_n e^{\mathrm{i}\theta_{ij}} e^{\mathrm{i}\mathbf{k}\cdot\mathbf{r}_{ij}},
+        \Lambda_{l, n} = - \sum_n \sum_{\langle ij \rangle_{n}^l} t_n e^{\mathrm{i}\theta_{ij}} e^{\mathrm{i}\mathbf{k}\cdot\mathbf{r}},
 
     where :math:`\langle ij \rangle^l_n` denotes the subset of n-th nearest neighbors with a net :math:`y` unit cell displacement of :math:`l`, :math:`\theta_{ij}` is the Peierls phase, :math:`\mathbf{k}` is the momentum vector, and :math:`\mathbf{r}` is the displacement vector.
 

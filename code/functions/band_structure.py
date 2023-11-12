@@ -113,12 +113,12 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
 
     **Method 2:**
 
-    The Berry curvature around a plaquette is computed from the quantum metric :cite:`Parameswaran13` (example applications in :cite:`Claassen15`), such that
+    The Berry curvature around a plaquette is computed from the quantum geometric tensor :cite:`Parameswaran13` (example applications in :cite:`Claassen15`), such that
 
     .. math::
        \mathcal{B}_{12}(\mathbf{k}_\alpha) = - 2 \text{Im}[\mathcal{R}_{12}(\mathbf{k}_\alpha)],
 
-    where the quantum metric tensor is defined as
+    where the quantum geometric tensor is defined as
 
     .. math::
        \mathcal{R}_{12}(\mathbf{k}_\alpha) = \braket{u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_1)|u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_2)} - \braket{u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_1)|u(\mathbf{k}_\alpha)} \braket{u(\mathbf{k}_\alpha)|u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_2)}.

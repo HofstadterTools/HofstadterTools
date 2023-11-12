@@ -13,7 +13,7 @@ class Hofstadter:
     The Hamiltonian for the Hofstadter model is given as
 
     .. math::
-        H = - \sum_{\braket{ij}_n} t_n e^{i \theta_{ij}} c_i^\dagger c_j + \mathrm{H.c.},
+        H = - \sum_n \sum_{\braket{ij}_n} t_n e^{i \theta_{ij}} c_i^\dagger c_j + \mathrm{H.c.},
 
     where :math:`\braket{ij}_n` denotes nth nearest neighbors on some regular Euclidean lattice in the xy-plane, :math:`t_n` are the corresponding hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the particle (creation)annihilation operators.
     """
