@@ -135,5 +135,6 @@ dmypy.json
 # custom
 **/*.npy
 **/*.png
+!docs/source/images/**/*.png
 **/*.log
 code/test/*
