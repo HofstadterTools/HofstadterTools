@@ -36,6 +36,7 @@ def parse_input_arguments(program, description):
     parser.add_argument("-plt_lat", "--plot_lattice", default=False, action='store_true', help="plot the lattice")
     parser.add_argument("-period", "--periodicity", type=int, default=1, help="factor by which to divide A_UC in the flux density")
     parser.add_argument("-dpi", type=int, default=300, help="dots-per-inch resolution of the saved output image")
+    parser.add_argument("-ps", "--point_size", type=float, default=1, help="scale factor by which to scale the default point size")
 
     if program == "band_structure":
         parser.add_argument("-samp", type=int, default=101, help="number of samples in linear direction")

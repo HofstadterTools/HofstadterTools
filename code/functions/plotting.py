@@ -8,6 +8,7 @@ from matplotlib.ticker import MaxNLocator
 from copy import deepcopy
 import matplotlib.colors as mcolors
 from mpl_toolkits.mplot3d import axes3d
+from matplotlib import rcParams
 import functions.utility as fu
 
 
@@ -36,6 +37,7 @@ def band_structure(model, args, data):
     plt_lat = args["plot_lattice"]
     period = args['periodicity']
     dpi = args['dpi']
+    ps = args['point_size']
     # band_structure arguments
     samp = args['samp']
     wil = args['wilson']
@@ -84,7 +86,7 @@ def band_structure(model, args, data):
             ax2.set_title(f"$n_\phi = {args['nphi'][0]}/{args['nphi'][1]}$")
             idx_x = np.linspace(0, samp - 1, samp, dtype=int)
             for i in range(num_bands):
-                ax2.scatter(idx_x, wilson_loops[i])
+                ax2.scatter(idx_x, wilson_loops[i], s=ps*rcParams['lines.markersize']**2)
             ax2.set_xlabel('$k_1/|\mathbf{b}_1|$')
             ax2.set_ylabel('$\prod \\theta_\\mathrm{B}$')
             ax2.xaxis.set_major_formatter(plt.FuncFormatter(normalize))
@@ -156,6 +158,7 @@ def butterfly(model, args, data):
     log = args['log']
     plt_lat = args["plot_lattice"]
     dpi = args['dpi']
+    ps = args['point_size']
     # butterfly arguments
     q = args['q']
     col = args['color']
@@ -205,7 +208,7 @@ def butterfly(model, args, data):
             colors = np.vstack((colors1, colors2, colors3))
             cmap = mcolors.LinearSegmentedColormap.from_list('avron', colors, 21)
     if col == "point":
-        sc = ax.scatter(nphi_list, E_list, c=chern_list, cmap=cmap, s=1, marker='.', vmin=-10, vmax=10)
+        sc = ax.scatter(nphi_list, E_list, c=chern_list, cmap=cmap, s=ps*7*(199/q), marker='.', vmin=-10, vmax=10, linewidths=0)
         if not art:
             cbar = plt.colorbar(sc, extend='both')
             cbar.set_label("$C$")
@@ -227,7 +230,7 @@ def butterfly(model, args, data):
     else:
         nphi_list = list(np.concatenate(nphi_list).ravel())
         E_list = list(np.concatenate(E_list).ravel())
-        ax.scatter(nphi_list, E_list, s=1, marker='.')
+        ax.scatter(nphi_list, E_list, s=ps*7*(199/q), marker='.', linewidths=0)
 
     if not art:
         ax.set_ylabel('$E$')
@@ -253,7 +256,7 @@ def butterfly(model, args, data):
         gaps_list = list(np.concatenate(gaps_list).ravel())
 
         if not col:
-            ax2.scatter(nphi_DOS_list, DOS_list, s=[5 * i for i in gaps_list], c='r', linewidths=0)
+            ax2.scatter(nphi_DOS_list, DOS_list, s=[5*i for i in gaps_list], c='r', linewidths=0)
         else:
             tr_DOS_list = list(np.concatenate(tr_DOS_list).ravel())
             sc2 = ax2.scatter(nphi_DOS_list, DOS_list, s=[10 * i for i in gaps_list], c=tr_DOS_list, cmap=cmap,

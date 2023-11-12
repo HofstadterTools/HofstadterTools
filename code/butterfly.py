@@ -10,6 +10,7 @@ from copy import deepcopy
 import matplotlib.colors as mcolors
 import os
 import sys
+import warnings
 # --- internal imports
 import functions.arguments as fa
 import functions.butterfly as fb
@@ -32,13 +33,14 @@ if __name__ == '__main__':
     log = args['log']
     plt_lat = args["plot_lattice"]
     period = args['periodicity']
+    dpi = args['dpi']
+    ps = args['point_size']
     # butterfly arguments
     q = args['q']
     col = args['color']
     pal = args['palette']
     wan = args['wannier']
     art = args['art']
-    dpi = args['dpi']
 
     # initialize logger
     if log:
@@ -80,7 +82,7 @@ if __name__ == '__main__':
         # color data lists
         if col:
             cherns, trs = fb.chern(p, q)
-            if round(M/q) == 2:
+            if round(M/q) == 2 and len(t) == 1:  # NN honeycomb
                 cherns_double = cherns + [i for i in cherns[::-1]]
                 data['chern_list'].append(cherns_double)
                 trs_double = trs + [-i for i in trs[::-1]]
@@ -88,17 +90,23 @@ if __name__ == '__main__':
                 if wan:
                     trs_double_wan = trs[1:] + [-i for i in trs[::-1]][1:]
                     data['tr_DOS_list'].append(trs_double_wan[:-1])
-            else:
+            elif round(M/q) == 1:
                 data['chern_list'].append(cherns)
                 data['tr_list'].append(trs)
                 if wan:
                     data['tr_DOS_list'].append(trs[1:-1])
+            else:
+                warnings.warn("Color and wannier are only implemented for square/triangular/bravais/[honeycomb+1NN] models. Continuing without color and wannier...")
+                args['color'] = False
+                col = args['color']
+                args['wannier'] = False
+                wan = args['wannier']
 
     # color plane data matrix
     if col == "plane":
         data['E_list_orig'] = deepcopy(data['E_list'])
 
-        if round(M/q) == 2:
+        if round(M/q) == 2 and len(t) == 1:  # NN honeycomb
             half_len = int(np.shape(data['E_list'])[1]/2)
             for i, val in enumerate(data['E_list']):
                 data['E_list'][i] = val[:half_len]  # consider only lower half
@@ -117,7 +125,7 @@ if __name__ == '__main__':
                         data['matrix'][i][j] = data['tr_list'][i][k]  # assign the corresponding tr of that E_list value
                         break
 
-        if round(M/q) == 2:
+        if round(M/q) == 2 and len(t) == 1:  # NN honeycomb
             data['matrix'] = np.concatenate((data['matrix'], -data['matrix'][:, ::-1]), axis=1)  # double the spectrum
 
     # save data

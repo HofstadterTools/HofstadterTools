@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 from prettytable import PrettyTable
 from tqdm import tqdm
+import warnings
 # --- internal imports
 import functions.band_structure as fbs
 import functions.arguments as fa
@@ -27,6 +28,8 @@ if __name__ == '__main__':
     log = args['log']
     plt_lat = args["plot_lattice"]
     period = args['periodicity']
+    dpi = args['dpi']
+    ps = args['point_size']
     # band_structure arguments
     samp = args['samp']
     wil = args['wilson']
@@ -59,6 +62,8 @@ if __name__ == '__main__':
             data['eigenvalues'] = np.zeros((num_bands, samp, samp))  # real
             data['eigenvectors'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
             if any(geometry_columns):
+                if nphi[1] % 2 == 0:
+                    warnings.warn("Quantum geometric tensor not yet implemented for the case of band touching.")
                 data['eigenvectors_dkx'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
                 data['eigenvectors_dky'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
                 data['Dkx'] = np.dot(np.array([1/(samp-1), 0]), bMUCvec[0])
@@ -206,7 +211,7 @@ if __name__ == '__main__':
             chern_numbers[band] = np.sum(berry_fluxes[band, :, :]) / (2 * np.pi)
         if any(geometry_columns):
             chern_numbers_2[band] = np.sum(berry_fluxes_2[band, :, :]) * data['Dkx'] * data['Dky'] / (2 * np.pi)
-            std_g_norm[band] = np.std(fs_metric[band, :, :]) / np.abs(np.average(fs_metric[band, :, :]))
+            std_g_norm[band] = np.sum(fs_metric[band, :, :]) * data['Dkx'] * data['Dky'] / (2 * np.pi)
             av_gxx[band] = np.mean(fs_metric[band, :, :, 0, 0])
             std_gxx[band] = np.std(fs_metric[band, :, :, 0, 0])
             av_gxy[band] = np.mean(fs_metric[band, :, :, 0, 1])
