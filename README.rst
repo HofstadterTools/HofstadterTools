@@ -19,10 +19,27 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 		(base) user@domain:~/HofstadterTools$ conda env create -f environment.yml
 		(base) user@domain:~/HofstadterTools$ conda activate HT
 		(HT) user@domain:~/HofstadterTools$ cd code
-		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -mod Hofstadter -lat square -nphi 1 4
-		(HT) user@domain:~/HofstadterTools/code$ python butterfly.py -mod Hofstadter -lat square -q 199
+		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -lat square -nphi 1 4 --display both --wilson
 
-Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=199`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`tutorials <tutorials>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
+.. image:: images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
+    :width: 33 %
+.. image:: images/overview/wilson_both_square_nphi_1_4_t_1.png
+    :width: 33 %
+.. image:: images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
+    :width: 33 %
+
+.. code:: console
+
+    (HT) user@domain:~/HofstadterTools/code$ python butterfly.py -lat square -q 97 --color point --wannier --plot_lattice
+
+.. image:: images/overview/butterfly_square_q_97_t_1_col_point_avron.png
+    :width: 33 %
+.. image:: images/overview/wannier_square_q_97_t_1_col_point_avron.png
+    :width: 33 %
+.. image:: images/overview/lattice.png
+    :width: 33 %
+
+Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`gallery <gallery>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
 
 Python Environment
 ------------------

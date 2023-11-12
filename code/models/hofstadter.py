@@ -289,11 +289,11 @@ class Hofstadter:
         fig_lat = plt.figure()
         fig_lat.canvas.manager.set_window_title('Lattice')
         ax = fig_lat.add_subplot(111)
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
+        ax.set_xlabel("$x$")
+        ax.set_ylabel("$y$")
         ax.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
         ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
-        ax.set_title(f"t = {t_list}")
+        ax.set_title(f"$t$ = {t_list}")
 
         # plot grid points
         r_list = []

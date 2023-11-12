@@ -82,3 +82,9 @@ By default, the flux density in HofstadterTools is defined with respect to the l
 	I have plotted a Hofstadter butterfly using the ``--color`` flag and the code runs surprisingly quickly. How are the Chern numbers computed?
 
 All of the Hofstadter butterflies are colored using the Streda-Widom Diophantine relation (see Appendix C of :cite:`DiColandrea22` for a derivation). We note that although the formula can unambiguously determine the Chern numbers for the case of the rectangular lattice, the natural window condition is not uniquely resolved in general. This *may* lead to minor imperfections in the coloring for other lattices, especially when plotting with an extremely high resolution, as scrutinized in Fig.4 of :cite:`Agazzi14` or :cite:`Avron14`. At the time of writing, there is no Diophantine equation that can uniquely determine the Chern numbers in the general case. For the ``--color`` flag, we make the choice of sacrificing precision for the sake of efficiency.
+
+.. admonition:: Question
+
+	I am trying to plot a Hofstadter butterfly with high resolution but I find strange interpolated blobs in the fine structure of the spectrum. How can I fix this?
+
+This is an indication that the dpi of the image is too low. Assuming that you have saved the output data for such a high-resolution spectrum (recommended), you can overwrite the ``args['dpi']`` parameter in the ``plot/butterfly.py`` script and try plotting it again. By default, the dpi is set to 300. This works reasonably well for :math:`q` values up to about 300. In general, we recommend setting a dpi value of greater than :math:`q` for best results.

@@ -238,7 +238,7 @@ def Hamiltonian(t, p, q, A_UC, vec_group_matrix, k):
         \Lambda_{q, 0} & \Lambda_{q, 1} & \ddots
         \end{pmatrix},
 
-    where :math:`\Lambda_{l, n}` is the diagonal function. Note that we only populate the first matrix with unique hoppings in the positive J direction. If there are hoppings that are related by Hermitian conjugation in the same Harper equation, then the lower triangular matrix with simply be the conjugate of the upper triangular matrix. The second matrix represents rolled over boundary terms.
+    where :math:`\Lambda_{l, n}` is the diagonal function. Note that we only populate the first matrix with unique hoppings in the positive J direction. If there are inter-unit-cell hoppings that are related by Hermitian conjugation in the same Harper equation, then the lower triangular matrix with simply be the conjugate of the upper triangular matrix. The second matrix represents rolled over boundary terms.
 
     Parameters
     ----------

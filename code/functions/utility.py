@@ -86,7 +86,6 @@ def create_filename(program, args, aux_text=""):
         wan = args['wannier']
         period = args['periodicity']
         art = args['art']
-        dpi = args['dpi']
 
         q_str = f"q_{q:g}_"
         col_str = f"col_{color}_{pal}_" if color else ""
