@@ -224,8 +224,8 @@ if __name__ == '__main__':
     table.field_names = [j for i, j in enumerate(headers) if bools[i]]
     for band in np.arange(num_bands)[::-1]:
         table_data = [band, band_group[band], isolated[band], band_width[band], band_gap[band], band_gap[band] / band_width[band],
-                std_B_norm[band], round(chern_numbers[band]), chern_numbers_2[band], std_g_norm[band],
-                av_gxx[band], std_gxx[band], av_gxy[band], std_gxy[band], av_TISM[band], av_DISM[band]]
+                      std_B_norm[band], round(chern_numbers[band]), chern_numbers_2[band], std_g_norm[band],
+                      av_gxx[band], std_gxx[band], av_gxy[band], std_gxy[band], av_TISM[band], av_DISM[band]]
         table.add_row([j for i, j in enumerate(table_data) if bools[i]])
     print(table)
 

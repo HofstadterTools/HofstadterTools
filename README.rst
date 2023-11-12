@@ -19,10 +19,10 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 		(base) user@domain:~/HofstadterTools$ conda env create -f environment.yml
 		(base) user@domain:~/HofstadterTools$ conda activate HT
 		(HT) user@domain:~/HofstadterTools$ cd code
-		(HT) user@domain:~/HofstadterTools/code$ python butterfly.py -mod Hofstadter -lat square -q 199
 		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -mod Hofstadter -lat square -nphi 1 4
+		(HT) user@domain:~/HofstadterTools/code$ python butterfly.py -mod Hofstadter -lat square -q 199
 
-Voilà! You have just plotted the Hofstadter butterfly for nearest-neighbor hopping on the square lattice at :math:`q=199`, together with the corresponding band structure at flux density :math:`n_\phi=1/4`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`tutorials <tutorials>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
+Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=199`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`tutorials <tutorials>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
 
 Python Environment
 ------------------

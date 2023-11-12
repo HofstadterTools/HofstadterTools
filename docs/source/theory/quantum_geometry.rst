@@ -8,7 +8,7 @@ The quantum geometric tensor is defined as
 .. math::
        \mathcal{R}_{\alpha \beta}(\mathbf{k}) = \braket{\partial_{k_\alpha} u_\mathbf{k}|\partial_{k_\beta} u_\mathbf{k}} - \braket{\partial_{k_\alpha} u_\mathbf{k}| u_\mathbf{k}} \braket{u_\mathbf{k}| \partial_{k_\beta} u_\mathbf{k}},
 
-where :math:`\ket{u_\mathbf{k}}` is the eigenvector at momentum :math:`\mathbf{k}`. The real part of the quantum geometric tensor is given by the Fubini-Study metric :math:`g_{ij}(\mathbf{k})=\Re[\mathcal{R}_{ij}]`, which corresponds to the distance between eigenstates on the Bloch sphere, whereas the imaginary part of the quantum geometric tensor is given by the Berry curvature :math:`\mathcal{B}(\mathbf{k})=-2 \Im [\mathcal{R}_{\alpha\beta}(\mathbf{k})]` with :math:`\alpha\neq\beta`.
+where :math:`\ket{u_\mathbf{k}}` is the eigenvector at momentum :math:`\mathbf{k}`. The real part of the quantum geometric tensor is given by the Fubini-Study metric :math:`g_{\alpha\beta}(\mathbf{k})=\Re[\mathcal{R}_{\alpha\beta}]`, which corresponds to the distance between eigenstates on the Bloch sphere, whereas the imaginary part of the quantum geometric tensor is given by the Berry curvature :math:`\mathcal{B}(\mathbf{k})=-2 \Im [\mathcal{R}_{\alpha\beta}(\mathbf{k})]` with :math:`\alpha\neq\beta`.
 
 As for the Chern numbers, there are several methods to compute the quantum geometric tensor. In analogy to the  :doc:`previous section <chern_numbers>`, we may start by naively writing down the numerical derivatives:
 
