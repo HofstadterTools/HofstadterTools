@@ -15,7 +15,7 @@ Working in Landau gauge in the y-direction, we have shown in the :doc:`previous 
 
 where :math:`\Delta X = X_j - X_i` and :math:`\Delta Y = Y_j - Y_i`. Hence, the complex phase factor acquired by each hopping describes a rectangular magnetic unit cell extended in the y-direction.
 
-For example, for a rational flux density of :math:`n_\phi\equiv p/q=1/4`, the magnetic unit cell will be described by a rectangle of dimension :math:`1\times4`, with constant y-hopping amplitudes of :math:`-t`, but varying x-hopping amplitudes of :math:`-t`, :math:`-t e^{-\mathrm{i}\pi / 2}`,  :math:`-t e^{-\mathrm{i}\pi}`, :math:`-t e^{-\mathrm{i}3\pi /2}`, respectively.
+For example, for a rational flux density of :math:`n_\phi\equiv p/q=1/4`, the magnetic unit cell will be described by a rectangle of dimensions :math:`1\times4`, with constant y-hopping amplitudes of :math:`-t`, but varying x-hopping amplitudes of :math:`-t`, :math:`-t e^{-\mathrm{i}\pi / 2}`,  :math:`-t e^{-\mathrm{i}\pi}`, :math:`-t e^{-\mathrm{i}3\pi /2}`, respectively.
 
 Applying the Schrödinger equation to a wavefunction at a site indexed by :math:`(m,n)` yields
 

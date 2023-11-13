@@ -23,7 +23,7 @@ Inserting these into the expression for the quantum geometric tensor and simplif
 .. math::
    \mathcal{R}_{\alpha \beta}(\mathbf{k}) = \lim_{\Delta_\alpha\to 0} \lim_{\Delta_\beta \to 0} \frac{1}{\Delta_\alpha \Delta_\beta}\left[ \braket{u_{\mathbf{k}+\Delta_\alpha}| u_{\mathbf{k}+\Delta_\beta}} - \braket{u_{\mathbf{k}+\Delta_\alpha}| u_\mathbf{k}} \braket{ u_\mathbf{k}| u_{\mathbf{k}+\Delta_\beta}}\right].
 
-This is a valid expression for the quantum geometric tensor, however it is gauge dependent and therefore care needs to be taken to ensure that the numerical derivatives are accurate. In practise, this often means choosing an interval for these derivatives that is many orders of magnitude smaller than the k mesh.
+This is a valid expression for the quantum geometric tensor, however it is gauge dependent and therefore care needs to be taken to ensure that the numerical derivatives are accurate. In practice, this often means choosing an interval for these derivatives that is many orders of magnitude smaller than the :math:`k` mesh.
 
 An alternative method for computing the quantum geometric tensor is to use projectors, such that
 

@@ -38,7 +38,7 @@ hence, the Peierls phases may be written as
 .. math::
    \theta_{ij} = -\left( \frac{2\pi B}{\phi_0} \right) \Delta X \left( Y_i + \frac{\Delta Y}{2} \right),
 
-where :math:`\Delta Y = Y_j - Y_i` and :math:`\Delta X = X_j - X_i`. Note that, with this choice of gauge, the Peierls phases depend on *absolute* y coordinates but only *relative* x coordinates.
+where :math:`\Delta Y = Y_j - Y_i` and :math:`\Delta X = X_j - X_i`. Note that, with this choice of gauge, the Peierls phases depend on *absolute* y-coordinates but only *relative* x-coordinates.
 
 Since the magnetic flux density, :math:`n_{\phi}=BA/\phi_0`, is often defined with respect to the lattice unit cell area :math:`A=a^2`, and the lattice constant :math:`a` is often set to one, you may sometimes see this expression written as
 

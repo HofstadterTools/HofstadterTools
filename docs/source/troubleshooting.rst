@@ -85,6 +85,6 @@ All of the Hofstadter butterflies are colored using the Streda-Widom Diophantine
 
 .. admonition:: Question
 
-	I am trying to plot a plane colored Hofstadter butterfly with high resolution but I find strange interpolated blobs in the fine structure of the spectrum. How can I fix this?
+	I am trying to plot a plane-colored Hofstadter butterfly with high resolution but I find strange interpolated blobs in the fine structure of the spectrum. How can I fix this?
 
 This is an indication that the dpi of the image is too low. Assuming that you have saved the output data for such a high-resolution spectrum (recommended), you can overwrite the ``args['dpi']`` parameter in the ``plot/butterfly.py`` script and try plotting it again. By default, the dpi is set to 300. This works reasonably well for :math:`M` values up to about 300, where :math:`M` is the number of bands in the spectrum. In general, we recommend setting a dpi value of greater than :math:`M` for best results.

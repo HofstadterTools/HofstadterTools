@@ -22,7 +22,7 @@ Square Lattice
 
 .. note::
 
-		The Hofstadter Hamiltonian is defined with an overall minus sign in HofstadterTools. Hence, ``-t 1`` translates to a effective hopping strength of -1 for nearest-neighbor terms, and so on.
+		The Hofstadter Hamiltonian is defined with an overall minus sign in HofstadterTools. Hence, ``-t 1`` translates to an effective hopping strength of -1 for nearest-neighbor terms, and so on.
 
 .. image:: images/gallery/butterfly_square_q_499_t_1_0_-0.25_col_point_jet_dpi_500.png
 	:align: center
@@ -42,7 +42,7 @@ Triangular Lattice
 Bravais Lattice
 ---------------
 
-* The Hofstadter model on a Bravais lattice with an obliqueness angle of 67/180 in units of pi, in between the square and triangular lattices. The hopping amplitudes are similar (but not identical) to those used in Fig.4(c) of :cite:`Yilmaz17`.
+* The Hofstadter model on a Bravais lattice with an obliqueness angle of 67/180 in units of :math:`\\\pi`, in between the square and triangular lattices. The hopping amplitudes are similar (but not identical) to those used in Fig.4(c) of :cite:`Yilmaz17`.
 
 ``python butterfly.py -mod Hofstadter -q 499 -lat bravais -theta 67 180 -t 0.5 0.2 -dpi 500 -save``
 

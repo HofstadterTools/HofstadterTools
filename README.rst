@@ -136,8 +136,8 @@ The Hofstadter model is an active field of research and therefore HofstadterTool
 * interface to quantum chemistry codes :cite:`Bodesheim23`
 * capability to compute the non-Abelian `Hofstadter moth` :cite:`Osterloh05` :cite:`Yang20`
 * capability to compute Chern numbers using bulk-edge correspondence :cite:`Agazzi14`
-* capability to generate potential function corresponding to hopping amplitudes :cite:`Yilmaz17`
-* implementation of other topological flat bands models for benchmarking (e.g. chiral pi-flux model) :cite:`Neupert11`
+* capability to generate the potential function corresponding to hopping amplitudes :cite:`Yilmaz17`
+* implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) :cite:`Neupert11`
 
 ..
 	* add g fluctuations
