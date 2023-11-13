@@ -5,8 +5,8 @@ import cmath as cm
 
 
 def _principal(z):
-    """
-    Compute the principal branch of a complex number :math:`z`, such that :math:`-\pi<\text{Im}(z)\leq\pi`.
+    r"""
+    Compute the principal branch of a complex number :math:`z`, such that :math:`-\\\pi<\text{Im}(z)\leq\\\pi`.
 
     Parameters
     ----------
@@ -109,7 +109,7 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
         .. math::
             \mathcal{B}_{12}(\mathbf{k}_\alpha) = - \text{Im}\;\mathcal{P}\;(\log\tilde{\mathcal{U}}_1(\mathbf{k}_\alpha) +\log\tilde{\mathcal{U}}_2(\mathbf{k}_\alpha+\hat{\mathbf{e}}_1)-\log\tilde{\mathcal{U}}_1(\mathbf{k}_\alpha+\hat{\mathbf{e}}_2)-\log\tilde{\mathcal{U}}_2(\mathbf{k}_\alpha)),
 
-        where :math:`\mathcal{P}` denotes the principal value of the complex number :math:`z`, such that :math:`-\pi<\text{Im}(z)\leq\pi`.
+        where :math:`\mathcal{P}` denotes the principal value of the complex number :math:`z`, such that :math:`-\\\pi<\text{Im}(z)\leq\\\pi`.
 
     **Method 2:**
 

@@ -89,7 +89,7 @@ class Hofstadter:
             Y = np.array([0, 0.5])
             S = np.array([0.5, 0.5])
             X = np.array([0.5, 0])
-            sym_points_val = [("$\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
+            sym_points_val = [("$\\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
         elif self.lat == "triangular":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -110,7 +110,7 @@ class Hofstadter:
             Y = np.array([0, 0.5])
             S = np.array([0.5, 0.5])
             X = np.array([0.5, 0])
-            sym_points_val = [("$\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
+            sym_points_val = [("$\\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
         elif self.lat == "bravais":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -132,7 +132,7 @@ class Hofstadter:
             Y = np.array([0, 0.5])
             S = np.array([0.5, 0.5])
             X = np.array([0.5, 0])
-            sym_points_val = [("$\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
+            sym_points_val = [("$\\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
         elif self.lat == "honeycomb":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -155,7 +155,7 @@ class Hofstadter:
             GA = np.array([0., 0.])
             MM = np.array([0.5, 0.5])
             K2 = np.array([1/3, 2/3])
-            sym_points_val = [("$K_1$", K1), ("$\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
+            sym_points_val = [("$K_1$", K1), ("$\\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
         elif self.lat == "kagome":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -179,7 +179,7 @@ class Hofstadter:
             GA = np.array([0., 0.])
             MM = np.array([0.5, 0.5])
             K2 = np.array([1/3, 2/3])
-            sym_points_val = [("$K_1$", K1), ("$\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
+            sym_points_val = [("$K_1$", K1), ("$\\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
         elif self.lat == "custom":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -203,7 +203,7 @@ class Hofstadter:
             GA = np.array([0., 0.])
             MM = np.array([0.5, 0.5])
             K2 = np.array([1/3, 2/3])
-            sym_points_val = [("$K_1$", K1), ("$\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
+            sym_points_val = [("$K_1$", K1), ("$\\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
 
         num_bands_val = len(abasisvec_val) * self.q
 

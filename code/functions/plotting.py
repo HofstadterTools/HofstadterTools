@@ -58,14 +58,14 @@ def band_structure(model, args, data):
         fig = plt.figure()
         fig.canvas.manager.set_window_title('Band Structure (3D)')
         ax = fig.add_subplot(111, projection='3d')
-        ax.set_title(f"$n_\phi = {nphi[0]}/{nphi[1]}$")
+        ax.set_title(f"$n_\\phi = {nphi[0]}/{nphi[1]}$")
         idx_x = np.linspace(0, samp - 1, samp, dtype=int)
         idx_y = np.linspace(0, samp - 1, samp, dtype=int)
         kx, ky = np.meshgrid(idx_x, idx_y)
         for i in range(num_bands):
             ax.plot_surface(kx, ky, eigenvalues[i, kx, ky], alpha=0.5)
-        ax.set_xlabel('$k_1/|\mathbf{b}_1|$')
-        ax.set_ylabel('$k_2/|\mathbf{b}_2|$')
+        ax.set_xlabel('$k_1/|\\mathbf{b}_1|$')
+        ax.set_ylabel('$k_2/|\\mathbf{b}_2|$')
         ax.set_zlabel('$E$')
 
         def normalize(value, tick_number):
@@ -83,12 +83,12 @@ def band_structure(model, args, data):
             fig2 = plt.figure()
             fig2.canvas.manager.set_window_title('Wilson Loops')
             ax2 = fig2.add_subplot(111)
-            ax2.set_title(f"$n_\phi = {args['nphi'][0]}/{args['nphi'][1]}$")
+            ax2.set_title(f"$n_\\phi = {args['nphi'][0]}/{args['nphi'][1]}$")
             idx_x = np.linspace(0, samp - 1, samp, dtype=int)
             for i in range(num_bands):
                 ax2.scatter(idx_x, wilson_loops[i], s=ps*rcParams['lines.markersize']**2)
-            ax2.set_xlabel('$k_1/|\mathbf{b}_1|$')
-            ax2.set_ylabel('$\prod \\theta_\\mathrm{B}$')
+            ax2.set_xlabel('$k_1/|\\mathbf{b}_1|$')
+            ax2.set_ylabel('$\\prod \\theta_\\mathrm{B}$')
             ax2.xaxis.set_major_formatter(plt.FuncFormatter(normalize))
             ax2.yaxis.set_major_formatter(plt.FuncFormatter(normalize))
 
@@ -101,7 +101,7 @@ def band_structure(model, args, data):
         fig3 = plt.figure()
         fig3.canvas.manager.set_window_title('Band Structure (2D)')
         ax3 = fig3.add_subplot(111)
-        ax3.set_title(f"$n_\phi = {nphi[0]}/{nphi[1]}$")
+        ax3.set_title(f"$n_\\phi = {nphi[0]}/{nphi[1]}$")
         for i in range(num_bands):
             ax3.plot(eigenvalues_2D[i])
         locations, labels = [0], [sym_points[0][0]]
@@ -184,7 +184,7 @@ def butterfly(model, args, data):
     ax = fig.add_subplot(111)
 
     if not art:
-        ax.set_title(f"$n_\phi = p/{q}$")
+        ax.set_title(f"$n_\\phi = p/{q}$")
         transparent = False
     else:
         transparent = True
@@ -234,7 +234,7 @@ def butterfly(model, args, data):
 
     if not art:
         ax.set_ylabel('$E$')
-        ax.set_xlabel('$n_\phi$')
+        ax.set_xlabel('$n_\\phi$')
         ax.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
         ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
 
@@ -243,9 +243,9 @@ def butterfly(model, args, data):
         fig2.canvas.manager.set_window_title('Wannier Diagram')
         ax2 = fig2.add_subplot(111)
         if not art:
-            ax2.set_title(f"$n_\phi = p/{q}$")
+            ax2.set_title(f"$n_\\phi = p/{q}$")
             ax2.set_ylabel('$D(E)$')
-            ax2.set_xlabel('$n_\phi$')
+            ax2.set_xlabel('$n_\\phi$')
             ax2.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
             ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
         else:

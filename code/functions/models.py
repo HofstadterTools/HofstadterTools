@@ -133,10 +133,10 @@ def nearest_neighbor_sorter(data_array):
 def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
     r"""The Peierls factor.
 
-    The Peierls factor in Landau gauge :math:`\mathbf{A}=-By\hat{\mathbf{e}}_x` is given by
+    The Peierls factor in Landau gauge :math:`\\\mathbf{A}=-By\hat{\\\mathbf{e}}_x` is given by
 
     .. math::
-        e^{\mathrm{i}\theta_{ij}} = \exp\left(-\frac{2\pi\mathrm{i}n_\phi}{A} \Delta X (Y_i + \Delta Y /2) \right),
+        e^{\\\mathrm{i}\theta_{ij}} = \exp\left(-\frac{2\pi\\\mathrm{i}n_\phi}{A} \Delta X (Y_i + \Delta Y /2) \right),
 
     where :math:`\theta_{ij}` is the Peierls phase from site :math:`i=(X_i, Y_i)`. to :math:`j=(X_j, Y_j)`, :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, :math:`n_\phi` is the flux density, and :math:`A` is the area. :cite:`Peierls33`
 
@@ -171,9 +171,9 @@ def diag_func(t_val, p_val, q_val, A_UC_val, vec_group, k_val, dJ_val, J_idx_val
     The function that populates the diagonals of the Hamiltonian matrix is given by
 
     .. math::
-        \Lambda_{l, n} = - \sum_n \sum_{\langle ij \rangle_{n}^l} t_n e^{\mathrm{i}\theta_{ij}} e^{\mathrm{i}\mathbf{k}\cdot\mathbf{r}},
+        \Lambda_{l, n} = - \sum_n \sum_{\langle ij \rangle_{n}^l} t_n e^{\\\mathrm{i}\theta_{ij}} e^{\\\mathrm{i}\\\mathbf{k}\cdot\\\mathbf{r}},
 
-    where :math:`\langle ij \rangle^l_n` denotes the subset of n-th nearest neighbors with a net :math:`y` unit cell displacement of :math:`l`, :math:`\theta_{ij}` is the Peierls phase, :math:`\mathbf{k}` is the momentum vector, and :math:`\mathbf{r}` is the displacement vector.
+    where :math:`\langle ij \rangle^l_n` denotes the subset of n-th nearest neighbors with a net :math:`y` unit cell displacement of :math:`l`, :math:`\theta_{ij}` is the Peierls phase, :math:`\\\mathbf{k}` is the momentum vector, and :math:`\\\mathbf{r}` is the displacement vector.
 
     Parameters
     ----------
@@ -676,8 +676,8 @@ if __name__ == '__main__':
     kx, ky = np.meshgrid(idx_x, idx_y)
     for i in range(num_bands):
         ax.plot_surface(kx, ky, eigenvalues[i, kx, ky], alpha=0.5)
-    ax.set_xlabel('$k_1/|\mathbf{b}_1|$')
-    ax.set_ylabel('$k_2/|\mathbf{b}_2|$')
+    ax.set_xlabel('$k_1/|\\mathbf{b}_1|$')
+    ax.set_ylabel('$k_2/|\\mathbf{b}_2|$')
     ax.set_zlabel('$E$')
 
     def normalize(value, tick_number):
