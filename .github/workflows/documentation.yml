@@ -11,10 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
-      - uses: docker://pandoc/core:3.0
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme myst_parser pybtex sphinx-copybutton sphinxcontrib-bibtex sphinx-autodoc-typehints nbsphinx ipython pydata-sphinx-theme jupyter jupytext graphviz pandoc
+          pip install sphinx sphinx_rtd_theme myst_parser pybtex sphinx-copybutton sphinxcontrib-bibtex sphinx-autodoc-typehints nbsphinx ipython pydata-sphinx-theme jupyter jupytext graphviz pypandoc
       - name: Sphinx build
         run: |
           sphinx-build docs/source docs/build
