@@ -14,7 +14,7 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 
 .. code:: console
 
-		(base) user@domain:~$ git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git
+		(base) user@domain:~$ git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools
 		(base) user@domain:~$ cd HofstadterTools
 		(base) user@domain:~/HofstadterTools$ conda env create -f environment.yml
 		(base) user@domain:~/HofstadterTools$ conda activate HT
