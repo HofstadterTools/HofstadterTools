@@ -6,12 +6,12 @@ import functions.plotting as fp
 if __name__ == '__main__':
 
     # load the file
-    filename = "butterfly_square_q_399_t_1_col_plane_avron.npy"
+    filename = "butterfly_kagome_q_499_t_1_alpha_1_theta_1_3_period_8_dpi_1000.npy"
     model, args, data = fu.load_data("butterfly", filename)
 
     # overwrite args parameters
     # args['save'] = False
-    # args['dpi'] = 1000
+    args['dpi'] = 500
 
     # construct the figure(s)
     fp.butterfly(model, args, data)
