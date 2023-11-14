@@ -169,13 +169,14 @@ if __name__ == '__main__':
             TISM, DISM = np.zeros((2, num_bands, samp - 1, samp - 1))  # real
         for band, group in tqdm(enumerate(band_group), desc="Band Properties", ascii=True):
             group_size = np.count_nonzero(band_group == group)
-            for idx_x in range(samp - 1):
+            for idx_y in range(samp - 1):
                 if wil:
                     if group != band_group[band - 1]:
-                        data['wilson_loops'][band, idx_x] = fbs.wilson_loop(data['eigenvectors'], band, idx_x, group_size)
+                        data['wilson_loops'][band, idx_y] = fbs.wilson_loop(data['eigenvectors'], band, idx_y,
+                                                                            group_size)
                     else:
-                        data['wilson_loops'][band, idx_x] = data['wilson_loops'][band - 1, idx_x]
-                for idx_y in range(samp - 1):
+                        data['wilson_loops'][band, idx_y] = data['wilson_loops'][band - 1, idx_y]
+                for idx_x in range(samp - 1):
                     if group != band_group[band - 1]:
                         berry_fluxes[band, idx_x, idx_y] = fbs.berry_curv(data['eigenvectors'], band, idx_x, idx_y, group_size)
                         # quantum geometry

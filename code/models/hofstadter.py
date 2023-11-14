@@ -49,6 +49,8 @@ class Hofstadter:
         self.t = t  #: list : The list of hopping amplitudes in order of ascending NN (default=[1]).
         self.lat = lat  #: str : The name of the lattice (default="square").
         self.alpha = alpha  #: float : The anisotropy of the Bravais lattice vectors (default=1).
+        self.theta0 = theta[0]  #: int : The numerator of the fractional angle between Bravais lattice vectors in units of pi (default=1).
+        self.theta1 = theta[1]  #: int : The denominator of the fractional angle between Bravais lattice vectors in units of pi (default=3).
         self.theta = (theta[0]/theta[1])*np.pi  #: float : The angle between Bravais lattice vectors (default=pi/3).
         self.period = period  #: int : The factor by which to divide A_UC in the flux density (default=1).
 
@@ -77,13 +79,12 @@ class Hofstadter:
             # basis vectors
             abasis1 = self.a0 * np.array([0, 0])
             abasisvec_val = np.array([abasis1])
-            # reciprocal lattice vectors
-            b1 = (2. * np.pi) / self.a0 * np.array([1, 0])
-            b2 = (2. * np.pi) / self.a0 * np.array([0, 1])
+            # lattice vectors (MUC)
+            aMUC1 = a1
+            aMUC2 = self.q * a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
             # reciprocal lattice vectors (MUC)
-            bMUC1 = b1 / self.q
-            bMUC2 = b2
-            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
             GA = np.array([0, 0])
             Y = np.array([0, 0.5])
@@ -98,13 +99,12 @@ class Hofstadter:
             # basis vectors
             abasis1 = self.a0 * np.array([0, 0])
             abasisvec_val = np.array([abasis1])
-            # reciprocal lattice vectors
-            b1 = (2. * np.pi) / self.a0 * np.array([1, -1 / np.sqrt(3)])
-            b2 = (2. * np.pi) / self.a0 * np.array([0, 2 / np.sqrt(3)])
+            # lattice vectors (MUC)
+            aMUC1 = a1
+            aMUC2 = self.q * a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
             # reciprocal lattice vectors (MUC)
-            bMUC1 = b1 / self.q
-            bMUC2 = b2
-            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
             GA = np.array([0, 0])
             Y = np.array([0, 0.5])
@@ -119,14 +119,12 @@ class Hofstadter:
             # basis vectors
             abasis1 = np.array([0, 0])
             abasisvec_val = np.array([abasis1])
-            # reciprocal lattice vectors
-            rec_factor = (2. * np.pi) / (a1[0]*a2[1] - a1[1]*a2[0])
-            b1 = rec_factor * np.array([a2[1], -a2[0]])
-            b2 = rec_factor * np.array([-a1[1], a1[0]])
+            # lattice vectors (MUC)
+            aMUC1 = a1
+            aMUC2 = self.q * a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
             # reciprocal lattice vectors (MUC)
-            bMUC1 = b1 / self.q
-            bMUC2 = b2
-            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
             GA = np.array([0, 0])
             Y = np.array([0, 0.5])
@@ -142,14 +140,12 @@ class Hofstadter:
             abasis1 = np.array([0, 0])
             abasis2 = np.array([(1 / 2) * a1[0], (1 / 3) * a2[1]])  # centroid is 1/3 of the way up
             abasisvec_val = np.vstack((abasis1, abasis2))
-            # reciprocal lattice vectors
-            rec_factor = (2. * np.pi) / (a1[0] * a2[1] - a1[1] * a2[0])
-            b1 = rec_factor * np.array([a2[1], -a2[0]])
-            b2 = rec_factor * np.array([-a1[1], a1[0]])
+            # lattice vectors (MUC)
+            aMUC1 = a1
+            aMUC2 = self.q * a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
             # reciprocal lattice vectors (MUC)
-            bMUC1 = b1 / self.q
-            bMUC2 = b2
-            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
             K1 = np.array([2/3, 1/3])
             GA = np.array([0., 0.])
@@ -166,14 +162,12 @@ class Hofstadter:
             abasis2 = np.array([(1 / 2) * a1[0], 0])
             abasis3 = np.array([(1 / 2) * a2[0], (1 / 2) * a2[1]])
             abasisvec_val = np.vstack((abasis1, abasis2, abasis3))
-            # reciprocal lattice vectors
-            rec_factor = (2. * np.pi) / (a1[0] * a2[1] - a1[1] * a2[0])
-            b1 = rec_factor * np.array([a2[1], -a2[0]])
-            b2 = rec_factor * np.array([-a1[1], a1[0]])
+            # lattice vectors (MUC)
+            aMUC1 = a1
+            aMUC2 = self.q * a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
             # reciprocal lattice vectors (MUC)
-            bMUC1 = b1 / self.q
-            bMUC2 = b2
-            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
             K1 = np.array([2/3, 1/3])
             GA = np.array([0., 0.])
@@ -190,14 +184,12 @@ class Hofstadter:
             abasis2 = np.array([(1 / 2) * a1[0], 0])
             abasis3 = np.array([(1 / 2) * a2[0], (1 / 2) * a2[1]])
             abasisvec_val = np.vstack((abasis1, abasis2, abasis3))
-            # reciprocal lattice vectors
-            rec_factor = (2. * np.pi) / (a1[0] * a2[1] - a1[1] * a2[0])
-            b1 = rec_factor * np.array([a2[1], -a2[0]])
-            b2 = rec_factor * np.array([-a1[1], a1[0]])
+            # lattice vectors (MUC)
+            aMUC1 = a1
+            aMUC2 = self.q * a2
+            aMUCvec_val = np.vstack((aMUC1, aMUC2))
             # reciprocal lattice vectors (MUC)
-            bMUC1 = b1 / self.q
-            bMUC2 = b2
-            bMUCvec_val = np.vstack((bMUC1, bMUC2))
+            bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
             K1 = np.array([2/3, 1/3])
             GA = np.array([0., 0.])
@@ -227,9 +219,9 @@ class Hofstadter:
             Hamiltonian = fm.BasicSquareHamiltonian(self.t, self.p, self.q, k_val, self.period)
         elif self.lat == "triangular" and len(self.t) == 1:
             Hamiltonian = fm.BasicTriangularHamiltonian(self.t, self.p, self.q, k_val, self.period)
-        elif self.lat == "honeycomb" and len(self.t) == 1:
+        elif self.lat == "honeycomb" and len(self.t) == 1 and self.alpha == 1 and self.theta0 == 1 and self.theta1 == 3:
             Hamiltonian = fm.BasicHoneycombHamiltonian(self.t, self.p, self.q, k_val, self.period)
-        elif self.lat == "kagome" and len(self.t) == 1:
+        elif self.lat == "kagome" and len(self.t) == 1 and self.alpha == 1 and self.theta0 == 1 and self.theta1 == 3:
             Hamiltonian = fm.BasicKagomeHamiltonian(self.t, self.p, self.q, k_val, self.period)
         else:  # general case
             _, avec, abasisvec, _, _ = self.unit_cell()

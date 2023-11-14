@@ -47,6 +47,12 @@ If you are executing your program from a different location, then the ``-input``
 
 By default, the tqdm progress bar is streamed to stderr. Hence, the progress bar is shortened to 10 characters when logging to make the log files more readable.
 
+.. admonition:: Question
+
+	I have adjusted the ``-alpha`` lattice anisotropy flag and now the band structures and butterfly spectra look odd. Is this expected behavior?
+
+In HofstadterTools, nth-nearest neighbors are defined as a group of sites that are the same radius from a reference site. We stress that these points lie on a *circle* and not, for example, on an ellipse that is scaled by the Bravais lattice vector lengths. Hence, by adjusting the lattice anisotropy, you may inadvertently change the number of nearest neighbors.
+
 band_structure Questions
 ------------------------
 

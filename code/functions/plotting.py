@@ -84,10 +84,10 @@ def band_structure(model, args, data):
             fig2.canvas.manager.set_window_title('Wilson Loops')
             ax2 = fig2.add_subplot(111)
             ax2.set_title(f"$n_\\phi = {args['nphi'][0]}/{args['nphi'][1]}$")
-            idx_x = np.linspace(0, samp - 1, samp, dtype=int)
+            idx_y = np.linspace(0, samp - 1, samp, dtype=int)
             for i in range(num_bands):
-                ax2.scatter(idx_x, wilson_loops[i], s=ps*rcParams['lines.markersize']**2)
-            ax2.set_xlabel('$k_1/|\\mathbf{b}_1|$')
+                ax2.scatter(idx_y, wilson_loops[i], s=ps*rcParams['lines.markersize']**2)
+            ax2.set_xlabel('$k_2/|\\mathbf{b}_2|$')
             ax2.set_ylabel('$\\prod \\theta_\\mathrm{B}$')
             ax2.xaxis.set_major_formatter(plt.FuncFormatter(normalize))
             ax2.yaxis.set_major_formatter(plt.FuncFormatter(normalize))

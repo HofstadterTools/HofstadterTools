@@ -6,6 +6,45 @@ from mpl_toolkits.mplot3d import axes3d
 from copy import deepcopy
 
 
+def reciprocal_vectors(avec):
+    r"""Finds the reciprocal lattice vectors in 2D.
+
+    .. math::
+        \begin{pmatrix}
+        b_{1x} & b_{2x} \\
+        b_{1y} & b_{2y}
+        \end{pmatrix} =
+        \frac{2\\\pi}{a_{1x}a_{2y} - a_{1y}a_{2x}}
+        \begin{pmatrix}
+        a_{2y} & -a_{1y} \\
+        -a_{2x} & a_{1x}
+        \end{pmatrix}
+
+    Parameters
+    ----------
+    avec: ndarray
+        The array of real-space lattice vectors.
+
+    Returns
+    -------
+    bvec: ndarray
+        The array of reciprocal-space lattice vectors.
+    """
+
+    if len(avec) != 2:
+        raise ValueError("Reciprocal lattice vector function only works in 2D.")
+
+    a1 = avec[0]
+    a2 = avec[1]
+
+    rec_factor = (2*np.pi) / (a1[0] * a2[1] - a1[1] * a2[0])
+    b1 = rec_factor * np.array([a2[1], -a2[0]])
+    b2 = rec_factor * np.array([-a1[1], a1[0]])
+    bvec = np.vstack((b1, b2))
+
+    return bvec
+
+
 def nearest_neighbor_finder(avec, abasisvec, t_list, x_init, y_init, basis_init):
     """Finds the relevant nearest neighbors for a given lattice.
 

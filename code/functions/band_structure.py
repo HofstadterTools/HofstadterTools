@@ -168,7 +168,7 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
     return Berry_curv
 
 
-def wilson_loop(_eigenvectors, _band, _idx_x, _group_size=1):
+def wilson_loop(_eigenvectors, _band, _idx_y, _group_size=1):
     r"""
     Compute the Wilson loop.
 
@@ -179,16 +179,28 @@ def wilson_loop(_eigenvectors, _band, _idx_x, _group_size=1):
 
     where :math:`\tilde{\mathcal{U}}_2` is the normalized link variable, :math:`\mathbf{k}_\alpha` is the momentum vector, and the product is taken on a Brillouin zone cycle in the :math:`\gamma=2` direction. :cite:`Gresch18`
 
+    Parameters
+    ----------
+    _eigenvectors: ndarray
+        The array of eigenvectors with dimension (num_bands, num_bands, num_samples, num_samples).
+    _band: int
+        The band number. If part of a band group, this must refer to the lowest band of the group.
+    _idx_y: int
+        The y-momentum index, with respect to the discretized grid.
+    _group_size: int
+        The number of touching bands a.k.a. number of bands in the band group (default=1).
+
     Returns
     -------
     Wilson_loop: complex
         The Wilson loop term.
     """
 
-    numb_ky = np.shape(_eigenvectors)[3]
+    # print("np.shape(_eigenvectors) = ", np.shape(_eigenvectors))
+    numb_kx = np.shape(_eigenvectors)[2]
     product = 1
-    for j in range(numb_ky):
-        product *= U(2, _eigenvectors, _band, _idx_x, j, _group_size)
+    for i in range(numb_kx):
+        product *= U(1, _eigenvectors, _band, i, _idx_y, _group_size)
     Wilson_loop = -np.imag(np.log(product))
 
     return Wilson_loop
