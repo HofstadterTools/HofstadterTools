@@ -23,14 +23,14 @@ Inserting these into the expression for the quantum geometric tensor and simplif
 .. math::
    \mathcal{R}_{\alpha \beta}(\mathbf{k}) = \lim_{\Delta_\alpha\to 0} \lim_{\Delta_\beta \to 0} \frac{1}{\Delta_\alpha \Delta_\beta}\left[ \braket{u_{\mathbf{k}+\Delta_\alpha}| u_{\mathbf{k}+\Delta_\beta}} - \braket{u_{\mathbf{k}+\Delta_\alpha}| u_\mathbf{k}} \braket{ u_\mathbf{k}| u_{\mathbf{k}+\Delta_\beta}}\right].
 
-This is a valid expression for the quantum geometric tensor, however it is gauge dependent and therefore care needs to be taken to ensure that the numerical derivatives are accurate. In practice, this often means choosing an interval for these derivatives that is many orders of magnitude smaller than the :math:`k` mesh.
+This is a valid expression for the quantum geometric tensor, however it is composed of gauge-dependent Bloch wavefunctions and therefore care needs to be taken to ensure that the numerical derivatives are accurate.
 
 An alternative method for computing the quantum geometric tensor is to use projectors, such that
 
 .. math::
-   \mathcal{R}_{\alpha, \beta}(\mathbf{k}) = \partial_{k_\alpha}Q_\mathbf{k} \partial_{k_\beta} \mathcal{P}_\mathbf{k},
+   \mathcal{R}_{\alpha\beta}(\mathbf{k}) = \mathrm{tr}(\mathcal{P}_\mathbf{k}\partial_{k_\alpha}\mathcal{P}_\mathbf{k} \partial_{k_\beta} \mathcal{P}_\mathbf{k}),
 
-where :math:`\mathcal{P}_\mathbf{k} = \ket{u_\mathbf{k}} \bra{u_\mathbf{k}}` is the band projector and :math:`\mathcal{Q}_\mathbf{k}=1 - \mathcal{P}_\mathbf{k}` is the orthogonal band projector. This expression is now gauge invariant and therefore less susceptible to errors. The projector formalism can also be naturally extended to the case of band touching, as discussed in several works, e.g. Appendix C.4 of :cite:`Hirschmann23`.
+where :math:`\mathcal{P}_\mathbf{k} = \sum_n \ket{u_n(\mathbf{k})} \bra{u_n(\mathbf{k})}` is the band projector and :math:`n` is the number of touching bands. This expression is now gauge invariant and therefore less susceptible to errors, as well as naturally extended to the case of multiple band touching. :cite:`Hirschmann23`
 
 Crucially, since band geometry and topology are components of the same tensor, we can derive relations between them, namely
 

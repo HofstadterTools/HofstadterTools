@@ -1,9 +1,9 @@
 Chern Numbers
 =============
 
-In this section, we will demonstrate how to numerically compute the first Chern number. :cite:`AidelsburgerPhD, SoluyanovPhD, Goudarzi22`
+In this section, we will demonstrate how to numerically compute the Chern number. :cite:`AidelsburgerPhD, SoluyanovPhD, Goudarzi22`
 
-The Chern number is defined as
+The first Chern number is defined as
 
 .. math::
    C = \frac{1}{2\pi} \int_\mathrm{BZ} \mathcal{B}(\mathbf{k}) \mathrm{d}^2 k,
@@ -31,12 +31,12 @@ Inserting this into the expression for the Berry curvature yields
    \mathcal{B}(\mathbf{k}) = -\mathrm{i} \lim_{\Delta_\alpha\to 0}\lim_{\Delta_\beta\to 0} \frac{1}{\Delta_\alpha\Delta_\beta} \left( \braket{u_{\mathbf{k}+\Delta_\alpha}| u_{\mathbf{k}+\Delta_\beta+\Delta_\alpha}}-\braket{u_\mathbf{k}|u_{\mathbf{k}+\Delta_\beta}} - \braket{u_{\mathbf{k}+\Delta_\beta}| u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta}}+\braket{u_\mathbf{k}|u_{\mathbf{k}+\Delta_\alpha}} \right).
 
 
-However, it is difficult to compute the Berry curvature numerically using this formula because it is not gauge invariant. Instead, exploiting the property that the Berry curvature is real, we may write it as a product of Berry phases around a plaquette
+However, it is difficult to compute the Berry curvature numerically using this formula because the Bloch wavefunctions come with a gauge-dependent phase. Instead, exploiting the property that the Berry curvature is real, we may write it as a product of Berry phases around a plaquette
 
 .. math::
    \mathcal{B}(\mathbf{k}) = - \lim_{\Delta_\alpha\to 0}\lim_{\Delta_\beta\to 0} \frac{1}{\Delta_\alpha \Delta_\beta} \text{Im}\;\log (\braket{u_{\mathbf{k}}| u_{\mathbf{k}+\Delta_\alpha}}\braket{u_{\mathbf{k}+\Delta_\alpha}| u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta}}\braket{u_{\mathbf{k}+\Delta_\alpha+\Delta_\beta}| u_{\mathbf{k}+\Delta_\beta}} \braket{u_{\mathbf{k}+\Delta_\beta}| u_{\mathbf{k}}}).
 
-This expression is gauge invariant and the Chern number is then computed by numerically integrating the Berry curvature at each plaquette and dividing by :math:`2\pi`. In the limit of small plaquettes, we recover an integer. This equation is also known as the Fukui formula. :cite:`Fukui05`
+This expression is manifestly gauge invariant and the Chern number is then computed by numerically integrating the Berry curvature at each plaquette and dividing by :math:`2\pi`. In the limit of small plaquettes, we recover an integer. This equation is also known as the Fukui formula. :cite:`Fukui05`
 
 In the case of band touching, each phase factor is replaced by the determinant of the phase factor matrix. For example, in the case of two bands touching, the phase factors
 

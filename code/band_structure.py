@@ -10,6 +10,7 @@ import functions.band_structure as fbs
 import functions.arguments as fa
 import functions.utility as fu
 import functions.plotting as fp
+import functions.models as fm
 from models.hofstadter import Hofstadter
 from configuration.band_structure import *
 
@@ -55,15 +56,15 @@ if __name__ == '__main__':
             raise ValueError("model is not defined")
 
         # define unit cell
-        num_bands, _, _, bMUCvec, sym_points = model.unit_cell()
+        _, avec, abasisvec, bMUCvec, sym_points = model.unit_cell()
+        _, bases = fm.nearest_neighbor_finder(avec, abasisvec, t, 0, 0, 0)
+        num_bands = nphi[1] * len(bases)
 
         if disp == "3D" or disp == "both" or any(topology_columns) or any(geometry_columns):
             # construct bands
             data['eigenvalues'] = np.zeros((num_bands, samp, samp))  # real
             data['eigenvectors'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
             if any(geometry_columns):
-                if nphi[1] % 2 == 0:
-                    warnings.warn("Quantum geometric tensor not yet implemented for the case of band touching.")
                 data['eigenvectors_dkx'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
                 data['eigenvectors_dky'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
                 data['Dkx'] = np.dot(np.array([1/(samp-1), 0]), bMUCvec[0])
@@ -86,9 +87,9 @@ if __name__ == '__main__':
                             k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bMUCvec)
                             k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bMUCvec)
                             ham_dkx = model.hamiltonian(k_dkx)
-                            eigvals_dkx, eigvecs_dkx = np.linalg.eig(ham_dkx)
+                            eigvals_dkx, eigvecs_dkx = np.linalg.eigh(ham_dkx)
                             ham_dky = model.hamiltonian(k_dky)
-                            eigvals_dky, eigvecs_dky = np.linalg.eig(ham_dky)
+                            eigvals_dky, eigvecs_dky = np.linalg.eigh(ham_dky)
                             idx_dkx = np.argsort(eigvals_dkx)
                             idx_dky = np.argsort(eigvals_dky)
                             data['eigenvectors_dkx'][:, band, idx_x, idx_y] = eigvecs_dkx[:, idx_dkx[band]]
@@ -107,7 +108,7 @@ if __name__ == '__main__':
                         points_per_path - 1)
                     k = np.matmul(k, bMUCvec)
                     ham = model.hamiltonian(k)
-                    eigvals = np.linalg.eigvals(ham)
+                    eigvals = np.linalg.eigvalsh(ham)
                     idx = np.argsort(eigvals)
                     for band in range(num_bands):
                         data['eigenvalues_2D'][band, count] = np.real(eigvals[idx[band]])
@@ -181,18 +182,22 @@ if __name__ == '__main__':
                         berry_fluxes[band, idx_x, idx_y] = fbs.berry_curv(data['eigenvectors'], band, idx_x, idx_y, group_size)
                         # quantum geometry
                         if any(geometry_columns):
-                            if group_size == 1:
-                                geom_tensor = fbs.geom_tensor(data['eigenvectors'], data['eigenvectors_dkx'], data['eigenvectors_dky'], bMUCvec, band, idx_x, idx_y, group_size)
-                                fs_metric[band, idx_x, idx_y] = np.real(geom_tensor)
-                                berry_curv = -2*np.imag(geom_tensor)
-                                ###
-                                berry_fluxes_2[band, idx_x, idx_y] = berry_curv[0][1]
-                                TISM[band, idx_x, idx_y] = np.trace(fs_metric[band, idx_x, idx_y]) \
-                                    - np.abs(berry_fluxes_2[band, idx_x, idx_y])
-                                DISM[band, idx_x, idx_y] = np.linalg.det(fs_metric[band, idx_x, idx_y]) \
-                                    - 0.25*np.abs(berry_fluxes_2[band, idx_x, idx_y])**2
+                            geom_tensor = fbs.geom_tensor(data['eigenvectors'], data['eigenvectors_dkx'], data['eigenvectors_dky'], bMUCvec, band, idx_x, idx_y, group_size)
+                            fs_metric[band, idx_x, idx_y] = np.real(geom_tensor)
+                            berry_curv = -2 * np.imag(geom_tensor)
+                            ###
+                            berry_fluxes_2[band, idx_x, idx_y] = berry_curv[0][1]
+                            TISM[band, idx_x, idx_y] = np.trace(fs_metric[band, idx_x, idx_y]) \
+                                                       - np.abs(berry_fluxes_2[band, idx_x, idx_y])
+                            DISM[band, idx_x, idx_y] = np.linalg.det(fs_metric[band, idx_x, idx_y]) \
+                                                       - 0.25 * np.abs(berry_fluxes_2[band, idx_x, idx_y])**2
                     else:
                         berry_fluxes[band, idx_x, idx_y] = berry_fluxes[band-1, idx_x, idx_y]
+                        if any(geometry_columns):
+                            fs_metric[band, idx_x, idx_y] = fs_metric[band-1, idx_x, idx_y]
+                            berry_fluxes_2[band, idx_x, idx_y] = berry_fluxes_2[band-1, idx_x, idx_y]
+                            TISM[band, idx_x, idx_y] = TISM[band-1, idx_x, idx_y]
+                            DISM[band, idx_x, idx_y] = DISM[band-1, idx_x, idx_y]
             if wil:
                 if group != band_group[band - 1]:
                     data['wilson_loops'][band, samp-1] = fbs.wilson_loop(data['eigenvectors'], band, samp-1, group_size)
@@ -202,17 +207,17 @@ if __name__ == '__main__':
     # band properties
     band_width = np.zeros(num_bands)
     std_B_norm = np.zeros(num_bands)
-    chern_numbers, chern_numbers_2 = np.zeros((2, num_bands))
+    chern_numbers = np.zeros(num_bands)
     std_g_norm, av_gxx, std_gxx, av_gxy, std_gxy = np.zeros((5, num_bands))
-    av_TISM, av_DISM = np.zeros((2, num_bands))
+    av_TISM, av_DISM, av_TISM_proj = np.zeros((3, num_bands))
     for band_idx, band in enumerate(np.arange(num_bands)[::-1]):
         band_width[band] = np.max(eigenvals[band]) - np.min(eigenvals[band])
         if any(topology_columns):
             std_B_norm[band] = np.std(berry_fluxes[band, :, :])/np.abs(np.average(berry_fluxes[band, :, :]))
             chern_numbers[band] = np.sum(berry_fluxes[band, :, :]) / (2 * np.pi)
         if any(geometry_columns):
-            chern_numbers_2[band] = np.sum(berry_fluxes_2[band, :, :]) * data['Dkx'] * data['Dky'] / (2 * np.pi)
-            std_g_norm[band] = np.sum(fs_metric[band, :, :]) * data['Dkx'] * data['Dky'] / (2 * np.pi)
+            g_var_sum = np.var(fs_metric[band, :, :][0, 0]) + np.var(fs_metric[band, :, :][0, 1])
+            std_g_norm[band] = np.sqrt(g_var_sum)
             av_gxx[band] = np.mean(fs_metric[band, :, :, 0, 0])
             std_gxx[band] = np.std(fs_metric[band, :, :, 0, 0])
             av_gxy[band] = np.mean(fs_metric[band, :, :, 0, 1])
@@ -221,16 +226,16 @@ if __name__ == '__main__':
             av_DISM[band] = np.sum(DISM[band]) * data['Dkx'] * data['Dky'] / (2 * np.pi)
 
     # table
-    headers = ["band", "group", "isolated", "width", "gap", "gap/width", "std_B/|av_B|", "C",
-               "C (geom_tensor)", "std_g/|av_g|", "av_gxx", "std_gxx", "av_gxy", "std_gxy", "<T>", "<D>"]
-    bools = [show_band, show_group, show_isolated, show_width, show_gap, show_gap_width, show_std_B_norm, show_C,
-             show_C_geom_tensor, show_std_g_norm, show_av_gxx, show_std_gxx, show_av_gxy, show_std_gxy, show_T, show_D]
+    headers = ["band", "group", "isolated", "width", "gap", "gap/width", "std_B", "C",
+               "std_g", "av_gxx", "std_gxx", "av_gxy", "std_gxy", "<T>", "<D>"]
+    bools = [show_band, show_group, show_isolated, show_width, show_gap, show_gap_width, show_std_B, show_C,
+             show_std_g, show_av_gxx, show_std_gxx, show_av_gxy, show_std_gxy, show_T, show_D]
     table = PrettyTable()
     name_list = []
     table.field_names = [j for i, j in enumerate(headers) if bools[i]]
     for band in np.arange(num_bands)[::-1]:
         table_data = [band, band_group[band], isolated[band], band_width[band], band_gap[band], band_gap[band] / band_width[band],
-                      std_B_norm[band], round(chern_numbers[band]), chern_numbers_2[band], std_g_norm[band],
+                      std_B_norm[band], round(chern_numbers[band]), std_g_norm[band],
                       av_gxx[band], std_gxx[band], av_gxy[band], std_gxy[band], av_TISM[band], av_DISM[band]]
         table.add_row([j for i, j in enumerate(table_data) if bools[i]])
     print(table)

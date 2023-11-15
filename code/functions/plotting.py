@@ -10,6 +10,7 @@ import matplotlib.colors as mcolors
 from mpl_toolkits.mplot3d import axes3d
 from matplotlib import rcParams
 import functions.utility as fu
+import functions.models as fm
 
 
 def band_structure(model, args, data):
@@ -51,7 +52,9 @@ def band_structure(model, args, data):
     wilson_loops = data['wilson_loops']
 
     # define unit cell
-    num_bands, _, _, bMUCvec, sym_points = model.unit_cell()
+    _, avec, abasisvec, bMUCvec, sym_points = model.unit_cell()
+    _, bases = fm.nearest_neighbor_finder(avec, abasisvec, t, 0, 0, 0)
+    num_bands = nphi[1] * len(bases)
 
     if disp in ["3D", "both"]:
         # construct figure

@@ -66,13 +66,19 @@ By default, the quantum geometry computations are turned off in the ``band_struc
 
 	I would like to compute the band structure of my custom Hamiltonian but it is running very slowly compared to standard examples. Why is this?
 
-The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor interactions. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its complete band structure more quickly, then consider adding it to ``functions/models.py`` in a similar format to the other hardcoded Hamiltonians, e.g. ``BasicKagomeHamiltonian``. We note that the ``butterfly`` program does not suffer from this issue, since the diagonalization is performed only at a single k point.
+The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor interactions. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its complete band structure more quickly, then consider adding it to ``functions/models.py`` in a similar format to the other hardcoded Hamiltonians, e.g. ``BasicKagomeHamiltonian``. We note that the ``butterfly`` program does not suffer from this issue, since the diagonalization is performed only at a single :math:`k` point.
 
 .. admonition:: Question
 
 	I have computed the band structure for a particular model and I have noticed that certain bands are not "touching" when they should be, or visa versa. How can I fix this?
 
-Due to the discrete nature of the k mesh, it is difficult to declare that certain bands are touching. For this purpose, HofstadterTools uses the band gap threshold flag ``-bgt``, which declares bands as touching when they are within this value of each other. If you notice that certain bands should/should not be touching, e.g. by noticing that the Chern numbers do not sum to zero, or you are simply suspicious of bands that are in close proximity, you can try decreasing the mesh size using the ``-samp`` flag and tweaking this ``-bgt`` value.
+Due to the discrete nature of the :math:`k` mesh, it is difficult to declare that certain bands are touching. For this purpose, HofstadterTools uses the band gap threshold flag ``-bgt``, which declares bands as touching when they are within this value of each other. If you notice that certain bands should/should not be touching, e.g. by noticing that the Chern numbers do not sum to zero, or you are simply suspicious of bands that are in close proximity, you can try decreasing the mesh size using the ``-samp`` flag and tweaking this ``-bgt`` value.
+
+.. admonition:: Question
+
+	I have computed the band structure for a kagome/custom lattice and it looks incorrect. Why is this?
+
+When computing the complete band structure, it may be more difficult to spot when the ``--periodicity`` flag needs to be set. If in doubt, compute the corresponding butterfly spectrum and make sure that it has the correct periodicity.
 
 butterfly Questions
 -------------------

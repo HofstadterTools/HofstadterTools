@@ -6,7 +6,7 @@ from fractions import Fraction
 def chern(pval, qval):
     r"""Compute Chern numbers using the Diophantine equation.
 
-    For a rational flux, the energy gaps in the Hofstadter spectrum are characterized by the integers s and t, which are related by the following Diophantine equation,
+    For a rational flux, the energy gaps in the Hofstadter spectrum are characterized by the integers :math:`s` and :math:`t`, which are related by the following Diophantine equation,
 
     .. math::
         r = qs_r + pt_r, \;\;\; |t_r|\leq\frac{q}{2}, \;\;\; s_r,t_r\in\mathbb{Z},

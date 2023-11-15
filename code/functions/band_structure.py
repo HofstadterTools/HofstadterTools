@@ -90,11 +90,9 @@ def U(var_num, _eigenvectors, _band, _idx_x, _idx_y, _group_size):
     return link_var
 
 
-def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
+def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1):
     r"""
     Compute the Berry curvature.
-
-    **Method 1 (default):**
 
     The Berry curvature around a plaquette is computed using the formula from :cite:`Fukui05` (example applications in :cite:`SoluyanovPhD, AidelsburgerPhD`), such that
 
@@ -111,21 +109,6 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
 
         where :math:`\mathcal{P}` denotes the principal value of the complex number :math:`z`, such that :math:`-\\\pi<\text{Im}(z)\leq\\\pi`.
 
-    **Method 2:**
-
-    The Berry curvature around a plaquette is computed from the quantum geometric tensor :cite:`Parameswaran13` (example applications in :cite:`Claassen15`), such that
-
-    .. math::
-       \mathcal{B}_{12}(\mathbf{k}_\alpha) = - 2 \text{Im}[\mathcal{R}_{12}(\mathbf{k}_\alpha)],
-
-    where the quantum geometric tensor is defined as
-
-    .. math::
-       \mathcal{R}_{12}(\mathbf{k}_\alpha) = \braket{u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_1)|u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_2)} - \braket{u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_1)|u(\mathbf{k}_\alpha)} \braket{u(\mathbf{k}_\alpha)|u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_2)}.
-
-    .. note::
-        This method is only implemented for a single band, and it converges significantly slower than method 1.
-
     Parameters
     ----------
     _eigenvectors: ndarray
@@ -138,9 +121,6 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
         The y-momentum index, with respect to the discretized grid.
     _group_size: int
         The number of touching bands a.k.a. number of bands in the band group (default=1).
-    method: [1, 2]
-        1. Compute the Berry curvature using the formula from :cite:`Fukui05` (default).
-        2. Compute the Berry curvature using the quantum metric :cite:`Parameswaran13`.
 
     Returns
     -------
@@ -148,22 +128,10 @@ def berry_curv(_eigenvectors, _band, _idx_x, _idx_y, _group_size=1, method=1):
         The Berry curvature around a square plaquette.
     """
 
-    if method == 1:
-        Berry_curv = - np.imag(np.log(U(1, _eigenvectors, _band, _idx_x, _idx_y, _group_size)
-                                      * U(2, _eigenvectors, _band, _idx_x+1, _idx_y, _group_size)
-                                      * U(1, _eigenvectors, _band, _idx_x, _idx_y+1, _group_size)**-1
-                                      * U(2, _eigenvectors, _band, _idx_x, _idx_y, _group_size)**-1))
-    elif method == 2:
-        if _group_size == 1:
-            vec = _eigenvectors[:, _band, _idx_x, _idx_y]
-            vec1 = _eigenvectors[:, _band, _idx_x+1, _idx_y]
-            vec2 = _eigenvectors[:, _band, _idx_x, _idx_y+1]
-            chi = np.conj(vec1).dot(vec2) - np.conj(vec1).dot(vec) * np.conj(vec).dot(vec2)
-            Berry_curv = -2 * np.imag(chi)
-        else:
-            raise ValueError("method=2 with bands>1 in berry_curv is not yet implemented.")
-    else:
-        raise ValueError("method parameter in berry_curv is not in [1, 2].")
+    Berry_curv = - np.imag(np.log(U(1, _eigenvectors, _band, _idx_x, _idx_y, _group_size)
+                                  * U(2, _eigenvectors, _band, _idx_x+1, _idx_y, _group_size)
+                                  * U(1, _eigenvectors, _band, _idx_x, _idx_y+1, _group_size)**-1
+                                  * U(2, _eigenvectors, _band, _idx_x, _idx_y, _group_size)**-1))
 
     return Berry_curv
 
@@ -210,20 +178,23 @@ def geom_tensor(_eigenvectors, _eigenvectors_dkx, _eigenvectors_dky, _bvec, _ban
     r"""
     Compute the quantum geometric tensor.
 
-    The quantum geometric tensor is computed using the formula from :cite:`Parameswaran13` (example applications in :cite:`Claassen15`), such that
+    The quantum geometric tensor is computed using
 
     .. math::
-       \mathcal{R}_{\mu \nu}(\mathbf{k}_\alpha) = \braket{u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_\mu) | u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_\nu)} - \braket{u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_\mu) | u(\mathbf{k}_\alpha)} \braket{u(\mathbf{k}_\alpha) | u(\mathbf{k}_\alpha+\hat{\mathbf{e}}_\nu)},
+       \mathcal{R}_{i j}(\mathbf{k}) = \mathrm{tr} ( \mathcal{P}_\mathbf{k} \partial_{k_i} \mathcal{P}_\mathbf{k} \partial_{k_j} \mathcal{P}_\mathbf{k}),
 
-    where :math:`\ket{u(\mathbf{k}_\alpha)}` is the eigenvector at momentum :math:`\mathbf{k}_\alpha`. The quantum geometric tensor at the point :math:`\mathbf{k}` can then be computed by taking the limit of small plaquette size.
-
-    .. note::
-        This function is currently only implemented for a single band.
+    where :math:`\mathcal{P}_\mathbf{k} = \sum_n \ket{u_n(\mathbf{k})}\bra{u_n(\mathbf{k})}` is the band projector and the sum is performed over all bands in the band group. :cite:`Parameswaran13` :cite:`Hirschmann23`
 
     Parameters
     ----------
     _eigenvectors: ndarray
         The array of eigenvectors with dimension (num_bands, num_bands, num_samples, num_samples).
+    _eigenvectors_dkx: ndarray
+        The array of eigenvectors at a dkx offset with dimension (num_bands, num_bands, num_samples, num_samples).
+    _eigenvectors_dky: ndarray
+        The array of eigenvectors at a dky offset with dimension (num_bands, num_bands, num_samples, num_samples).
+    _bvec: ndarray
+        The array of reciprocal lattice vectors.
     _band: int
         The band number. If part of a band group, this must refer to the lowest band of the group.
     _idx_x: int
@@ -239,27 +210,25 @@ def geom_tensor(_eigenvectors, _eigenvectors_dkx, _eigenvectors_dky, _bvec, _ban
         The quantum geometric tensor with dimension (2,2).
     """
 
-    if _group_size == 1:
+    numb_samp_x = np.shape(_eigenvectors)[2]
+    numb_samp_y = np.shape(_eigenvectors)[3]
 
-        numb_samp_x = np.shape(_eigenvectors)[2]
-        numb_samp_y = np.shape(_eigenvectors)[3]
+    tot_proj, tot_proj_dkx, tot_proj_dky = 0, 0, 0
+    for i in range(_group_size):
+        tot_proj += np.outer(_eigenvectors[:, _band+i, _idx_x, _idx_y], np.conj(_eigenvectors[:, _band+i, _idx_x, _idx_y]))
+        tot_proj_dkx += np.outer(_eigenvectors_dkx[:, _band+i, _idx_x, _idx_y], np.conj(_eigenvectors_dkx[:, _band+i, _idx_x, _idx_y]))
+        tot_proj_dky += np.outer(_eigenvectors_dky[:, _band+i, _idx_x, _idx_y], np.conj(_eigenvectors_dky[:, _band+i, _idx_x, _idx_y]))
 
-        dkx = np.linalg.norm(_bvec[0]) / (1000*(numb_samp_x-1))
-        dky = np.linalg.norm(_bvec[1]) / (1000*(numb_samp_y-1))
+    dkx = np.linalg.norm(_bvec[0]) / (1000 * (numb_samp_x - 1))
+    dky = np.linalg.norm(_bvec[1]) / (1000 * (numb_samp_y - 1))
 
-        vec = _eigenvectors[:, _band, _idx_x, _idx_y]
-        vec_dkx = _eigenvectors_dkx[:, _band, _idx_x, _idx_y]
-        vec_dky = _eigenvectors_dky[:, _band, _idx_x, _idx_y]
+    grad_kx = np.subtract(tot_proj_dkx, tot_proj) / dkx
+    grad_ky = np.subtract(tot_proj_dky, tot_proj) / dky
 
-        grad_kx = (vec_dkx - vec) / dkx
-        grad_ky = (vec_dky - vec) / dky
-
-        tensor = np.zeros((2, 2), dtype=np.complex128)
-        tensor[0][0] = np.vdot(grad_kx, grad_kx) - np.vdot(grad_kx, vec) * np.vdot(vec, grad_kx)
-        tensor[0][1] = np.vdot(grad_kx, grad_ky) - np.vdot(grad_kx, vec) * np.vdot(vec, grad_ky)
-        tensor[1][0] = np.vdot(grad_ky, grad_kx) - np.vdot(grad_ky, vec) * np.vdot(vec, grad_kx)
-        tensor[1][1] = np.vdot(grad_ky, grad_ky) - np.vdot(grad_ky, vec) * np.vdot(vec, grad_ky)
-    else:
-        raise ValueError("geom_tensor function is currently only implemented for _group_size=1.")
+    tensor = np.zeros((2, 2), dtype=np.complex128)
+    tensor[0][0] = np.trace(np.matmul(tot_proj, np.matmul(grad_kx, grad_kx)))
+    tensor[0][1] = np.trace(np.matmul(tot_proj, np.matmul(grad_kx, grad_ky)))
+    tensor[1][0] = np.trace(np.matmul(tot_proj, np.matmul(grad_ky, grad_kx)))
+    tensor[1][1] = np.trace(np.matmul(tot_proj, np.matmul(grad_ky, grad_ky)))
 
     return tensor
