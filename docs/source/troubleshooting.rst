@@ -60,7 +60,7 @@ band_structure Questions
 
 	I would like to analyze the quantum geometry of the bands, but I do not see any quantum geometry data in the output table of the ``band_structure`` program. How can I do this?
 
-By default, the quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can edit the table column selector at ``code/configuration/band_structure.py``. Note that the table columns are grouped by computational expense. For example, if you would like to output the normalized Fubini-Study metric fluctuations ``std_g_norm``, then you could also output the Brillouin-zone-averaged trace inequality saturation measure ``T``  at negligible additional cost.
+By default, the quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can edit the table column selector at ``code/configuration/band_structure.py``. Note that the table columns are grouped by computational expense. For example, if you would like to output the Fubini-Study metric fluctuations ``std_g``, then you could also output the Brillouin-zone-averaged trace inequality saturation measure ``T``  at negligible additional cost.
 
 .. admonition:: Question
 
