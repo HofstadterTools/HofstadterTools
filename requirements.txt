@@ -3,7 +3,6 @@ numpy
 matplotlib
 prettytable
 tqdm
-furo
 ipython
 sphinx
 pydata-sphinx-theme
@@ -16,3 +15,4 @@ sphinx-copybutton
 sphinx_rtd_theme
 graphviz
 pypandoc
+pytest
