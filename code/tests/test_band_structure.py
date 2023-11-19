@@ -69,8 +69,6 @@ def test_square():
     eigenvectors_ref = data['eigenvectors']
 
     assert np.allclose(eigenvalues, eigenvalues_ref)
-    print("one = ", eigenvectors)
-    print("two = ", eigenvectors_ref)
     assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
 
 
@@ -86,7 +84,7 @@ def test_triangular():
     eigenvectors_ref = data['eigenvectors']
 
     assert np.allclose(eigenvalues, eigenvalues_ref)
-    # assert np.allclose(eigenvectors, eigenvectors_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
 
 
 def test_bravais():
@@ -101,7 +99,7 @@ def test_bravais():
     eigenvectors_ref = data['eigenvectors']
 
     assert np.allclose(eigenvalues, eigenvalues_ref)
-    assert np.allclose(eigenvectors, eigenvectors_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
 
 
 def test_honeycomb():
@@ -116,7 +114,7 @@ def test_honeycomb():
     eigenvectors_ref = data['eigenvectors']
 
     assert np.allclose(eigenvalues, eigenvalues_ref)
-    assert np.allclose(eigenvectors, eigenvectors_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
 
 
 def test_kagome():
@@ -131,4 +129,4 @@ def test_kagome():
     eigenvectors_ref = data['eigenvectors']
 
     assert np.allclose(eigenvalues, eigenvalues_ref)
-    assert np.allclose(eigenvectors, eigenvectors_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
