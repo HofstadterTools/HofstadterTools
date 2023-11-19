@@ -1,3 +1,5 @@
+"""Unit tests for the butterfly program."""
+
 import numpy as np
 from math import gcd
 from models.hofstadter import Hofstadter
@@ -52,6 +54,7 @@ def butterfly(q, t, lat, alpha=1, theta=(1, 3), period=1):
 
 
 def test_square():
+    """Benchmark the square Hofstadter butterfly, e.g. against Fig.4(d) of :cite:`Yilmaz17`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "square")
@@ -68,6 +71,7 @@ def test_square():
 
 
 def test_triangular():
+    """Benchmark the triangular Hofstadter butterfly, e.g. against Fig.4(a) of :cite:`Yilmaz17`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "triangular")
@@ -84,6 +88,7 @@ def test_triangular():
 
 
 def test_bravais():
+    """Benchmark the Bravais Hofstadter butterfly, e.g. against Fig.4(c) of :cite:`Yilmaz17`."""
 
     # current
     nphi_list, E_list = butterfly(97, [0.5, 0.2], "bravais", alpha=1, theta=(67, 180))
@@ -100,6 +105,7 @@ def test_bravais():
 
 
 def test_honeycomb():
+    """Benchmark the honeycomb Hofstadter butterfly, e.g. against Fig.5 of :cite:`Agazzi14`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "honeycomb")
@@ -116,6 +122,7 @@ def test_honeycomb():
 
 
 def test_kagome():
+    """Benchmark the kagome Hofstadter butterfly, e.g. against Fig.3 of :cite:`Jing-Min09`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "kagome", alpha=1, theta=(1, 3), period=8)

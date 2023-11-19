@@ -1,3 +1,5 @@
+"""Unit tests for the band_structure program."""
+
 import numpy as np
 import functions.models as fm
 from models.hofstadter import Hofstadter
@@ -58,6 +60,7 @@ def band_structure(nphi, t, lat, alpha=1, theta=(1, 3), period=1, samp=11):
 
 
 def test_square():
+    """Benchmark the square Hofstadter band structure, e.g. against Fig.2.6(a) of :cite:`Aidelsburger13`."""
 
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "square")
@@ -73,6 +76,7 @@ def test_square():
 
 
 def test_triangular():
+    """Benchmark the triangular Hofstadter band structure."""
 
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "triangular")
@@ -88,6 +92,7 @@ def test_triangular():
 
 
 def test_bravais():
+    """Benchmark the Bravais Hofstadter band structure."""
 
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [0.5, 0.2], "bravais", alpha=1, theta=(67, 180))
@@ -103,6 +108,7 @@ def test_bravais():
 
 
 def test_honeycomb():
+    """Benchmark the honeycomb Hofstadter band structure."""
 
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "honeycomb")
@@ -118,6 +124,7 @@ def test_honeycomb():
 
 
 def test_kagome():
+    """Benchmark the kagome Hofstadter band structure."""
 
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "kagome", period=8)
