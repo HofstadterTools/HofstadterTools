@@ -1,10 +1,10 @@
 HofstadterTools
 ===============
 
-|documentation|
+|docs|
 
-.. |documentation| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/documentation.yml/badge.svg
-   :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/documentation.yml
+.. |docs| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml/badge.svg
+   :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model, which describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a perpendicular gauge field. This package can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
