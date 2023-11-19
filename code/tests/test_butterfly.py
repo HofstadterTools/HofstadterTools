@@ -4,6 +4,30 @@ from models.hofstadter import Hofstadter
 
 
 def butterfly(q, t, lat, alpha=1, theta=(1, 3), period=1):
+    """Minimal function to generate the butterfly spectrum.
+
+    Parameters
+    ----------
+    q: int
+        The denominator of the coprime flux density fraction.
+    t: list
+        The list of hopping amplitudes in order of ascending NN.
+    lat: str
+        The name of the lattice.
+    alpha: float
+        The anisotropy of the Bravais lattice vectors (default=1).
+    theta: tuple
+        The angle between Bravais lattice vectors in units of pi (default=(1, 3)).
+    period: int
+        The factor by which to divide A_UC in the flux density (default=1).
+
+    Returns
+    -------
+    nphi_list: list
+        The list of flux densities.
+    E_list: list
+        The list of corresponding energies.
+    """
 
     nphi_list, E_list = [], []
 
@@ -30,12 +54,12 @@ def butterfly(q, t, lat, alpha=1, theta=(1, 3), period=1):
 def test_square():
 
     # current
-    nphi_list, E_list = butterfly(199, [1], "square")
+    nphi_list, E_list = butterfly(97, [1], "square")
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_square_q_199_t_1.npy"
+    filename = "code/tests/butterfly/butterfly_square_q_97_t_1.npz"
     file_data = np.load(filename, allow_pickle=True)
-    data = file_data[2]
+    data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']
     E_list_ref = data['E_list']
     reference = np.array([nphi_list_ref, E_list_ref])
@@ -46,12 +70,12 @@ def test_square():
 def test_triangular():
 
     # current
-    nphi_list, E_list = butterfly(199, [1], "triangular")
+    nphi_list, E_list = butterfly(97, [1], "triangular")
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_triangular_q_199_t_1.npy"
+    filename = "code/tests/butterfly/butterfly_triangular_q_97_t_1.npz"
     file_data = np.load(filename, allow_pickle=True)
-    data = file_data[2]
+    data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']
     E_list_ref = data['E_list']
     reference = np.array([nphi_list_ref, E_list_ref])
@@ -62,12 +86,12 @@ def test_triangular():
 def test_bravais():
 
     # current
-    nphi_list, E_list = butterfly(199, [0.5, 0.2], "bravais", alpha=1, theta=(67, 180))
+    nphi_list, E_list = butterfly(97, [0.5, 0.2], "bravais", alpha=1, theta=(67, 180))
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_bravais_q_199_t_0.5_0.2_alpha_1_theta_67_180.npy"
+    filename = "code/tests/butterfly/butterfly_bravais_q_97_t_0.5_0.2_alpha_1_theta_67_180.npz"
     file_data = np.load(filename, allow_pickle=True)
-    data = file_data[2]
+    data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']
     E_list_ref = data['E_list']
     reference = np.array([nphi_list_ref, E_list_ref])
@@ -78,12 +102,12 @@ def test_bravais():
 def test_honeycomb():
 
     # current
-    nphi_list, E_list = butterfly(199, [1], "honeycomb")
+    nphi_list, E_list = butterfly(97, [1], "honeycomb")
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_honeycomb_q_199_t_1_alpha_1_theta_1_3.npy"
+    filename = "code/tests/butterfly/butterfly_honeycomb_q_97_t_1_alpha_1_theta_1_3.npz"
     file_data = np.load(filename, allow_pickle=True)
-    data = file_data[2]
+    data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']
     E_list_ref = data['E_list']
     reference = np.array([nphi_list_ref, E_list_ref])
@@ -94,12 +118,12 @@ def test_honeycomb():
 def test_kagome():
 
     # current
-    nphi_list, E_list = butterfly(199, [1], "kagome", alpha=1, theta=(1, 3), period=8)
+    nphi_list, E_list = butterfly(97, [1], "kagome", alpha=1, theta=(1, 3), period=8)
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_kagome_q_199_t_1_alpha_1_theta_1_3_period_8.npy"
+    filename = "code/tests/butterfly/butterfly_kagome_q_97_t_1_alpha_1_theta_1_3_period_8.npz"
     file_data = np.load(filename, allow_pickle=True)
-    data = file_data[2]
+    data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']
     E_list_ref = data['E_list']
     reference = np.array([nphi_list_ref, E_list_ref])

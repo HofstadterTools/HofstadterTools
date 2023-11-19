@@ -6,7 +6,7 @@ import functions.plotting as fp
 if __name__ == '__main__':
 
     # load the file
-    filename = "band_structure_both_square_nphi_1_6_t_1.npy"
+    filename = "band_structure_3D_square_nphi_1_4_t_1.npz"
     model, args, data = fu.load_data("band_structure", filename)
 
     # overwrite args parameters

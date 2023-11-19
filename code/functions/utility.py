@@ -115,10 +115,9 @@ def save_data(program, model, args, data):
         The data array.
     """
 
-    filename = create_filename(program, args)
-    save_list = [model, args, data]
     directory = f"../data/{program}/" if os.path.isdir(f"../data/{program}/") else ""
-    np.save(directory+filename, save_list)
+    filename = create_filename(program, args)
+    np.savez_compressed(directory+filename, model=model, args=args, data=data)
 
     return None
 
@@ -136,9 +135,9 @@ def load_data(program, filename):
 
     directory = f"../data/{program}/" if os.path.isdir(f"../data/{program}/") else ""
     file_data = np.load(directory+filename, allow_pickle=True)
-    model = file_data[0]
-    args = file_data[1]
-    data = file_data[2]
+    model = file_data['model'].item()  # .item() unpacks 0-dim array
+    args = file_data['args'].item()
+    data = file_data['data'].item()
 
     return model, args, data
 
