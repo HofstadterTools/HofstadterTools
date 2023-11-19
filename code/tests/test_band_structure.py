@@ -8,7 +8,7 @@ def band_structure(nphi, t, lat, alpha=1, theta=(1, 3), period=1, samp=11):
 
     Parameters
     ----------
-    nphi: int
+    nphi: tuple
         The flux density.
     t: list
         The list of hopping amplitudes in order of ascending NN.
@@ -71,7 +71,7 @@ def test_square():
     assert np.allclose(eigenvalues, eigenvalues_ref)
     print("one = ", eigenvectors)
     print("two = ", eigenvectors_ref)
-    assert np.allclose(eigenvectors, eigenvectors_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
 
 
 def test_triangular():

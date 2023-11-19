@@ -1,7 +1,7 @@
 HofstadterTools
 ===============
 
-|docs|  |pytests|
+|docs| |pytests|
 
 .. |docs| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml
