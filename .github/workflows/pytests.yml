@@ -15,6 +15,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install sphinx sphinx_rtd_theme myst_parser pybtex sphinx-copybutton sphinxcontrib-bibtex sphinx-autodoc-typehints nbsphinx ipython pydata-sphinx-theme jupyter jupytext pypandoc numpy matplotlib prettytable tqdm pytest
+      - name: Set the PYTHONPATH
+        run: |
+          echo "PYTHONPATH=$PYTHONPATH:code" >> "$GITHUB_ENV"
       - name: Run pytests
         run: |
           pytest code/tests/
