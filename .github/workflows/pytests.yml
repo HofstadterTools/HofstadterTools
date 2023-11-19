@@ -17,4 +17,4 @@ jobs:
           pip install sphinx sphinx_rtd_theme myst_parser pybtex sphinx-copybutton sphinxcontrib-bibtex sphinx-autodoc-typehints nbsphinx ipython pydata-sphinx-theme jupyter jupytext pypandoc numpy matplotlib prettytable tqdm pytest
       - name: Run pytests
         run: |
-          pytest codes/tests/
+          pytest code/tests/
