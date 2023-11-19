@@ -1,13 +1,16 @@
 HofstadterTools
 ===============
 
-|docs| |pytests|
+|docs| |pytests| |license|
 
 .. |docs| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml
 
 .. |pytests| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/pytests.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/pytests.yml
+
+.. |license| image:: https://badgen.net/badge/license/GPLv3/blue
+   :target: https://www.gnu.org/licenses/gpl-3.0
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model, which describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a perpendicular gauge field. This package can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
@@ -29,7 +32,7 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 		(HT) user@domain:~/HofstadterTools$ cd code
 		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -lat square -nphi 1 4 --display both --wilson
 
-.. image:: https://hofstadter.tools/_images/band_structure_3D_both_square_nphi_1_4_t_1.png
+.. image:: images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
     :width: 33 %
     :alt: 3D Band Structure
 .. image:: images/overview/wilson_both_square_nphi_1_4_t_1.png
