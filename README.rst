@@ -29,10 +29,10 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 .. image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/main/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
     :width: 33 %
     :alt: 3D Band Structure
-.. image:: images/overview/wilson_both_square_nphi_1_4_t_1.png
+.. image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/gh-pages/_images/wilson_both_square_nphi_1_4_t_1.png
     :width: 33 %
     :alt: Wilson Loops
-.. image:: images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
+.. image:: https://hofstadter.tools/_images/band_structure_2D_both_square_nphi_1_4_t_1.png
     :width: 33 %
     :alt: 2D Band Structure
 
@@ -42,10 +42,13 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 
 .. image:: images/overview/butterfly_square_q_97_t_1_col_point_avron.png
     :width: 33 %
+    :alt: Butterfly Spectrum
 .. image:: images/overview/wannier_square_q_97_t_1_col_point_avron.png
     :width: 33 %
+    :alt: Wannier Diagram
 .. image:: images/overview/lattice.png
     :width: 33 %
+    :alt: Lattice
 
 Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`gallery <gallery>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
 
