@@ -16,5 +16,3 @@ sphinx_rtd_theme
 graphviz
 pypandoc
 pytest
-myst_parser
-pybtex

@@ -14,7 +14,7 @@ jobs:
       - uses: ts-graphviz/setup-graphviz@v1
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install sphinx sphinx_rtd_theme myst_parser pybtex sphinx-copybutton sphinxcontrib-bibtex sphinx-autodoc-typehints nbsphinx ipython pydata-sphinx-theme jupyter jupytext pypandoc numpy matplotlib prettytable tqdm
       - name: Sphinx build
         run: |
           sphinx-build docs/source docs/build
