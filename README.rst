@@ -1,11 +1,11 @@
 .. image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
-    :width: 33 %
+    :width: 32 %
     :alt: Butterfly Spectrum
 .. image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
-    :width: 33 %
+    :width: 32 %
     :alt: Butterfly Spectrum
 .. image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
-    :width: 33 %
+    :width: 32 %
     :alt: Butterfly Spectrum
 
 HofstadterTools
