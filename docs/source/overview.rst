@@ -2,4 +2,4 @@ Overview
 ========
 
 .. include:: ../../README.rst
-    :start-line: 12
+    :start-line: 2
