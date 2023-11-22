@@ -56,11 +56,13 @@ def create_filename(program, args, aux_text=""):
     theta = args['theta']
     save = args['save']
     log = args['log']
+    period = args['periodicity']
     dpi = args['dpi']
 
     aux_str = aux_text if aux_text == "" else aux_text+"_"
     t_str = "t_" + '_'.join([f"{i:g}" for i in t]) + "_"
     brav_str = f"alpha_{alpha:g}_theta_{theta[0]:g}_{theta[1]:g}_" if lat not in ["square", "triangular"] else ""
+    per_str = f"period_{period:g}_" if period != 1 else ""
     dpi_str = f"dpi_{dpi:g}_" if dpi != 300 else ""
 
     if program == "band_structure":
@@ -76,7 +78,7 @@ def create_filename(program, args, aux_text=""):
         bgt_str = f"bgt_{bgt:g}_"
         samp_str = f"samp_{samp:g}_" if samp != 101 else ""
 
-        filename = f"band_structure_{aux_str}{disp_str}{mod_str}{lat}_{nphi_str}{t_str}{brav_str}{samp_str}{dpi_str}"[:-1]
+        filename = f"band_structure_{aux_str}{disp_str}{mod_str}{lat}_{nphi_str}{t_str}{brav_str}{per_str}{samp_str}{dpi_str}"[:-1]
 
     elif program == "butterfly":
         plt_lat = args["plot_lattice"]
@@ -84,12 +86,10 @@ def create_filename(program, args, aux_text=""):
         color = args['color']
         pal = args['palette']
         wan = args['wannier']
-        period = args['periodicity']
         art = args['art']
 
         q_str = f"q_{q:g}_"
         col_str = f"col_{color}_{pal}_" if color else ""
-        per_str = f"period_{period:g}_" if period != 1 else ""
         art_str = "art_" if art else ""
 
         filename = f"butterfly_{aux_str}{lat}_{q_str}{t_str}{brav_str}{col_str}{per_str}{art_str}{dpi_str}"[:-1]

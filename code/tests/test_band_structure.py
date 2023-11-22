@@ -60,12 +60,28 @@ def band_structure(nphi, t, lat, alpha=1, theta=(1, 3), period=1, samp=11):
 
 
 def test_square():
-    """Benchmark the square Hofstadter band structure, e.g. against Fig.2.6(a) of :cite:`Aidelsburger13`."""
+    """Benchmark the square Hofstadter band structure against Fig.2.6(a) of :cite:`Aidelsburger13`."""
 
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "square")
     # reference
     filename = "code/tests/band_structure/band_structure_3D_square_nphi_1_5_t_1_samp_11.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    eigenvalues_ref = data['eigenvalues']
+    eigenvectors_ref = data['eigenvectors']
+
+    assert np.allclose(eigenvalues, eigenvalues_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
+
+
+def test_square_2():
+    """Benchmark the zero-quadratic model band structure."""
+
+    # current
+    eigenvalues, eigenvectors = band_structure((1, 5), [1, 0, -0.25], "square")
+    # reference
+    filename = "code/tests/band_structure/band_structure_3D_square_nphi_1_5_t_1_0_-0.25_samp_11.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     eigenvalues_ref = data['eigenvalues']
@@ -91,6 +107,22 @@ def test_triangular():
     assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
 
 
+def test_triangular_2():
+    """Benchmark the 2nd-NN triangular Hofstadter band structure."""
+
+    # current
+    eigenvalues, eigenvectors = band_structure((1, 5), [0, 1], "triangular", period=2)
+    # reference
+    filename = "code/tests/band_structure/band_structure_3D_triangular_nphi_1_5_t_0_1_period_2_samp_11.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    eigenvalues_ref = data['eigenvalues']
+    eigenvectors_ref = data['eigenvectors']
+
+    assert np.allclose(eigenvalues, eigenvalues_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
+
+
 def test_bravais():
     """Benchmark the Bravais Hofstadter band structure."""
 
@@ -98,6 +130,38 @@ def test_bravais():
     eigenvalues, eigenvectors = band_structure((1, 5), [0.5, 0.2], "bravais", alpha=1, theta=(67, 180))
     # reference
     filename = "code/tests/band_structure/band_structure_3D_bravais_nphi_1_5_t_0.5_0.2_alpha_1_theta_67_180_samp_11.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    eigenvalues_ref = data['eigenvalues']
+    eigenvectors_ref = data['eigenvectors']
+
+    assert np.allclose(eigenvalues, eigenvalues_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
+
+
+def test_bravais_2():
+    """Benchmark the Bravais Hofstadter band structure in the triangular lattice limit."""
+
+    # current
+    eigenvalues, eigenvectors = band_structure((1, 5), [1], "bravais", alpha=1, theta=(1, 3))
+    # reference
+    filename = "code/tests/band_structure/band_structure_3D_bravais_nphi_1_5_t_1_alpha_1_theta_1_3_samp_11.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    eigenvalues_ref = data['eigenvalues']
+    eigenvectors_ref = data['eigenvectors']
+
+    assert np.allclose(eigenvalues, eigenvalues_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
+
+
+def test_bravais_3():
+    """Benchmark the Bravais Hofstadter band structure in the square lattice limit."""
+
+    # current
+    eigenvalues, eigenvectors = band_structure((1, 5), [1], "bravais", alpha=1, theta=(1, 2))
+    # reference
+    filename = "code/tests/band_structure/band_structure_3D_bravais_nphi_1_5_t_1_alpha_1_theta_1_2_samp_11.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     eigenvalues_ref = data['eigenvalues']
@@ -123,13 +187,29 @@ def test_honeycomb():
     assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
 
 
+def test_honeycomb_2():
+    """Benchmark the 2nd-NN honeycomb Hofstadter band structure. This is equivalent to the triangular Hofstadter butterfly."""
+
+    # current
+    eigenvalues, eigenvectors = band_structure((1, 5), [0, 1], "honeycomb")
+    # reference
+    filename = "code/tests/band_structure/band_structure_3D_honeycomb_nphi_1_5_t_0_1_alpha_1_theta_1_3_samp_11.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    eigenvalues_ref = data['eigenvalues']
+    eigenvectors_ref = data['eigenvectors']
+
+    assert np.allclose(eigenvalues, eigenvalues_ref)
+    assert np.allclose(np.abs(eigenvectors), np.abs(eigenvectors_ref))
+
+
 def test_kagome():
     """Benchmark the kagome Hofstadter band structure."""
 
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "kagome", period=8)
     # reference
-    filename = "code/tests/band_structure/band_structure_3D_kagome_nphi_1_5_t_1_alpha_1_theta_1_3_samp_11.npz"
+    filename = "code/tests/band_structure/band_structure_3D_kagome_nphi_1_5_t_1_alpha_1_theta_1_3_period_8_samp_11.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     eigenvalues_ref = data['eigenvalues']

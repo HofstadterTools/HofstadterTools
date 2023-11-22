@@ -54,7 +54,7 @@ def butterfly(q, t, lat, alpha=1, theta=(1, 3), period=1):
 
 
 def test_square():
-    """Benchmark the square Hofstadter butterfly, e.g. against Fig.4(d) of :cite:`Yilmaz17`."""
+    """Benchmark the square Hofstadter butterfly. This butterfly is plotted in many papers, e.g. Fig.4(d) of :cite:`Yilmaz17`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "square")
@@ -70,8 +70,25 @@ def test_square():
     assert np.allclose(current, reference)
 
 
+def test_square_2():
+    """Benchmark the zero-quadratic model butterfly against Fig.2 of :cite:`Bauer22`."""
+
+    # current
+    nphi_list, E_list = butterfly(97, [1, 0, -0.25], "square")
+    current = np.array([nphi_list, E_list])
+    # reference
+    filename = "code/tests/butterfly/butterfly_square_q_97_t_1_0_-0.25.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    nphi_list_ref = data['nphi_list']
+    E_list_ref = data['E_list']
+    reference = np.array([nphi_list_ref, E_list_ref])
+
+    assert np.allclose(current, reference)
+
+
 def test_triangular():
-    """Benchmark the triangular Hofstadter butterfly, e.g. against Fig.4(a) of :cite:`Yilmaz17`."""
+    """Benchmark the triangular Hofstadter butterfly. This butterfly is plotted in many papers, e.g. Fig.4(a) of :cite:`Yilmaz17`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "triangular")
@@ -87,8 +104,25 @@ def test_triangular():
     assert np.allclose(current, reference)
 
 
+def test_triangular_2():
+    """Benchmark the 2nd-NN triangular Hofstadter butterfly. This butterfly is plotted in many papers, e.g. Fig.4 of :cite:`Oh00`."""
+
+    # current
+    nphi_list, E_list = butterfly(97, [0, 1], "triangular", period=2)
+    current = np.array([nphi_list, E_list])
+    # reference
+    filename = "code/tests/butterfly/butterfly_triangular_q_97_t_0_1_period_2.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    nphi_list_ref = data['nphi_list']
+    E_list_ref = data['E_list']
+    reference = np.array([nphi_list_ref, E_list_ref])
+
+    assert np.allclose(current, reference)
+
+
 def test_bravais():
-    """Benchmark the Bravais Hofstadter butterfly, e.g. against Fig.4(c) of :cite:`Yilmaz17`."""
+    """Benchmark the Bravais Hofstadter butterfly against Fig.4(b-c) of :cite:`Yilmaz17`."""
 
     # current
     nphi_list, E_list = butterfly(97, [0.5, 0.2], "bravais", alpha=1, theta=(67, 180))
@@ -104,8 +138,42 @@ def test_bravais():
     assert np.allclose(current, reference)
 
 
+def test_bravais_2():
+    """Benchmark the Bravais Hofstadter butterfly in the triangular lattice limit."""
+
+    # current
+    nphi_list, E_list = butterfly(97, [1], "bravais", alpha=1, theta=(1, 3))
+    current = np.array([nphi_list, E_list])
+    # reference
+    filename = "code/tests/butterfly/butterfly_bravais_q_97_t_1_alpha_1_theta_1_3.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    nphi_list_ref = data['nphi_list']
+    E_list_ref = data['E_list']
+    reference = np.array([nphi_list_ref, E_list_ref])
+
+    assert np.allclose(current, reference)
+
+
+def test_bravais_3():
+    """Benchmark the Bravais Hofstadter butterfly in the square lattice limit."""
+
+    # current
+    nphi_list, E_list = butterfly(97, [1], "bravais", alpha=1, theta=(1, 2))
+    current = np.array([nphi_list, E_list])
+    # reference
+    filename = "code/tests/butterfly/butterfly_bravais_q_97_t_1_alpha_1_theta_1_2.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    nphi_list_ref = data['nphi_list']
+    E_list_ref = data['E_list']
+    reference = np.array([nphi_list_ref, E_list_ref])
+
+    assert np.allclose(current, reference)
+
+
 def test_honeycomb():
-    """Benchmark the honeycomb Hofstadter butterfly, e.g. against Fig.5 of :cite:`Agazzi14`."""
+    """Benchmark the honeycomb Hofstadter butterfly. This butterfly is plotted in many papers, e.g. Fig.5 of :cite:`Agazzi14`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "honeycomb")
@@ -121,8 +189,25 @@ def test_honeycomb():
     assert np.allclose(current, reference)
 
 
+def test_honeycomb_2():
+    """Benchmark the 2nd-NN honeycomb Hofstadter butterfly. This is equivalent to the triangular Hofstadter butterfly."""
+
+    # current
+    nphi_list, E_list = butterfly(97, [0, 1], "honeycomb")
+    current = np.array([nphi_list, E_list])
+    # reference
+    filename = "code/tests/butterfly/butterfly_honeycomb_q_97_t_0_1_alpha_1_theta_1_3.npz"
+    file_data = np.load(filename, allow_pickle=True)
+    data = file_data['data'].item()
+    nphi_list_ref = data['nphi_list']
+    E_list_ref = data['E_list']
+    reference = np.array([nphi_list_ref, E_list_ref])
+
+    assert np.allclose(current, reference)
+
+
 def test_kagome():
-    """Benchmark the kagome Hofstadter butterfly, e.g. against Fig.3 of :cite:`Jing-Min09`."""
+    """Benchmark the kagome Hofstadter butterfly. This butterfly is plotted in many papers, e.g. Fig.3 of :cite:`Jing-Min09`."""
 
     # current
     nphi_list, E_list = butterfly(97, [1], "kagome", alpha=1, theta=(1, 3), period=8)

@@ -53,7 +53,7 @@ By default, the tqdm progress bar is streamed to stderr. Hence, the progress bar
 
 In HofstadterTools, nth-nearest neighbors are defined as a group of sites that are the same radius from a reference site. We stress that these points lie on a *circle* and not, for example, on an ellipse that is scaled by the Bravais lattice vector lengths. Hence, by adjusting the lattice anisotropy, you may inadvertently change the number of nearest neighbors.
 
-band_structure Questions
+Band Structure Questions
 ------------------------
 
 .. admonition:: Question
@@ -76,11 +76,17 @@ Due to the discrete nature of the :math:`k` mesh, it is difficult to declare tha
 
 .. admonition:: Question
 
-	I have computed the band structure for a kagome/custom lattice and it looks incorrect. Why is this?
+	I have computed the band structure for a kagome/custom lattice and it looks incorrect. Why could this be?
 
 When computing the complete band structure, it may be more difficult to spot when the ``--periodicity`` flag needs to be set. If in doubt, compute the corresponding butterfly spectrum and make sure that it has the correct periodicity.
 
-butterfly Questions
+.. admonition:: Question
+
+	For comparison, I would like to compute the regular band structure for my tight-binding model, without an external magnetic field. How can I do this?
+
+The band structure with zero magnetic field can be computed by setting the flux density as ``-nphi 0 1``. For example, we can compute the band structure of graphene by using the command ``python band_structure.py -lat honeycomb -nphi 0 1``.
+
+Butterfly Questions
 -------------------
 
 .. admonition:: Question

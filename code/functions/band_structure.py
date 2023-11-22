@@ -145,7 +145,7 @@ def wilson_loop(_eigenvectors, _band, _idx_y, _group_size=1):
     .. math::
         W = -\Im \log \prod_{\alpha} \tilde{\mathcal{U}}_2(\mathbf{k}_\alpha),
 
-    where :math:`\tilde{\mathcal{U}}_2` is the normalized link variable, :math:`\mathbf{k}_\alpha` is the momentum vector, and the product is taken on a Brillouin zone cycle in the :math:`\gamma=2` direction. :cite:`Gresch18`
+    where :math:`\tilde{\mathcal{U}}_2` is the normalized link variable, :math:`\mathbf{k}_\alpha` is the discretized momentum vector, and the product is taken on a Brillouin zone cycle in the :math:`\gamma=2` direction. :cite:`Gresch18`
 
     Parameters
     ----------
@@ -181,9 +181,9 @@ def geom_tensor(_eigenvectors, _eigenvectors_dkx, _eigenvectors_dky, _bvec, _ban
     The quantum geometric tensor is computed using
 
     .. math::
-       \mathcal{R}_{i j}(\mathbf{k}) = \mathrm{tr} ( \mathcal{P}_\mathbf{k} \partial_{k_i} \mathcal{P}_\mathbf{k} \partial_{k_j} \mathcal{P}_\mathbf{k}),
+       \mathcal{R}_{\mu\nu}(\mathbf{k}) = \mathrm{tr} ( \mathcal{P}_\mathbf{k} \partial_{k_\mu} \mathcal{P}_\mathbf{k} \partial_{k_\nu} \mathcal{P}_\mathbf{k}),
 
-    where :math:`\mathcal{P}_\mathbf{k} = \sum_n \ket{u_n(\mathbf{k})}\bra{u_n(\mathbf{k})}` is the band projector and the sum is performed over all bands in the band group. :cite:`Parameswaran13` :cite:`Hirschmann23`
+    where :math:`\mathcal{P}_\mathbf{k} = \sum_n^{N_\mathrm{g}} \ket{u_n(\mathbf{k})}\bra{u_n(\mathbf{k})}` is the band projector and the sum is performed over all bands in the band group :math:`N_\mathrm{g}`. :cite:`Parameswaran13, Hirschmann23`
 
     Parameters
     ----------

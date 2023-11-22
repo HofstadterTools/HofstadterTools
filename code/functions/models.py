@@ -175,9 +175,9 @@ def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
     The Peierls factor in Landau gauge :math:`\\\mathbf{A}=-By\hat{\\\mathbf{e}}_x` is given by
 
     .. math::
-        e^{\\\mathrm{i}\theta_{ij}} = \exp\left(-\frac{2\pi\\\mathrm{i}n_\phi}{A} \Delta X (Y_i + \Delta Y /2) \right),
+        e^{\\\mathrm{i}\theta_{ij}} = \exp\left[ -\frac{2\pi\\\mathrm{i}n_\phi}{A} \Delta X \left( Y_i + \frac{\Delta Y}{2} \right) \right],
 
-    where :math:`\theta_{ij}` is the Peierls phase from site :math:`i=(X_i, Y_i)`. to :math:`j=(X_j, Y_j)`, :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, :math:`n_\phi` is the flux density, and :math:`A` is the area. :cite:`Peierls33`
+    where :math:`\theta_{ij}` is the Peierls phase from site :math:`i=(X_i, Y_i)`. to :math:`j=(X_j, Y_j)`, :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, :math:`n_\phi` is the flux density, and :math:`A` is the area factor to make the expression dimensionless. :cite:`Peierls33`
 
     Parameters
     ----------
@@ -207,12 +207,12 @@ def peierls_factor(nphi, dx, y_cart, dy_cart, A_UC):
 def diag_func(t_val, p_val, q_val, A_UC_val, vec_group, k_val, dJ_val, J_idx_val):
     r"""The diagonal function.
 
-    The function that populates the diagonals of the Hamiltonian matrix is given by
+    The function that populates the diagonals of the Harper matrix is given by
 
     .. math::
-        \Lambda_{l, n} = - \sum_n \sum_{\langle ij \rangle_{n}^l} t_n e^{\\\mathrm{i}\theta_{ij}} e^{\\\mathrm{i}\\\mathbf{k}\cdot\\\mathbf{r}},
+        \Lambda_{l, n} = - \sum_\kappa \sum_{\langle ij \rangle_{\kappa}^l} t_\kappa e^{\\\mathrm{i}\theta_{ij}} e^{\\\mathrm{i}\\\mathbf{k}\cdot\\\mathbf{r}},
 
-    where :math:`\langle ij \rangle^l_n` denotes the subset of n-th nearest neighbors with a net :math:`y` unit cell displacement of :math:`l`, :math:`\theta_{ij}` is the Peierls phase, :math:`\\\mathbf{k}` is the momentum vector, and :math:`\\\mathbf{r}` is the displacement vector.
+    where :math:`\langle \dots \rangle^l_\kappa` denotes the subset of :math:`\kappa`-th nearest neighbors with a net :math:`y` unit cell displacement of :math:`l`, :math:`\theta_{ij}` is the Peierls phase, :math:`\\\mathbf{k}` is the momentum vector, and :math:`\\\mathbf{r}` is the displacement vector.
 
     Parameters
     ----------
@@ -258,15 +258,15 @@ def Hamiltonian(t, p, q, A_UC, vec_group_matrix, k):
 
     .. math::
         H = \begin{pmatrix}
-        H_{00} & H_{01} & \dots \\
-        H_{10} & H_{11} & \dots \\
+        H^{00} & H^{01} & \dots \\
+        H^{10} & H^{11} & \dots \\
         \vdots & \vdots & \ddots
         \end{pmatrix},
 
-    where :math:`N_b` is the number of sites in the basis. Each submatrix :math:`h=H_{\beta\gamma}` has dimensions :math:`q\times q` and represents the Harper equation for hoppings from the :math:`\beta` to the :math:`\gamma` sublatttice, such that
+    where :math:`N_b` is the number of sites in the basis. Each submatrix :math:`H^{\alpha\beta}` has dimensions :math:`q\times q` and represents the Harper equation for hoppings from the :math:`\alpha` to the :math:`\beta` sublatttice, such that
 
     .. math::
-        h = \begin{pmatrix}
+        H = \begin{pmatrix}
         \Lambda_{0,0} & \Lambda_{0,1} & \dots \\
         \Lambda_{1,0} & \Lambda_{1,1} & \dots \\
         \vdots & \vdots & \ddots
@@ -277,7 +277,7 @@ def Hamiltonian(t, p, q, A_UC, vec_group_matrix, k):
         \Lambda_{q, 0} & \Lambda_{q, 1} & \ddots
         \end{pmatrix},
 
-    where :math:`\Lambda_{l, n}` is the diagonal function. Note that we only populate the first matrix with unique hoppings in the positive J direction. If there are inter-unit-cell hoppings that are related by Hermitian conjugation in the same Harper equation, then the lower triangular matrix with simply be the conjugate of the upper triangular matrix. The second matrix represents rolled over boundary terms.
+    where :math:`\Lambda_{l, n}` is the diagonal function, and we have dropped the sublattice superscripts for readability. Note that we only populate the first matrix with unique hoppings in the positive J direction. If there are inter-unit-cell hoppings that are related by Hermitian conjugation in the same Harper equation, then the lower triangular matrix with simply be the conjugate of the upper triangular matrix. The second matrix represents rolled over boundary terms.
 
     Parameters
     ----------
