@@ -1,15 +1,3 @@
-|header1| |header2| |header3|
-
-.. |header1| image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
-    :width: 32 %
-    :alt: Butterfly Spectrum
-.. |header2| image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
-    :width: 32 %
-    :alt: Butterfly Spectrum
-.. |header3| image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
-    :width: 32 %
-    :alt: Butterfly Spectrum
-
 HofstadterTools
 ===============
 
@@ -31,7 +19,7 @@ HofstadterTools
 
 .. admonition:: About the name
 
-		Philip Harper first derived the difference equation for the model :cite:`Harper55`, which was later analyzed in detail by Mark Azbel :cite:`Azbel64`, and finally plotted by Douglas Hofstadter :cite:`Hofstadter76`. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
+		Philip Harper first derived the difference equation for the model `Harper55 <https://dx.doi.org/10.1088/0370-1298/68/10/304>`__, which was later analyzed in detail by Mark Azbel `Azbel64 <http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list>`__, and finally plotted by Douglas Hofstadter `Hofstadter76 <https://link.aps.org/doi/10.1103/PhysRevB.14.2239>`__. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
 
 Quick Start
 -----------
@@ -75,7 +63,7 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
     :width: 32 %
     :alt: Lattice
 
-Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`gallery <gallery>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
+Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the `gallery <https://hofstadter.tools/gallery.html>`__ and `code reference <https://hofstadter.tools/_autosummary/functions.html>`__ to see what HofstadterTools has to offer.
 
 Python Environment
 ------------------
@@ -111,7 +99,7 @@ The first line ensures that the python path is set for the sources root director
 Directory Structure
 -------------------
 
-* **code** -- sources root directory where the python programs and their configuration settings are stored, as well as the namespace packages. A detailed description of the available :doc:`programs <tutorials>` and :ref:`namespace packages <code_reference>` is in the documentation.
+* **code** -- sources root directory where the python programs and their configuration settings are stored, as well as the namespace packages. A detailed description of the available `programs <https://hofstadter.tools/tutorials.html>`__ and `namespace packages <https://hofstadter.tools/_autosummary/functions.html>`__ is in the documentation.
 
 	* **configuration** -- user-defined configuration files for the programs.
 	* **functions** -- helper functions for the programs.
@@ -164,20 +152,15 @@ Contributing
 
 The Hofstadter model is an active field of research and therefore HofstadterTools will never be complete. Here is a list of some features that we have on the pipeline to be implemented (in no particular order):
 
-* support for hyperbolic lattices :cite:`Stegmaier22`
-* support for fractal lattices :cite:`Chen20`
-* support for higher-dimensional lattices :cite:`DiColandrea22`
-* support for quasicrystals :cite:`Ghadimi22`
-* support for open boundary conditions :cite:`Pena23`
-* interface to quantum chemistry codes :cite:`Bodesheim23`
-* capability to compute the non-Abelian `Hofstadter moth` :cite:`Osterloh05, Yang20`
-* capability to compute Chern numbers using bulk-edge correspondence :cite:`Agazzi14`
-* capability to generate the potential function corresponding to hopping amplitudes :cite:`Yilmaz17`
-* implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) :cite:`Neupert11`
+* support for hyperbolic lattices `Stegmaier22 <https://link.aps.org/doi/10.1103/PhysRevLett.128.166402>`__
+* support for fractal lattices `Chen20 <https://doi.org/10.1007/s00220-020-03850-w>`__
+* support for higher-dimensional lattices `DiColandrea22 <https://dx.doi.org/10.1088/1367-2630/ac4126>`__
+* support for quasicrystals `Ghadimi22 <https://link.aps.org/doi/10.1103/PhysRevB.106.L201113>`__
+* support for open boundary conditions `Pena23 <https://doi.org/10.1016/j.rinp.2023.106257>`__
+* interface to quantum chemistry codes `Bodesheim23 <https://doi.org/10.1038/s41699-023-00378-0>`__
+* capability to compute the non-Abelian `Hofstadter moth` `Osterloh05 <https://link.aps.org/doi/10.1103/PhysRevLett.95.010403>`__, `Yang20 <https://doi.org/10.1038/s41377-020-00384-7>`__
+* capability to compute Chern numbers using bulk-edge correspondence `Agazzi14 <https://doi.org/10.1007/s10955-014-0992-0>`__
+* capability to generate the potential function corresponding to hopping amplitudes `Yilmaz17 <https://link.aps.org/doi/10.1103/PhysRevA.95.063628>`__
+* implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) `Neupert11 <https://link.aps.org/doi/10.1103/PhysRevLett.106.236804>`__
 
-..
-	* add g fluctuations
-	* add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
-	* implement quantum geometry tensor using projectors (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
-
-Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/bartandrews/HofstadterTools>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.
+Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/HofstadterTools/HofstadterTools.github.io>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.

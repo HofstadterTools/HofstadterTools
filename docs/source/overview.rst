@@ -159,9 +159,4 @@ The Hofstadter model is an active field of research and therefore HofstadterTool
 * capability to generate the potential function corresponding to hopping amplitudes :cite:`Yilmaz17`
 * implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) :cite:`Neupert11`
 
-..
-	* add g fluctuations
-	* add capability for multi-band quantum geometry tensor (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
-	* implement quantum geometry tensor using projectors (appendix C.4. of "Minimal model for double Weyl points, multiband quantum geometry, and singular flat band inspired by LK-99")
-
-Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/bartandrews/HofstadterTools>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.
+Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/HofstadterTools/HofstadterTools.github.io>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.
