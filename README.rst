@@ -36,13 +36,13 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -lat square -nphi 1 4 --display both --wilson
 
 .. image:: docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 20 %
     :alt: 3D Band Structure
 .. image:: docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 20 %
     :alt: Wilson Loops
 .. image:: docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 20 %
     :alt: 2D Band Structure
 
 .. code:: console
