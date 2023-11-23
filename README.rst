@@ -17,9 +17,9 @@ HofstadterTools
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model, which describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a perpendicular gauge field. This package can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
-.. admonition:: About the name
+**About the name**
 
-		Philip Harper first derived the difference equation for the model `Harper55 <https://dx.doi.org/10.1088/0370-1298/68/10/304>`__, which was later analyzed in detail by Mark Azbel `Azbel64 <http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list>`__, and finally plotted by Douglas Hofstadter `Hofstadter76 <https://link.aps.org/doi/10.1103/PhysRevB.14.2239>`__. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
+Philip Harper first derived the difference equation for the model `[Harper55] <https://dx.doi.org/10.1088/0370-1298/68/10/304>`__, which was later analyzed in detail by Mark Azbel `[Azbel64] <http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list>`__, and finally plotted by Douglas Hofstadter `[Hofstadter76] <https://link.aps.org/doi/10.1103/PhysRevB.14.2239>`__. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
 
 Quick Start
 -----------
@@ -152,15 +152,15 @@ Contributing
 
 The Hofstadter model is an active field of research and therefore HofstadterTools will never be complete. Here is a list of some features that we have on the pipeline to be implemented (in no particular order):
 
-* support for hyperbolic lattices `Stegmaier22 <https://link.aps.org/doi/10.1103/PhysRevLett.128.166402>`__
-* support for fractal lattices `Chen20 <https://doi.org/10.1007/s00220-020-03850-w>`__
-* support for higher-dimensional lattices `DiColandrea22 <https://dx.doi.org/10.1088/1367-2630/ac4126>`__
-* support for quasicrystals `Ghadimi22 <https://link.aps.org/doi/10.1103/PhysRevB.106.L201113>`__
-* support for open boundary conditions `Pena23 <https://doi.org/10.1016/j.rinp.2023.106257>`__
-* interface to quantum chemistry codes `Bodesheim23 <https://doi.org/10.1038/s41699-023-00378-0>`__
-* capability to compute the non-Abelian `Hofstadter moth` `Osterloh05 <https://link.aps.org/doi/10.1103/PhysRevLett.95.010403>`__, `Yang20 <https://doi.org/10.1038/s41377-020-00384-7>`__
-* capability to compute Chern numbers using bulk-edge correspondence `Agazzi14 <https://doi.org/10.1007/s10955-014-0992-0>`__
-* capability to generate the potential function corresponding to hopping amplitudes `Yilmaz17 <https://link.aps.org/doi/10.1103/PhysRevA.95.063628>`__
-* implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) `Neupert11 <https://link.aps.org/doi/10.1103/PhysRevLett.106.236804>`__
+* support for hyperbolic lattices `[Stegmaier22] <https://link.aps.org/doi/10.1103/PhysRevLett.128.166402>`__
+* support for fractal lattices `[Chen20] <https://doi.org/10.1007/s00220-020-03850-w>`__
+* support for higher-dimensional lattices `[DiColandrea22] <https://dx.doi.org/10.1088/1367-2630/ac4126>`__
+* support for quasicrystals `[Ghadimi22] <https://link.aps.org/doi/10.1103/PhysRevB.106.L201113>`__
+* support for open boundary conditions `[Pena23] <https://doi.org/10.1016/j.rinp.2023.106257>`__
+* interface to quantum chemistry codes `[Bodesheim23] <https://doi.org/10.1038/s41699-023-00378-0>`__
+* capability to compute the non-Abelian `Hofstadter moth` `[Osterloh05] <https://link.aps.org/doi/10.1103/PhysRevLett.95.010403>`__, `[Yang20] <https://doi.org/10.1038/s41377-020-00384-7>`__
+* capability to compute Chern numbers using bulk-edge correspondence `[Agazzi14] <https://doi.org/10.1007/s10955-014-0992-0>`__
+* capability to generate the potential function corresponding to hopping amplitudes `[Yilmaz17] <https://link.aps.org/doi/10.1103/PhysRevA.95.063628>`__
+* implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) `[Neupert11] <https://link.aps.org/doi/10.1103/PhysRevLett.106.236804>`__
 
 Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/HofstadterTools/HofstadterTools.github.io>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.
