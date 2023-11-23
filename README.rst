@@ -1,3 +1,15 @@
+|header1| |header2| |header3|
+
+.. |header1| image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
+    :width: 32 %
+    :alt: Butterfly Spectrum
+.. |header2| image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
+    :width: 32 %
+    :alt: Butterfly Spectrum
+.. |header3| image:: docs/source/images/gallery/butterfly_honeycomb_q_499_t_1_alpha_1_theta_1_3_col_plane_avron_art_dpi_1000.png
+    :width: 32 %
+    :alt: Butterfly Spectrum
+
 HofstadterTools
 ===============
 
@@ -51,14 +63,16 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 
     (HT) user@domain:~/HofstadterTools/code$ python butterfly.py -lat square -q 97 --color point --wannier --plot_lattice
 
-.. image:: docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png
-    :width: 33 %
+|image4| |image5| |image6|
+
+.. |image4| image:: docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png
+    :width: 32 %
     :alt: Butterfly Spectrum
-.. image:: docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png
-    :width: 33 %
+.. |image5| image:: docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png
+    :width: 32 %
     :alt: Wannier Diagram
-.. image:: docs/source/images/overview/lattice.png
-    :width: 33 %
+.. |image6| image:: docs/source/images/overview/lattice.png
+    :width: 32 %
     :alt: Lattice
 
 Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`gallery <gallery>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
