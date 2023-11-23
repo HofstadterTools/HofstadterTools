@@ -107,6 +107,9 @@ where we define :math:`\mathcal{D}` as the **determinant inequality saturation m
 
 Using these band properties, we can perform several sanity checks on our computed band structures. In terms of band topology, we know that all of the Chern numbers in a Hofstadter spectrum must sum to zero. In terms of band geometry, we know that as we take the Landau level limit :math:`q\to\infty`, the TISM and DISM must monotonically approach zero from above.
 
+.. note::
+	Another way that we can check the values of the TISM is by benchmarking against Fig.3 of :cite:`Bauer22`.
+
 .. list-table:: Basic Properties
    :widths: 10 10 10 70
    :header-rows: 1
