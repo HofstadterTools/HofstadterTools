@@ -38,13 +38,13 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 |image1| |image2| |image3|
 
 .. |image1| image:: docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 32 %
     :alt: 3D Band Structure
 .. |image2| image:: docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 32 %
     :alt: Wilson Loops
 .. |image3| image:: docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 32 %
     :alt: 2D Band Structure
 
 .. code:: console
