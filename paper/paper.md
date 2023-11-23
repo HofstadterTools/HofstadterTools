@@ -17,7 +17,7 @@ authors:
     orcid: 0000-0002-9079-7433
     affiliation: 1
 affiliations:
- - name: Bartholomew Andrews, Postdoctoral Fellow, University of California, Berkley, USA
+ - name: Department of Physics, University of California, Berkeley, USA
    index: 1
 date: 22 November 2023
 bibliography: paper.bib
@@ -25,73 +25,26 @@ bibliography: paper.bib
 
 # Summary
 
-Summary text here.
+*A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience.*
+
+The Hofstadter model successfully describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a perpendicular gauge field, and hence is ubiquitous in many fields of research, including condensed matter, optical, and atomic physics. Motivated by this, we introduce [HofstadterTools](https://hofstadter.tools), a Python package that can be used to analyze the energy spectrum of a generalized Hofstadter model on any regular Euclidean lattice. The package can be applied to compute key properties of the band structure, such as quantum geometry and topology, as well as plot colored Hofstadter butterflies and Wannier diagrams.
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
+*A Statement of need section that clearly illustrates the research purpose of the software and places it in the context of related work.*
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
+The Hofstadter model is one of many tight-binding models that is of interest to physicists and hence, it is often treated as an add-on to other numerical physics packages, such as pyqula, DiagHam, and TeNPy, or simply included as supplementary code together with research articles. However, the Hofstadter model's generalizability, interdisciplinary appeal, and recent experimental realization, motivates us to create a dedicated package that can provide a detailed analysis of its band structure, in the general case.
 
-# Mathematics
+1) **Generalizability.** Although the Hofstadter model is typically thought of in its original context of electrons in a periodic potential coupled to a perpendicular magnetic field, this set-up is not required. For example, the vector potential can arise from an artificial gauge field in optical flux lattices with bosons, or from time-modulated Floquet Hamiltonians. Moreover, the full scope of the Hofstadter model is a topic of current research, with papers on its manifestation in hyperbolic lattices, higher-dimensional lattices, and synthesized materials, all released within the last couple of years.    
 
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
+2) **Interdisciplinary appeal.** Aside from the Hofstadter model's well-known connection to condensed matter physics and the quantum Hall effect, it is also intensively studied in other fields. In mathematics, the Harper equation is a special case of an almost Mathieu operator, which is one of the best-understood types of ergodic Schrödinger operators. Moreover, the butterfly spectrum has a clear connection to the fields of chaos and fractals. In physics, the Hofstadter model can also be realized using laser-assisted hoppings in atomic, molecular, and optical physics, or via Floquet pumping.
 
-Double dollars make self-standing equations:
+3) **Recent experimental realization.** Despite the fact that the Hofstadter model was first studied 70 years ago, it has only been experimentally realized within the last decade. Signatures of the Hofstadter butterfly were first observed in moiré materials, and then later found in optical flux lattice and diffraction experiments. Not only does this spur recent theoretical interest, but it also increases the likelihood of newcomers entering the field, with the need for a well-documented, consolidated code repository that they can use for benchmarking experimental data or related computations.
 
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
-
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
-
-# Citations
-
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
-
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
-
-# Figures
-
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
+The most likely use-case of HofstadterTools is for computational condensed matter theorists to use as a reference point alongside many-body computations. The Hofstadter model is an infinitely configurable topological flat band model and hence is a popular choice for theorists studying strongly-correlated phenomena, such as the fractional quantum Hall effect and superconductivity. Since there is a relationship between properties of the single-particle band structures and the stability of exotic strongly-correlated states, HofstadterTools may be used to guide theorists who are analyzing quantum many-body systems. 
 
 # Acknowledgements
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
+We thank Gunnar Möller, Titus Neupert, Rahul Roy, Alexey Soluyanov, Mike Zaletel, Johannes Mitscherling, and Mathi Raja, for useful discussions. This project was funded by the Swiss National Science Foundation under Grant No. P500PT_203168.
 
 # References
