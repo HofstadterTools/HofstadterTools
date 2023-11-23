@@ -12,8 +12,8 @@ HofstadterTools
 .. |license| image:: https://badgen.net/badge/license/GPLv3/blue
    :target: https://www.gnu.org/licenses/gpl-3.0
 
-* GitHub Repository: https://github.com/HofstadterTools/HofstadterTools.github.io
 * Documentation: https://hofstadter.tools or `hof.tools <https://hofstadter.tools>`__
+* GitHub Repository: https://github.com/HofstadterTools/HofstadterTools.github.io
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model, which describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a perpendicular gauge field. This package can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
@@ -35,29 +35,29 @@ Using HofstadterTools is quick and easy! Assuming the recommended scenario of a 
 		(HT) user@domain:~/HofstadterTools$ cd code
 		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -lat square -nphi 1 4 --display both --wilson
 
-.. image:: images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
+.. image:: docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
     :width: 33 %
-    :alt: 3D Band Structure (see documentation)
-.. image:: images/overview/wilson_both_square_nphi_1_4_t_1.png
+    :alt: 3D Band Structure
+.. image:: docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png
     :width: 33 %
-    :alt: Wilson Loops (see documentation)
-.. image:: images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
+    :alt: Wilson Loops
+.. image:: docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
     :width: 33 %
-    :alt: 2D Band Structure (see documentation)
+    :alt: 2D Band Structure
 
 .. code:: console
 
     (HT) user@domain:~/HofstadterTools/code$ python butterfly.py -lat square -q 97 --color point --wannier --plot_lattice
 
-.. image:: images/overview/butterfly_square_q_97_t_1_col_point_avron.png
+.. image:: docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png
     :width: 33 %
-    :alt: Butterfly Spectrum (see documentation)
-.. image:: images/overview/wannier_square_q_97_t_1_col_point_avron.png
+    :alt: Butterfly Spectrum
+.. image:: docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png
     :width: 33 %
-    :alt: Wannier Diagram (see documentation)
-.. image:: images/overview/lattice.png
+    :alt: Wannier Diagram
+.. image:: docs/source/images/overview/lattice.png
     :width: 33 %
-    :alt: Lattice (see documentation)
+    :alt: Lattice
 
 Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the :doc:`gallery <gallery>` and :ref:`code reference <code_reference>` to see what HofstadterTools has to offer.
 
@@ -154,7 +154,7 @@ The Hofstadter model is an active field of research and therefore HofstadterTool
 * support for quasicrystals :cite:`Ghadimi22`
 * support for open boundary conditions :cite:`Pena23`
 * interface to quantum chemistry codes :cite:`Bodesheim23`
-* capability to compute the non-Abelian `Hofstadter moth` :cite:`Osterloh05` :cite:`Yang20`
+* capability to compute the non-Abelian `Hofstadter moth` :cite:`Osterloh05, Yang20`
 * capability to compute Chern numbers using bulk-edge correspondence :cite:`Agazzi14`
 * capability to generate the potential function corresponding to hopping amplitudes :cite:`Yilmaz17`
 * implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) :cite:`Neupert11`
