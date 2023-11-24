@@ -21,12 +21,6 @@ affiliations:
    index: 1
 date: 23 November 2023
 bibliography: paper.bib
-dates:
-  - received:  N/A
-  - accepted:  N/A
-  - published: N/A
-code:
-  - url: https://github.com/HofstadterTools/HofstadterTools.github.io
 ---
 
 # Summary
