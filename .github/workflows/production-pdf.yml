@@ -1,15 +1,15 @@
-name: draft-pdf
+name: production-pdf
 
 on: [push]
 
 jobs:
   paper:
     runs-on: ubuntu-latest
-    name: Paper Draft
+    name: Paper Production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build draft PDF
+      - name: Build production PDF
         uses: HofstadterTools/openjournals-draft-action@master
         with:
           journal: joss
