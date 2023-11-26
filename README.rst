@@ -86,9 +86,9 @@ Using ``pip``:
 3) Activate the virtual environment: ``source env/bin/activate``
 4) Install the dependencies: ``pip install -r requirements.txt``
 
-.. note::
+**Note**
 
-		For compiling the documentation, ``sphinx_rtd_theme`` was installed using pip to get the newer version number (>=0.5.1). This fixes a minor bug with the formatting of unordered lists.
+For compiling the documentation, ``sphinx_rtd_theme`` was installed using pip to get the newer version number (>=0.5.1). This fixes a minor bug with the formatting of unordered lists.
 
 In addition, we recommend adding the following lines to your shell configuration file (e.g. ``.bashrc`` or ``.zshrc``):
 
