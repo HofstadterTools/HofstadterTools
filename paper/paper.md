@@ -43,10 +43,4 @@ A typical use-case of HofstadterTools is for condensed matter theorists to utili
 
 We thank Gunnar Möller, Titus Neupert, Rahul Roy, Alexey Soluyanov, Mike Zaletel, Johannes Mitscherling, and Mathi Raja, for useful discussions. This project was funded by the Swiss National Science Foundation under Grant No. P500PT_203168.
 
-| ![hello](..%2Fdocs%2Fsource%2Fimages%2Fgallery%2Fbutterfly_square_q_499_t_1_col_plane_red-blue_dpi_500.png){height="100pt"}                                                   | ![wannier_square_q_499_t_1_col_plane_red-blue_dpi_500.png](..%2Fdocs%2Fsource%2Fimages%2Fgallery%2Fwannier_square_q_499_t_1_col_plane_red-blue_dpi_500.png){height="100pt"}                              |
-| ![butterfly_triangular_q_499_t_1_col_plane_jet_dpi_500.png](..%2Fdocs%2Fsource%2Fimages%2Fgallery%2Fbutterfly_triangular_q_499_t_1_col_plane_jet_dpi_500.png){height="100pt"} | ![butterfly_bravais_q_499_t_0.5_0.2_alpha_1_theta_67_180_dpi_500.png](..%2Fdocs%2Fsource%2Fimages%2Fgallery%2Fbutterfly_bravais_q_499_t_0.5_0.2_alpha_1_theta_67_180_dpi_500.png){height="100pt"}        |
-| ![hello](..%2Fdocs%2Fsource%2Fimages%2Fgallery%2Fbutterfly_square_q_499_t_1_col_plane_red-blue_dpi_500.png){height="100pt"}                                                   | ![butterfly_honeycomb_q_499_t_1_1_alpha_1_theta_1_3_period_6_dpi_500.png](..%2Fdocs%2Fsource%2Fimages%2Fgallery%2Fbutterfly_honeycomb_q_499_t_1_1_alpha_1_theta_1_3_period_6_dpi_500.png){height="100pt"} |
-
-: Table caption
-
 # References
