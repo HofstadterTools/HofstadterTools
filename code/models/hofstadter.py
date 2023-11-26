@@ -15,7 +15,7 @@ class Hofstadter:
     .. math::
         H = - \sum_\kappa \sum_{\braket{ij}_\kappa} t_\kappa e^{i \theta_{ij}} c_i^\dagger c_j + \mathrm{H.c.},
 
-    where :math:`\braket{\dots}_\kappa` denotes nth nearest neighbors on some regular Euclidean lattice in the xy-plane, :math:`t_\kappa` are the corresponding hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the particle (creation)annihilation operators.
+    where :math:`\braket{\dots}_\kappa` denotes :math:`\kappa`-th nearest neighbors on some regular Euclidean lattice in the xy-plane, :math:`t_\kappa` are the corresponding hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the particle (creation)annihilation operators.
     """
 
     def __init__(self, p, q, a0=1, t=None, lat="square", alpha=1, theta=(1, 3), period=1):

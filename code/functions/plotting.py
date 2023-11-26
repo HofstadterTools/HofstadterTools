@@ -274,6 +274,7 @@ def butterfly(model, args, data):
 
     if art:
         ax.axis('off')
+        # ax.set_box_aspect(1)
         if wan:
             ax2.axis('off')
 
