@@ -1,7 +1,7 @@
 Overview
 ========
 
-|docs| |pytests| |license|
+|docs| |pytests| |license| |hits|
 
 .. |docs| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml
@@ -11,6 +11,9 @@ Overview
 
 .. |license| image:: https://badgen.net/badge/license/GPLv3/blue
    :target: https://www.gnu.org/licenses/gpl-3.0
+
+.. |hits| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fhits.dwyl.com%2FHofstadterTools%2FHofstadterToolsgithubio.json%3Fcolor%3Dpink
+   :target: http://hits.dwyl.com/HofstadterTools/HofstadterToolsgithubio
 
 * Documentation: https://hofstadter.tools or `hof.tools <https://hofstadter.tools>`__
 * GitHub Repository: https://github.com/HofstadterTools/HofstadterTools.github.io
