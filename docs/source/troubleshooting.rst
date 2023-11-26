@@ -53,6 +53,12 @@ By default, the tqdm progress bar is streamed to stderr. Hence, the progress bar
 
 In HofstadterTools, :math:`\kappa`-th nearest neighbors are defined as a group of sites that are the same radius from a reference site. We stress that these points lie on a *circle* and not, for example, on an ellipse that is scaled by the Bravais lattice vector lengths. Hence, by adjusting the lattice anisotropy, you may inadvertently change the number of nearest neighbors.
 
+.. admonition:: Question
+
+	Where can I find the version number of my local copy of HofstadterTools?
+
+The release number can be found in ``docs/source/conf.py`` and follows the standard semantic versioning conventions.
+
 Band Structure Questions
 ------------------------
 
