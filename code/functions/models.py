@@ -341,11 +341,11 @@ def Hamiltonian(t, p, q, A_UC, vec_group_matrix, k):
 def BasicSquareHamiltonian(t, p, q, k, period):
     """The basic square lattice Hofstadter Hamiltonian.
 
-    The Hofstadter Hamiltonian for the square lattice with nearest-neighbor interactions.
+    The Hofstadter Hamiltonian for the square lattice with nearest-neighbor hopping.
 
     .. note::
 
-        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+        We have hardcoded this Hamiltonian because it is commonly used and this function is faster than calling the generic Hamiltonian method.
 
     Parameters
     ----------
@@ -391,11 +391,11 @@ def BasicSquareHamiltonian(t, p, q, k, period):
 def BasicTriangularHamiltonian(t, p, q, k, period):
     """The basic triangular lattice Hofstadter Hamiltonian.
 
-    The Hofstadter Hamiltonian for the triangular lattice with nearest-neighbor interactions.
+    The Hofstadter Hamiltonian for the triangular lattice with nearest-neighbor hopping.
 
     .. note::
 
-        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+        We have hardcoded this Hamiltonian because it is commonly used and this function is faster than calling the generic Hamiltonian method.
 
     Parameters
     ----------
@@ -442,11 +442,11 @@ def BasicTriangularHamiltonian(t, p, q, k, period):
 def BasicHoneycombHamiltonian(t, p, q, k, period):
     """The basic honeycomb lattice Hofstadter Hamiltonian.
 
-    The Hofstadter Hamiltonian for the honeycomb lattice with nearest-neighbor interactions.
+    The Hofstadter Hamiltonian for the honeycomb lattice with nearest-neighbor hopping.
 
     .. note::
 
-        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+        We have hardcoded this Hamiltonian because it is commonly used and this function is faster than calling the generic Hamiltonian method.
 
     Parameters
     ----------
@@ -524,11 +524,11 @@ def BasicHoneycombHamiltonian(t, p, q, k, period):
 def BasicKagomeHamiltonian(t, p, q, k, period):
     """The basic kagome lattice Hofstadter Hamiltonian.
 
-    The Hofstadter Hamiltonian for the kagome lattice with nearest-neighbor interactions.
+    The Hofstadter Hamiltonian for the kagome lattice with nearest-neighbor hopping.
 
     .. note::
 
-        We have hardcoded this Hamiltonian because it is commonly used and this function is much faster than calling the generic Hamiltonian method.
+        We have hardcoded this Hamiltonian because it is commonly used and this function is faster than calling the generic Hamiltonian method.
 
     Parameters
     ----------
