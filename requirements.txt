@@ -12,7 +12,7 @@ jupyter
 jupytext
 sphinxcontrib-bibtex
 sphinx-copybutton
-sphinx_rtd_theme
+sphinx-rtd-theme
 graphviz
 pypandoc
 pytest

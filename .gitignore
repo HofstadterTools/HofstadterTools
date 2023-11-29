@@ -141,3 +141,4 @@ code/tests/test_sample.py
 !docs/source/images/**/*.png
 **/*.log
 old/
+*.txt
