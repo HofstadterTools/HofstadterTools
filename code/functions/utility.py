@@ -50,6 +50,7 @@ def create_filename(program, args, aux_text=""):
 
     # read input arguments
     mod = args['model']
+    a = args['a']
     t = fa.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
@@ -60,6 +61,7 @@ def create_filename(program, args, aux_text=""):
     dpi = args['dpi']
 
     aux_str = aux_text if aux_text == "" else aux_text+"_"
+    a_str = f"a_{a:g}_" if a != 1 else ""
     t_str = "t_" + '_'.join([f"{i:g}" for i in t]) + "_"
     brav_str = f"alpha_{alpha:g}_theta_{theta[0]:g}_{theta[1]:g}_" if lat not in ["square", "triangular"] else ""
     per_str = f"period_{period:g}_" if period != 1 else ""
@@ -78,7 +80,7 @@ def create_filename(program, args, aux_text=""):
         bgt_str = f"bgt_{bgt:g}_"
         samp_str = f"samp_{samp:g}_" if samp != 101 else ""
 
-        filename = f"band_structure_{aux_str}{disp_str}{mod_str}{lat}_{nphi_str}{t_str}{brav_str}{per_str}{samp_str}{dpi_str}"[:-1]
+        filename = f"band_structure_{aux_str}{disp_str}{mod_str}{lat}_{nphi_str}{a_str}{t_str}{brav_str}{per_str}{samp_str}{dpi_str}"[:-1]
 
     elif program == "butterfly":
         plt_lat = args["plot_lattice"]
@@ -92,7 +94,7 @@ def create_filename(program, args, aux_text=""):
         col_str = f"col_{color}_{pal}_" if color else ""
         art_str = "art_" if art else ""
 
-        filename = f"butterfly_{aux_str}{lat}_{q_str}{t_str}{brav_str}{col_str}{per_str}{art_str}{dpi_str}"[:-1]
+        filename = f"butterfly_{aux_str}{lat}_{q_str}{a_str}{t_str}{brav_str}{col_str}{per_str}{art_str}{dpi_str}"[:-1]
 
     else:
         raise ValueError("program is not defined")

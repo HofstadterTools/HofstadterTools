@@ -21,6 +21,7 @@ if __name__ == '__main__':
     args = fa.parse_input_arguments("band_structure", "Plot the Hofstadter Band Structure.")
     # general arguments
     mod = args['model']
+    a = args['a']
     t = fa.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
@@ -51,7 +52,7 @@ if __name__ == '__main__':
 
         # construct model
         if mod == "Hofstadter":
-            model = Hofstadter(nphi[0], nphi[1], t=t, lat=lat, alpha=alpha, theta=theta, period=period)
+            model = Hofstadter(nphi[0], nphi[1], a0=a, t=t, lat=lat, alpha=alpha, theta=theta, period=period)
         else:
             raise ValueError("model is not defined")
 

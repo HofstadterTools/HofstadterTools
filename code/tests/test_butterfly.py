@@ -145,7 +145,7 @@ def test_bravais_2():
     nphi_list, E_list = butterfly(97, [1], "bravais", alpha=1, theta=(1, 3))
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_bravais_q_97_t_1_alpha_1_theta_1_3.npz"
+    filename = "code/tests/butterfly/butterfly_triangular_q_97_t_1.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']
@@ -162,7 +162,7 @@ def test_bravais_3():
     nphi_list, E_list = butterfly(97, [1], "bravais", alpha=1, theta=(1, 2))
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_bravais_q_97_t_1_alpha_1_theta_1_2.npz"
+    filename = "code/tests/butterfly/butterfly_square_q_97_t_1.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']
@@ -196,7 +196,7 @@ def test_honeycomb_2():
     nphi_list, E_list = butterfly(97, [0, 1], "honeycomb")
     current = np.array([nphi_list, E_list])
     # reference
-    filename = "code/tests/butterfly/butterfly_honeycomb_q_97_t_0_1_alpha_1_theta_1_3.npz"
+    filename = "code/tests/butterfly/butterfly_triangular_q_97_t_1.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     nphi_list_ref = data['nphi_list']

@@ -25,6 +25,7 @@ if __name__ == '__main__':
     args = fa.parse_input_arguments("butterfly", "Plot the Hofstadter Butterfly.")
     # general arguments
     mod = args['model']
+    a = args['a']
     t = fa.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
@@ -57,7 +58,7 @@ if __name__ == '__main__':
 
         # construct model
         if mod == "Hofstadter":
-            model = Hofstadter(p, q, t=t, lat=lat, alpha=alpha, theta=theta, period=period)
+            model = Hofstadter(p, q, a0=a, t=t, lat=lat, alpha=alpha, theta=theta, period=period)
         else:
             raise ValueError("model is not defined")
 

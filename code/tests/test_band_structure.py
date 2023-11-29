@@ -145,7 +145,7 @@ def test_bravais_2():
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "bravais", alpha=1, theta=(1, 3))
     # reference
-    filename = "code/tests/band_structure/band_structure_3D_bravais_nphi_1_5_t_1_alpha_1_theta_1_3_samp_11.npz"
+    filename = "code/tests/band_structure/band_structure_3D_triangular_nphi_1_5_t_1_samp_11.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     eigenvalues_ref = data['eigenvalues']
@@ -161,7 +161,7 @@ def test_bravais_3():
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [1], "bravais", alpha=1, theta=(1, 2))
     # reference
-    filename = "code/tests/band_structure/band_structure_3D_bravais_nphi_1_5_t_1_alpha_1_theta_1_2_samp_11.npz"
+    filename = "code/tests/band_structure/band_structure_3D_square_nphi_1_5_t_1_samp_11.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     eigenvalues_ref = data['eigenvalues']
@@ -193,7 +193,7 @@ def test_honeycomb_2():
     # current
     eigenvalues, eigenvectors = band_structure((1, 5), [0, 1], "honeycomb")
     # reference
-    filename = "code/tests/band_structure/band_structure_3D_honeycomb_nphi_1_5_t_0_1_alpha_1_theta_1_3_samp_11.npz"
+    filename = "code/tests/band_structure/band_structure_3D_triangular_nphi_1_5_t_1_samp_11.npz"
     file_data = np.load(filename, allow_pickle=True)
     data = file_data['data'].item()
     eigenvalues_ref = data['eigenvalues']

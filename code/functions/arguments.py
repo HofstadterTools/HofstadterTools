@@ -30,6 +30,7 @@ def parse_input_arguments(program, description):
 
     models = ["Hofstadter"]
     general.add_argument("-mod", "--model", type=str, default="Hofstadter", choices=models, help="name of model")
+    general.add_argument("-a", type=float, default=1, help="lattice constant")
     general.add_argument("-t", nargs='+', type=float, default=[1], help="list of hopping amplitudes in ascending order [1NN, 2NN, 3NN, ...]")
     lattices = ["square", "triangular", "bravais", "honeycomb", "kagome", "custom"]
     general.add_argument("-lat", "--lattice", type=str, default="bravais", choices=lattices, help="name of lattice")
