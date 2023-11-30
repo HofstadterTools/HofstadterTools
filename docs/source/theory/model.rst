@@ -1,7 +1,7 @@
 Model
 =====
 
-We consider a system of non-interacting quantum particles hopping on a lattice in the xy-plane and coupled to a perpendicular gauge field. For the sake of concreteness, we discuss electrons of charge :math:`-e` and mass :math:`m_\mathrm{e}` in this section, governed by a 2D tight-binding model and coupled to a perpendicular magnetic field :math:`\mathbf{B}=B\hat{\mathbf{e}}_z`. However, the theory is readily generalizable.
+We consider a system of non-interacting quantum particles hopping on a lattice in the xy-plane and coupled to a gauge field. For the sake of concreteness, we discuss electrons of charge :math:`-e` and mass :math:`m_\mathrm{e}` in this section, governed by a 2D tight-binding model and coupled to a perpendicular magnetic field :math:`\mathbf{B}=B\hat{\mathbf{e}}_z`. However, the theory is readily generalizable.
 
 The **generalized Hofstadter model** describing the electron motion is given by
 
