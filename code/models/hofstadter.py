@@ -18,7 +18,7 @@ class Hofstadter:
     where :math:`\braket{\dots}_\kappa` denotes :math:`\kappa`-th nearest neighbors on some regular Euclidean lattice in the xy-plane, :math:`t_\kappa` are the corresponding hopping amplitudes, :math:`\theta_{ij}` are the Peierls phases, and :math:`c^{(\dagger)}` are the particle (creation)annihilation operators.
     """
 
-    def __init__(self, p, q, a0=1, t=None, lat="square", alpha=1, theta=(1, 3), period=1):
+    def __init__(self, p, q, a0=1, t=None, lat="bravais", alpha=1, theta=(1, 3), period=1):
         """Constructor for the Hofstadter class.
 
         Parameters
@@ -32,7 +32,7 @@ class Hofstadter:
         t: list
             The list of hopping amplitudes in order of ascending NN (default=[1]).
         lat: str
-            The name of the lattice (default="square").
+            The name of the lattice (default="bravais").
         alpha: float
             The anisotropy of the Bravais lattice vectors (default=1).
         theta: tuple
@@ -47,7 +47,7 @@ class Hofstadter:
         self.q = q  #: int : The denominator of the coprime flux density fraction.
         self.a0 = a0  #: float :The lattice constant (default=1).
         self.t = t  #: list : The list of hopping amplitudes in order of ascending NN (default=[1]).
-        self.lat = lat  #: str : The name of the lattice (default="square").
+        self.lat = lat  #: str : The name of the lattice (default="bravais").
         self.alpha = alpha  #: float : The anisotropy of the Bravais lattice vectors (default=1).
         self.theta0 = theta[0]  #: int : The numerator of the fractional angle between Bravais lattice vectors in units of pi (default=1).
         self.theta1 = theta[1]  #: int : The denominator of the fractional angle between Bravais lattice vectors in units of pi (default=3).
