@@ -77,7 +77,7 @@ if __name__ == '__main__':
         # Wannier diagram data lists
         if wan:
             data['nphi_DOS_list'].append([nphi] * (M-1))
-            data['DOS_list'].append([i/q for i in range(M-1)])
+            data['DOS_list'].append([i/M for i in range(M-1)])
             data['gaps_list'].append([lmbda[i+1] - lmbda[i] for i in range(M-1)])
 
         # color data lists

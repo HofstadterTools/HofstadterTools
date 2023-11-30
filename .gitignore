@@ -136,6 +136,7 @@ dmypy.json
 **/*.npy
 #!code/tests/**/*.npy
 **/*.png
+!paper/*.png
 code/standalone/*
 code/tests/test_sample.py
 !docs/source/images/**/*.png

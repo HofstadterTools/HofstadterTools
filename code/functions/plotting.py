@@ -247,7 +247,7 @@ def butterfly(model, args, data):
         ax2 = fig2.add_subplot(111)
         if not art:
             ax2.set_title(f"$n_\\phi = p/{q}$")
-            ax2.set_ylabel('$D(E)$')
+            ax2.set_ylabel('$N(E)$')
             ax2.set_xlabel('$n_\\phi$')
             ax2.xaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
             ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%g$'))
