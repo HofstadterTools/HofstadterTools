@@ -15,10 +15,8 @@ tags:
 authors:
   - name: Bartholomew Andrews
     orcid: 0000-0002-9079-7433
-    affiliation: 1
 affiliations:
  - name: Department of Physics, University of California, Berkeley, USA
-   index: 1
 date: 29 November 2023
 bibliography: paper.bib
 ---
