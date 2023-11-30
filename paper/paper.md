@@ -17,7 +17,7 @@ authors:
     orcid: 0000-0002-9079-7433
 affiliations:
  - name: Department of Physics, University of California, Berkeley, USA
-date: 29 November 2023
+date: 30 November 2023
 bibliography: paper.bib
 ---
 
@@ -37,7 +37,7 @@ The purpose of HofstadterTools is to consolidate the fragmented theory and code 
 
 A prominent use-case of HofstadterTools is to facilitate the study of a rich landscape of many-body problems. The Hofstadter model is an infinitely-configurable topological flat-band model and hence, is a popular choice among theorists studying strongly-correlated phenomena, such as the fractional quantum Hall effect [@Andrews20; @Andrews21] and superconductivity [@Shaffer21; @Sahay23]. Since there is a relationship between the quantum geometry and topology of single-particle band structures and the stability of exotic strongly-correlated states [@Jackson15; @Andrews23; @Ledwith22; @Lee17; @Tian23; @Wang21], HofstadterTools may be used to guide theorists who are researching quantum many-body systems. More broadly, we hope that HofstadterTools will find many interdisciplinary applications, and we look forward to expanding the package in these directions, with help from the community. 
 
-![\label{fig:square}**Square Lattice** (a) Hofstadter butterfly and (b) Wannier diagram for the Hofstadter model defined with nearest-neighbor hoppings on the square lattice. The (a) energy $E$, and (b) integrated density of states below the gap $N(E)$, are plotted as a function of flux density $n_\phi=BA_\mathrm{min}/\phi_0=p/499$, where $B$ is the perpendicular field strength, $A_\mathrm{min}$ is the area of a minimal hopping plaquette, $\phi_0$ is the flux quantum, and $p$ is an integer. The $r$-th gap is colored with respect to $t=\sum_{i=0}^r C_i$, where $C_i$ is the Chern number of band $i$. The size of the points in the Wannier diagram is proportional to the size of the gaps. [@DiColandrea22]](butterfly_square_q_499_t_1_col_plane_red-blue_dpi_600_combined-min.png)
+![\label{fig:square}**Square Lattice** (a) Hofstadter butterfly and (b) Wannier diagram for the Hofstadter model defined with nearest-neighbor hoppings on the square lattice. (a) The energy $E$, and (b) the integrated density of states below the gap $N(E)$, are plotted as a function of flux density $n_\phi=BA_\mathrm{min}/\phi_0=p/499$, where $B$ is the perpendicular field strength, $A_\mathrm{min}$ is the area of a minimal hopping plaquette, $\phi_0$ is the flux quantum, and $p$ is an integer. The $r$-th gap is colored with respect to $t=\sum_{i=0}^r C_i$, where $C_i$ is the Chern number of band $i$. The size of the points in the Wannier diagram is proportional to the size of the gaps. [@DiColandrea22]](butterfly_square_q_499_t_1_col_plane_red-blue_dpi_600_combined-min.png)
 
 ![\label{fig:triangular}**Triangular Lattice** (a) Hofstadter butterfly and (b) Wannier diagram for the Hofstadter model defined with nearest-neighbor hoppings on the triangular lattice. [@Avron14]](butterfly_triangular_q_499_t_1_col_plane_jet_period_2_dpi_600_combined-min.png)
 
