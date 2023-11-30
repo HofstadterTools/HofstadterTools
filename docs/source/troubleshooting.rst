@@ -6,7 +6,7 @@ General Questions
 
 .. admonition:: Question
 
-	I get an argparse error whenever one of my command line arguments is a negative number. What is correct syntax so that python does not interpret my negative numbers as flags?
+	I get an argparse error when one of my command line arguments is a negative number. What is correct syntax so that python does not interpret my negative numbers as flags?
 
 If you would like to parse negative number arguments to command line flags, it's best to use quotation marks with a preceding space, e.g. ``-t 1 0 " -0.25"``.
 
@@ -66,13 +66,13 @@ Band Structure Questions
 
 	I would like to analyze the quantum geometry of the bands, but I do not see any quantum geometry data in the output table of the ``band_structure`` program. How can I do this?
 
-By default, the quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can edit the table column selector at ``code/configuration/band_structure.py``. Note that the table columns are grouped by computational expense. For example, if you would like to output the Fubini-Study metric fluctuations ``std_g``, then you could also output the Brillouin-zone-averaged trace inequality saturation measure ``T``  at negligible additional cost.
+By default, the quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can edit the table column selector at ``code/configuration/band_structure.py``. Note that the table columns are grouped by computational expense. For example, if you would like to output the Fubini-Study metric fluctuations ``std_g``, then you could also output the Brillouin-zone-averaged trace inequality saturation measure ``T`` at negligible additional cost.
 
 .. admonition:: Question
 
 	I would like to compute the band structure of my custom Hamiltonian but it is running very slowly compared to standard examples. Why is this?
 
-The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor hopping. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its complete band structure more quickly, then consider adding it to ``functions/models.py`` in a similar format to the other hardcoded Hamiltonians, e.g. ``BasicKagomeHamiltonian``. We note that the ``butterfly`` program does not suffer from this issue, since the diagonalization is performed only at a single :math:`k` point.
+The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor hopping. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its *complete* band structure more quickly, then consider adding it to ``functions/models.py`` in a similar format to the other hardcoded Hamiltonians, e.g. ``BasicKagomeHamiltonian``. We note that the ``butterfly`` program does not suffer from this issue, since the diagonalization is performed only at a single :math:`k` point.
 
 .. admonition:: Question
 
