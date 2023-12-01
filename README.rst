@@ -141,11 +141,12 @@ If you have found HofstadterTools useful, it would be greatly appreciated if you
 .. code-block:: bibtex
 
 	@misc{HofstadterTools,
-	author="Bartholomew Andrews",
-	title="HofstadterTools",
-	howpublished="Python package",
-	year="2023",
-	url="https://github.com/HofstadterTools/HofstadterTools.github.io"
+	title={HofstadterTools: A Python package for analyzing the Hofstadter model},
+	author={Bartholomew Andrews},
+	year={2023},
+	eprint={2311.18726},
+	archivePrefix={arXiv},
+	primaryClass={cond-mat.mes-hall}
 	}
 
 Acknowledgments
