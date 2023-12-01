@@ -15,6 +15,7 @@ Overview
 .. |hits| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fhits.dwyl.com%2FHofstadterTools%2FHofstadterToolsgithubio.json%3Fcolor%3Dpink
    :target: http://hits.dwyl.com/HofstadterTools/HofstadterToolsgithubio
 
+* Paper: https://arxiv.org/abs/2311.18726
 * Documentation: https://hofstadter.tools or `hof.tools <https://hofstadter.tools>`__
 * GitHub Repository: https://github.com/HofstadterTools/HofstadterTools.github.io
 
