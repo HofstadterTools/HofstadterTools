@@ -140,6 +140,7 @@ dmypy.json
 code/standalone/*
 code/tests/test_sample.py
 !docs/source/images/**/*.png
+environment_local.yml
 **/*.log
 old/
 *.txt
