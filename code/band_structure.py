@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 from prettytable import PrettyTable
 from tqdm import tqdm
+import sys
 import warnings
 # --- internal imports
 import functions.band_structure as fbs

@@ -10,7 +10,7 @@ The **generalized Hofstadter model** describing the electron motion is given by
 
 where :math:`\langle \dots \rangle_\kappa` denotes :math:`\kappa`-th nearest neighbors on some regular Euclidean lattice (defined below) with corresponding hopping amplitudes :math:`t_\kappa`, :math:`e^{\mathrm{i}\theta_{ij}}` is the Peierls phase acquired by hopping from site :math:`i` to site :math:`j`, and :math:`c^{(\dagger)}` is the electron (creation)annihilation operator :cite:`Harper55, Azbel64, Hofstadter76`. We note that a set of nearest neighbors in HofstadterTools is defined as a set of sites that are *equidistant* from an origin site, i.e. a group of points that lie on a circle.
 
-The **Peierls phase** is the lattice-analogue of the Aharanov-Bohm phase and is given as
+The **Peierls phase** is the lattice-analogue of the Aharonov-Bohm phase and is given as
 
 .. math::
 	\theta_{ij} = \frac{2\pi}{\phi_0} \int_i^j \mathbf{A}\cdot \mathrm{d}\mathbf{l},
@@ -24,7 +24,7 @@ In HofstadterTools, we choose **Landau gauge** in the y-direction, with a conser
 
 .. math::
 	\theta_{ij} = -\frac{2\pi B}{\phi_0} \int_0^1
-	\begin{pmatrix} Y_i + (Y_j - Y_i)\tau \\ 0 \end{pmatrix} \cdot \begin{pmatrix} X_i - X_j \\ Y_i - Y_j \end{pmatrix} \mathrm{d}\tau,
+	\begin{pmatrix} Y_i + (Y_j - Y_i)\tau \\ 0 \end{pmatrix} \cdot \begin{pmatrix} X_j - X_i \\ Y_j - Y_i \end{pmatrix} \mathrm{d}\tau,
 
 which reduces to
 
