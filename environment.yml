@@ -1,22 +1,29 @@
 name: HT
 channels:
   - defaults
+  - conda-forge
 dependencies:
-  - python
+  - python>=3.10.13
   - numpy
   - matplotlib
   - prettytable
   - tqdm
-  - sphinx=5.3.0
-  - jupytext
-  - sphinx-autodoc-typehints
-  - nbsphinx
+  - pytest
   - ipython
   - jupyter
-  - pydata-sphinx-theme
-  - sphinxcontrib-bibtex
+  - sphinx=5.3.0
+  - pip
+  - pip:
+      - sphinx-rtd-theme
+  - sphinxcontrib-bibtex=2.5.0
   - sphinx-copybutton
+  - pydata-sphinx-theme
+  - sphinx-autodoc-typehints=1.19.5
+  - nbsphinx
+  - jupytext
   - graphviz
+  - pybtex
+  - jupytext
   - pypandoc
-  - pytest
-prefix: /home/bart/miniconda3/envs/HT
+  - pybtex
+  - myst-parser

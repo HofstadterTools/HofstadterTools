@@ -20,4 +20,4 @@ pybtex #
 jupytext ##
 pypandoc ##
 pybtex ##
-myst_parser #
+myst-parser #
