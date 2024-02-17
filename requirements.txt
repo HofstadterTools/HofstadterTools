@@ -1,17 +1,22 @@
-numpy
-matplotlib
-prettytable
-tqdm
-ipython
-sphinx==5.3.0
-pydata-sphinx-theme
-sphinx-autodoc-typehints==1.19.5
-nbsphinx
-jupyter
-jupytext
-sphinxcontrib-bibtex==2.5.0
-sphinx-copybutton
-sphinx-rtd-theme
-graphviz
-pypandoc
+# core functionality
+numpy #
+matplotlib #
+prettytable #
+tqdm #
 pytest
+# interactivity
+ipython #
+jupyter #
+# documentation
+sphinx==5.3.0 #
+sphinx-rtd-theme #
+sphinxcontrib-bibtex==2.5.0 #
+sphinx-copybutton #
+pydata-sphinx-theme #
+sphinx-autodoc-typehints==1.19.5 #
+nbsphinx #
+graphviz
+pybtex #
+jupytext #
+pypandoc #
+pybtex #

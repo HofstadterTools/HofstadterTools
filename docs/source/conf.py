@@ -12,13 +12,14 @@
 #
 import os
 import sys
+import datetime
 # import inspect
 sys.path.insert(0, os.path.abspath('../../code/'))  # Source code dir relative to this file
 
 # -- Project information -----------------------------------------------------------------------------------------------
 
 project = 'HofstadterTools'
-copyright = '2023, Bartholomew Andrews'
+copyright = f'{datetime.date.today().year}, Bartholomew Andrews'
 author = 'Bartholomew Andrews'
 
 # The full version, including alpha/beta/rc tags
