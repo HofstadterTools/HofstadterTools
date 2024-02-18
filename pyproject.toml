@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["code"]
+
+[project]
+name = "HofstaderTools"
+version = "1.0.0"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "prettytable",
+    "tqdm",
+    "pytest",
+    "ipython",
+    "jupyter"
+]
+requires-python = ">=3.10.13"
+authors = [{name = "Bartholomew Andrews", email="bartandrews123@gmail.com"}]
+maintainers = [{name = "Bartholomew Andrews", email="bartandrews123@gmail.com"}]
+description = "A Python package for analyzing the Hofstadter model."
+readme = "README.rst"
+license = {file = "LICENSE"}
+keywords = ["theoretical-physics", "electromagnetism", "fractals", "quantum-physics", "topological-materials",
+    "mathematical-physics", "topological-order", "condensed-matter-physics", "quantum-hall-effect", "band-theory"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Physics"
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx==5.3.0",
+    "sphinx-rtd-theme",
+    "sphinxcontrib-bibtex==2.5.0",
+    "sphinx-copybutton",
+    "pydata-sphinx-theme",
+    "sphinx-autodoc-typehints==1.19.5",
+    "nbsphinx",
+    "graphviz",
+    "pybtex",
+    "jupytext",
+    "pypandoc",
+    "pybtex",
+    "myst-parser"
+]
+
+[project.urls]
+Homepage = "https://hofstadter.tools"
+Pre-print = "https://arxiv.org/abs/2311.18726"
+Documentation = "https://hofstadter.tools"
+Repository = "https://github.com/HofstadterTools/HofstadterTools.github.io"
+Issues = "https://github.com/HofstadterTools/HofstadterTools.github.io/issues"
+
+[project.scripts]
+band_structure = "band_structure:main"
+butterfly = "butterfly:main"

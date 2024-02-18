@@ -19,8 +19,7 @@ import functions.plotting as fp
 from models.hofstadter import Hofstadter
 
 
-if __name__ == '__main__':
-
+def main():
     # parse input arguments
     args = fa.parse_input_arguments("butterfly", "Plot the Hofstadter Butterfly.")
     # general arguments
@@ -76,14 +75,14 @@ if __name__ == '__main__':
 
         # Wannier diagram data lists
         if wan:
-            data['nphi_DOS_list'].append([nphi] * (M-1))
-            data['DOS_list'].append([i/M for i in range(M-1)])
-            data['gaps_list'].append([lmbda[i+1] - lmbda[i] for i in range(M-1)])
+            data['nphi_DOS_list'].append([nphi] * (M - 1))
+            data['DOS_list'].append([i / M for i in range(M - 1)])
+            data['gaps_list'].append([lmbda[i + 1] - lmbda[i] for i in range(M - 1)])
 
         # color data lists
         if col:
             cherns, trs = fb.chern(p, q)
-            if round(M/q) == 2 and len(t) == 1:  # NN honeycomb
+            if round(M / q) == 2 and len(t) == 1:  # NN honeycomb
                 cherns_double = cherns + [i for i in cherns[::-1]]
                 data['chern_list'].append(cherns_double)
                 trs_double = trs + [-i for i in trs[::-1]]
@@ -91,13 +90,14 @@ if __name__ == '__main__':
                 if wan:
                     trs_double_wan = trs[1:] + [-i for i in trs[::-1]][1:]
                     data['tr_DOS_list'].append(trs_double_wan[:-1])
-            elif round(M/q) == 1:
+            elif round(M / q) == 1:
                 data['chern_list'].append(cherns)
                 data['tr_list'].append(trs)
                 if wan:
                     data['tr_DOS_list'].append(trs[1:-1])
             else:
-                warnings.warn("Color and wannier are only implemented for square/triangular/bravais/[honeycomb+1NN] models. Continuing without color and wannier...")
+                warnings.warn(
+                    "Color and wannier are only implemented for square/triangular/bravais/[honeycomb+1NN] models. Continuing without color and wannier...")
                 args['color'] = False
                 col = args['color']
                 args['wannier'] = False
@@ -107,8 +107,8 @@ if __name__ == '__main__':
     if col == "plane":
         data['E_list_orig'] = deepcopy(data['E_list'])
 
-        if round(M/q) == 2 and len(t) == 1:  # NN honeycomb
-            half_len = int(np.shape(data['E_list'])[1]/2)
+        if round(M / q) == 2 and len(t) == 1:  # NN honeycomb
+            half_len = int(np.shape(data['E_list'])[1] / 2)
             for i, val in enumerate(data['E_list']):
                 data['E_list'][i] = val[:half_len]  # consider only lower half
 
@@ -119,14 +119,14 @@ if __name__ == '__main__':
         E_vals = np.linspace(np.min(data['E_list']), np.max(data['E_list']), res[1])  # energy bins
         data['matrix'] = np.zeros((res[0], res[1]))
 
-        for i, p in enumerate(range(1, res[0]+1)):  # p goes from 1 to 199
+        for i, p in enumerate(range(1, res[0] + 1)):  # p goes from 1 to 199
             for j, E in enumerate(E_vals):  # E goes through energy bins
                 for k, El in enumerate(data['E_list'][i]):  # for each energy bin, compare it to the E_list
                     if E <= El:  # if energy is lower than sorted E_list value
                         data['matrix'][i][j] = data['tr_list'][i][k]  # assign the corresponding tr of that E_list value
                         break
 
-        if round(M/q) == 2 and len(t) == 1:  # NN honeycomb
+        if round(M / q) == 2 and len(t) == 1:  # NN honeycomb
             data['matrix'] = np.concatenate((data['matrix'], -data['matrix'][:, ::-1]), axis=1)  # double the spectrum
 
     # save data
@@ -136,3 +136,8 @@ if __name__ == '__main__':
     # construct figure(s)
     fp.butterfly(model, args, data)
     plt.show()
+
+
+if __name__ == '__main__':
+
+    main()

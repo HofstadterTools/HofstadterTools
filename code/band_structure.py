@@ -16,8 +16,7 @@ from models.hofstadter import Hofstadter
 from configuration.band_structure import *
 
 
-if __name__ == '__main__':
-
+def main():
     # parse input arguments
     args = fa.parse_input_arguments("band_structure", "Plot the Hofstadter Band Structure.")
     # general arguments
@@ -69,15 +68,15 @@ if __name__ == '__main__':
             if any(geometry_columns):
                 data['eigenvectors_dkx'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
                 data['eigenvectors_dky'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
-                data['Dkx'] = np.dot(np.array([1/(samp-1), 0]), bMUCvec[0])
-                data['Dky'] = np.dot(np.array([0, 1/(samp-1)]), bMUCvec[1])
+                data['Dkx'] = np.dot(np.array([1 / (samp - 1), 0]), bMUCvec[0])
+                data['Dky'] = np.dot(np.array([0, 1 / (samp - 1)]), bMUCvec[1])
             for band in tqdm(range(num_bands), desc="Band Construction", ascii=True):
                 for idx_x in range(samp):
-                    frac_kx = idx_x / (samp-1)
+                    frac_kx = idx_x / (samp - 1)
                     if any(geometry_columns):
-                        frac_kx_dkx = (frac_kx + 1/(1000*(samp-1))) % 1
+                        frac_kx_dkx = (frac_kx + 1 / (1000 * (samp - 1))) % 1
                     for idx_y in range(samp):
-                        frac_ky = idx_y / (samp-1)
+                        frac_ky = idx_y / (samp - 1)
                         k = np.matmul(np.array([frac_kx, frac_ky]), bMUCvec)
                         ham = model.hamiltonian(k)
                         eigvals, eigvecs = np.linalg.eigh(ham)
@@ -85,7 +84,7 @@ if __name__ == '__main__':
                         data['eigenvalues'][band, idx_x, idx_y] = eigvals[idx[band]]
                         data['eigenvectors'][:, band, idx_x, idx_y] = eigvecs[:, idx[band]]
                         if any(geometry_columns):
-                            frac_ky_dky = (frac_ky + 1/(1000*(samp-1))) % 1
+                            frac_ky_dky = (frac_ky + 1 / (1000 * (samp - 1))) % 1
                             k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bMUCvec)
                             k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bMUCvec)
                             ham_dkx = model.hamiltonian(k_dkx)
@@ -181,10 +180,13 @@ if __name__ == '__main__':
                         data['wilson_loops'][band, idx_y] = data['wilson_loops'][band - 1, idx_y]
                 for idx_x in range(samp - 1):
                     if group != band_group[band - 1]:
-                        berry_fluxes[band, idx_x, idx_y] = fbs.berry_curv(data['eigenvectors'], band, idx_x, idx_y, group_size)
+                        berry_fluxes[band, idx_x, idx_y] = fbs.berry_curv(data['eigenvectors'], band, idx_x, idx_y,
+                                                                          group_size)
                         # quantum geometry
                         if any(geometry_columns):
-                            geom_tensor = fbs.geom_tensor(data['eigenvectors'], data['eigenvectors_dkx'], data['eigenvectors_dky'], bMUCvec, band, idx_x, idx_y, group_size)
+                            geom_tensor = fbs.geom_tensor(data['eigenvectors'], data['eigenvectors_dkx'],
+                                                          data['eigenvectors_dky'], bMUCvec, band, idx_x, idx_y,
+                                                          group_size)
                             fs_metric[band, idx_x, idx_y] = np.real(geom_tensor)
                             berry_curv = -2 * np.imag(geom_tensor)
                             ###
@@ -192,19 +194,20 @@ if __name__ == '__main__':
                             TISM[band, idx_x, idx_y] = np.trace(fs_metric[band, idx_x, idx_y]) \
                                                        - np.abs(berry_fluxes_2[band, idx_x, idx_y])
                             DISM[band, idx_x, idx_y] = np.linalg.det(fs_metric[band, idx_x, idx_y]) \
-                                                       - 0.25 * np.abs(berry_fluxes_2[band, idx_x, idx_y])**2
+                                                       - 0.25 * np.abs(berry_fluxes_2[band, idx_x, idx_y]) ** 2
                     else:
-                        berry_fluxes[band, idx_x, idx_y] = berry_fluxes[band-1, idx_x, idx_y]
+                        berry_fluxes[band, idx_x, idx_y] = berry_fluxes[band - 1, idx_x, idx_y]
                         if any(geometry_columns):
-                            fs_metric[band, idx_x, idx_y] = fs_metric[band-1, idx_x, idx_y]
-                            berry_fluxes_2[band, idx_x, idx_y] = berry_fluxes_2[band-1, idx_x, idx_y]
-                            TISM[band, idx_x, idx_y] = TISM[band-1, idx_x, idx_y]
-                            DISM[band, idx_x, idx_y] = DISM[band-1, idx_x, idx_y]
+                            fs_metric[band, idx_x, idx_y] = fs_metric[band - 1, idx_x, idx_y]
+                            berry_fluxes_2[band, idx_x, idx_y] = berry_fluxes_2[band - 1, idx_x, idx_y]
+                            TISM[band, idx_x, idx_y] = TISM[band - 1, idx_x, idx_y]
+                            DISM[band, idx_x, idx_y] = DISM[band - 1, idx_x, idx_y]
             if wil:
                 if group != band_group[band - 1]:
-                    data['wilson_loops'][band, samp-1] = fbs.wilson_loop(data['eigenvectors'], band, samp-1, group_size)
+                    data['wilson_loops'][band, samp - 1] = fbs.wilson_loop(data['eigenvectors'], band, samp - 1,
+                                                                           group_size)
                 else:
-                    data['wilson_loops'][band, samp-1] = data['wilson_loops'][band - 1, samp-1]
+                    data['wilson_loops'][band, samp - 1] = data['wilson_loops'][band - 1, samp - 1]
 
     # band properties
     band_width = np.zeros(num_bands)
@@ -215,7 +218,7 @@ if __name__ == '__main__':
     for band_idx, band in enumerate(np.arange(num_bands)[::-1]):
         band_width[band] = np.max(eigenvals[band]) - np.min(eigenvals[band])
         if any(topology_columns):
-            std_B_norm[band] = np.std(berry_fluxes[band, :, :])/np.abs(np.average(berry_fluxes[band, :, :]))
+            std_B_norm[band] = np.std(berry_fluxes[band, :, :]) / np.abs(np.average(berry_fluxes[band, :, :]))
             chern_numbers[band] = np.sum(berry_fluxes[band, :, :]) / (2 * np.pi)
         if any(geometry_columns):
             g_var_sum = np.var(fs_metric[band, :, :][0, 0]) + np.var(fs_metric[band, :, :][0, 1])
@@ -236,7 +239,8 @@ if __name__ == '__main__':
     name_list = []
     table.field_names = [j for i, j in enumerate(headers) if bools[i]]
     for band in np.arange(num_bands)[::-1]:
-        table_data = [band, band_group[band], isolated[band], band_width[band], band_gap[band], band_gap[band] / band_width[band],
+        table_data = [band, band_group[band], isolated[band], band_width[band], band_gap[band],
+                      band_gap[band] / band_width[band],
                       std_B_norm[band], round(chern_numbers[band]), std_g_norm[band],
                       av_gxx[band], std_gxx[band], av_gxy[band], std_gxy[band], av_TISM[band], av_DISM[band]]
         table.add_row([j for i, j in enumerate(table_data) if bools[i]])
@@ -249,3 +253,8 @@ if __name__ == '__main__':
     # construct figures
     fp.band_structure(model, args, data)
     plt.show()
+
+
+if __name__ == '__main__':
+
+    main()
