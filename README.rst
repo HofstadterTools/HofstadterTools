@@ -1,7 +1,7 @@
 HofstadterTools
 ===============
 
-|docs| |pytests| |license| |hits|
+|docs| |pytests| |license|
 
 .. |docs| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml
@@ -12,127 +12,159 @@ HofstadterTools
 .. |license| image:: https://badgen.net/badge/license/GPLv3/blue
    :target: https://www.gnu.org/licenses/gpl-3.0
 
-.. |hits| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fhits.dwyl.com%2FHofstadterTools%2FHofstadterToolsgithubio.json%3Fcolor%3Dpink
-   :target: http://hits.dwyl.com/HofstadterTools/HofstadterToolsgithubio
-
 * Paper: https://arxiv.org/abs/2311.18726
 * Documentation: https://hofstadter.tools or `hof.tools <https://hofstadter.tools>`__
 * GitHub Repository: https://github.com/HofstadterTools/HofstadterTools.github.io
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model, which describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a gauge field. This package can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
-**About the name**
+.. admonition:: About the name
 
-Philip Harper first derived the difference equation for the model `[Harper55] <https://dx.doi.org/10.1088/0370-1298/68/10/304>`__, which was later analyzed in detail by Mark Azbel `[Azbel64] <http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list>`__, and finally plotted by Douglas Hofstadter `[Hofstadter76] <https://link.aps.org/doi/10.1103/PhysRevB.14.2239>`__. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
+		Philip Harper first derived the difference equation for the model [`Harper55 <https://dx.doi.org/10.1088/0370-1298/68/10/304>`__], which was later analyzed in detail by Mark Azbel [`Azbel64 <http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list>`__], and finally plotted by Douglas Hofstadter [`Hofstadter76 <https://link.aps.org/doi/10.1103/PhysRevB.14.2239>`__]. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
 
 Quick Start
 -----------
 
-Using HofstadterTools is quick and easy! Assuming the recommended scenario of a Linux/Unix kernel with `git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__ and `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ installed:
+Using HofstadterTools is quick and easy! First, clone and enter the project:
 
 .. code:: console
 
-		(base) user@domain:~$ git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools
-		(base) user@domain:~$ cd HofstadterTools
-		(base) user@domain:~/HofstadterTools$ conda env create -f environment.yml
-		(base) user@domain:~/HofstadterTools$ conda activate HT
-		(HT) user@domain:~/HofstadterTools$ cd code
-		(HT) user@domain:~/HofstadterTools/code$ python band_structure.py -lat square -nphi 1 4 --display both --wilson
+    git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools; cd HofstadterTools
+
+Then, assuming an environment with Python>=3.7, install using:
+
+.. code:: console
+
+    pip install -e .
+
+You can now access the ``band_structure`` and ``butterfly`` programs from any location.
+
+.. code:: console
+
+    band_structure -lat square -nphi 1 4 --display both --wilson
 
 |image1| |image2| |image3|
 
-.. |image1| image:: docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
+.. |image1| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: 3D Band Structure
-.. |image2| image:: docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png
+.. |image2| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: Wilson Loops
-.. |image3| image:: docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
+.. |image3| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: 2D Band Structure
 
 .. code:: console
 
-    (HT) user@domain:~/HofstadterTools/code$ python butterfly.py -lat square -q 97 --color point --wannier --plot_lattice
+    butterfly -lat square -q 97 --color point --wannier --plot_lattice
 
 |image4| |image5| |image6|
 
-.. |image4| image:: docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png
+.. |image4| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png?raw=true
     :width: 32 %
     :alt: Butterfly Spectrum
-.. |image5| image:: docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png
+.. |image5| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png?raw=true
     :width: 32 %
     :alt: Wannier Diagram
-.. |image6| image:: docs/source/images/overview/lattice.png
+.. |image6| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/lattice.png?raw=true
     :width: 32 %
     :alt: Lattice
 
 Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the `gallery <https://hofstadter.tools/gallery.html>`__ and `code reference <https://hofstadter.tools/_autosummary/functions.html>`__ to see what HofstadterTools has to offer.
 
-Python Environment
-------------------
+Installation
+------------
 
-We recommend the use of a python virtual environment to handle the package dependencies. In the following, we assume a Linux/Unix kernel, however these instructions may be readily adapted for Windows.
+This package was developed using Ubuntu 20.04.6 (x86_64) with Python=3.10.13, however it is designed to be platform-independent and can work with any Python>=3.7.
 
-Using ``conda``:
+Virtual environment
+~~~~~~~~~~~~~~~~~~~
 
-1) If you have not already, install Anaconda or `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ (recommended).
-2) On first use, create the ``HT`` environment: ``conda env create -f environment.yml``
-3) Whenever you would like to use the environment, run: ``conda activate HT``
+We recommend the use of a python virtual environment to handle the package dependencies. For example, in order to set up a ``venv``, type:
 
-Using ``pip``:
+.. code:: console
 
-1) On most Unix-derived operating systems, ``pip`` is already installed. If not, install `pip <https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#installing-pip>`__.
-2) Create the virtual environment (recommended in the project root): ``python -m venv env``
-3) Activate the virtual environment: ``source env/bin/activate``
-4) Install the dependencies: ``pip install -r requirements.txt``
+    user@domain:path/to/HofstadterTools$ python3 -m venv myenv
+    user@domain:path/to/HofstadterTools$ source myenv/bin/activate
 
-**Note**
+where ``python3`` points to Python>=3.7.
 
-For compiling the documentation, ``sphinx_rtd_theme`` was installed using pip to get the newer version number (>=0.5.1). This fixes a minor bug with the formatting of unordered lists.
+.. caution::
 
-In addition, we recommend adding the following lines to your shell configuration file (e.g. ``.bashrc`` or ``.zshrc``):
+  Before activating a python virtual environment, check if any other python virtual environments are already active. For example, if you have a conda environment active, you may want to ``conda deactivate`` before activating a ``venv``, or vice versa.
 
-.. code:: shell
+From source
+~~~~~~~~~~~
 
-		export PYTHONPATH=$PYTHONPATH:~/HofstadterTools/code
-		export PYTHONUNBUFFERED='True'
+Within your virtual environment, you can then install HofstadterTools:
 
-The first line ensures that the python path is set for the sources root directory and the second line allows you to check raw data being written to a data file in real-time (e.g. using ``tail -f``).
+.. code:: console
+
+    (myenv) user@domain:path/to/HofstadterTools$ pip install -e .
+
+where the optional ``-e`` flag indicates an editable install. If you would like to also install the dependencies to compile the documentation locally, then instead type:
+
+.. code:: console
+
+    (myenv) user@domain:path/to/HofstadterTools$ pip install -e ".[docs]"
+
+Testing
+~~~~~~~
+
+You can confirm that HofstadterTools is correctly installed by typing
+
+.. code:: console
+
+    (myenv) user@domain:any/path$ pip list | grep HofstadterTools
+
+or by running the pytests:
+
+.. code:: console
+
+    (myenv) user@domain:path/to/HofstadterTools$ pytest
+
+Once the project ``HofstadterTools`` has been successfully installed, the package ``HT`` will be available in your virtual environment. In addition, you can access the programs ``band_structure`` and ``butterfly`` from any location:
+
+.. code:: console
+
+    (myenv) user@domain:any/path$ band_structure --help
+    (myenv) user@domain:any/path$ butterfly --help
 
 Directory Structure
 -------------------
 
-* **code** -- sources root directory where the python programs and their configuration settings are stored, as well as the namespace packages. A detailed description of the available `programs <https://hofstadter.tools/tutorials.html>`__ and `namespace packages <https://hofstadter.tools/_autosummary/functions.html>`__ is in the documentation.
+* **src** -- sources root with the ``HT`` package, along with its configuration settings, subpackages, and programs. A detailed description of the available `programs <https://hofstadter.tools/tutorials.html>`__ and `namespace packages <https://hofstadter.tools/_autosummary/functions.html>`__ is in the documentation.
 
-	* **configuration** -- user-defined configuration files for the programs.
-	* **functions** -- helper functions for the programs.
-	* **models** -- model classes for the programs.
-	* **tests** -- unit tests for the programs.
+  * **HT** -- ``HT`` package
 
-* **data** -- output destination for raw data files.
+    * **configuration** -- user-defined configuration files for the programs.
+    * **functions** -- helper functions for the programs.
+    * **models** -- model classes for the programs.
+    * **plot** -- location of the plot scripts.
+    * **tests** -- unit tests for the programs.
 
-	* **band_structure** -- data generated by the band_structure program.
-	* **butterfly** -- data generated by the butterfly program.
+* **data** -- output destination for raw data files (if programs are run explicitly from their file location, otherwise the output destination is the current working directory).
 
-* **docs** -- location of the sphinx documentation. To view the documentation offline, compile by running ``make html`` and then open ``build/html/index.html`` in a web browser.
+  * **band_structure** -- data generated by the band_structure program.
+  * **butterfly** -- data generated by the butterfly program.
 
-	* **build** -- compiled documentation (once built).
-	* **source** -- documentation source.
+* **docs** -- location of the sphinx documentation. To view the documentation locally, compile by running ``make html`` or ``make clean html`` and then open ``build/html/index.html`` in a web browser. This assumes that the optional ``docs`` dependencies are installed.
 
-* **figs** -- output destination for the figures.
+  * **build** -- compiled documentation (once built).
+  * **source** -- documentation source.
 
-	* **band_structure** -- figures generated by the band_structure program.
-	* **butterfly** -- figures generated by the butterfly program.
+* **figs** -- output destination for the figures (if programs are run explicitly from their file location, otherwise the output destination is the current working directory).
 
-* **logs** -- output destination for the log files.
+  * **band_structure** -- figures generated by the band_structure program.
+  * **butterfly** -- figures generated by the butterfly program.
 
-	* **band_structure** -- logs generated by the band_structure program.
-	* **butterfly** -- logs generated by the butterfly program.
+* **logs** -- output destination for the log files (if programs are run explicitly from their file location, otherwise the output destination is the current working directory).
+
+  * **band_structure** -- logs generated by the band_structure program.
+  * **butterfly** -- logs generated by the butterfly program.
 
 * **paper** -- summary paper introducing HofstadterTools. The formatted pdf can be downloaded as an ``artifact`` of the ``production-pdf`` workflow under the GitHub actions tab.
-
-* **plot** -- location of the plot scripts.
 
 How to Cite
 -----------
@@ -141,14 +173,14 @@ If you have found HofstadterTools useful, it would be greatly appreciated if you
 
 .. code-block:: bibtex
 
-	@misc{HofstadterTools,
-	title={HofstadterTools: A Python package for analyzing the Hofstadter model},
-	author={Bartholomew Andrews},
-	year={2023},
-	eprint={2311.18726},
-	archivePrefix={arXiv},
-	primaryClass={cond-mat.mes-hall}
-	}
+  @misc{HofstadterTools,
+  title={HofstadterTools: A Python package for analyzing the Hofstadter model},
+  author={Bartholomew Andrews},
+  year={2023},
+  eprint={2311.18726},
+  archivePrefix={arXiv},
+  primaryClass={cond-mat.mes-hall}
+  }
 
 Acknowledgments
 ---------------
@@ -160,15 +192,15 @@ Contributing
 
 The Hofstadter model is an active field of research and therefore HofstadterTools will never be complete. Here is a list of some features that we have on the pipeline to be implemented (in no particular order):
 
-* support for hyperbolic lattices `[Stegmaier22] <https://link.aps.org/doi/10.1103/PhysRevLett.128.166402>`__
-* support for fractal lattices `[Chen20] <https://doi.org/10.1007/s00220-020-03850-w>`__
-* support for higher-dimensional lattices `[DiColandrea22] <https://dx.doi.org/10.1088/1367-2630/ac4126>`__
-* support for quasicrystals `[Ghadimi22] <https://link.aps.org/doi/10.1103/PhysRevB.106.L201113>`__
-* support for open boundary conditions `[Pena23] <https://doi.org/10.1016/j.rinp.2023.106257>`__
-* interface to quantum chemistry codes `[Bodesheim23] <https://doi.org/10.1038/s41699-023-00378-0>`__
-* capability to compute the non-Abelian `Hofstadter moth` `[Osterloh05] <https://link.aps.org/doi/10.1103/PhysRevLett.95.010403>`__, `[Yang20] <https://doi.org/10.1038/s41377-020-00384-7>`__
-* capability to compute Chern numbers using bulk-edge correspondence `[Agazzi14] <https://doi.org/10.1007/s10955-014-0992-0>`__
-* capability to generate the potential function corresponding to hopping amplitudes `[Yilmaz17] <https://link.aps.org/doi/10.1103/PhysRevA.95.063628>`__
-* implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) `[Neupert11] <https://link.aps.org/doi/10.1103/PhysRevLett.106.236804>`__
+* support for hyperbolic lattices [`Stegmaier22 <https://link.aps.org/doi/10.1103/PhysRevLett.128.166402>`__]
+* support for fractal lattices [`Chen20 <https://doi.org/10.1007/s00220-020-03850-w>`__]
+* support for higher-dimensional lattices [`DiColandrea22 <https://dx.doi.org/10.1088/1367-2630/ac4126>`__]
+* support for quasicrystals [`Ghadimi22 <https://link.aps.org/doi/10.1103/PhysRevB.106.L201113>`__]
+* support for open boundary conditions [`Pena23 <https://doi.org/10.1016/j.rinp.2023.106257>`__]
+* interface to quantum chemistry codes [`Bodesheim23 <https://doi.org/10.1038/s41699-023-00378-0>`__]
+* capability to compute the non-Abelian `Hofstadter moth` [`Osterloh05 <https://link.aps.org/doi/10.1103/PhysRevLett.95.010403>`__], [`Yang20 <https://doi.org/10.1038/s41377-020-00384-7>`__]
+* capability to compute Chern numbers using bulk-edge correspondence [`Agazzi14 <https://doi.org/10.1007/s10955-014-0992-0>`__]
+* capability to generate the potential function corresponding to hopping amplitudes [`Yilmaz17 <https://link.aps.org/doi/10.1103/PhysRevA.95.063628>`__]
+* implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) [`Neupert11 <https://link.aps.org/doi/10.1103/PhysRevLett.106.236804>`__]
 
 Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/HofstadterTools/HofstadterTools.github.io>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.

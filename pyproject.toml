@@ -2,11 +2,18 @@
 requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
-where = ["code"]
+where = ["src"]
+exclude = ["HT.standalone"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
 
 [project]
-name = "HofstaderTools"
+name = "HofstadterTools"
 version = "1.0.0"
 dependencies = [
     "numpy",
@@ -17,7 +24,7 @@ dependencies = [
     "ipython",
     "jupyter"
 ]
-requires-python = ">=3.10.13"
+requires-python = ">=3.7"
 authors = [{name = "Bartholomew Andrews", email="bartandrews123@gmail.com"}]
 maintainers = [{name = "Bartholomew Andrews", email="bartandrews123@gmail.com"}]
 description = "A Python package for analyzing the Hofstadter model."
@@ -52,7 +59,6 @@ docs = [
     "pybtex",
     "jupytext",
     "pypandoc",
-    "pybtex",
     "myst-parser"
 ]
 
@@ -64,5 +70,5 @@ Repository = "https://github.com/HofstadterTools/HofstadterTools.github.io"
 Issues = "https://github.com/HofstadterTools/HofstadterTools.github.io/issues"
 
 [project.scripts]
-band_structure = "band_structure:main"
-butterfly = "butterfly:main"
+band_structure = "HT.band_structure:main"
+butterfly = "HT.butterfly:main"

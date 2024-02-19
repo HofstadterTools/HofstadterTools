@@ -19,5 +19,4 @@ graphviz
 pybtex #
 jupytext ##
 pypandoc ##
-pybtex ##
 myst-parser #

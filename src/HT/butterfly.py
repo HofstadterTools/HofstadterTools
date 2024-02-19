@@ -12,11 +12,11 @@ import os
 import sys
 import warnings
 # --- internal imports
-import functions.arguments as fa
-import functions.butterfly as fb
-import functions.utility as fu
-import functions.plotting as fp
-from models.hofstadter import Hofstadter
+from HT.functions import arguments as fa
+from HT.functions import butterfly as fb
+from HT.functions import utility as fu
+from HT.functions import plotting as fp
+from HT.models.hofstadter import Hofstadter
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
     # general arguments
     mod = args['model']
     a = args['a']
-    t = fa.read_t_from_file() if args['input'] else args['t']
+    t = fu.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']

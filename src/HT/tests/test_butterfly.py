@@ -1,8 +1,10 @@
 """Unit tests for the butterfly program."""
 
+# --- external imports
 import numpy as np
 from math import gcd
-from models.hofstadter import Hofstadter
+# --- internal imports
+from HT.models.hofstadter import Hofstadter
 
 
 def butterfly(q, t, lat, alpha=1, theta=(1, 3), period=1):

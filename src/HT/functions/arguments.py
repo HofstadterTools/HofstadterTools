@@ -1,5 +1,6 @@
 """Functions for argument parsing."""
 
+# --- external imports
 import argparse
 
 
@@ -51,7 +52,11 @@ def parse_input_arguments(program, description):
         band_structure.add_argument("-disp", "--display", type=str, default="3D", choices=displays, help="how to display band structure")
         band_structure.add_argument("-nphi", nargs=2, type=int, default=[1, 4], help="flux density")
         band_structure.add_argument("-bgt", type=float, default=0.01, help="band gap threshold")
-        band_structure.add_argument("-load", type=str, default=False, help="load data from file")
+        band_structure.add_argument("-load", default=False, action='store_true', help="load data from file")
+        band_structure.add_argument("-topo", "--topology", default=False, action='store_true', help="print the topology columns")
+        band_structure.add_argument("-geom", "--geometry", default=False, action='store_true', help="print the basic quantum geometry columns")
+        columns = ["band", "group", "isolated", "width", "gap", "gap_width", "std_B", "C", "std_g", "av_gxx", "std_gxx", "av_gxy", "std_gxy", "T", "D"]
+        band_structure.add_argument("-cols", "--columns", nargs='+', type=str, default=["band", "group", "isolated", "width", "gap", "gap_width"], choices=columns, help="select the table columns individually")
     if program == "butterfly":
         butterfly.add_argument("-q", type=int, default=199, help="denominator of flux density (prime integer)")
         colors = [False, "point", "plane"]

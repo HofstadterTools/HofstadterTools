@@ -7,13 +7,12 @@ from tqdm import tqdm
 import sys
 import warnings
 # --- internal imports
-import functions.band_structure as fbs
-import functions.arguments as fa
-import functions.utility as fu
-import functions.plotting as fp
-import functions.models as fm
-from models.hofstadter import Hofstadter
-from configuration.band_structure import *
+from HT.functions import band_structure as fbs
+from HT.functions import arguments as fa
+from HT.functions import utility as fu
+from HT.functions import plotting as fp
+from HT.functions import models as fm
+from HT.models.hofstadter import Hofstadter
 
 
 def main():
@@ -22,7 +21,7 @@ def main():
     # general arguments
     mod = args['model']
     a = args['a']
-    t = fa.read_t_from_file() if args['input'] else args['t']
+    t = fu.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
@@ -39,6 +38,34 @@ def main():
     nphi = args['nphi']
     bgt = args['bgt']
     load = args['load']
+    topo = args['topology']
+    geom = args['geometry']
+    cols = args['columns']
+
+    # table column selection
+    if cols == ["band", "group", "isolated", "width", "gap", "gap_width"]:  # default
+        show_band = show_group = show_isolated = show_width = show_gap = show_gap_width = True
+        show_std_B = show_C = topo
+        show_std_g = show_T = show_D = geom
+        show_av_gxx = show_std_gxx = show_av_gxy = show_std_gxy = False
+    else:
+        show_band = True if "band" in cols else False
+        show_group = True if "group" in cols else False
+        show_isolated = True if "isolated" in cols else False
+        show_width = True if "width" in cols else False
+        show_gap = True if "gap" in cols else False
+        show_gap_width = True if "gap_width" in cols else False
+        show_std_B = True if "std_B" in cols else False
+        show_C = True if "C" in cols else False
+        show_std_g = True if "std_g" in cols else False
+        show_av_gxx = True if "av_gxx" in cols else False
+        show_std_gxx = True if "std_gxx" in cols else False
+        show_av_gxy = True if "av_gxy" in cols else False
+        show_std_gxy = True if "std_gxy" in cols else False
+        show_T = True if "T" in cols else False
+        show_D = True if "D" in cols else False
+    topo_cols = [show_C, show_std_B]
+    geom_cols = [show_std_g, show_av_gxx, show_std_gxx, show_av_gxy, show_std_gxy, show_T, show_D]
 
     # initialize logger
     if log:
@@ -61,11 +88,11 @@ def main():
         _, bases = fm.nearest_neighbor_finder(avec, abasisvec, t, 0, 0, 0)
         num_bands = nphi[1] * len(bases)
 
-        if disp == "3D" or disp == "both" or any(topology_columns) or any(geometry_columns):
+        if disp == "3D" or disp == "both" or wil or any(topo_cols) or any(geom_cols):
             # construct bands
             data['eigenvalues'] = np.zeros((num_bands, samp, samp))  # real
             data['eigenvectors'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
-            if any(geometry_columns):
+            if any(geom_cols):
                 data['eigenvectors_dkx'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
                 data['eigenvectors_dky'] = np.zeros((num_bands, num_bands, samp, samp), dtype=np.complex128)  # complex
                 data['Dkx'] = np.dot(np.array([1 / (samp - 1), 0]), bMUCvec[0])
@@ -73,7 +100,7 @@ def main():
             for band in tqdm(range(num_bands), desc="Band Construction", ascii=True):
                 for idx_x in range(samp):
                     frac_kx = idx_x / (samp - 1)
-                    if any(geometry_columns):
+                    if any(geom_cols):
                         frac_kx_dkx = (frac_kx + 1 / (1000 * (samp - 1))) % 1
                     for idx_y in range(samp):
                         frac_ky = idx_y / (samp - 1)
@@ -83,7 +110,7 @@ def main():
                         idx = np.argsort(eigvals)
                         data['eigenvalues'][band, idx_x, idx_y] = eigvals[idx[band]]
                         data['eigenvectors'][:, band, idx_x, idx_y] = eigvecs[:, idx[band]]
-                        if any(geometry_columns):
+                        if any(geom_cols):
                             frac_ky_dky = (frac_ky + 1 / (1000 * (samp - 1))) % 1
                             k_dkx = np.matmul(np.array([frac_kx_dkx, frac_ky]), bMUCvec)
                             k_dky = np.matmul(np.array([frac_kx, frac_ky_dky]), bMUCvec)
@@ -120,7 +147,7 @@ def main():
         # fix certain arguments
         # general arguments
         mod = args_load['model']
-        t = fa.read_t_from_file() if args_load['input'] else args_load['t']
+        t = fu.read_t_from_file() if args_load['input'] else args_load['t']
         lat = args_load['lattice']
         alpha = args_load['alpha']
         theta = args_load['theta']
@@ -133,7 +160,7 @@ def main():
         num_bands, _, _, bMUCvec, sym_points = model.unit_cell()
 
     # band gap and isolated
-    if disp == "3D" or disp == "both" or any(topology_columns) or any(geometry_columns):
+    if disp == "3D" or disp == "both" or wil or any(topo_cols) or any(geom_cols):
         eigenvals = data['eigenvalues']
     else:
         eigenvals = data['eigenvalues_2D']
@@ -161,11 +188,11 @@ def main():
             band_group[band] = band_group_val
 
     # compute Berry fluxes
-    if any(topology_columns) or any(geometry_columns):
+    if wil or any(topo_cols) or any(geom_cols):
         berry_fluxes = np.zeros((num_bands, samp - 1, samp - 1))  # real
         if wil:
             data['wilson_loops'] = np.zeros((num_bands, samp))  # real
-        if any(geometry_columns):
+        if any(geom_cols):
             fs_metric = np.zeros((num_bands, samp - 1, samp - 1, 2, 2))  # real
             berry_fluxes_2 = np.zeros((num_bands, samp - 1, samp - 1))  # real
             TISM, DISM = np.zeros((2, num_bands, samp - 1, samp - 1))  # real
@@ -183,7 +210,7 @@ def main():
                         berry_fluxes[band, idx_x, idx_y] = fbs.berry_curv(data['eigenvectors'], band, idx_x, idx_y,
                                                                           group_size)
                         # quantum geometry
-                        if any(geometry_columns):
+                        if any(geom_cols):
                             geom_tensor = fbs.geom_tensor(data['eigenvectors'], data['eigenvectors_dkx'],
                                                           data['eigenvectors_dky'], bMUCvec, band, idx_x, idx_y,
                                                           group_size)
@@ -197,7 +224,7 @@ def main():
                                                        - 0.25 * np.abs(berry_fluxes_2[band, idx_x, idx_y]) ** 2
                     else:
                         berry_fluxes[band, idx_x, idx_y] = berry_fluxes[band - 1, idx_x, idx_y]
-                        if any(geometry_columns):
+                        if any(geom_cols):
                             fs_metric[band, idx_x, idx_y] = fs_metric[band - 1, idx_x, idx_y]
                             berry_fluxes_2[band, idx_x, idx_y] = berry_fluxes_2[band - 1, idx_x, idx_y]
                             TISM[band, idx_x, idx_y] = TISM[band - 1, idx_x, idx_y]
@@ -217,10 +244,10 @@ def main():
     av_TISM, av_DISM, av_TISM_proj = np.zeros((3, num_bands))
     for band_idx, band in enumerate(np.arange(num_bands)[::-1]):
         band_width[band] = np.max(eigenvals[band]) - np.min(eigenvals[band])
-        if any(topology_columns):
+        if any(topo_cols):
             std_B_norm[band] = np.std(berry_fluxes[band, :, :]) / np.abs(np.average(berry_fluxes[band, :, :]))
             chern_numbers[band] = np.sum(berry_fluxes[band, :, :]) / (2 * np.pi)
-        if any(geometry_columns):
+        if any(geom_cols):
             g_var_sum = np.var(fs_metric[band, :, :][0, 0]) + np.var(fs_metric[band, :, :][0, 1])
             std_g_norm[band] = np.sqrt(g_var_sum)
             av_gxx[band] = np.mean(fs_metric[band, :, :, 0, 0])

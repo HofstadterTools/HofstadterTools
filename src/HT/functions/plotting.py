@@ -1,5 +1,6 @@
 """Functions for plotting data."""
 
+# --- external imports
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -9,11 +10,12 @@ from copy import deepcopy
 import matplotlib.colors as mcolors
 from mpl_toolkits.mplot3d import axes3d
 from matplotlib import rcParams
-import functions.utility as fu
-import functions.models as fm
+# --- internal imports
+from HT.functions import utility as fu
+from HT.functions import models as fm
 
 
-def band_structure(model, args, data):
+def band_structure(model, args, data, plotting=False):
     """Plot the Hofstadter band structure.
 
     Parameters
@@ -24,12 +26,14 @@ def band_structure(model, args, data):
         The arguments parsed to the program.
     data: ndarray
         The data array.
+    plotting: bool
+        The plotting script flag.
     """
 
     # read input arguments
     # general arguments
     mod = args['model']
-    t = fa.read_t_from_file() if args['input'] else args['t']
+    t = fu.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
@@ -120,7 +124,8 @@ def band_structure(model, args, data):
         ax3.set_ylabel('$E$')
 
     if save:
-        dir = "../figs/band_structure/" if os.path.isdir('../figs/band_structure/') else ""
+        rel_path = "../../.." if plotting else "../.."
+        dir = f"{rel_path}/figs/band_structure/" if os.path.isdir(f'{rel_path}/figs/band_structure/') else ""
         if disp in ["2D", "both"]:
             filename_2D = fu.create_filename("band_structure", args, aux_text="2D")
             fig3.savefig(dir+filename_2D+".png", bbox_inches='tight', dpi=dpi)
@@ -137,7 +142,7 @@ def band_structure(model, args, data):
     return None
 
 
-def butterfly(model, args, data):
+def butterfly(model, args, data, plotting=False):
     """Plot the Hofstadter butterfly.
 
     Parameters
@@ -148,12 +153,14 @@ def butterfly(model, args, data):
         The arguments parsed to the program.
     data: ndarray
         The data array.
+    plotting: bool
+        The plotting script flag.
     """
 
     # read input arguments
     # general arguments
     mod = args['model']
-    t = fa.read_t_from_file() if args['input'] else args['t']
+    t = fu.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
@@ -280,7 +287,8 @@ def butterfly(model, args, data):
 
     if save:
         filename = fu.create_filename("butterfly", args)
-        dir = "../figs/butterfly/" if os.path.isdir('../figs/butterfly/') else ""
+        rel_path = "../../../" if plotting else "../.."
+        dir = f"{rel_path}/figs/butterfly/" if os.path.isdir(f'{rel_path}/figs/butterfly/') else ""
         fig.savefig(dir+filename+".png", bbox_inches='tight', dpi=dpi, transparent=transparent)
         if wan:
             fig2.savefig(dir+filename.replace("butterfly", "wannier")+".png",

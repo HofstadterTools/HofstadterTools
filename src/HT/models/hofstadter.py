@@ -1,10 +1,12 @@
 """The Hofstadter model classes."""
 
+# --- external imports
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.patches import Polygon
-import functions.models as fm
+# --- internal imports
+from HT.functions import models as fm
 
 
 class Hofstadter:

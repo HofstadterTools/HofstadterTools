@@ -1,8 +1,10 @@
 """Unit tests for the band_structure program."""
 
+# --- external imports
 import numpy as np
-import functions.models as fm
-from models.hofstadter import Hofstadter
+# --- internal imports
+from HT.functions import models as fm
+from HT.models.hofstadter import Hofstadter
 
 
 def band_structure(nphi, t, lat, alpha=1, theta=(1, 3), period=1, samp=11):

@@ -1,5 +1,6 @@
 """Functions for butterfly calculations."""
 
+# --- external imports
 from fractions import Fraction
 
 

@@ -16,10 +16,10 @@ jobs:
       - uses: ts-graphviz/setup-graphviz@v1
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install .
       - name: Set the PYTHONPATH
         run: |
-          echo "PYTHONPATH=$PYTHONPATH:code" >> "$GITHUB_ENV"
+          echo "PYTHONPATH=$PYTHONPATH:src" >> "$GITHUB_ENV"
       - name: Run pytests
         run: |
-          pytest code/tests/
+          pytest

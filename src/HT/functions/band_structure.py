@@ -1,5 +1,6 @@
 """Functions for band structure calculations."""
 
+# --- external imports
 import numpy as np
 import cmath as cm
 

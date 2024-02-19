@@ -20,19 +20,19 @@ The flags ``-alpha`` and ``-theta`` specify the anisotropy and obliqueness of th
 
 	I have run the code with the ``-save``/``-log`` flag but I cannot find the output. Where is the output saved?
 
-If you executed the code in the ``code`` directory (recommended), then the output will be saved by default in the ``data``, ``figs``, and ``logs`` directories. If you executed the code in any other location, then all of the output will be saved in the current working directory.
+If you explicitly executed the code in its local directory (e.g. ``src/HT`` for the programs and ``src/HT/plot`` for the plot scripts), then the output will be saved by default in the ``data``, ``figs``, and ``logs`` project directories. If you executed the code in any other location, then all of the output will be saved in the current working directory.
 
 .. admonition:: Question
 
 	I would like to implement a custom lattice, which has a multi-site basis that is different than ``honeycomb`` or ``kagome``. How can I do this?
 
-In HofstadterTools, the ``custom`` lattice parameter is used for this purpose. Navigate to the ``unit_cell`` method of the ``Hofstadter`` class in ``models/hofstadter.py`` and enter your desired set of basis vectors and high-symmetry points under the ``elif self.lat == "custom":`` clause. By default, the ``custom`` lattice is identical to ``kagome``.
+In HofstadterTools, the ``custom`` lattice parameter is used for this purpose. Navigate to the ``unit_cell`` method of the ``Hofstadter`` class in ``src/HT/models/hofstadter.py`` and enter your desired set of basis vectors and high-symmetry points under the ``elif self.lat == "custom":`` clause. By default, the ``custom`` lattice is identical to ``kagome``. If you are not using an editable install, you will need to reinstall HofstadterTools for the changes to take effect.
 
 .. admonition:: Question
 
 	I would like to input a list of hopping parameters from a file. How can I do this?
 
-If you are executing your code from within the ``code`` directory (recommended), then you can edit the configuration file ``hopping_input.txt`` located in ``code/configuration``, and then append the flag ``-input`` to your program. The file consists of rows with two columns, separated by a tab. The left column is the NN group and the right column is the hopping amplitude. For example, in order to input the flags ``-t 1 0 " -0.25"``, we can create the following file:
+If you are explicitly executing the code in its local directory (e.g. ``src/HT``), then you can edit the configuration file ``hopping_input.txt`` located in ``src/HT/configuration``, and then append the flag ``-input`` to your program. The file consists of rows with two columns, separated by a tab. The left column is the NN group and the right column is the hopping amplitude. For example, in order to input the flags ``-t 1 0 " -0.25"``, we can create the following file:
 
 .. code:: console
 
@@ -57,26 +57,26 @@ In HofstadterTools, :math:`\kappa`-th nearest neighbors are defined as a group o
 
 	Where can I find the version number of my local copy of HofstadterTools?
 
-The release number can be found in ``docs/source/conf.py`` and follows the standard semantic versioning conventions.
+The release number can be found in ``pyproject.toml`` and follows the standard semantic versioning conventions.
 
 Band Structure Questions
 ------------------------
 
 .. admonition:: Question
 
-	I would like to analyze the quantum geometry of the bands, but I do not see any quantum geometry data in the output table of the ``band_structure`` program. How can I do this?
+	I would like to analyze the topology / quantum geometry of the bands, but I do not see such data in the output table of the ``band_structure`` program. How can I do this?
 
-By default, the quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can edit the table column selector at ``code/configuration/band_structure.py``. Note that the table columns are grouped by computational expense. For example, if you would like to output the Fubini-Study metric fluctuations ``std_g``, then you could also output the Brillouin-zone-averaged trace inequality saturation measure ``T`` at negligible additional cost.
+By default, the topology and quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can use the ``-topo``, ``-geom``, and ``-cols`` flags. The basic band structure columns are returned by default. The ``-topo`` flag will additionally return the topology columns, the ``geom`` flag will additionally return the quantum geometry columns, whereas the ``-cols`` flag will override all other flags and return a custom selection of columns. Note that the {basic,topology,geometry} table columns are grouped by computational expense.
 
 .. admonition:: Question
 
 	I would like to compute the band structure of my custom Hamiltonian but it is running very slowly compared to standard examples. Why is this?
 
-The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor hopping. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its *complete* band structure more quickly, then consider adding it to ``functions/models.py`` in a similar format to the other hardcoded Hamiltonians, e.g. ``BasicKagomeHamiltonian``. We note that the ``butterfly`` program does not suffer from this issue, since the diagonalization is performed only at a single :math:`k` point.
+The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor hopping. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its *complete* band structure more quickly, then consider adding it to ``src/HT/functions/models.py`` in a similar format to the other hardcoded Hamiltonians, e.g. ``BasicKagomeHamiltonian``. We note that the ``butterfly`` program does not suffer from this issue, since the diagonalization is performed only at a single :math:`k` point.
 
 .. admonition:: Question
 
-	I have computed the band structure for a particular model and I have noticed that certain bands are not "touching" when they should be, or visa versa. How can I fix this?
+	I have computed the band structure for a particular model and I have noticed that certain bands are not "touching" when they should be, or vice versa. How can I fix this?
 
 Due to the discrete nature of the :math:`k` mesh, it is difficult to declare that certain bands are touching. For this purpose, HofstadterTools uses the band gap threshold flag ``-bgt``, which declares bands as touching when they are within this value of each other. If you notice that certain bands should/should not be touching, e.g. by noticing that the Chern numbers do not sum to zero, or you are simply suspicious of bands that are in close proximity, you can try decreasing the mesh size using the ``-samp`` flag and tweaking this ``-bgt`` value.
 
@@ -90,14 +90,14 @@ When computing the complete band structure, it may be more difficult to spot whe
 
 	For comparison, I would like to compute the regular band structure for my tight-binding model, without an external magnetic field. How can I do this?
 
-The band structure with zero magnetic field can be computed by setting the flux density as ``-nphi 0 1``. For example, we can compute the band structure of graphene by using the command ``python band_structure.py -lat honeycomb -nphi 0 1``.
+The band structure with zero magnetic field can be computed by setting the flux density as ``-nphi 0 1``. For example, we can compute the band structure of graphene by using the command ``band_structure -lat honeycomb -nphi 0 1``.
 
 Butterfly Questions
 -------------------
 
 .. admonition:: Question
 
-	I have plotted a Hofstadter butterfly for some custom model but there are spurious straggeling bands and aperiodicity in the spectrum. What can I do to fix this?
+	I have plotted a Hofstadter butterfly for some custom model but there are spurious straggling bands and aperiodicity in the spectrum. What can I do to fix this?
 
 By default, the flux density in HofstadterTools is defined with respect to the lattice unit cell area. However, in some models, the minimal plaquette around which a particle can hop encloses an area that is smaller than the unit cell area. In these cases, in order to both restore periodicity and view the complete butterfly spectrum, you may need to define the flux density with respect to the area of a minimal plaquette. In general, compute the ratio ``n`` of the effective unit cell area (spanned by the hopping terms) and the area of a minimal hopping plaquette, and then append the flag ``--periodicity n``.
 
@@ -111,4 +111,4 @@ All of the Hofstadter butterflies are colored using the Streda-Widom Diophantine
 
 	I am trying to plot a plane-colored Hofstadter butterfly with high resolution but I find strange interpolated blobs in the fine structure of the spectrum. How can I fix this?
 
-This is an indication that the dpi of the image is too low. Assuming that you have saved the output data for such a high-resolution spectrum (recommended), you can overwrite the ``args['dpi']`` parameter in the ``plot/butterfly.py`` script and try plotting it again. By default, the dpi is set to 300. This works reasonably well for :math:`M` values up to about 300, where :math:`M` is the number of bands in the spectrum. In general, we recommend setting a dpi value of greater than :math:`M` for best results.
+This is an indication that the dpi of the image is too low. Assuming that you have saved the output data for such a high-resolution spectrum (recommended), you can overwrite the ``args['dpi']`` parameter in the ``src/HT/plot/butterfly.py`` script and try plotting it again. By default, the dpi is set to 300. This works reasonably well for :math:`M` values up to about 300, where :math:`M` is the number of bands in the spectrum. In general, we recommend setting a dpi value of greater than :math:`M` for best results.

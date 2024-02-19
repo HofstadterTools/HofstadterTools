@@ -1,5 +1,6 @@
 """Functions for input/output and miscellaneous use."""
 
+# --- external imports
 import os
 import csv
 import numpy as np
@@ -51,7 +52,7 @@ def create_filename(program, args, aux_text=""):
     # read input arguments
     mod = args['model']
     a = args['a']
-    t = fa.read_t_from_file() if args['input'] else args['t']
+    t = fu.read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
@@ -117,14 +118,14 @@ def save_data(program, model, args, data):
         The data array.
     """
 
-    directory = f"../data/{program}/" if os.path.isdir(f"../data/{program}/") else ""
+    directory = f"../../data/{program}/" if os.path.isdir(f"../../data/{program}/") else ""
     filename = create_filename(program, args)
     np.savez_compressed(directory+filename, model=model, args=args, data=data)
 
     return None
 
 
-def load_data(program, filename):
+def load_data(program, filename, plotting=False):
     """Load data from file.
 
     Parameters
@@ -133,9 +134,12 @@ def load_data(program, filename):
         The name of the program.
     filename: str
         The name of the file to be loaded.
+    plotting: bool
+        The plotting script flag.
     """
 
-    directory = f"../data/{program}/" if os.path.isdir(f"../data/{program}/") else ""
+    rel_path = "../../.." if plotting else "../.."
+    directory = f"{rel_path}/data/{program}/" if os.path.isdir(f"{rel_path}/data/{program}/") else ""
     file_data = np.load(directory+filename, allow_pickle=True)
     model = file_data['model'].item()  # .item() unpacks 0-dim array
     args = file_data['args'].item()
@@ -149,7 +153,7 @@ class Logger(object):
 
     def __init__(self, program, args):
         self.terminal = sys.stdout or sys.stderr
-        directory = f"../logs/{program}/" if os.path.isdir(f"../logs/{program}/") else ""
+        directory = f"../../logs/{program}/" if os.path.isdir(f"../../logs/{program}/") else ""
         filename = create_filename(program, args)
         self.log = open(directory+filename+".log", 'w', buffering=1)
 
