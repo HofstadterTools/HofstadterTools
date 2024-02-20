@@ -31,7 +31,7 @@ Using HofstadterTools is quick and easy! First, clone and enter the project:
 
     git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools; cd HofstadterTools
 
-Then, assuming a Python>=3.7 environment (with `pip <https://pip.pypa.io/en/stable/>`__ and `tkinter <https://docs.python.org/3/library/tkinter.html>`__), install using:
+Then, assuming an environment with Python>=3.9, install using:
 
 .. code:: console
 
@@ -76,7 +76,7 @@ Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor
 Installation
 ------------
 
-This package was developed using Ubuntu 20.04.6 (x86_64) with Python=3.10.13, however it is designed to be platform-independent and can work with any Python>=3.7.
+This package was developed using Ubuntu 20.04.6 (x86_64) with Python=3.10.13, however it is designed to be platform-independent and can work with any Python>=3.9.
 
 Virtual environment
 ~~~~~~~~~~~~~~~~~~~
@@ -88,11 +88,11 @@ We recommend the use of a python virtual environment to handle the package depen
     user@domain:path/to/HofstadterTools$ python3 -m venv myenv
     user@domain:path/to/HofstadterTools$ source myenv/bin/activate
 
-where ``python3`` points to Python>=3.7 (with `pip <https://pip.pypa.io/en/stable/>`__ and `tkinter <https://docs.python.org/3/library/tkinter.html>`__).
+where ``python3`` points to Python>=3.9.
 
 .. note::
 
-	On Linux, your python installation may not automatically ship with all of the necessary components, such as ``venv``, ``pip``, and ``tkinter``. If this is the case, or if in doubt, install them before proceeding. For example, on Debian-based distros, the command is ``apt install python3-venv python3-pip python3-tk``, where ``python3`` can be replaced with any specific Python>=3.7, as required. Without ``python-tk``, you may not be able to view the plots.
+	If your python installation does not come with all of the necessary components, such as ``venv``, you can install them. For example, on Debian-based distros, the command is ``sudo apt install python3-venv``, where ``python3`` can be replaced with any specific Python>=3.9, as required.
 
 .. caution::
 
