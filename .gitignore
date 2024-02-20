@@ -144,3 +144,4 @@ old/
 *.txt
 environment*.yml
 **/logo_placeholder.png
+requirements.txt

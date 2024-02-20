@@ -31,7 +31,7 @@ Using HofstadterTools is quick and easy! First, clone and enter the project:
 
     git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools; cd HofstadterTools
 
-Then, assuming an environment with Python>=3.7, install using:
+Then, assuming a Python>=3.7 environment (with ``pip`` and ``tk``), install using:
 
 .. code:: console
 
@@ -88,7 +88,11 @@ We recommend the use of a python virtual environment to handle the package depen
     user@domain:path/to/HofstadterTools$ python3 -m venv myenv
     user@domain:path/to/HofstadterTools$ source myenv/bin/activate
 
-where ``python3`` points to Python>=3.7.
+where ``python3`` points to Python>=3.7 (with ``pip`` and ``tk``).
+
+.. note::
+
+	On Linux, your python installation may not automatically ship with all of the necessary components, such as ``venv``, ``pip``, and ``tk``. If this is the case, or if in any doubt, install them before proceeding. For example, on Debian-based distros, the command is ``sudo apt install python3-venv python3-pip python3-tk``, where ``python3`` can be replaced with any specific Python>=3.7, as required. Without ``python-tk``, you may not be able to view the plots!
 
 .. caution::
 
