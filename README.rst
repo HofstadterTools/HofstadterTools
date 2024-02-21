@@ -20,22 +20,16 @@ HofstadterTools
 
 .. admonition:: About the name
 
-		Philip Harper first derived the difference equation for the model [`Harper55 <https://dx.doi.org/10.1088/0370-1298/68/10/304>`__], which was later analyzed in detail by Mark Azbel [`Azbel64 <http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list>`__], and finally plotted by Douglas Hofstadter [`Hofstadter76 <https://link.aps.org/doi/10.1103/PhysRevB.14.2239>`__]. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
+    Philip Harper first derived the difference equation for the model [`Harper55 <https://dx.doi.org/10.1088/0370-1298/68/10/304>`__], which was later analyzed in detail by Mark Azbel [`Azbel64 <http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list>`__], and finally plotted by Douglas Hofstadter [`Hofstadter76 <https://link.aps.org/doi/10.1103/PhysRevB.14.2239>`__]. Consequently, the formal name for the model is the *Harper-Azbel-Hofstadter model* to credit its three main contributors.
 
 Quick Start
 -----------
 
-Using HofstadterTools is quick and easy! First, clone and enter the project:
+Using HofstadterTools is quick and easy!
 
 .. code:: console
 
-    git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools; cd HofstadterTools
-
-Then, assuming an environment with Python>=3.9, install using:
-
-.. code:: console
-
-    pip install -e .
+    pip install HofstadterTools
 
 You can now access the ``band_structure`` and ``butterfly`` programs from any location.
 
@@ -78,62 +72,60 @@ Installation
 
 This package was developed using Ubuntu 20.04.6 (x86_64) with Python=3.10.13, however it is designed to be platform-independent and can work with any Python>=3.9.
 
-Virtual environment
-~~~~~~~~~~~~~~~~~~~
+Basic install
+~~~~~~~~~~~~~
 
-We recommend the use of a python virtual environment to handle the package dependencies. For example, in order to set up a ``venv``, type:
+For basic usage of HofstadterTools, i.e. in cases where you *do not* plan on editing the source code, you can install the package quickly and easily from PyPI:
 
 .. code:: console
 
-    user@domain:path/to/HofstadterTools$ python3 -m venv myenv
-    user@domain:path/to/HofstadterTools$ source myenv/bin/activate
+    pip install HofstadterTools
 
-where ``python3`` points to Python>=3.9.
+To avoid dependency clashes, we recommend the use of a python virtual environment, such as ``venv``.
+
+.. warning::
+
+    If you install HofstadterTools into a conda environment, you may see a ``libGL error`` when you run the programs. This is a known problem with the ``libstdc++.so`` file in Conda and should not affect the functionality of HofstadterTools.
+
+Advanced install
+~~~~~~~~~~~~~~~~
+
+For advanced usage of HofstadterTools, i.e. in cases where you *do* plan on editing the source code, you can install the package from source.
+
+.. code:: console
+
+    user@domain:any/path$ git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools; cd HofstadterTools
+    user@domain:path/to/HofstadterTools$ pip install -e .
+
+The optional ``-e`` flag indicates an editable install. Alternatively, if you plan on building the documentation locally, the optional ``docs`` dependencies need to be installed.
+
+.. code:: console
+
+    user@domain:path/to/HofstadterTools$ pip install -e ".[docs]"
 
 .. note::
 
-	If your python installation does not come with all of the necessary components, such as ``venv``, you can install them. For example, on Debian-based distros, the command is ``sudo apt install python3-venv``, where ``python3`` can be replaced with any specific Python>=3.9, as required.
-
-.. caution::
-
-  Before activating a python virtual environment, check if any other python virtual environments are already active. For example, if you have a conda environment active, you may want to ``conda deactivate`` before activating a ``venv``, or vice versa.
-
-From source
-~~~~~~~~~~~
-
-Within your virtual environment, you can then install HofstadterTools:
-
-.. code:: console
-
-    (myenv) user@domain:path/to/HofstadterTools$ pip install -e .
-
-where the optional ``-e`` flag indicates an editable install. If you would like to also install the dependencies to compile the documentation locally, then instead type:
-
-.. code:: console
-
-    (myenv) user@domain:path/to/HofstadterTools$ pip install -e ".[docs]"
+    Implementing custom lattices with more than one site per unit cell requires an advanced install.
 
 Testing
 ~~~~~~~
 
-You can confirm that HofstadterTools is correctly installed by typing
+You can confirm that HofstadterTools is correctly installed by running the pytests.
 
 .. code:: console
 
-    (myenv) user@domain:any/path$ pip list | grep HofstadterTools
+    user@domain:any/path$ pytest --pyargs HT
 
-or by running the pytests:
-
-.. code:: console
-
-    (myenv) user@domain:path/to/HofstadterTools$ pytest
-
-Once the project ``HofstadterTools`` has been successfully installed, the package ``HT`` will be available in your virtual environment. In addition, you can access the programs ``band_structure`` and ``butterfly`` from any location:
+Once the *project* ``HofstadterTools`` is installed, the *package* ``HT`` will be available in your python environment. In addition, you can access the programs ``band_structure``, ``butterfly``, ``plot_band_structure``, and ``plot_butterfly``, from any location.
 
 .. code:: console
 
-    (myenv) user@domain:any/path$ band_structure --help
-    (myenv) user@domain:any/path$ butterfly --help
+    user@domain:any/path$ band_structure --help
+    user@domain:any/path$ butterfly --help
+    user@domain:any/path$ plot_band_structure --help
+    user@domain:any/path$ plot_butterfly --help
+
+The ``plot_*`` programs are used to replot band_structures / butterflies that have been saved to file.
 
 Directory Structure
 -------------------
