@@ -13,6 +13,8 @@
 import os
 import sys
 from datetime import datetime
+import tomli
+
 # import inspect
 sys.path.insert(0, os.path.abspath('../../src/HT'))  # Source code dir relative to this file
 
@@ -23,7 +25,9 @@ copyright = f'{datetime.now().year}, Bartholomew Andrews'
 author = 'Bartholomew Andrews'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+with open("../../pyproject.toml", "rb") as f:
+    toml = tomli.load(f)
+release = toml["project"]["version"]
 
 # -- pandoc ------------------------------------------------------------------------------------------------------------
 

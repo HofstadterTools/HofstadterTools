@@ -63,7 +63,8 @@ docs = [
     "pybtex",
     "jupytext",
     "pypandoc",
-    "myst-parser"
+    "myst-parser",
+    "tomli"
 ]
 
 [project.urls]

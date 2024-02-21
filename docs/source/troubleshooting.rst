@@ -26,7 +26,7 @@ If you explicitly executed the code in its local directory (e.g. ``src/HT`` for 
 
 	I would like to implement a custom lattice, which has a multi-site basis that is different than ``honeycomb`` or ``kagome``. How can I do this?
 
-In HofstadterTools, the ``custom`` lattice parameter is used for this purpose. Navigate to the ``unit_cell`` method of the ``Hofstadter`` class in ``src/HT/models/hofstadter.py`` and enter your desired set of basis vectors and high-symmetry points under the ``elif self.lat == "custom":`` clause. By default, the ``custom`` lattice is identical to ``kagome``. If you are not using an editable install, you will need to reinstall HofstadterTools for the changes to take effect.
+In HofstadterTools, the ``custom`` lattice parameter is used for this purpose and it requires an installation from source (advanced usage). Navigate to the ``unit_cell`` method of the ``Hofstadter`` class in ``src/HT/models/hofstadter.py`` and enter your desired set of basis vectors and high-symmetry points under the ``elif self.lat == "custom":`` clause. By default, the ``custom`` lattice is identical to ``kagome``.
 
 .. admonition:: Question
 
@@ -66,7 +66,7 @@ Band Structure Questions
 
 	I would like to analyze the topology / quantum geometry of the bands, but I do not see such data in the output table of the ``band_structure`` program. How can I do this?
 
-By default, the topology and quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can use the ``-topo``, ``-geom``, and ``-cols`` flags. The basic band structure columns are returned by default. The ``-topo`` flag will additionally return the topology columns, the ``geom`` flag will additionally return the quantum geometry columns, whereas the ``-cols`` flag will override all other flags and return a custom selection of columns. Note that the {basic,topology,geometry} table columns are grouped by computational expense.
+By default, the topology and quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can use the ``-topo``, ``-geom``, and ``-cols`` flags. The basic band structure columns are returned by default. The ``-topo`` flag will additionally return the topology columns, the ``geom`` flag will additionally return the quantum geometry columns, whereas the ``-cols`` flag will override all settings and return a custom selection of columns. Note that the {basic,topology,geometry} table columns are grouped by computational expense.
 
 .. admonition:: Question
 
@@ -111,4 +111,4 @@ All of the Hofstadter butterflies are colored using the Streda-Widom Diophantine
 
 	I am trying to plot a plane-colored Hofstadter butterfly with high resolution but I find strange interpolated blobs in the fine structure of the spectrum. How can I fix this?
 
-This is an indication that the dpi of the image is too low. Assuming that you have saved the output data for such a high-resolution spectrum (recommended), you can overwrite the ``args['dpi']`` parameter in the ``src/HT/plot/butterfly.py`` script and try plotting it again. By default, the dpi is set to 300. This works reasonably well for :math:`M` values up to about 300, where :math:`M` is the number of bands in the spectrum. In general, we recommend setting a dpi value of greater than :math:`M` for best results.
+This is an indication that the dpi of the image is too low. Assuming that you have saved the output data for such a high-resolution spectrum (recommended), you can run ``plot_butterfly`` with a new ``-dpi`` flag. By default, the dpi is set to 300. This works reasonably well for :math:`M` values up to about 300, where :math:`M` is the number of bands in the spectrum. In general, we recommend setting a dpi value of greater than :math:`M` for best results.
