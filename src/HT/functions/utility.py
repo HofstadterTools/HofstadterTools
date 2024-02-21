@@ -52,7 +52,7 @@ def create_filename(program, args, aux_text=""):
     # read input arguments
     mod = args['model']
     a = args['a']
-    t = fu.read_t_from_file() if args['input'] else args['t']
+    t = read_t_from_file() if args['input'] else args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']

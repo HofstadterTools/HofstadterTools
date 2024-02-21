@@ -9,6 +9,9 @@ include-package-data = true
 where = ["src"]
 exclude = ["HT.standalone"]
 
+[tool.setuptools.package-data]
+"*" = ["*.npz", "*.txt"]
+
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 
@@ -73,3 +76,5 @@ Issues = "https://github.com/HofstadterTools/HofstadterTools.github.io/issues"
 [project.scripts]
 band_structure = "HT.band_structure:main"
 butterfly = "HT.butterfly:main"
+plot_band_structure = "HT.plot.plot_band_structure:main"
+plot_butterfly = "HT.plot.plot_butterfly:main"

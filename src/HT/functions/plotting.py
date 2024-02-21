@@ -33,7 +33,7 @@ def band_structure(model, args, data, plotting=False):
     # read input arguments
     # general arguments
     mod = args['model']
-    t = fu.read_t_from_file() if args['input'] else args['t']
+    t = args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']
@@ -160,7 +160,7 @@ def butterfly(model, args, data, plotting=False):
     # read input arguments
     # general arguments
     mod = args['model']
-    t = fu.read_t_from_file() if args['input'] else args['t']
+    t = args['t']
     lat = args['lattice']
     alpha = args['alpha']
     theta = args['theta']

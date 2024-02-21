@@ -145,3 +145,5 @@ old/
 environment*.yml
 **/logo_placeholder.png
 requirements.txt
+.build-env/
+.test-env/
