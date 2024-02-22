@@ -8,13 +8,13 @@ The **butterfly spectrum** is a plot of energy :math:`E` against flux density :m
 The Hofstadter butterfly may be colored in variety of ways. For example, we may **color the points** of the butterfly by their Chern number, as shown in the left figure below. The disadvantage of this, is that there will be many points in the butterfly and so the fine details of the coloring may be obscured. Moreover, the Chern number magnitude range will increase with :math:`q` and so it is difficult to define a fixed scale. By default, HofstadterTools uses a scale for Chern numbers of magnitude up to 10. An alternative, and usually preferred, method is to **color the plane** of the butterfly by the cumulative Chern numbers of the gaps, as shown in the middle figure below. The cumulative Chern numbers are consistent with increasing :math:`q` and they are intimately connected with the Hall conductivity in the quantum Hall effect. As before, HofstadterTools uses a scale for Chern numbers of magnitude up to 10, by default, as well as the color palette made famous by Avron :cite:`Avron03`. To complement the butterfly spectra, we may also plot the **Wannier diagram**, which shows the integrated density of states below the gap :math:`N(E)` against flux density, as in the right figure below. The size of the points is proportional to the size of the gaps and the color is given by the cumulative Chern number. The gradients of the slopes may be used to infer the Hall conductivity, which is particularly useful for connecting with experiments :cite:`DiColandrea22`.
 
 .. image:: ../images/overview/butterfly_square_q_97_t_1_col_point_avron.png
-    :width: 33 %
+    :width: 32 %
     :alt: Butterfly Spectrum (Point)
 .. image:: ../images/theory/butterfly_square_q_97_t_1_col_plane_avron.png
-    :width: 33 %
+    :width: 32 %
     :alt: Butterfly Spectrum (Plane)
 .. image:: ../images/overview/wannier_square_q_97_t_1_col_point_avron.png
-    :width: 33 %
+    :width: 32 %
     :alt: Wannier Diagram
 
 In the butterfly spectra, we are computing the band structure with :math:`q` bands, up to :math:`q-1` times, where we typically have :math:`10^2<q<10^3`. These are comparatively large band structures, which are fortunately not excessively computationally expensive, since we are only computing each spectrum at the :math:`\Gamma`-point. However, we are coloring the spectra using the Chern numbers of the bands, which for our ``band_structure`` program was computed using the Fukui formula :cite:`Fukui05`. This formula involves a numerical integration over the entire Brillouin zone, which would be too computationally demanding in this case. Fortunately, for most butterfly spectra, there is a faster way to infer the Chern numbers, known as the **Streda-Widom Diophantine relation**. For a rational flux, it is easy to show that the energy gaps in the Hofstadter spectrum are characterized by the integers :math:`s` and :math:`t`, which are related by the Diophantine equation,

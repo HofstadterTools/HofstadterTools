@@ -45,13 +45,13 @@ All distances are measured in units of the lattice constant :math:`a=1`. Given t
 and hence there are 4 energy bands in the spectrum, as shown in the figures below.
 
 .. image:: ../images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 32 %
     :alt: 3D Band Structure
 .. image:: ../images/overview/wilson_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 32 %
     :alt: Wilson Loops
 .. image:: ../images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png
-    :width: 33 %
+    :width: 32 %
     :alt: 2D Band Structure
 
 In the general case, the procedure follows in a similar way. We start by writing down the time-independent Schrödinger equation for each site in the basis, which we index using lowercase Greek letters :math:`\alpha,\beta`. This yields a set :math:`N_\mathrm{b}` simultaneous equations, which we can write in matrix form, such that :math:`\mathbf{H}\boldsymbol{\psi}=E\boldsymbol{\psi}`, where :math:`\boldsymbol{\psi}=(\psi^0, \psi^1, \dots, \psi^{N_\mathrm{b}-1})^\intercal` is a vector of length :math:`N_\mathrm{b}`, and the :math:`N_\mathrm{b}\times N_\mathrm{b}` Hamiltonian matrix is given as
