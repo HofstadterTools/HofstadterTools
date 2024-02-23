@@ -21,9 +21,10 @@ jobs:
       - name: Sphinx build
         run: |
           sphinx-build docs/source docs/build
-      - name: Deploy to external repository
+      - name: Create CNAME
         run: |
           echo hofstadter.tools > docs/build/CNAME
+      - name: Deploy to external repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
