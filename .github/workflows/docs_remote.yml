@@ -29,5 +29,3 @@ jobs:
           source-directory: 'docs/build/html'
           destination-github-username: 'HofstadterTools'
           destination-repository-name: 'HTwebsite.github.io'
-          user-email: bartandrews123@gmail.com
-          target-branch: gh-pages
