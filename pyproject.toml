@@ -17,7 +17,7 @@ pythonpath = ["src"]
 
 [project]
 name = "HofstadterTools"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
     "numpy",
     "matplotlib",
@@ -71,8 +71,8 @@ docs = [
 Homepage = "https://hofstadter.tools"
 Pre-print = "https://arxiv.org/abs/2311.18726"
 Documentation = "https://hofstadter.tools"
-Repository = "https://github.com/HofstadterTools/HofstadterTools.github.io"
-Issues = "https://github.com/HofstadterTools/HofstadterTools.github.io/issues"
+Repository = "https://github.com/HofstadterTools/HofstadterTools"
+Issues = "https://github.com/HofstadterTools/HofstadterTools/issues"
 
 [project.scripts]
 band_structure = "HT.band_structure:main"
