@@ -8,7 +8,7 @@ on:
 
 jobs:
   docs_remote:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,6 +26,6 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: 'docs/build/html'
+          source-directory: 'docs'
           destination-github-username: 'HofstadterTools'
           destination-repository-name: 'HTwebsite.github.io'
