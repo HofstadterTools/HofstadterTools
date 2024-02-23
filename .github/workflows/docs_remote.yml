@@ -20,6 +20,9 @@ jobs:
       - name: Sphinx build
         run: |
           sphinx-build docs/source docs/build
+      - name: Bypass jekyll
+        run: |
+          touch docs/build/.nojekyll
       - name: Create CNAME
         run: |
           echo hofstadter.tools > docs/build/CNAME
@@ -30,4 +33,4 @@ jobs:
         with:
           source-directory: 'docs/build'
           destination-github-username: 'HofstadterTools'
-          destination-repository-name: 'HTwebsite.github.io'
+          destination-repository-name: 'HofstadterTools.github.io'
