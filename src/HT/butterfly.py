@@ -59,7 +59,7 @@ def main():
         if mod == "Hofstadter":
             model = Hofstadter(p, q, a0=a, t=t, lat=lat, alpha=alpha, theta=theta, period=period)
         else:
-            raise ValueError("model is not defined")
+            raise ValueError("model is not defined.")
 
         # define flux density
         if gcd(p, q) != 1:  # nphi must be a coprime fraction

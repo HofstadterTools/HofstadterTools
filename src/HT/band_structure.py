@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 from prettytable import PrettyTable
 from tqdm import tqdm
+from math import gcd
 import sys
 import warnings
 # --- internal imports
@@ -36,6 +37,8 @@ def main():
     wil = args['wilson']
     disp = args['display']
     nphi = args['nphi']
+    if gcd(nphi[0], nphi[1]) != 1:  # nphi must be a coprime fraction
+        raise ValueError("nphi must be a coprime fraction.")
     bgt = args['bgt']
     load = args['load']
     topo = args['topology']
@@ -81,7 +84,7 @@ def main():
         if mod == "Hofstadter":
             model = Hofstadter(nphi[0], nphi[1], a0=a, t=t, lat=lat, alpha=alpha, theta=theta, period=period)
         else:
-            raise ValueError("model is not defined")
+            raise ValueError("model is not defined.")
 
         # define unit cell
         _, avec, abasisvec, bMUCvec, sym_points = model.unit_cell()

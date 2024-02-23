@@ -98,7 +98,7 @@ def create_filename(program, args, aux_text=""):
         filename = f"butterfly_{aux_str}{lat}_{q_str}{a_str}{t_str}{brav_str}{col_str}{per_str}{art_str}{dpi_str}"[:-1]
 
     else:
-        raise ValueError("program is not defined")
+        raise ValueError("program is not defined.")
 
     return filename
 

@@ -85,7 +85,7 @@ def U(var_num, _eigenvectors, _band, _idx_x, _idx_y, _group_size):
             elif var_num == 2:
                 vec2 = _eigenvectors[:, _band + j, _idx_x, (_idx_y + 1) % _num_samples]
             else:
-                raise ValueError("link variable number must be in [1, 2].")
+                raise ValueError("Link variable number must be in [1, 2].")
             link_matrix[i, j] = np.conj(vec1).dot(vec2)
     link_var = np.linalg.det(link_matrix)
     return link_var
