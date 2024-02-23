@@ -3,11 +3,11 @@ HofstadterTools
 
 |docs| |pytests| |license|
 
-.. |docs| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml/badge.svg
-   :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/docs.yml
+.. |docs| image:: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml/badge.svg
+   :target: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml
 
-.. |pytests| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/pytests.yml/badge.svg
-   :target: https://github.com/HofstadterTools/HofstadterTools.github.io/actions/workflows/pytests.yml
+.. |pytests| image:: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/pytests.yml/badge.svg
+   :target: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/pytests.yml
 
 .. |license| image:: https://badgen.net/badge/license/GPLv3/blue
    :target: https://www.gnu.org/licenses/gpl-3.0
@@ -39,13 +39,13 @@ You can now access the ``band_structure`` and ``butterfly`` programs from any lo
 
 |image1| |image2| |image3|
 
-.. |image1| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png?raw=true
+.. |image1| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: 3D Band Structure
-.. |image2| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true
+.. |image2| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: Wilson Loops
-.. |image3| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true
+.. |image3| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: 2D Band Structure
 
@@ -55,13 +55,13 @@ You can now access the ``band_structure`` and ``butterfly`` programs from any lo
 
 |image4| |image5| |image6|
 
-.. |image4| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png?raw=true
+.. |image4| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png?raw=true
     :width: 32 %
     :alt: Butterfly Spectrum
-.. |image5| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png?raw=true
+.. |image5| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png?raw=true
     :width: 32 %
     :alt: Wannier Diagram
-.. |image6| image:: https://github.com/HofstadterTools/HofstadterTools.github.io/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/lattice.png?raw=true
+.. |image6| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/lattice.png?raw=true
     :width: 32 %
     :alt: Lattice
 
@@ -75,7 +75,7 @@ This package was developed using Ubuntu 20.04.6 (x86_64) with Python=3.10.13, ho
 Basic install
 ~~~~~~~~~~~~~
 
-For basic usage of HofstadterTools, i.e. in cases where you *do not* plan on editing the source code, you can install the package quickly and easily from PyPI:
+For basic usage of HofstadterTools, i.e. in cases where you *do not* plan on editing the source code, you can install the package quickly and easily from PyPI.
 
 .. code:: console
 
@@ -94,7 +94,8 @@ For advanced usage of HofstadterTools, i.e. in cases where you *do* plan on edit
 
 .. code:: console
 
-    user@domain:any/path$ git clone git@github.com:HofstadterTools/HofstadterTools.github.io.git HofstadterTools; cd HofstadterTools
+    user@domain:any/path$ git clone git@github.com:HofstadterTools/HofstadterTools.git
+    user@domain:any/path$ cd HofstadterTools
     user@domain:path/to/HofstadterTools$ pip install -e .
 
 The optional ``-e`` flag indicates an editable install. Alternatively, if you plan on building the documentation locally, the optional ``docs`` dependencies need to be installed.
