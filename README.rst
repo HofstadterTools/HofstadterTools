@@ -14,7 +14,7 @@ HofstadterTools
 
 * Paper: https://arxiv.org/abs/2311.18726
 * Documentation: https://hofstadter.tools or `hof.tools <https://hofstadter.tools>`__
-* GitHub Repository: https://github.com/HofstadterTools/HofstadterTools.github.io
+* GitHub Repository: https://github.com/HofstadterTools/HofstadterTools
 
 **H**\ ofstadter\ **T**\ ools (\ **HT**) is a set of Python programs and classes for analyzing the Hofstadter model, which describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a gauge field. This package can be used to compute the band structure of a *generalized* Hofstadter model on *any* regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.
 
@@ -200,4 +200,4 @@ The Hofstadter model is an active field of research and therefore HofstadterTool
 * capability to generate the potential function corresponding to hopping amplitudes [`Yilmaz17 <https://link.aps.org/doi/10.1103/PhysRevA.95.063628>`__]
 * implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) [`Neupert11 <https://link.aps.org/doi/10.1103/PhysRevLett.106.236804>`__]
 
-Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/HofstadterTools/HofstadterTools.github.io>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.
+Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/HofstadterTools/HofstadterTools>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.
