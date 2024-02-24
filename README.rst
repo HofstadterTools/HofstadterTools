@@ -1,7 +1,7 @@
 HofstadterTools
 ===============
 
-|docs| |pytests| |license|
+|docs| |pytests| |pypi| |license|
 
 .. |docs| image:: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml
@@ -9,7 +9,10 @@ HofstadterTools
 .. |pytests| image:: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/pytests.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/pytests.yml
 
-.. |license| image:: https://badgen.net/badge/license/GPLv3/blue
+.. |pypi| image:: https://img.shields.io/pypi/v/HofstadterTools
+   :target: https://pypi.org/project/HofstadterTools/
+
+.. |license| image:: https://img.shields.io/github/license/HofstadterTools/HofstadterTools
    :target: https://www.gnu.org/licenses/gpl-3.0
 
 * Paper: https://arxiv.org/abs/2311.18726
