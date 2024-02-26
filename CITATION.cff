@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Andrews"
+  given-names: "Bartholomew"
+  orcid: "https://orcid.org/0000-0002-9079-7433"
+title: "HofstadterTools"
+version: 1.0.1
+date-released: 2024-02-23
+url: "https://github.com/HofstadterTools/HofstadterTools"
+preferred-citation:
+  type: misc
+  authors:
+  - family-names: "Andrews"
+    given-names: "Bartholomew"
+    orcid: "https://orcid.org/0000-0002-9079-7433"
+  title: "HofstadterTools: A Python package for analyzing the Hofstadter model"
+  year: 2023
+  eprint: 2311.18726
+  archivePrefix: "arXiv"
+  primaryClass: "cond-mat.mes-hall"
+  doi: "10.48550/arXiv.2311.18726"
