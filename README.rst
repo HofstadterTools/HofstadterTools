@@ -45,7 +45,7 @@ Using conda:
 
     conda install conda-forge::HofstadterTools
 
-You can now access the ``band_structure`` and ``butterfly`` programs from any location.
+You can now access the ``band_structure`` and ``butterfly`` programs from any location. The ``band_structure`` program evaluates the Hofstadter band structure at fixed flux density :math:`n_\phi=p/q` for a range of momenta :math:`\mathbf{k}=(k_x,k_y)`, whereas the ``butterfly`` program evaluates the energy spectrum at fixed momentum :math:`\mathbf{k}=\mathbf{0}` for a range of :math:`n_\phi=p/q`, where :math:`p` and :math:`q` are coprime integers.
 
 .. code:: console
 
@@ -257,4 +257,4 @@ The Hofstadter model is an active field of research and therefore HofstadterTool
 * capability to generate the potential function corresponding to hopping amplitudes [`Yilmaz17 <https://link.aps.org/doi/10.1103/PhysRevA.95.063628>`__]
 * implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) [`Neupert11 <https://link.aps.org/doi/10.1103/PhysRevLett.106.236804>`__]
 
-Contributions are always welcome! The easiest way to contribute is to submit a pull request on `GitHub <https://github.com/HofstadterTools/HofstadterTools>`__ or contact `Bart Andrews <https://bartandrews.me>`__ if you have any feedback.
+Contributions are always welcome! The HofstadterTools repository is maintained using `GitHub <https://github.com/HofstadterTools/HofstadterTools>`__. If you would like to contribute, please submit a `pull request <https://github.com/HofstadterTools/HofstadterTools/pulls>`__; if you would like to report an issue or problem, please open an `issue <https://github.com/HofstadterTools/HofstadterTools/issues>`__; and if you need to seek support, please start a `discussion <https://github.com/HofstadterTools/HofstadterTools/discussions>`__. For all other enquires, please contact `Bart Andrews <https://bartandrews.me>`__.
