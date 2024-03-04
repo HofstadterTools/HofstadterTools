@@ -145,6 +145,7 @@ old/
 environment*.yml
 **/logo_placeholder.png
 requirements.txt
+HofstadterTools
 .build-env/
 .test-env/
 .github/workflows/docs_backup.yml

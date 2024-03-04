@@ -1,7 +1,7 @@
 HofstadterTools
 ===============
 
-|docs| |pytests| |pypi| |license|
+|docs| |pytests| |pypi| |conda-forge| |license|
 
 .. |docs| image:: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml/badge.svg
    :target: https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml
@@ -11,6 +11,9 @@ HofstadterTools
 
 .. |pypi| image:: https://img.shields.io/pypi/v/HofstadterTools
    :target: https://pypi.org/project/HofstadterTools/
+
+.. |conda-forge| image:: https://img.shields.io/conda/v/conda-forge/hofstadtertools?label=conda-forge
+   :target: https://anaconda.org/conda-forge/hofstadtertools
 
 .. |license| image:: https://img.shields.io/github/license/HofstadterTools/HofstadterTools
    :target: https://www.gnu.org/licenses/gpl-3.0
@@ -28,11 +31,19 @@ HofstadterTools
 Quick Start
 -----------
 
-Using HofstadterTools is quick and easy!
+Installing HofstadterTools is quick and easy!
+
+Using pip:
 
 .. code:: console
 
     pip install HofstadterTools
+
+Using conda:
+
+.. code:: console
+
+    conda install conda-forge::HofstadterTools
 
 You can now access the ``band_structure`` and ``butterfly`` programs from any location.
 
@@ -78,34 +89,77 @@ This package was developed using Ubuntu 20.04.6 (x86_64) with Python=3.10.13, ho
 Basic install
 ~~~~~~~~~~~~~
 
-For basic usage of HofstadterTools, i.e. in cases where you *do not* plan on editing the source code, you can install the package quickly and easily from PyPI.
+For basic usage of HofstadterTools, i.e. in cases where you *do not* plan on editing the source code, you can install the package from a distribution.
+
+Using pip
+*********
+
+1. [Optional] Create and activate a new venv environment. In the example below, ``my_env_name`` is the name of the venv and ``my_env_folder`` is the name of its folder. If needed, you can replace ``python3`` with ``python3.xx`` below to create a venv pinned to a particular python version.
 
 .. code:: console
 
-    pip install HofstadterTools
+    user@domain:any/path$ python3 -m my_env_name my_env_folder
+    user@domain:any/path$ source path/to/my_env_folder/bin/activate
 
-To avoid dependency clashes, we recommend the use of a python virtual environment, such as ``venv``.
+2. Install HofstadterTools from PyPI.
+
+.. code:: console
+
+    (my_env_name) user@domain:any/path$ pip install HofstadterTools
+
+You can verify the installation by typing ``pip list | grep HofstadterTools``, you can uninstall by typing ``pip uninstall HofstadterTools``, and you can deactivate the environment by typing ``deactivate``. The entire environment can be removed by deleting ``my_env_folder``.
+
+Using conda
+***********
+
+1. [Optional] Create and activate a new conda environment. In the example below, ``my_env_name`` is the name of the conda environment. If needed, you can replace ``python=3`` with ``python=3.xx`` below to create a conda environment with a particular python version pre-installed.
+
+.. code:: console
+
+    user@domain:any/path$ conda create -n my_env_name python=3
+    user@domain:any/path$ conda activate my_env_name
+
+2. Install HofstadterTools from conda-forge.
+
+.. code:: console
+
+    (my_env_name) user@domain:any/path$ conda install conda-forge::HofstadterTools
+
+You can verify the installation by typing ``conda list | grep hofstadtertools``, you can uninstall by typing ``conda remove HofstadterTools``, and you can deactivate the environment by typing ``conda deactivate``. The entire environment can be removed by typing ``conda remove -n my_env_name --all``.
 
 .. warning::
 
-    If you install HofstadterTools into a conda environment, you may see a ``libGL error`` when you run the programs. This is a known problem with the ``libstdc++.so`` file in Conda and should not affect the functionality of HofstadterTools.
+    If you pip install HofstadterTools into a conda environment, you may see a ``libGL error`` when you run the programs. This is a known problem with the ``libstdc++.so`` file in Conda and should not affect the functionality of HofstadterTools.
 
 Advanced install
 ~~~~~~~~~~~~~~~~
 
 For advanced usage of HofstadterTools, i.e. in cases where you *do* plan on editing the source code, you can install the package from source.
 
+1. Clone the HofstadterTools repository.
+
 .. code:: console
 
     user@domain:any/path$ git clone git@github.com:HofstadterTools/HofstadterTools.git
-    user@domain:any/path$ cd HofstadterTools
+
+2. Using pip, install the HofstadterTools package. This step can also be done in a virtual environment. The optional ``-e`` flag below indicates an editable install.
+
+.. code:: console
+
     user@domain:path/to/HofstadterTools$ pip install -e .
 
-The optional ``-e`` flag indicates an editable install. Alternatively, if you plan on building the documentation locally, the optional ``docs`` dependencies need to be installed.
+Alternatively, if you plan on building the documentation locally, the optional ``docs`` dependencies need to be installed.
 
 .. code:: console
 
     user@domain:path/to/HofstadterTools$ pip install -e ".[docs]"
+
+3. [Optional] Build and view the documentation locally. The optional ``clean`` argument below removes files from the build directory, and ``firefox`` can be replaced with any web browser.
+
+.. code:: console
+
+    user@domain:path/to/HofstadterTools/docs$ make clean html
+    user@domain:path/to/HofstadterTools/docs$ firefox build/html/index.html &
 
 .. note::
 
