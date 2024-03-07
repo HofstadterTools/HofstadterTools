@@ -120,7 +120,7 @@ def band_structure(model, args, data, plotting=False):
         labels.append(sym_points[0][0])
         ax3.set_xticks(locations, labels=labels)
         ax3.set_xlim([0, num_points])
-        ax3.set_xlabel('symmetry path')
+        ax3.set_xlabel('reference path')
         ax3.set_ylabel('$E$')
 
     if save:

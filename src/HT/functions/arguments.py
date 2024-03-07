@@ -39,7 +39,7 @@ def parse_input_arguments(program, description):
         lattices = ["square", "triangular", "bravais", "honeycomb", "kagome", "custom"]
         general.add_argument("-lat", "--lattice", type=str, default="bravais", choices=lattices, help="name of lattice")
         general.add_argument("-alpha", type=float, default=1, help="length of a2 Bravais vector relative to a1 (Bravais lattice anisotropy)")
-        general.add_argument("-theta", nargs=2, type=float, default=[1, 3], help="angle between Bravais basis vectors as a fraction of pi (Bravais lattice obliqueness)")
+        general.add_argument("-theta", nargs=2, type=int, default=[1, 3], help="angle between Bravais basis vectors as a fraction of pi (Bravais lattice obliqueness)")
         general.add_argument("-input", default=False, action='store_true', help="read hopping parameters from hopping_input.txt file")
         general.add_argument("-period", "--periodicity", type=int, default=1, help="factor by which to divide A_UC in the flux density")
         general.add_argument("-log", default=False, action='store_true', help="save the output logs")

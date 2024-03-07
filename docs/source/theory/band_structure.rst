@@ -6,17 +6,17 @@ The band structure for the Hofstadter model is computed by constructing a set of
 To recap from the previous section, for Landau gauge in the y-direction :math:`\mathbf{A}=-By \hat{\mathbf{e}}_x`, the general formula for the **Peirels phase** acquired by an electron hopping from site :math:`i=(X_i,Y_i)` to site :math:`j=(X_j,Y_j)` is given as
 
 .. math::
-	\theta_{ij} = -2\pi n_\phi \Delta X \left( Y_i + \frac{\Delta Y}{2} \right),
+  \theta_{ij} = -2\pi n_\phi \Delta X \left( Y_i + \frac{\Delta Y}{2} \right),
 
 where :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, and we have defined the flux density with respect to the UC area, such that :math:`n_\phi=BA_\mathrm{UC}/\phi_0 = Ba^2/\phi_0`. In what follows, let us index the UC coordinates using :math:`(m,n)`. The **time-independent Schrödinger equation** for the conventional nearest neighbor (NN) square-lattice Hofstadter model is then given as
 
 .. math::
-	E \Psi_{m,n} = -t e^{-\mathrm{i}2\pi n_\phi n} \Psi_{m+1, n} - t \Psi_{m, n+1} + \mathrm{H.c.},
+  E \Psi_{m,n} = -t e^{-\mathrm{i}2\pi n_\phi n} \Psi_{m+1, n} - t \Psi_{m, n+1} + \mathrm{H.c.},
 
 where :math:`\Psi_{m,n}` is the wavefunction at unit cell :math:`(m,n)` and :math:`t` is the hopping amplitude. Since we have taken Landau gauge in the y-direction, it is reasonable to assume plane wave behavior in the x-direction. Hence we can simplify the equation further by invoking the **plane wave ansatz** :math:`\Psi_{m,n} = e^{\mathrm{i}\mathbf{r}\cdot\mathbf{k}}\psi_{n}`, such that
 
 .. math::
-	E \psi_{n} = -t e^{-\mathrm{i}2\pi n_\phi n + \mathrm{i}k_x} \psi_{n} - t e^{\mathrm{i} k_y}\Psi_{m} + \mathrm{H.c.},
+  E \psi_{n} = -t e^{-\mathrm{i}2\pi n_\phi n + \mathrm{i}k_x} \psi_{n} - t e^{\mathrm{i} k_y}\Psi_{m} + \mathrm{H.c.},
 
 which simplifies to
 
@@ -54,6 +54,42 @@ and hence there are 4 energy bands in the spectrum, as shown in the figures belo
     :width: 32 %
     :alt: 2D Band Structure
 
+.. note::
+  It is not possible to define a high-symmetry path for the generalized Hofstadter model as a continuous function of lattice anisotropy and obliqueness. Instead, we use reference paths to plot the 2D band structures.
+
+  .. list-table::
+   :widths: 10 30 30 30
+   :header-rows: 1
+
+   * - Lattice
+     - UC Lattice Vectors
+     - UC Basis Vectors
+     - Reference Path
+   * - ``square``
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a(0, 1)`
+     - :math:`(0, 0)`
+     - :math:`\Gamma\to X \to M \to Y \to \Gamma`
+   * - ``triangular``
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a (1/2, \sqrt{3}/2)`
+     - :math:`(0, 0)`
+     - :math:`\Gamma \to K \to M \to K' \to \Gamma`
+   * - ``bravais``
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a \alpha (\cos \theta, \sin \theta)`
+     - :math:`(0, 0)`
+     - :math:`\begin{cases}\Gamma \to K \to M \to K' \to \Gamma, \;\;\; &\text{when }\theta\text{ is a multiple of }\pi/3\text{ but not }\pi/2 \\ \Gamma \to X \to M \to Y \to \Gamma, \;\;\; &\text{otherwise}\end{cases}`
+   * - ``honeycomb``
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a \alpha (\cos \theta, \sin \theta)`
+     - :math:`(0, 0)`, :math:`(a_{1,x}/2, a_{2,y}/3)`
+     - :math:`\Gamma \to K \to M \to K' \to \Gamma`
+   * - ``kagome``
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a \alpha (\cos \theta, \sin \theta)`
+     - :math:`(0, 0)`, :math:`(a_{1,x}/2, 0)`, :math:`(a_{2,x}/2, a_{2,y}/2)`
+     - :math:`\Gamma \to K \to M \to K' \to M' \to \Gamma`
+
+  The reference points are defined as: :math:`\Gamma = (0, 0)`, :math:`M = (1/2, 1/2)`, :math:`X = (1/2, 0)`, :math:`Y = (0, 1/2)`, :math:`K = (2/3, 1/3)`, :math:`K' = (1/3, 2/3)`, :math:`M' = (0, 1/2)`, in fractional units of the MUC reciprocal lattice vectors. The difference between :math:`Y` and :math:`M'` is simply convention, depending on whether we are referring to rectangular or hexagonal Brillouin zones.
+
+  We emphasize that the paths defined above are only *high-symmetry paths* in special cases, where the corresponding symmetries are present, such as at zero magnetic field. In all other cases, these are simply *reference paths* through :math:`k`-space to facilitate easy comparison, and the full 3D band structure should also be examined.
+
 In the general case, the procedure follows in a similar way. We start by writing down the time-independent Schrödinger equation for each site in the basis, which we index using lowercase Greek letters :math:`\alpha,\beta`. This yields a set :math:`N_\mathrm{b}` simultaneous equations, which we can write in matrix form, such that :math:`\mathbf{H}\boldsymbol{\psi}=E\boldsymbol{\psi}`, where :math:`\boldsymbol{\psi}=(\psi^0, \psi^1, \dots, \psi^{N_\mathrm{b}-1})^\intercal` is a vector of length :math:`N_\mathrm{b}`, and the :math:`N_\mathrm{b}\times N_\mathrm{b}` Hamiltonian matrix is given as
 
 .. math::
@@ -67,16 +103,16 @@ In the general case, the procedure follows in a similar way. We start by writing
 where :math:`H^{\alpha\beta}` is the Hamiltonian for hoppings from sublattice :math:`\alpha` to sublattice :math:`\beta`. Then, for each :math:`H^{\alpha\beta}` we can write down a :math:`q\times q` Harper matrix, as before. For Landau gauge in the y-direction :math:`\mathbf{A}=-By \hat{\mathbf{e}}_x`, the general form of the Harper matrix is given as
 
 .. math::
-	 \mathbf{H} = \begin{pmatrix}
-							  \Lambda_{0,0} & \Lambda_{0,1} & \dots \\
-							  \Lambda_{1,0} & \Lambda_{1,1} & \dots \\
-							  \vdots & \vdots & \ddots
-							  \end{pmatrix} +
-							  \begin{pmatrix}
-							  \ddots & \Lambda_{0, q-1}^* & \Lambda_{0, q}^* \\
-							  \Lambda_{q-1, 0} & \ddots & \Lambda_{1, q}^* \\
-							  \Lambda_{q, 0} & \Lambda_{q, 1} & \ddots
-							  \end{pmatrix},
+   \mathbf{H} = \begin{pmatrix}
+                \Lambda_{0,0} & \Lambda_{0,1} & \dots \\
+                \Lambda_{1,0} & \Lambda_{1,1} & \dots \\
+                \vdots & \vdots & \ddots
+                \end{pmatrix} +
+                \begin{pmatrix}
+                \ddots & \Lambda_{0, q-1}^* & \Lambda_{0, q}^* \\
+                \Lambda_{q-1, 0} & \ddots & \Lambda_{1, q}^* \\
+                \Lambda_{q, 0} & \Lambda_{q, 1} & \ddots
+                \end{pmatrix},
 
 where :math:`\Lambda_{l, n}` is the diagonal function, and we have dropped the :math:`\alpha\beta` superscripts for readability. The second matrix simply accounts for rolled over boundary terms. Since we are working in Landau gauge in the y-direction, the **diagonal function** may be written as
 
@@ -88,7 +124,7 @@ where :math:`\langle \dots \rangle^l_\kappa` denotes the subset of :math:`\kappa
 In HofstadterTools, we can analyze the resulting band structure by computing its key properties, which are listed in the tables below. These **band properties** may be selected in the file ``code/configuration/band_structure.py``, and are grouped by computational expense. By default, HofstadterTools prints properties in the basic and topology groups only (for speed reasons). When computing topology and quantum geometry properties of bands, it is important to use *manifestly gauge invariant* expressions, so that we omit spurious Bloch phase factors and can compute the quantities quickly and accurately. To this end, we use the Fukui formula to compute the (first) Chern number :cite:`Fukui05` and the projector formalism to compute the quantum geometric tensor :cite:`Mera22`.
 
 .. note::
-	The Chern numbers of the bands may also be inferred by plotting the **Wilson loops**, which are the products of Berry phases around cycles of the Brillouin zone, as shown in the middle figure above. The magnitude of the Chern number corresponds to the number of windings of the Wilson loop and the sign of the Chern number corresponds to its direction.
+  The Chern numbers of the bands may also be inferred by plotting the **Wilson loops**, which are the products of Berry phases around cycles of the Brillouin zone, as shown in the middle figure above. The magnitude of the Chern number corresponds to the number of windings of the Wilson loop and the sign of the Chern number corresponds to its direction.
 
 In the projector formalism, the **quantum geometric tensor** is defined as
 
@@ -108,7 +144,7 @@ where we define :math:`\mathcal{D}` as the **determinant inequality saturation m
 Using these band properties, we can perform several sanity checks on our computed band structures. In terms of band topology, we know that all of the Chern numbers in a Hofstadter spectrum must sum to zero. In terms of band geometry, we know that as we take the Landau level limit :math:`q\to\infty`, the TISM and DISM must monotonically approach zero from above.
 
 .. note::
-	The band structures can also be checked by comparing against results in the literature. For example, the Chern numbers can be benchmarked against Fig.2.6 of :cite:`AidelsburgerPhD` and the values of the TISM can be benchmarked against Fig.3 of :cite:`Bauer22`.
+  The band structures can also be checked by comparing against results in the literature. For example, the Chern numbers can be benchmarked against Fig.2.6 of :cite:`AidelsburgerPhD` and the values of the TISM can be benchmarked against Fig.3 of :cite:`Bauer22`.
 
 .. list-table:: Basic Properties
    :widths: 10 10 10 70

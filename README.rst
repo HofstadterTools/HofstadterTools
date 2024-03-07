@@ -107,6 +107,12 @@ Using pip
 
     (my_env_name) user@domain:any/path$ pip install HofstadterTools
 
+3. [Optional] Upgrade an existing HofstadterTools installation.
+
+.. code:: console
+
+    (my_env_name) user@domain:any/path$ pip install --upgrade HofstadterTools
+
 You can verify the installation by typing ``pip list | grep HofstadterTools``, you can uninstall by typing ``pip uninstall HofstadterTools``, and you can deactivate the environment by typing ``deactivate``. The entire environment can be removed by deleting ``my_env_folder``.
 
 Using conda
@@ -124,6 +130,12 @@ Using conda
 .. code:: console
 
     (my_env_name) user@domain:any/path$ conda install conda-forge::HofstadterTools
+
+3. [Optional] Update an existing HofstadterTools installation.
+
+.. code:: console
+
+    (my_env_name) user@domain:any/path$ conda update HofstadterTools
 
 You can verify the installation by typing ``conda list | grep hofstadtertools``, you can uninstall by typing ``conda remove HofstadterTools``, and you can deactivate the environment by typing ``conda deactivate``. The entire environment can be removed by typing ``conda remove -n my_env_name --all``.
 
@@ -160,6 +172,10 @@ Alternatively, if you plan on building the documentation locally, the optional `
 
     user@domain:path/to/HofstadterTools/docs$ make clean html
     user@domain:path/to/HofstadterTools/docs$ firefox build/html/index.html &
+
+.. note::
+
+    Building the documentation locally with the inheritance diagrams requires that the ``graphviz`` program is installed, so that the ``dot`` program is in the path. For example, on Debian systems, this can be achieved by typing ``sudo apt install graphviz``, and verified by typing ``dot -V``.
 
 .. note::
 

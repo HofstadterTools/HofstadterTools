@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.patches import Polygon
+from math import gcd
 # --- internal imports
 from HT.functions import models as fm
 
@@ -89,10 +90,10 @@ class Hofstadter:
             bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
             GA = np.array([0, 0])
-            Y = np.array([0, 0.5])
-            S = np.array([0.5, 0.5])
             X = np.array([0.5, 0])
-            sym_points_val = [("$\\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
+            M = np.array([0.5, 0.5])
+            Y = np.array([0, 0.5])
+            sym_points_val = [("$\\Gamma$", GA), ("$X$", X), ("$M$", M), ("$Y$", Y)]
         elif self.lat == "triangular":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -108,11 +109,11 @@ class Hofstadter:
             # reciprocal lattice vectors (MUC)
             bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
-            GA = np.array([0, 0])
-            Y = np.array([0, 0.5])
-            S = np.array([0.5, 0.5])
-            X = np.array([0.5, 0])
-            sym_points_val = [("$\\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
+            GA = np.array([0., 0.])
+            K = np.array([2/3, 1/3])
+            M = np.array([0.5, 0.5])
+            Kp = np.array([1/3, 2/3])
+            sym_points_val = [("$\\Gamma$", GA), ("$K$", K), ("$M$", M), ("$K'$", Kp)]
         elif self.lat == "bravais":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -128,11 +129,18 @@ class Hofstadter:
             # reciprocal lattice vectors (MUC)
             bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
-            GA = np.array([0, 0])
-            Y = np.array([0, 0.5])
-            S = np.array([0.5, 0.5])
-            X = np.array([0.5, 0])
-            sym_points_val = [("$\\Gamma$", GA), ("$Y$", Y), ("$S$", S), ("$X$", X)]
+            GA = np.array([0., 0.])
+            M = np.array([0.5, 0.5])
+            theta_gcd = gcd(self.theta0, self.theta1)
+            theta = (self.theta0/theta_gcd, self.theta1/theta_gcd)
+            if theta[1] == 3:  # multiples of pi/3 but not pi/2
+                K = np.array([2/3, 1/3])
+                Kp = np.array([1/3, 2/3])
+                sym_points_val = [("$\\Gamma$", GA), ("$K$", K), ("$M$", M), ("$K'$", Kp)]
+            else:
+                X = np.array([0.5, 0])
+                Y = np.array([0, 0.5])
+                sym_points_val = [("$\\Gamma$", GA), ("$X$", X), ("$M$", M), ("$Y$", Y)]
         elif self.lat == "honeycomb":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -149,11 +157,11 @@ class Hofstadter:
             # reciprocal lattice vectors (MUC)
             bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
-            K1 = np.array([2/3, 1/3])
             GA = np.array([0., 0.])
-            MM = np.array([0.5, 0.5])
-            K2 = np.array([1/3, 2/3])
-            sym_points_val = [("$K_1$", K1), ("$\\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
+            K = np.array([2/3, 1/3])
+            M = np.array([0.5, 0.5])
+            Kp = np.array([1/3, 2/3])
+            sym_points_val = [("$\\Gamma$", GA), ("$K$", K), ("$M$", M), ("$K'$", Kp)]
         elif self.lat == "kagome":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -171,11 +179,12 @@ class Hofstadter:
             # reciprocal lattice vectors (MUC)
             bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
-            K1 = np.array([2/3, 1/3])
             GA = np.array([0., 0.])
-            MM = np.array([0.5, 0.5])
-            K2 = np.array([1/3, 2/3])
-            sym_points_val = [("$K_1$", K1), ("$\\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
+            K = np.array([2/3, 1/3])
+            M = np.array([0.5, 0.5])
+            Kp = np.array([1/3, 2/3])
+            Mp = np.array([0, 0.5])
+            sym_points_val = [("$\\Gamma$", GA), ("$K$", K), ("$M$", M), ("$K'$", Kp), ("$M'$", Mp)]
         elif self.lat == "custom":
             # lattice vectors
             a1 = self.a0 * np.array([1, 0])
@@ -193,11 +202,12 @@ class Hofstadter:
             # reciprocal lattice vectors (MUC)
             bMUCvec_val = fm.reciprocal_vectors(aMUCvec_val)
             # symmetry points
-            K1 = np.array([2/3, 1/3])
             GA = np.array([0., 0.])
-            MM = np.array([0.5, 0.5])
-            K2 = np.array([1/3, 2/3])
-            sym_points_val = [("$K_1$", K1), ("$\\Gamma$", GA), ("$M$", MM), ("$K_2$", K2)]
+            K = np.array([2/3, 1/3])
+            M = np.array([0.5, 0.5])
+            Kp = np.array([1/3, 2/3])
+            Mp = np.array([0, 0.5])
+            sym_points_val = [("$\\Gamma$", GA), ("$K$", K), ("$M$", M), ("$K'$", Kp), ("$M'$", Mp)]
 
         num_bands_val = len(abasisvec_val) * self.q
 
