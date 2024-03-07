@@ -59,7 +59,7 @@ You can now access the ``band_structure`` and ``butterfly`` programs from any lo
 .. |image2| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: Wilson Loops
-.. |image3| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true
+.. |image3| image:: https://github.com/HofstadterTools/HofstadterTools/blob/fb6764269db9bfb84cf2f0fc7be0a729799db1bc/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true
     :width: 32 %
     :alt: 2D Band Structure
 
