@@ -8,7 +8,7 @@ To recap from the previous section, for Landau gauge in the y-direction :math:`\
 .. math::
   \theta_{ij} = -2\pi n_\phi \Delta X \left( Y_i + \frac{\Delta Y}{2} \right),
 
-where :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, and we have defined the flux density with respect to the UC area, such that :math:`n_\phi=BA_\mathrm{UC}/\phi_0 = Ba^2/\phi_0`. In what follows, let us index the UC coordinates using :math:`(m,n)`. The **time-independent Schrödinger equation** for the conventional nearest neighbor (NN) square-lattice Hofstadter model is then given as
+where :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, and we have defined the flux density with respect to the UC area, such that :math:`n_\phi=BA_\mathrm{UC}/\phi_0 = Ba^2/\phi_0`. In what follows, let us index the UC coordinates using :math:`(m,n)`. The **time-independent Schrödinger equation** for the conventional nearest-neighbor (NN) square-lattice Hofstadter model is then given as
 
 .. math::
   E \Psi_{m,n} = -t e^{-\mathrm{i}2\pi n_\phi n} \Psi_{m+1, n} - t \Psi_{m, n+1} + \mathrm{H.c.},
@@ -86,7 +86,7 @@ and hence there are 4 energy bands in the spectrum, as shown in the figures belo
      - :math:`\mathbf{a}_{\text{b},1}=(0, 0)`, :math:`\mathbf{a}_{\text{b},2}=(a_{1,x}/2, 0)`, :math:`\mathbf{a}_{\text{b},3}=(a_{2,x}/2, a_{2,y}/2)`
      - :math:`\Gamma \to K \to M \to K' \to M' \to \Gamma`
 
-  The reference points are defined as: :math:`\Gamma = (0, 0)`, :math:`M = (1/2, 1/2)`, :math:`X = (1/2, 0)`, :math:`Y = (0, 1/2)`, :math:`K = (2/3, 1/3)`, :math:`K' = (1/3, 2/3)`, :math:`M' = (0, 1/2)`, in fractional units of the MUC reciprocal lattice vectors. The difference between :math:`Y` and :math:`M'` is simply convention, depending on whether we are referring to rectangular or hexagonal Brillouin zones.
+  The reference points are defined as: :math:`\Gamma = (0, 0)`, :math:`M = (1/2, 1/2)`, :math:`X = (1/2, 0)`, :math:`Y = (0, 1/2)`, :math:`K = (2/3, 1/3)`, :math:`K' = (1/3, 2/3)`, :math:`M' = (0, 1/2)`, in fractional units of the MUC reciprocal lattice vectors :math:`(\mathbf{b}_1, \mathbf{b}_2)`. The difference between :math:`Y` and :math:`M'` is simply convention, depending on whether we are referring to rectangular or hexagonal Brillouin zones.
 
   We emphasize that the paths defined above are only *high-symmetry paths* in special cases, where the corresponding symmetries are present, such as at zero magnetic field. In all other cases, these are simply *reference paths* through :math:`k`-space to facilitate easy comparison, and the full 3D band structure should also be examined.
 
