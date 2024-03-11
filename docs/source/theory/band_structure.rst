@@ -67,23 +67,23 @@ and hence there are 4 energy bands in the spectrum, as shown in the figures belo
      - Reference Path
    * - ``square``
      - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a(0, 1)`
-     - :math:`(0, 0)`
+     - :math:`\mathbf{a}_{\text{b},1}=(0, 0)`
      - :math:`\Gamma\to X \to M \to Y \to \Gamma`
    * - ``triangular``
      - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a (1/2, \sqrt{3}/2)`
-     - :math:`(0, 0)`
+     - :math:`\mathbf{a}_{\text{b},1}=(0, 0)`
      - :math:`\Gamma \to K \to M \to K' \to \Gamma`
    * - ``bravais``
      - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)`
-     - :math:`(0, 0)`
+     - :math:`\mathbf{a}_{\text{b},1}=(0, 0)`
      - :math:`\begin{cases}\Gamma \to K \to M \to K' \to \Gamma, \;\;\; &\text{when }\theta\text{ is a multiple of }\pi/3\text{ but not }\pi/2 \\ \Gamma \to X \to M \to Y \to \Gamma, \;\;\; &\text{otherwise}\end{cases}`
    * - ``honeycomb``
      - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)`
-     - :math:`(0, 0)`, :math:`(a_{1,x}/2, a_{2,y}/3)`
+     - :math:`\mathbf{a}_{\text{b},1}=(0, 0)`, :math:`\mathbf{a}_{\text{b},2}=(a_{1,x}/2, a_{2,y}/3)`
      - :math:`\Gamma \to K \to M \to K' \to \Gamma`
    * - ``kagome``
      - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)`
-     - :math:`(0, 0)`, :math:`(a_{1,x}/2, 0)`, :math:`(a_{2,x}/2, a_{2,y}/2)`
+     - :math:`\mathbf{a}_{\text{b},1}=(0, 0)`, :math:`\mathbf{a}_{\text{b},2}=(a_{1,x}/2, 0)`, :math:`\mathbf{a}_{\text{b},3}=(a_{2,x}/2, a_{2,y}/2)`
      - :math:`\Gamma \to K \to M \to K' \to M' \to \Gamma`
 
   The reference points are defined as: :math:`\Gamma = (0, 0)`, :math:`M = (1/2, 1/2)`, :math:`X = (1/2, 0)`, :math:`Y = (0, 1/2)`, :math:`K = (2/3, 1/3)`, :math:`K' = (1/3, 2/3)`, :math:`M' = (0, 1/2)`, in fractional units of the MUC reciprocal lattice vectors. The difference between :math:`Y` and :math:`M'` is simply convention, depending on whether we are referring to rectangular or hexagonal Brillouin zones.
