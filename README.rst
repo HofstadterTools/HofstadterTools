@@ -94,7 +94,7 @@ For basic usage of HofstadterTools, i.e. in cases where you *do not* plan on edi
 Using pip
 *********
 
-1. [Optional] Create and activate a new venv environment. In the example below, ``my_env_name`` is the name of the venv and ``my_env_folder`` is the name of its folder. If needed, you can replace ``python3`` with ``python3.xx`` below to create a venv pinned to a particular python version.
+1. [Optional] Create and activate a new venv environment. In the example below, ``my_env_name`` is the name of the venv and ``my_env_folder`` is the name of its folder. If needed, you can replace ``python3`` with ``python3.xx`` below to create a venv pinned to a particular Python version.
 
 .. code:: console
 
@@ -118,7 +118,7 @@ You can verify the installation by typing ``pip list | grep HofstadterTools``, y
 Using conda
 ***********
 
-1. [Optional] Create and activate a new conda environment. In the example below, ``my_env_name`` is the name of the conda environment. If needed, you can replace ``python=3`` with ``python=3.xx`` below to create a conda environment with a particular python version pre-installed.
+1. [Optional] Create and activate a new conda environment. In the example below, ``my_env_name`` is the name of the conda environment. If needed, you can replace ``python=3`` with ``python=3.xx`` below to create a conda environment with a particular Python version pre-installed.
 
 .. code:: console
 
@@ -190,7 +190,7 @@ You can confirm that HofstadterTools is correctly installed by running the pytes
 
     user@domain:any/path$ pytest --pyargs HT
 
-Once the *project* ``HofstadterTools`` is installed, the *package* ``HT`` will be available in your python environment. In addition, you can access the programs ``band_structure``, ``butterfly``, ``plot_band_structure``, and ``plot_butterfly``, from any location.
+Once the *project* ``HofstadterTools`` is installed, the *package* ``HT`` will be available in your Python environment. In addition, you can access the programs ``band_structure``, ``butterfly``, ``plot_band_structure``, and ``plot_butterfly``, from any location.
 
 .. code:: console
 

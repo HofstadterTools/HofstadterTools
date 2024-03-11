@@ -74,15 +74,15 @@ and hence there are 4 energy bands in the spectrum, as shown in the figures belo
      - :math:`(0, 0)`
      - :math:`\Gamma \to K \to M \to K' \to \Gamma`
    * - ``bravais``
-     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a \alpha (\cos \theta, \sin \theta)`
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)`
      - :math:`(0, 0)`
      - :math:`\begin{cases}\Gamma \to K \to M \to K' \to \Gamma, \;\;\; &\text{when }\theta\text{ is a multiple of }\pi/3\text{ but not }\pi/2 \\ \Gamma \to X \to M \to Y \to \Gamma, \;\;\; &\text{otherwise}\end{cases}`
    * - ``honeycomb``
-     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a \alpha (\cos \theta, \sin \theta)`
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)`
      - :math:`(0, 0)`, :math:`(a_{1,x}/2, a_{2,y}/3)`
      - :math:`\Gamma \to K \to M \to K' \to \Gamma`
    * - ``kagome``
-     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=a \alpha (\cos \theta, \sin \theta)`
+     - :math:`\mathbf{a}_1 = a (1, 0)`, :math:`\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)`
      - :math:`(0, 0)`, :math:`(a_{1,x}/2, 0)`, :math:`(a_{2,x}/2, a_{2,y}/2)`
      - :math:`\Gamma \to K \to M \to K' \to M' \to \Gamma`
 
@@ -90,7 +90,7 @@ and hence there are 4 energy bands in the spectrum, as shown in the figures belo
 
   We emphasize that the paths defined above are only *high-symmetry paths* in special cases, where the corresponding symmetries are present, such as at zero magnetic field. In all other cases, these are simply *reference paths* through :math:`k`-space to facilitate easy comparison, and the full 3D band structure should also be examined.
 
-In the general case, the procedure follows in a similar way. We start by writing down the time-independent Schrödinger equation for each site in the basis, which we index using lowercase Greek letters :math:`\alpha,\beta`. This yields a set :math:`N_\mathrm{b}` simultaneous equations, which we can write in matrix form, such that :math:`\mathbf{H}\boldsymbol{\psi}=E\boldsymbol{\psi}`, where :math:`\boldsymbol{\psi}=(\psi^0, \psi^1, \dots, \psi^{N_\mathrm{b}-1})^\intercal` is a vector of length :math:`N_\mathrm{b}`, and the :math:`N_\mathrm{b}\times N_\mathrm{b}` Hamiltonian matrix is given as
+In the general case, the procedure follows in a similar way. We start by writing down the time-independent Schrödinger equation for each site in the basis, which we index using lowercase Greek letters :math:`\alpha,\beta`. This yields a set of :math:`N_\mathrm{b}` simultaneous equations, which we can write in matrix form, such that :math:`\mathbf{H}\boldsymbol{\psi}=E\boldsymbol{\psi}`, where :math:`\boldsymbol{\psi}=(\psi^0, \psi^1, \dots, \psi^{N_\mathrm{b}-1})^\intercal` is a vector of length :math:`N_\mathrm{b}`, and the :math:`N_\mathrm{b}\times N_\mathrm{b}` Hamiltonian matrix is given as
 
 .. math::
    \mathbf{H} =
@@ -121,7 +121,7 @@ where :math:`\Lambda_{l, n}` is the diagonal function, and we have dropped the :
 
 where :math:`\langle \dots \rangle^l_\kappa` denotes the subset of :math:`\kappa`-th nearest neighbors with a net :math:`y` unit cell displacement of :math:`l`, :math:`\theta_{ij}` is the Peierls phase, :math:`\\\mathbf{k}` is the momentum vector, and :math:`\\\mathbf{r}` is the displacement vector. We emphasize that hoppings that are related by Hermitian conjugation, which are *outside the scope of the unit cell*, are not included in the diagonal function matrix. For example, for NN hopping on the triangular lattice, we include 3 of the 6 nearest neighbors in the diagonal function matrix, and the rest are captured when we add on the Hermitian conjugate to the Hamiltonian. However, for NN hopping on the kagome lattice, we include all 4 of 4 nearest neighbors for each basis site, since they are all within the same unit cell. Overall, we are left we left with a :math:`N_\mathrm{b}q\times N_\mathrm{b}q` block Hamiltonian matrix, which yields :math:`N_\mathrm{b}q` bands.
 
-In HofstadterTools, we can analyze the resulting band structure by computing its key properties, which are listed in the tables below. These **band properties** may be selected in the file ``code/configuration/band_structure.py``, and are grouped by computational expense. By default, HofstadterTools prints properties in the basic and topology groups only (for speed reasons). When computing topology and quantum geometry properties of bands, it is important to use *manifestly gauge invariant* expressions, so that we omit spurious Bloch phase factors and can compute the quantities quickly and accurately. To this end, we use the Fukui formula to compute the (first) Chern number :cite:`Fukui05` and the projector formalism to compute the quantum geometric tensor :cite:`Mera22`.
+In HofstadterTools, we can analyze the resulting band structure by computing its key properties, which are listed in the tables below. These **band properties** may be selected by passing flags to the ``band_structure`` program, and are grouped by computational expense. By default, HofstadterTools prints properties in the basic group only (for speed reasons). When computing topology and quantum geometry properties of bands, it is important to use *manifestly gauge invariant* expressions, so that we omit spurious Bloch phase factors and can compute the quantities quickly and accurately. To this end, we use the Fukui formula to compute the (first) Chern number :cite:`Fukui05` and the projector formalism to compute the quantum geometric tensor :cite:`Mera22`.
 
 .. note::
   The Chern numbers of the bands may also be inferred by plotting the **Wilson loops**, which are the products of Berry phases around cycles of the Brillouin zone, as shown in the middle figure above. The magnitude of the Chern number corresponds to the number of windings of the Wilson loop and the sign of the Chern number corresponds to its direction.

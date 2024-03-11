@@ -6,7 +6,7 @@ General Questions
 
 .. admonition:: Question
 
-	I get an argparse error when one of my command line arguments is a negative number. What is correct syntax so that python does not interpret my negative numbers as flags?
+	I get an argparse error when one of my command line arguments is a negative number. What is correct syntax so that Python does not interpret my negative numbers as flags?
 
 If you would like to parse negative number arguments to command line flags, it's best to use quotation marks with a preceding space, e.g. ``-t 1 0 " -0.25"``.
 
@@ -14,7 +14,7 @@ If you would like to parse negative number arguments to command line flags, it's
 
 	When computing for the ``square`` or ``triangular`` lattices, the flags ``-alpha`` and ``-theta`` do not seem to do anything. Why not?
 
-The flags ``-alpha`` and ``-theta`` specify the anisotropy and obliqueness of the underlying Bravais lattice. In the case of the ``square`` and ``triangular`` lattices, both of these values are fixed by definition and so cannot be changed. If you would like to change the anisotropy and obliqueness of a lattice with a single-site basis, you can use the ``bravais`` lattice parameter instead. For lattices with a multi-site basis, e.g. ``honeycomb`` or ``kagome``, you can use the ``-alpha`` and ``-theta`` flags as normal, since the basis sites are defined in fractional coordinates with respect to the Bravais vectors.
+The flags ``-alpha`` and ``-theta`` specify the anisotropy and obliqueness of the underlying Bravais lattice. In the case of the ``square`` and ``triangular`` lattices, both of these values are fixed by definition and so cannot be changed. If you would like to change the anisotropy and obliqueness of a lattice with a single-site basis, you can use the ``bravais`` lattice parameter instead. For lattices with a multi-site basis, e.g. ``honeycomb`` or ``kagome``, you can use the ``-alpha`` and ``-theta`` flags as normal, since the basis sites are defined in fractional coordinates with respect to the lattice vectors.
 
 .. admonition:: Question
 
@@ -26,7 +26,7 @@ If you explicitly executed the code in its local directory (e.g. ``src/HT`` for 
 
 	I would like to implement a custom lattice, which has a multi-site basis that is different than ``honeycomb`` or ``kagome``. How can I do this?
 
-In HofstadterTools, the ``custom`` lattice parameter is used for this purpose and it requires an installation from source (advanced usage). Navigate to the ``unit_cell`` method of the ``Hofstadter`` class in ``src/HT/models/hofstadter.py`` and enter your desired set of basis vectors and high-symmetry points under the ``elif self.lat == "custom":`` clause. By default, the ``custom`` lattice is identical to ``kagome``.
+In HofstadterTools, the ``custom`` lattice parameter is used for this purpose and it requires an installation from source (advanced usage). Navigate to the ``unit_cell`` method of the ``Hofstadter`` class in ``src/HT/models/hofstadter.py`` and enter your desired set of basis vectors and high-symmetry/reference points under the ``elif self.lat == "custom":`` clause. By default, the ``custom`` lattice is identical to ``kagome``.
 
 .. admonition:: Question
 
