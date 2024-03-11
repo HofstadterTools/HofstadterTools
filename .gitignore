@@ -142,6 +142,7 @@ dmypy.json
 **/*.log
 old/
 *.txt
+!src/HT/configuration/hopping_input.txt
 environment*.yml
 **/logo_placeholder.png
 requirements.txt
