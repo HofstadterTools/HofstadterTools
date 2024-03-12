@@ -96,7 +96,7 @@ The band structure with zero magnetic field can be computed by setting the flux 
 
 	I have saved a band structure to file and I would now like to regenerate the output table. How can I do this?
 
-The ``band_structure`` program takes an input file via the ``-load`` argument. By using this flag, the band structure is loaded from file and only the band properties are computed. You can then regenerate and/or reconfigure the output table as usual. Additionally, the output table can be saved to file by running ``band_structure`` with the ``-log`` flag. We note that the ``plot_band_structure`` program can only regenerate the band structure plots and modify their appearance, using the ``band_structure`` function in ``src/HT/functions/plotting.py``. Since ``plot_band_structure`` calls the plotting function directly, it cannot be used to regenerate the output table.
+The ``band_structure`` program takes an input file via the ``-load`` argument. By using this flag, the band structure is loaded from file and only the band properties are computed. You can then regenerate and/or reconfigure the output table as usual. Additionally, the output table can be saved to file by running ``band_structure`` with the ``-log`` flag. We note that the ``plot_band_structure`` program is intended for replotting the band structures and modifying their appearance, using the ``band_structure`` function in ``src/HT/functions/plotting.py``. Since ``plot_band_structure`` calls the plotting function directly, it cannot be used to regenerate the output table. In both cases, 2D/3D band structure data needs to have been saved to file in order to plot the corresponding 2D/3D band structure.
 
 Butterfly Questions
 -------------------
