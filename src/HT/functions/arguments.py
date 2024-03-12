@@ -6,7 +6,7 @@ import argparse
 
 def parse_input_arguments(program, description):
     """
-    Parse the input arguments to a given program.
+    Parse the input arguments for a given program.
 
     Each program may be run with a given set of flags. This function parses those command-line arguments and returns them as a dictionary.
 

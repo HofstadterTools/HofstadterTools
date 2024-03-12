@@ -5,8 +5,8 @@ authors:
   given-names: "Bartholomew"
   orcid: "https://orcid.org/0000-0002-9079-7433"
 title: "HofstadterTools"
-version: 1.0.1
-date-released: 2024-02-23
+version: 1.0.3
+date-released: 2024-03-12
 url: "https://github.com/HofstadterTools/HofstadterTools"
 preferred-citation:
   type: misc
