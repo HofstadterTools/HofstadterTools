@@ -6,9 +6,9 @@ General Questions
 
 .. admonition:: Question
 
-	I get an argparse error when one of my command line arguments is a negative number. What is correct syntax so that Python does not interpret my negative numbers as flags?
+	I get an argparse error when one of my command line arguments is a negative number. What is the correct syntax so that Python does not interpret my negative numbers as flags?
 
-If you would like to parse negative number arguments to command line flags, it's best to use quotation marks with a preceding space, e.g. ``-t 1 0 " -0.25"``.
+If you would like to parse negative number arguments to command line flags, it is best to use quotation marks with a preceding space, e.g. ``-t 1 0 " -0.25"``.
 
 .. admonition:: Question
 
@@ -51,7 +51,7 @@ By default, the tqdm progress bar is streamed to stderr. Hence, the progress bar
 
 	I have adjusted the ``-alpha`` lattice anisotropy flag and now the band structures and butterfly spectra look odd. Is this expected behavior?
 
-In HofstadterTools, :math:`\kappa`-th nearest neighbors are defined as a group of sites that are the same radius from a reference site. We stress that these points lie on a *circle* and not, for example, on an ellipse that is scaled by the Bravais lattice vector lengths. Hence, by adjusting the lattice anisotropy, you may inadvertently change the number of nearest neighbors.
+In HofstadterTools, :math:`\kappa`-th nearest neighbors are defined as a group of sites that are the same radius from a reference site. We stress that these points lie on a *circle* and not, for example, on an ellipse that is scaled by the Bravais lattice vector lengths. Hence, by adjusting the lattice anisotropy, you may inadvertently change the number of nearest neighbors. You can easily check this by plotting the lattice using the ``--plot_lattice`` flag.
 
 .. admonition:: Question
 
@@ -66,7 +66,7 @@ Band Structure Questions
 
 	I would like to analyze the topology / quantum geometry of the bands, but I do not see such data in the output table of the ``band_structure`` program. How can I do this?
 
-By default, the topology and quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can use the ``-topo``, ``-geom``, and ``-cols`` flags. The basic band structure columns are returned by default. The ``-topo`` flag will additionally return the topology columns, the ``geom`` flag will additionally return the quantum geometry columns, whereas the ``-cols`` flag will override all settings and return a custom selection of columns. Note that the {basic,topology,geometry} table columns are grouped by computational expense.
+By default, the topology and quantum geometry computations are turned off in the ``band_structure`` program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can use the ``-topo``, ``-geom``, and ``-cols`` flags. The basic band structure columns are returned by default. The ``-topo`` flag will additionally return the topology columns, the ``geom`` flag will additionally return the quantum geometry columns, and the ``-cols`` flag will override all settings to return a custom selection of columns. Note that the {basic,topology,geometry} table columns are grouped by computational expense.
 
 .. admonition:: Question
 

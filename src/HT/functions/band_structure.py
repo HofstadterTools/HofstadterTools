@@ -184,7 +184,7 @@ def geom_tensor(_eigenvectors, _eigenvectors_dkx, _eigenvectors_dky, _bvec, _ban
     .. math::
        \mathcal{R}_{\mu\nu}(\mathbf{k}) = \mathrm{tr} ( \mathcal{P}_\mathbf{k} \partial_{k_\mu} \mathcal{P}_\mathbf{k} \partial_{k_\nu} \mathcal{P}_\mathbf{k}),
 
-    where :math:`\mathcal{P}_\mathbf{k} = \sum_n^{N_\mathrm{g}} \ket{u_n(\mathbf{k})}\bra{u_n(\mathbf{k})}` is the band projector and the sum is performed over all bands in the band group :math:`N_\mathrm{g}`. :cite:`Parameswaran13, Hirschmann23`
+    where :math:`\mathcal{P}_\mathbf{k} = \sum_n^{N_\mathrm{g}} \ket{u_n(\mathbf{k})}\bra{u_n(\mathbf{k})}` is the band projector and the sum is performed over all bands in the band group :math:`N_\mathrm{g}`. :cite:`Parameswaran13, Hirschmann24`
 
     Parameters
     ----------

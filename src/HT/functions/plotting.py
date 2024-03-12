@@ -23,7 +23,7 @@ def band_structure(model, args, data, plotting=False):
     model: Hofstadter.hamiltonian
         The Hofstadter Hamiltonian class attribute.
     args: dict
-        The arguments parsed to the program.
+        The arguments passed to the program.
     data: ndarray
         The data array.
     plotting: bool
@@ -150,7 +150,7 @@ def butterfly(model, args, data, plotting=False):
     model: Hofstadter.hamiltonian
         The Hofstadter Hamiltonian class attribute.
     args: dict
-        The arguments parsed to the program.
+        The arguments passed to the program.
     data: ndarray
         The data array.
     plotting: bool

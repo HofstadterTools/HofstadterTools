@@ -206,7 +206,7 @@ Directory Structure
 
 * **src** -- sources root with the ``HT`` package, along with its configuration settings, subpackages, and programs. A detailed description of the available `programs <https://hofstadter.tools/tutorials.html>`__ and `namespace packages <https://hofstadter.tools/_autosummary/functions.html>`__ is in the documentation.
 
-  * **HT** -- ``HT`` package
+  * **HT** -- ``HT`` package.
 
     * **configuration** -- user-defined configuration files for the programs.
     * **functions** -- helper functions for the programs.

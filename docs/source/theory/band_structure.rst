@@ -16,7 +16,7 @@ where :math:`\Delta X = X_j - X_i`, :math:`\Delta Y = Y_j - Y_i`, and we have de
 where :math:`\Psi_{m,n}` is the wavefunction at unit cell :math:`(m,n)` and :math:`t` is the hopping amplitude. Since we have taken Landau gauge in the y-direction, it is reasonable to assume plane wave behavior in the x-direction. Hence we can simplify the equation further by invoking the **plane wave ansatz** :math:`\Psi_{m,n} = e^{\mathrm{i}\mathbf{r}\cdot\mathbf{k}}\psi_{n}`, such that
 
 .. math::
-  E \psi_{n} = -t e^{-\mathrm{i}2\pi n_\phi n + \mathrm{i}k_x} \psi_{n} - t e^{\mathrm{i} k_y}\Psi_{m} + \mathrm{H.c.},
+  E \psi_{n} = -t e^{-\mathrm{i}2\pi n_\phi n + \mathrm{i}k_x} \psi_{n} - t e^{\mathrm{i} k_y}\psi_{n+1} + \mathrm{H.c.},
 
 which simplifies to
 
@@ -226,9 +226,9 @@ Using these band properties, we can perform several sanity checks on our compute
      - This quantity is equal to :math:`\sigma_{g_{yx}}` and is studied in :cite:`Bauer16`.
    * - ``T``
      - Brillouin-zone-averaged Trace Inequality Saturation Measure (TISM)
-     - :math:`\langle\mathcal{T}\rangle = \langle \mathrm{tr} g(\mathbf{k}) - |\mathcal{B}(\mathbf{k})| \rangle`
+     - :math:`\langle\mathcal{T}\rangle = \langle \mathrm{tr}\,g(\mathbf{k}) - |\mathcal{B}(\mathbf{k})| \rangle`
      - The TISM is non-negative and defined in Eq.(10) of :cite:`Jackson15`.
    * - ``D``
      - Brillouin-zone-averaged Determinant Inequality Saturation Measure (DISM)
-     - :math:`\langle\mathcal{D}\rangle = \langle \mathrm{det} g(\mathbf{k}) - \mathcal{B}^2(\mathbf{k})/4 \rangle`
+     - :math:`\langle\mathcal{D}\rangle = \langle \mathrm{det}\,g(\mathbf{k}) - \mathcal{B}^2(\mathbf{k})/4 \rangle`
      - The DISM is non-negative and defined in Eq.(9) of :cite:`Jackson15`.

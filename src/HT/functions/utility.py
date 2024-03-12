@@ -39,9 +39,9 @@ def create_filename(program, args, aux_text=""):
     program: str
         The name of the program.
     args: dict
-        The arguments parsed to the program.
+        The arguments passed to the program.
     aux_text: str
-        The auxiliary text parsed to the filename.
+        The auxiliary text passed to the filename.
 
     Returns
     -------
@@ -113,7 +113,7 @@ def save_data(program, model, args, data):
     model: Hofstadter.hamiltonian
         The Hamiltonian class attribute.
     args: dict
-        The arguments parsed to the program.
+        The arguments passed to the program.
     data: ndarray
         The data array.
     """

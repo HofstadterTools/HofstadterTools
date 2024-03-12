@@ -71,7 +71,7 @@ class Hofstadter:
         bMUCvec_val: ndarray
             The reciprocal MUC vectors.
         sym_points_val: ndarray
-            The high-symmetry points.
+            The high-symmetry/reference points.
         """
 
         if self.lat == "square":
