@@ -266,7 +266,6 @@ def main():
     bools = [show_band, show_group, show_isolated, show_width, show_gap, show_gap_width, show_std_B, show_C,
              show_std_g, show_av_gxx, show_std_gxx, show_av_gxy, show_std_gxy, show_T, show_D]
     table = PrettyTable()
-    name_list = []
     table.field_names = [j for i, j in enumerate(headers) if bools[i]]
     for band in np.arange(num_bands)[::-1]:
         table_data = [band, band_group[band], isolated[band], band_width[band], band_gap[band],

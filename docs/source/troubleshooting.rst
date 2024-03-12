@@ -92,6 +92,12 @@ When computing the complete band structure, it may be more difficult to spot whe
 
 The band structure with zero magnetic field can be computed by setting the flux density as ``-nphi 0 1``. For example, we can compute the band structure of graphene by using the command ``band_structure -lat honeycomb -nphi 0 1``.
 
+.. admonition:: Question
+
+	I have saved a band structure to file and I would now like to regenerate the output table using the ``plot_band_structure`` program. How can I do this?
+
+Currently, the ``plot_band_structure`` program can regenerate the band structure plots and modify their appearance, using the ``band_structure`` function in ``src/HT/functions/plotting.py``. Since the program calls the plotting function directly, it cannot be used to regenerate the output table. However, the output table can be saved to file by running the original ``band_structure`` program with the ``-log`` flag.
+
 Butterfly Questions
 -------------------
 
