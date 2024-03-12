@@ -80,7 +80,7 @@ class Hofstadter:
             a2 = self.a0 * np.array([0, 1])
             avec_val = np.vstack((a1, a2))
             # basis vectors
-            abasis1 = self.a0 * np.array([0, 0])
+            abasis1 = np.array([0, 0])
             abasisvec_val = np.array([abasis1])
             # lattice vectors (MUC)
             aMUC1 = a1
@@ -100,7 +100,7 @@ class Hofstadter:
             a2 = self.a0 * np.array([1 / 2, np.sqrt(3) / 2])
             avec_val = np.vstack((a1, a2))
             # basis vectors
-            abasis1 = self.a0 * np.array([0, 0])
+            abasis1 = np.array([0, 0])
             abasisvec_val = np.array([abasis1])
             # lattice vectors (MUC)
             aMUC1 = a1
