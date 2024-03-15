@@ -98,7 +98,7 @@ Honeycomb Lattice
 Kagome Lattice
 --------------
 
-* The Hofstadter model with nearest-neighbor hopping on the kagome lattice. In this case, the minimal plaquette area enclosed by particle hopping is 8 times smaller than the unit cell area, and so we append ``--periodicity 8`` to resolve the entire butterfly spectrum and fix any aperiodicity. This butterfly is also plotted in Fig.3 of :cite:`Jing-Min09` and Fig.2(a) of :cite:`Du18`.
+* The Hofstadter model with nearest-neighbor hopping on the kagome lattice. In this case, the minimal plaquette area enclosed by particle hopping is 8 times smaller than the unit cell area, and so we append ``--periodicity 8`` to resolve the entire butterfly spectrum and fix any aperiodicity. This butterfly is also plotted in Fig.3 of :cite:`Xiao03`, Fig.3 of :cite:`Jing-Min09`, and Fig.2(a) of :cite:`Du18`.
 
 .. code:: console
 
