@@ -94,50 +94,50 @@ For basic usage of HofstadterTools, i.e. in cases where you *do not* plan on edi
 Using pip
 *********
 
-1. [Optional] Create and activate a new venv environment. In the example below, ``my_env_name`` is the name of the venv and ``my_env_folder`` is the name of its folder. If needed, you can replace ``python3`` with ``python3.xx`` below to create a venv pinned to a particular Python version.
+1. [Optional] Create and activate a new venv environment. In the example below, ``my_env`` is the name of the venv and its parent folder. If needed, you can replace ``python3`` with ``python3.xx`` below to create a venv pinned to a particular Python version.
 
 .. code:: console
 
-    user@domain:any/path$ python3 -m my_env_name my_env_folder
-    user@domain:any/path$ source path/to/my_env_folder/bin/activate
+    user@domain:any/path$ python3 -m venv my_env
+    user@domain:any/path$ source path/to/my_env/bin/activate
 
 2. Install HofstadterTools from PyPI.
 
 .. code:: console
 
-    (my_env_name) user@domain:any/path$ pip install HofstadterTools
+    (my_env) user@domain:any/path$ pip install HofstadterTools
 
 3. [Optional] Upgrade an existing HofstadterTools installation.
 
 .. code:: console
 
-    (my_env_name) user@domain:any/path$ pip install --upgrade HofstadterTools
+    (my_env) user@domain:any/path$ pip install --upgrade HofstadterTools
 
-You can verify the installation by typing ``pip list | grep HofstadterTools``, you can uninstall by typing ``pip uninstall HofstadterTools``, and you can deactivate the environment by typing ``deactivate``. The entire environment can be removed by deleting ``my_env_folder``.
+You can verify the installation by typing ``pip list | grep HofstadterTools``, you can uninstall by typing ``pip uninstall HofstadterTools``, and you can deactivate the environment by typing ``deactivate``. The entire environment can be removed by deleting the ``my_env`` folder.
 
 Using conda
 ***********
 
-1. [Optional] Create and activate a new conda environment. In the example below, ``my_env_name`` is the name of the conda environment. If needed, you can replace ``python=3`` with ``python=3.xx`` below to create a conda environment with a particular Python version pre-installed.
+1. [Optional] Create and activate a new conda environment. In the example below, ``my_env`` is the name of the conda environment. If needed, you can replace ``python=3`` with ``python=3.xx`` below to create a conda environment with a particular Python version pre-installed.
 
 .. code:: console
 
-    user@domain:any/path$ conda create -n my_env_name python=3
-    user@domain:any/path$ conda activate my_env_name
+    user@domain:any/path$ conda create -n my_env python=3
+    user@domain:any/path$ conda activate my_env
 
 2. Install HofstadterTools from conda-forge.
 
 .. code:: console
 
-    (my_env_name) user@domain:any/path$ conda install conda-forge::HofstadterTools
+    (my_env) user@domain:any/path$ conda install conda-forge::HofstadterTools
 
 3. [Optional] Update an existing HofstadterTools installation.
 
 .. code:: console
 
-    (my_env_name) user@domain:any/path$ conda update HofstadterTools
+    (my_env) user@domain:any/path$ conda update HofstadterTools
 
-You can verify the installation by typing ``conda list | grep hofstadtertools``, you can uninstall by typing ``conda remove HofstadterTools``, and you can deactivate the environment by typing ``conda deactivate``. The entire environment can be removed by typing ``conda remove -n my_env_name --all``.
+You can verify the installation by typing ``conda list | grep hofstadtertools``, you can uninstall by typing ``conda remove HofstadterTools``, and you can deactivate the environment by typing ``conda deactivate``. The entire environment can be removed by typing ``conda remove -n my_env --all``.
 
 .. warning::
 
