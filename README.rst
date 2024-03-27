@@ -18,7 +18,7 @@ HofstadterTools
 .. |license| image:: https://img.shields.io/github/license/HofstadterTools/HofstadterTools
    :target: https://www.gnu.org/licenses/gpl-3.0
 
-* Paper: https://arxiv.org/abs/2311.18726
+* Paper: https://doi.org/10.21105/joss.06356
 * Documentation: https://hofstadter.tools or `hof.tools <https://hofstadter.tools>`__
 * GitHub Repository: https://github.com/HofstadterTools/HofstadterTools
 
@@ -243,13 +243,17 @@ If you have found HofstadterTools useful, it would be greatly appreciated if you
 
 .. code-block:: bibtex
 
-  @misc{HofstadterTools,
-  title={HofstadterTools: A Python package for analyzing the Hofstadter model},
-  author={Bartholomew Andrews},
-  year={2023},
-  eprint={2311.18726},
-  archivePrefix={arXiv},
-  primaryClass={cond-mat.mes-hall}
+  @article{HofstadterTools,
+  doi = {10.21105/joss.06356},
+  url = {https://doi.org/10.21105/joss.06356},
+  year = {2024},
+  publisher = {The Open Journal},
+  volume = {9},
+  number = {95},
+  pages = {6356},
+  author = {Bartholomew Andrews},
+  title = {HofstadterTools: A Python package for analyzing the Hofstadter model},
+  journal = {Journal of Open Source Software}
   }
 
 Acknowledgments

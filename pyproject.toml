@@ -17,7 +17,7 @@ pythonpath = ["src"]
 
 [project]
 name = "HofstadterTools"
-version = "1.0.3"
+version = "1.0.4"
 dependencies = [
     "numpy",
     "matplotlib",
@@ -69,7 +69,7 @@ docs = [
 
 [project.urls]
 Homepage = "https://hofstadter.tools"
-Pre-print = "https://arxiv.org/abs/2311.18726"
+Paper = "https://doi.org/10.21105/joss.06356"
 Documentation = "https://hofstadter.tools"
 Repository = "https://github.com/HofstadterTools/HofstadterTools"
 Issues = "https://github.com/HofstadterTools/HofstadterTools/issues"
