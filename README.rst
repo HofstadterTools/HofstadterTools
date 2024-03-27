@@ -51,33 +51,21 @@ You can now access the ``band_structure`` and ``butterfly`` programs from any lo
 
     band_structure -lat square -nphi 1 4 --display both --wilson
 
-|image1| |image2| |image3|
+.. raw:: html
 
-.. |image1| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png?raw=true
-    :width: 32 %
-    :alt: 3D Band Structure
-.. |image2| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true
-    :width: 32 %
-    :alt: Wilson Loops
-.. |image3| image:: https://github.com/HofstadterTools/HofstadterTools/blob/fb6764269db9bfb84cf2f0fc7be0a729799db1bc/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true
-    :width: 32 %
-    :alt: 2D Band Structure
+  <img src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png?raw=true" alt="3D Band Structure" width="32%"/>
+  <img src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true" alt="Wilson Loops" width="32%"/>
+  <img src="https://github.com/HofstadterTools/HofstadterTools/blob/fb6764269db9bfb84cf2f0fc7be0a729799db1bc/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true" alt="2D Band Structure" width="32%"/>
 
 .. code:: console
 
     butterfly -lat square -q 97 --color point --wannier --plot_lattice
 
-|image4| |image5| |image6|
+.. raw:: html
 
-.. |image4| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png?raw=true
-    :width: 32 %
-    :alt: Butterfly Spectrum
-.. |image5| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png?raw=true
-    :width: 32 %
-    :alt: Wannier Diagram
-.. |image6| image:: https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/lattice.png?raw=true
-    :width: 32 %
-    :alt: Lattice
+  <img src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png?raw=true" alt="Butterfly Spectrum" width="32%"/>
+  <img src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png?raw=true" alt="Butterfly Diagram" width="32%"/>
+  <img src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/lattice.png?raw=true" alt="Lattice" width="32%"/>
 
 Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density :math:`n_\phi=1/4`, together with the corresponding butterfly spectrum at :math:`q=97`. You can append ``--help`` to either of these programs to view the list of options. Alternatively, you can explore the `gallery <https://hofstadter.tools/gallery.html>`__ and `code reference <https://hofstadter.tools/_autosummary/functions.html>`__ to see what HofstadterTools has to offer.
 
