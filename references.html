@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>References &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="functions" href="_autosummary/functions.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">References</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/references.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h1>
+<div class="docutils container" id="id1">
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Agazzi14<span class="fn-bracket">]</span></span>
+<p>A. Agazzi, J.-P. Eckmann, and G. M. Graf. The colored Hofstadter butterfly for the honeycomb lattice. <em>Journal of Statistical Physics</em>, 156(3):417–426, Aug 2014. URL: <a class="reference external" href="https://doi.org/10.1007/s10955-014-0992-0">https://doi.org/10.1007/s10955-014-0992-0</a>, <a class="reference external" href="https://doi.org/10.1007/s10955-014-0992-0">doi:10.1007/s10955-014-0992-0</a>.</p>
+</div>
+<div class="citation" id="id28" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Aidelsburger13<span class="fn-bracket">]</span></span>
+<p>M. Aidelsburger, M. Atala, M. Lohse, J. T. Barreiro, B. Paredes, and I. Bloch. Realization of the Hofstadter Hamiltonian with ultracold atoms in optical lattices. <em>Physical Review Letters</em>, 111:185301, Oct 2013. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.111.185301">https://link.aps.org/doi/10.1103/PhysRevLett.111.185301</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.111.185301">doi:10.1103/PhysRevLett.111.185301</a>.</p>
+</div>
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AidelsburgerPhD<span class="fn-bracket">]</span></span>
+<p>M. Aidelsburger. <em>Artificial gauge fields with ultracold atoms in optical lattices</em>. PhD thesis, Ludwig Maximilian University of Munich, 2014. URL: <a class="reference external" href="https://edoc.ub.uni-muenchen.de/18148/">https://edoc.ub.uni-muenchen.de/18148/</a>.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Albrecht01<span class="fn-bracket">]</span></span>
+<p>C. Albrecht, J. H. Smet, K. von Klitzing, D. Weiss, V. Umansky, and H. Schweizer. Evidence of Hofstadter's fractal energy spectrum in the quantized Hall conductance. <em>Physical Review Letters</em>, 86:147–150, Jan 2001. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.86.147">https://link.aps.org/doi/10.1103/PhysRevLett.86.147</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.86.147">doi:10.1103/PhysRevLett.86.147</a>.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Andrews20<span class="fn-bracket">]</span></span>
+<p>B. Andrews and A. Soluyanov. Fractional quantum Hall states for moiré superstructures in the Hofstadter regime. <em>Physical Review B</em>, 101:235312, Jun 2020. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.101.235312">https://link.aps.org/doi/10.1103/PhysRevB.101.235312</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.101.235312">doi:10.1103/PhysRevB.101.235312</a>.</p>
+</div>
+<div class="citation" id="id54" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Andrews21<span class="fn-bracket">]</span></span>
+<p>B. Andrews, M. Mohan, and T. Neupert. Abelian topological order of $\ensuremath \nu =2/5$ and $3/7$ fractional quantum Hall states in lattice models. <em>Physical Review B</em>, 103:075132, Feb 2021. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.103.075132">https://link.aps.org/doi/10.1103/PhysRevB.103.075132</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.103.075132">doi:10.1103/PhysRevB.103.075132</a>.</p>
+</div>
+<div class="citation" id="id39" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Andrews23<span class="fn-bracket">]</span></span>
+<p>B. Andrews, M. Raja, N. Mishra, M. Zaletel, and R. Roy. Stability of fractional Chern insulators with a non-Landau level continuum limit. 2023. <a class="reference external" href="https://arxiv.org/abs/2310.05758">arXiv:2310.05758</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.2310.05758">doi:10.48550/arXiv.2310.05758</a>.</p>
+</div>
+<div class="citation" id="id51" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Avila09<span class="fn-bracket">]</span></span>
+<p>A. Avila and S. Jitomirskaya. The Ten Martini Problem. <em>Annals of Mathematics</em>, 170(1):303–342, 2009. URL: <a class="reference external" href="http://www.jstor.org/stable/40345465">http://www.jstor.org/stable/40345465</a>, <a class="reference external" href="https://doi.org/10.4007/annals.2009.170.303">doi:10.4007/annals.2009.170.303</a>.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Avron03<span class="fn-bracket">]</span></span>
+<p>J. E. Avron, D. Osadchy, and R. Seiler. A Topological Look at the Quantum Hall Effect. <em>Physics Today</em>, 56(8):38–42, Aug 2003. URL: <a class="reference external" href="https://doi.org/10.1063/1.1611351">https://doi.org/10.1063/1.1611351</a>, <a class="reference external" href="https://doi.org/10.1063/1.1611351">doi:10.1063/1.1611351</a>.</p>
+</div>
+<div class="citation" id="id41" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Avron14<span class="fn-bracket">]</span></span>
+<p>J. E. Avron, O. Kenneth, and G. Yehoshua. A study of the ambiguity in the solutions to the Diophantine equation for Chern numbers. <em>Journal of Physics A: Mathematical and Theoretical</em>, 47(18):185202, Apr 2014. URL: <a class="reference external" href="https://dx.doi.org/10.1088/1751-8113/47/18/185202">https://dx.doi.org/10.1088/1751-8113/47/18/185202</a>, <a class="reference external" href="https://doi.org/10.1088/1751-8113/47/18/185202">doi:10.1088/1751-8113/47/18/185202</a>.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Azbel64<span class="fn-bracket">]</span></span>
+<p>M. Y. Azbel. Energy spectrum of a conduction electron in a magnetic field. <em>Journal of Experimental and Theoretical Physics</em>, 19(3):634–645, 1964. URL: <a class="reference external" href="http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list">http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list</a>.</p>
+</div>
+<div class="citation" id="id44" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bauer16<span class="fn-bracket">]</span></span>
+<p>D. Bauer, T. S. Jackson, and R. Roy. Quantum geometry and stability of the fractional quantum Hall effect in the Hofstadter model. <em>Physical Review B</em>, 93:235133, Jun 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.93.235133">https://link.aps.org/doi/10.1103/PhysRevB.93.235133</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.93.235133">doi:10.1103/PhysRevB.93.235133</a>.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bauer22<span class="fn-bracket">]</span></span>
+<p>D. Bauer, S. Talkington, F. Harper, B. Andrews, and R. Roy. Fractional Chern insulators with a non-Landau level continuum limit. <em>Physical Review B</em>, 105:045144, Jan 2022. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.105.045144">https://link.aps.org/doi/10.1103/PhysRevB.105.045144</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.105.045144">doi:10.1103/PhysRevB.105.045144</a>.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bodesheim23<span class="fn-bracket">]</span></span>
+<p>D. Bodesheim, R. Biele, and G. Cuniberti. Hierarchies of Hofstadter butterflies in 2D covalent organic frameworks. <em>npj 2D Materials and Applications</em>, 7(1):16, Mar 2023. URL: <a class="reference external" href="https://doi.org/10.1038/s41699-023-00378-0">https://doi.org/10.1038/s41699-023-00378-0</a>, <a class="reference external" href="https://doi.org/10.1038/s41699-023-00378-0">doi:10.1038/s41699-023-00378-0</a>.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Chen20<span class="fn-bracket">]</span></span>
+<p>J. P. Chen and R. Guo. Spectral decimation of the magnetic Laplacian on the Sierpinski gasket: solving the Hofstadter–Sierpinski butterfly. <em>Communications in Mathematical Physics</em>, 380(1):187–243, Nov 2020. URL: <a class="reference external" href="https://doi.org/10.1007/s00220-020-03850-w">https://doi.org/10.1007/s00220-020-03850-w</a>, <a class="reference external" href="https://doi.org/10.1007/s00220-020-03850-w">doi:10.1007/s00220-020-03850-w</a>.</p>
+</div>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Claassen15<span class="fn-bracket">]</span></span>
+<p>M. Claassen, C. H. Lee, R. Thomale, X.-L. Qi, and T. P. Devereaux. Position-momentum duality and fractional quantum Hall effect in Chern insulators. <em>Physical Review Letters</em>, 114:236802, Jun 2015. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.114.236802">https://link.aps.org/doi/10.1103/PhysRevLett.114.236802</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.114.236802">doi:10.1103/PhysRevLett.114.236802</a>.</p>
+</div>
+<div class="citation" id="id52" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Cooper19<span class="fn-bracket">]</span></span>
+<p>N. R. Cooper, J. Dalibard, and I. B. Spielman. Topological bands for ultracold atoms. <em>Reviews of Modern Physics</em>, 91:015005, Mar 2019. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/RevModPhys.91.015005">https://link.aps.org/doi/10.1103/RevModPhys.91.015005</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.91.015005">doi:10.1103/RevModPhys.91.015005</a>.</p>
+</div>
+<div class="citation" id="id22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Dean13<span class="fn-bracket">]</span></span>
+<p>C. R. Dean, L. Wang, P. Maher, C. Forsythe, F. Ghahari, Y. Gao, J. Katoch, M. Ishigami, P. Moon, M. Koshino, T. Taniguchi, K. Watanabe, K. L. Shepard, J. Hone, and P. Kim. Hofstadter's butterfly and the fractal quantum Hall effect in moiré superlattices. <em>Nature</em>, 497(7451):598–602, May 2013. URL: <a class="reference external" href="https://doi.org/10.1038/nature12186">https://doi.org/10.1038/nature12186</a>, <a class="reference external" href="https://doi.org/10.1038/nature12186">doi:10.1038/nature12186</a>.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DiColandrea22<span class="fn-bracket">]</span></span>
+<p>F. Di Colandrea, A. D’Errico, M. Maffei, H. M. Price, M. Lewenstein, L. Marrucci, F. Cardano, A. Dauphin, and P. Massignan. Linking topological features of the Hofstadter model to optical diffraction figures. <em>New Journal of Physics</em>, 24(1):013028, Jan 2022. URL: <a class="reference external" href="https://dx.doi.org/10.1088/1367-2630/ac4126">https://dx.doi.org/10.1088/1367-2630/ac4126</a>, <a class="reference external" href="https://doi.org/10.1088/1367-2630/ac4126">doi:10.1088/1367-2630/ac4126</a>.</p>
+</div>
+<div class="citation" id="id64" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DiagHam<span class="fn-bracket">]</span></span>
+<p>N. Regnault. DiagHam. Code repository at <a class="reference external" href="http://www.nick-ux.org/diagham">http://www.nick-ux.org/diagham</a>, 2001.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Du18<span class="fn-bracket">]</span></span>
+<p>L. Du, Q. Chen, A. D. Barr, A. R. Barr, and G. A. Fiete. Floquet Hofstadter butterfly on the kagome and triangular lattices. <em>Physical Review B</em>, 98:245145, Dec 2018. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.98.245145">https://link.aps.org/doi/10.1103/PhysRevB.98.245145</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.98.245145">doi:10.1103/PhysRevB.98.245145</a>.</p>
+</div>
+<div class="citation" id="id49" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Eckardt17<span class="fn-bracket">]</span></span>
+<p>A. Eckardt. Colloquium: atomic quantum gases in periodically driven optical lattices. <em>Reviews of Modern Physics</em>, 89:011004, Mar 2017. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/RevModPhys.89.011004">https://link.aps.org/doi/10.1103/RevModPhys.89.011004</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.89.011004">doi:10.1103/RevModPhys.89.011004</a>.</p>
+</div>
+<div class="citation" id="id24" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Fenner15<span class="fn-bracket">]</span></span>
+<p>F. T. P. Harper. <em>The Hofstadter Model and Other Fractional Chern Insulators</em>. PhD thesis, University of Oxford, 2015. URL: <a class="reference external" href="https://ora.ox.ac.uk/objects/uuid:4c4df19a-9bab-43c4-a845-ae170868913f">https://ora.ox.ac.uk/objects/uuid:4c4df19a-9bab-43c4-a845-ae170868913f</a>.</p>
+</div>
+<div class="citation" id="id2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Fukui05<span class="fn-bracket">]</span></span>
+<p>T. Fukui, Y. Hatsugai, and H. Suzuki. Chern numbers in discretized Brillouin zone: efficient method of computing (spin) Hall conductances. <em>Journal of the Physical Society of Japan</em>, 74(6):1674–1677, 2005. URL: <a class="reference external" href="https://doi.org/10.1143/JPSJ.74.1674">https://doi.org/10.1143/JPSJ.74.1674</a>, <a class="reference external" href="https://doi.org/10.1143/JPSJ.74.1674">doi:10.1143/JPSJ.74.1674</a>.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Ghadimi22<span class="fn-bracket">]</span></span>
+<p>R. Ghadimi, T. Sugimoto, and T. Tohyama. Higher-dimensional Hofstadter butterfly on the Penrose lattice. <em>Physical Review B</em>, 106:L201113, Nov 2022. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.106.L201113">https://link.aps.org/doi/10.1103/PhysRevB.106.L201113</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.106.L201113">doi:10.1103/PhysRevB.106.L201113</a>.</p>
+</div>
+<div class="citation" id="id48" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Goldman14<span class="fn-bracket">]</span></span>
+<p>N. Goldman, G. Juzeliūnas, P. Öhberg, and I. B. Spielman. Light-induced gauge fields for ultracold atoms. <em>Reports on Progress in Physics</em>, 77(12):126401, Nov 2014. URL: <a class="reference external" href="https://dx.doi.org/10.1088/0034-4885/77/12/126401">https://dx.doi.org/10.1088/0034-4885/77/12/126401</a>, <a class="reference external" href="https://doi.org/10.1088/0034-4885/77/12/126401">doi:10.1088/0034-4885/77/12/126401</a>.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Goudarzi22<span class="fn-bracket">]</span></span>
+<p>K. Goudarzi, H. G. Maragheh, and M. Lee. Calculation of the Berry curvature and Chern number of topological photonic crystals. <em>Journal of the Korean Physical Society</em>, 81(5):386–390, Sep 2022. URL: <a class="reference external" href="https://doi.org/10.1007/s40042-022-00530-x">https://doi.org/10.1007/s40042-022-00530-x</a>, <a class="reference external" href="https://doi.org/10.1007/s40042-022-00530-x">doi:10.1007/s40042-022-00530-x</a>.</p>
+</div>
+<div class="citation" id="id42" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Gresch18<span class="fn-bracket">]</span></span>
+<p>D. Gresch and A. Soluyanov. <em>Calculating Topological Invariants with Z2Pack</em>, pages 63–92. Springer International Publishing, Cham, 2018. URL: <a class="reference external" href="https://doi.org/10.1007/978-3-319-76388-0_3">https://doi.org/10.1007/978-3-319-76388-0_3</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-319-76388-0_3">doi:10.1007/978-3-319-76388-0_3</a>.</p>
+</div>
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Harper55<span class="fn-bracket">]</span></span>
+<p>P. G. Harper. Single band motion of conduction electrons in a uniform magnetic field. <em>Proceedings of the Physical Society. Section A</em>, 68(10):874, Oct 1955. URL: <a class="reference external" href="https://dx.doi.org/10.1088/0370-1298/68/10/304">https://dx.doi.org/10.1088/0370-1298/68/10/304</a>, <a class="reference external" href="https://doi.org/10.1088/0370-1298/68/10/304">doi:10.1088/0370-1298/68/10/304</a>.</p>
+</div>
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Hirschmann24<span class="fn-bracket">]</span></span>
+<p>M. M. Hirschmann and J. Mitscherling. Symmetry-enforced double Weyl points, multiband quantum geometry, and singular flat bands of doping-induced states at the Fermi level. <em>Physical Review Materials</em>, 8:014201, Jan 2024. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevMaterials.8.014201">https://link.aps.org/doi/10.1103/PhysRevMaterials.8.014201</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevMaterials.8.014201">doi:10.1103/PhysRevMaterials.8.014201</a>.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Hofstadter76<span class="fn-bracket">]</span></span>
+<p>D. R. Hofstadter. Energy levels and wave functions of Bloch electrons in rational and irrational magnetic fields. <em>Physical Review B</em>, 14:2239–2249, Sep 1976. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.14.2239">https://link.aps.org/doi/10.1103/PhysRevB.14.2239</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.14.2239">doi:10.1103/PhysRevB.14.2239</a>.</p>
+</div>
+<div class="citation" id="id66" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HofstadterTools<span class="fn-bracket">]</span></span>
+<p>B. Andrews. HofstadterTools: A Python package for analyzing the Hofstadter model. <em>Journal of Open Source Software</em>, 9(95):6356, 2024. URL: <a class="reference external" href="https://doi.org/10.21105/joss.06356">https://doi.org/10.21105/joss.06356</a>, <a class="reference external" href="https://doi.org/10.21105/joss.06356">doi:10.21105/joss.06356</a>.</p>
+</div>
+<div class="citation" id="id45" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Jackson15<span class="fn-bracket">]</span></span>
+<p>T. S. Jackson, G. Möller, and R. Roy. Geometric stability of topological lattice phases. <em>Nature Communications</em>, 6(1):8629, Nov 2015. URL: <a class="reference external" href="https://doi.org/10.1038/ncomms9629">https://doi.org/10.1038/ncomms9629</a>, <a class="reference external" href="https://doi.org/10.1038/ncomms9629">doi:10.1038/ncomms9629</a>.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Jing-Min09<span class="fn-bracket">]</span></span>
+<p>H. Jing-Min. Light-induced Hofstadter's butterfly spectrum of ultracold atoms on the two-dimensional kagomé lattice. <em>Chinese Physics Letters</em>, 26(12):123701, Dec 2009. URL: <a class="reference external" href="https://dx.doi.org/10.1088/0256-307X/26/12/123701">https://dx.doi.org/10.1088/0256-307X/26/12/123701</a>, <a class="reference external" href="https://doi.org/10.1088/0256-307X/26/12/123701">doi:10.1088/0256-307X/26/12/123701</a>.</p>
+</div>
+<div class="citation" id="id62" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Ledwith23<span class="fn-bracket">]</span></span>
+<p>P. J. Ledwith, A. Vishwanath, and D. E. Parker. Vortexability: A unifying criterion for ideal fractional Chern insulators. <em>Physical Review B</em>, 108:205144, Nov 2023. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.108.205144">https://link.aps.org/doi/10.1103/PhysRevB.108.205144</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.108.205144">doi:10.1103/PhysRevB.108.205144</a>.</p>
+</div>
+<div class="citation" id="id60" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Lee17<span class="fn-bracket">]</span></span>
+<p>C. H. Lee, M. Claassen, and R. Thomale. Band structure engineering of ideal fractional Chern insulators. <em>Physical Review B</em>, 96:165150, Oct 2017. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.96.165150">https://link.aps.org/doi/10.1103/PhysRevB.96.165150</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.96.165150">doi:10.1103/PhysRevB.96.165150</a>.</p>
+</div>
+<div class="citation" id="id46" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Mera22<span class="fn-bracket">]</span></span>
+<p>B. Mera and J. Mitscherling. Nontrivial quantum geometry of degenerate flat bands. <em>Physical Review B</em>, 106:165133, Oct 2022. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.106.165133">https://link.aps.org/doi/10.1103/PhysRevB.106.165133</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.106.165133">doi:10.1103/PhysRevB.106.165133</a>.</p>
+</div>
+<div class="citation" id="id29" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Miyake13<span class="fn-bracket">]</span></span>
+<p>H. Miyake, G. A. Siviloglou, C. J. Kennedy, W. C. Burton, and W. Ketterle. Realizing the Harper Hamiltonian with laser-assisted tunneling in optical lattices. <em>Physical Review Letters</em>, 111:185302, Oct 2013. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.111.185302">https://link.aps.org/doi/10.1103/PhysRevLett.111.185302</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.111.185302">doi:10.1103/PhysRevLett.111.185302</a>.</p>
+</div>
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Neupert11<span class="fn-bracket">]</span></span>
+<p>T. Neupert, L. Santos, C. Chamon, and C. Mudry. Fractional quantum Hall states at zero magnetic field. <em>Physical Review Letters</em>, 106:236804, Jun 2011. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.106.236804">https://link.aps.org/doi/10.1103/PhysRevLett.106.236804</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.106.236804">doi:10.1103/PhysRevLett.106.236804</a>.</p>
+</div>
+<div class="citation" id="id56" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Ni19<span class="fn-bracket">]</span></span>
+<p>X. Ni, K. Chen, M. Weiner, D. J. Apigo, C. Prodan, A. Alù, E. Prodan, and A. B. Khanikaev. Observation of Hofstadter butterfly and topological edge states in reconfigurable quasi-periodic acoustic crystals. <em>Communications Physics</em>, 2(1):55, Jun 2019. URL: <a class="reference external" href="https://doi.org/10.1038/s42005-019-0151-7">https://doi.org/10.1038/s42005-019-0151-7</a>, <a class="reference external" href="https://doi.org/10.1038/s42005-019-0151-7">doi:10.1038/s42005-019-0151-7</a>.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Oh00<span class="fn-bracket">]</span></span>
+<p>G.-Y. Oh. Energy spectrum of a triangular lattice in a uniform magnetic field: effect of next-nearest-neighbor hopping. <em>Journal of the Korean Physical Society</em>, 37:534–539, 11 2000. <a class="reference external" href="https://doi.org/10.3938/jkps.37.534">doi:10.3938/jkps.37.534</a>.</p>
+</div>
+<div class="citation" id="id37" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Osterloh05<span class="fn-bracket">]</span></span>
+<p>K. Osterloh, M. Baig, L. Santos, P. Zoller, and M. Lewenstein. Cold atoms in non-Abelian gauge potentials: from the Hofstadter &quot;moth&quot; to lattice gauge theory. <em>Physical Review Letters</em>, 95:010403, Jun 2005. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.95.010403">https://link.aps.org/doi/10.1103/PhysRevLett.95.010403</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.95.010403">doi:10.1103/PhysRevLett.95.010403</a>.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Parameswaran13<span class="fn-bracket">]</span></span>
+<p>S. A. Parameswaran, R. Roy, and S. L. Sondhi. Fractional quantum Hall physics in topological flat bands. <em>Comptes Rendus Physique</em>, 14(9):816–839, 2013. Topological insulators / Isolants topologiques. URL: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S163107051300073X">https://www.sciencedirect.com/science/article/pii/S163107051300073X</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1016/j.crhy.2013.04.003">doi:https://doi.org/10.1016/j.crhy.2013.04.003</a>.</p>
+</div>
+<div class="citation" id="id25" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Peierls33<span class="fn-bracket">]</span></span>
+<p>R. Peierls. Zur Theorie des Diamagnetismus von Leitungselektronen. <em>Zeitschrift für Physik</em>, 80(11):763–791, Nov 1933. URL: <a class="reference external" href="https://doi.org/10.1007/BF01342591">https://doi.org/10.1007/BF01342591</a>, <a class="reference external" href="https://doi.org/10.1007/BF01342591">doi:10.1007/BF01342591</a>.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Pena23<span class="fn-bracket">]</span></span>
+<p>A. Pena. Control of spectral, topological and charge transport properties of graphene via circularly polarized light and magnetic field. <em>Results in Physics</em>, 46:106257, 2023. URL: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S2211379723000505">https://www.sciencedirect.com/science/article/pii/S2211379723000505</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1016/j.rinp.2023.106257">doi:https://doi.org/10.1016/j.rinp.2023.106257</a>.</p>
+</div>
+<div class="citation" id="id63" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Pyqula<span class="fn-bracket">]</span></span>
+<p>J. Lado. Pyqula. Code repository at <a class="reference external" href="https://github.com/joselado/pyqula">https://github.com/joselado/pyqula</a>, 2021.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Rammal85<span class="fn-bracket">]</span></span>
+<p>R. Rammal. Landau level spectrum of Bloch electrons in a honeycomb lattice. <em>Journal De Physique</em>, 46(8):1345–1354, 1985. URL: <a class="reference external" href="https://doi.org/10.1051/jphys:019850046080134500">https://doi.org/10.1051/jphys:019850046080134500</a>, <a class="reference external" href="https://doi.org/10.1051/jphys:019850046080134500">doi:10.1051/jphys:019850046080134500</a>.</p>
+</div>
+<div class="citation" id="id61" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Roushan17<span class="fn-bracket">]</span></span>
+<p>P. Roushan, C. Neill, J. Tangpanitanon, V. M. Bastidas, A. Megrant, R. Barends, Y. Chen, Z. Chen, B. Chiaro, A. Dunsworth, A. Fowler, B. Foxen, M. Giustina, E. Jeffrey, J. Kelly, E. Lucero, J. Mutus, M. Neeley, C. Quintana, D. Sank, A. Vainsencher, J. Wenner, T. White, H. Neven, D. G. Angelakis, and J. Martinis. Spectroscopic signatures of localization with interacting photons in superconducting qubits. <em>Science</em>, 358(6367):1175–1179, 2017. URL: <a class="reference external" href="https://www.science.org/doi/abs/10.1126/science.aao1401">https://www.science.org/doi/abs/10.1126/science.aao1401</a>, <a class="reference external" href="https://doi.org/10.1126/science.aao1401">doi:10.1126/science.aao1401</a>.</p>
+</div>
+<div class="citation" id="id43" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Roy14<span class="fn-bracket">]</span></span>
+<p>R. Roy. Band geometry of fractional topological insulators. <em>Physical Review B</em>, 90:165139, Oct 2014. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.90.165139">https://link.aps.org/doi/10.1103/PhysRevB.90.165139</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.90.165139">doi:10.1103/PhysRevB.90.165139</a>.</p>
+</div>
+<div class="citation" id="id47" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Roy16<span class="fn-bracket">]</span></span>
+<p>S. Roy, M. Kolodrubetz, J. E. Moore, and A. G. Grushin. Chern numbers and chiral anomalies in Weyl butterflies. <em>Physical Review B</em>, 94:161107, Oct 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.94.161107">https://link.aps.org/doi/10.1103/PhysRevB.94.161107</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.94.161107">doi:10.1103/PhysRevB.94.161107</a>.</p>
+</div>
+<div class="citation" id="id53" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Sahay23<span class="fn-bracket">]</span></span>
+<p>R. Sahay, S. Divic, D. E. Parker, T. Soejima, S. Anand, J. Hauschild, M. Aidelsburger, A. Vishwanath, S. Chatterjee, N. Y. Yao, and M. P. Zaletel. Superconductivity in a topological lattice model with strong repulsion. 2023. <a class="reference external" href="https://arxiv.org/abs/2308.10935">arXiv:2308.10935</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.2308.10935">doi:10.48550/arXiv.2308.10935</a>.</p>
+</div>
+<div class="citation" id="id73" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Satija16<span class="fn-bracket">]</span></span>
+<p>I. I. Satija. <em>Butterfly in the Quantum World</em>. 2053-2571. Morgan &amp; Claypool Publishers, 2016. ISBN 978-1-6817-4117-8. URL: <a class="reference external" href="https://dx.doi.org/10.1088/978-1-6817-4117-8">https://dx.doi.org/10.1088/978-1-6817-4117-8</a>, <a class="reference external" href="https://doi.org/10.1088/978-1-6817-4117-8">doi:10.1088/978-1-6817-4117-8</a>.</p>
+</div>
+<div class="citation" id="id55" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Shaffer21<span class="fn-bracket">]</span></span>
+<p>D. Shaffer, J. Wang, and L. H. Santos. Theory of Hofstadter superconductors. <em>Physical Review B</em>, 104:184501, Nov 2021. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.104.184501">https://link.aps.org/doi/10.1103/PhysRevB.104.184501</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.104.184501">doi:10.1103/PhysRevB.104.184501</a>.</p>
+</div>
+<div class="citation" id="id50" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Simon00<span class="fn-bracket">]</span></span>
+<p>B. Simon. <em>Schrödinger operators in the twenty-first century</em>, chapter, pages 283–288. World Scientific, 2000. URL: <a class="reference external" href="https://www.worldscientific.com/doi/abs/10.1142/9781848160224_0014">https://www.worldscientific.com/doi/abs/10.1142/9781848160224_0014</a>, <a class="reference external" href="https://doi.org/10.1142/9781848160224_0014">doi:10.1142/9781848160224_0014</a>.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SoluyanovPhD<span class="fn-bracket">]</span></span>
+<p>A. Soluyanov. <em>Topological aspects of band theory</em>. PhD thesis, Rutgers University, 2012. URL: <a class="reference external" href="https://rucore.libraries.rutgers.edu/rutgers-lib/39042/">https://rucore.libraries.rutgers.edu/rutgers-lib/39042/</a>.</p>
+</div>
+<div class="citation" id="id30" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Stegmaier22<span class="fn-bracket">]</span></span>
+<p>A. Stegmaier, L. K. Upreti, R. Thomale, and I. Boettcher. Universality of Hofstadter butterflies on hyperbolic lattices. <em>Physical Review Letters</em>, 128:166402, Apr 2022. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.128.166402">https://link.aps.org/doi/10.1103/PhysRevLett.128.166402</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.128.166402">doi:10.1103/PhysRevLett.128.166402</a>.</p>
+</div>
+<div class="citation" id="id27" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Streda82<span class="fn-bracket">]</span></span>
+<p>P. Streda. Theory of quantised Hall conductivity in two dimensions. <em>Journal of Physics C: Solid State Physics</em>, 15(22):L717, Aug 1982. URL: <a class="reference external" href="https://dx.doi.org/10.1088/0022-3719/15/22/005">https://dx.doi.org/10.1088/0022-3719/15/22/005</a>, <a class="reference external" href="https://doi.org/10.1088/0022-3719/15/22/005">doi:10.1088/0022-3719/15/22/005</a>.</p>
+</div>
+<div class="citation" id="id65" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TeNPy<span class="fn-bracket">]</span></span>
+<p>J. Hauschild and F. Pollmann. Efficient numerical simulations with Tensor Networks: Tensor Network Python (TeNPy). <em>SciPost Physics Lecture Notes</em>, pages 5, 2018. Code available from <a class="reference external" href="https://github.com/tenpy/tenpy">https://github.com/tenpy/tenpy</a>. URL: <a class="reference external" href="https://scipost.org/10.21468/SciPostPhysLectNotes.5">https://scipost.org/10.21468/SciPostPhysLectNotes.5</a>, <a class="reference external" href="https://arxiv.org/abs/1805.00055">arXiv:1805.00055</a>, <a class="reference external" href="https://doi.org/10.21468/SciPostPhysLectNotes.5">doi:10.21468/SciPostPhysLectNotes.5</a>.</p>
+</div>
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Thouless82<span class="fn-bracket">]</span></span>
+<p>D. J. Thouless, M. Kohmoto, M. P. Nightingale, and M. den Nijs. Quantized Hall conductance in a two-dimensional periodic potential. <em>Physical Review Letters</em>, 49:405–408, Aug 1982. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.49.405">https://link.aps.org/doi/10.1103/PhysRevLett.49.405</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.49.405">doi:10.1103/PhysRevLett.49.405</a>.</p>
+</div>
+<div class="citation" id="id59" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Tian23<span class="fn-bracket">]</span></span>
+<p>H. Tian, X. Gao, Y. Zhang, S. Che, T. Xu, P. Cheung, K. Watanabe, T. Taniguchi, M. Randeria, F. Zhang, C. N. Lau, and M. W. Bockrath. Evidence for Dirac flat band superconductivity enabled by quantum geometry. <em>Nature</em>, 614(7948):440–444, Feb 2023. URL: <a class="reference external" href="https://doi.org/10.1038/s41586-022-05576-2">https://doi.org/10.1038/s41586-022-05576-2</a>, <a class="reference external" href="https://doi.org/10.1038/s41586-022-05576-2">doi:10.1038/s41586-022-05576-2</a>.</p>
+</div>
+<div class="citation" id="id72" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Vidal98<span class="fn-bracket">]</span></span>
+<p>J. Vidal, R. Mosseri, and B. Douçot. Aharonov-Bohm cages in two-dimensional structures. <em>Physical Review Letters</em>, 81:5888–5891, Dec 1998. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.81.5888">https://link.aps.org/doi/10.1103/PhysRevLett.81.5888</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.81.5888">doi:10.1103/PhysRevLett.81.5888</a>.</p>
+</div>
+<div class="citation" id="id58" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Wang21<span class="fn-bracket">]</span></span>
+<p>J. Wang, J. Cano, A. J. Millis, Z. Liu, and B. Yang. Exact Landau level description of geometry and interaction in a flatband. <em>Physical Review Letters</em>, 127:246403, Dec 2021. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.127.246403">https://link.aps.org/doi/10.1103/PhysRevLett.127.246403</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.127.246403">doi:10.1103/PhysRevLett.127.246403</a>.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Wannier78<span class="fn-bracket">]</span></span>
+<p>G. H. Wannier. A result not dependent on rationality for Bloch electrons in a magnetic field. <em>physica status solidi (b)</em>, 88(2):757–765, 1978. URL: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/pssb.2220880243">https://onlinelibrary.wiley.com/doi/abs/10.1002/pssb.2220880243</a>, <a class="reference external" href="https://doi.org/10.1002/pssb.2220880243">doi:10.1002/pssb.2220880243</a>.</p>
+</div>
+<div class="citation" id="id70" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WannierTools<span class="fn-bracket">]</span></span>
+<p>Q. Wu, S. Zhang, H.-F. Song, M. Troyer, and A. A. Soluyanov. WannierTools: An open-source software package for novel topological materials. <em>Computer Physics Communications</em>, 224:405–416, 2018. URL: <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/S0010465517303442">http://www.sciencedirect.com/science/article/pii/S0010465517303442</a>, <a class="reference external" href="https://doi.org/10.1016/j.cpc.2017.09.033">doi:10.1016/j.cpc.2017.09.033</a>.</p>
+</div>
+<div class="citation" id="id71" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Xiao03<span class="fn-bracket">]</span></span>
+<p>Y. Xiao, V. Pelletier, P. M. Chaikin, and D. A. Huse. Landau levels in the case of two degenerate coupled bands: Kagomé lattice tight-binding spectrum. <em>Physical Review B</em>, 67:104505, Mar 2003. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.67.104505">https://link.aps.org/doi/10.1103/PhysRevB.67.104505</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.67.104505">doi:10.1103/PhysRevB.67.104505</a>.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Yang20<span class="fn-bracket">]</span></span>
+<p>Y. Yang, B. Zhen, J. D. Joannopoulos, and M. Soljačić. Non-Abelian generalizations of the Hofstadter model: spin–orbit-coupled butterfly pairs. <em>Light: Science &amp; Applications</em>, 9(1):177, Oct 2020. URL: <a class="reference external" href="https://doi.org/10.1038/s41377-020-00384-7">https://doi.org/10.1038/s41377-020-00384-7</a>, <a class="reference external" href="https://doi.org/10.1038/s41377-020-00384-7">doi:10.1038/s41377-020-00384-7</a>.</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Yilmaz17<span class="fn-bracket">]</span></span>
+<p>F. Yilmaz and M. Ö. Oktel. Hofstadter butterfly evolution in the space of two-dimensional Bravais lattices. <em>Physical Review A</em>, 95:063628, Jun 2017. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevA.95.063628">https://link.aps.org/doi/10.1103/PhysRevA.95.063628</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevA.95.063628">doi:10.1103/PhysRevA.95.063628</a>.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Zak64<span class="fn-bracket">]</span></span>
+<p>J. Zak. Magnetic translation group. <em>Physical Review</em>, 134:A1602–A1606, Jun 1964. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRev.134.A1602">https://link.aps.org/doi/10.1103/PhysRev.134.A1602</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRev.134.A1602">doi:10.1103/PhysRev.134.A1602</a>.</p>
+</div>
+<div class="citation" id="id67" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Zhang22<span class="fn-bracket">]</span></span>
+<p>Y. Zhang, N. Manjunath, G. Nambiar, and M. Barkeshli. Fractional disclination charge and discrete shift in the Hofstadter butterfly. <em>Physical Review Letters</em>, 129:275301, Dec 2022. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.129.275301">https://link.aps.org/doi/10.1103/PhysRevLett.129.275301</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.129.275301">doi:10.1103/PhysRevLett.129.275301</a>.</p>
+</div>
+<div class="citation" id="id68" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Zhang23<span class="fn-bracket">]</span></span>
+<p>Y. Zhang, N. Manjunath, G. Nambiar, and M. Barkeshli. Quantized charge polarization as a many-body invariant in $(2+1)\mathrm D$ crystalline topological states and Hofstadter butterflies. <em>Physical Review X</em>, 13:031005, Jul 2023. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevX.13.031005">https://link.aps.org/doi/10.1103/PhysRevX.13.031005</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevX.13.031005">doi:10.1103/PhysRevX.13.031005</a>.</p>
+</div>
+<div class="citation" id="id69" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Zhang23_2<span class="fn-bracket">]</span></span>
+<p>Y. Zhang, N. Manjunath, R. Kobayashi, and M. Barkeshli. Complete crystalline topological invariants from partial rotations in $(2+1)\mathrm D$ invertible fermionic states and Hofstadter's butterfly. <em>Physical Review Letters</em>, 131:176501, Oct 2023. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.131.176501">https://link.aps.org/doi/10.1103/PhysRevLett.131.176501</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.131.176501">doi:10.1103/PhysRevLett.131.176501</a>.</p>
+</div>
+<div class="citation" id="id57" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Zilberberg18<span class="fn-bracket">]</span></span>
+<p>O. Zilberberg, S. Huang, J. Guglielmon, M. Wang, K. P. Chen, Y. E. Kraus, and M. C. Rechtsman. Photonic topological boundary pumping as a probe of 4D quantum Hall physics. <em>Nature</em>, 553(7686):59–62, Jan 2018. URL: <a class="reference external" href="https://doi.org/10.1038/nature25011">https://doi.org/10.1038/nature25011</a>, <a class="reference external" href="https://doi.org/10.1038/nature25011">doi:10.1038/nature25011</a>.</p>
+</div>
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_autosummary/functions.html" class="btn btn-neutral float-right" title="functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿functions
+=========
+
+.. automodule:: functions
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom-module-template.rst
+   :recursive:
+
+   functions.arguments
+   functions.band_structure
+   functions.butterfly
+   functions.models
+   functions.plotting
+   functions.utility
+

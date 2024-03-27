@@ -1,0 +1,6 @@
+functions.butterfly.chern
+=========================
+
+.. currentmodule:: functions.butterfly
+
+.. autofunction:: chern

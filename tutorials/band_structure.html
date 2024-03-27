@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Band Structure &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Butterfly" href="butterfly.html" />
+    <link rel="prev" title="Tutorials" href="../tutorials.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Band Structure</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/tutorials/band_structure.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Band-Structure">
+<h1>Band Structure<a class="headerlink" href="#Band-Structure" title="Permalink to this heading"></a></h1>
+<p>In this tutorial, we discuss the internals of the <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> program, used for plotting the band structure of the Hofstadter model at fixed coprime flux density <span class="math notranslate nohighlight">\(n_\phi=p/q\)</span> for a range of momenta <span class="math notranslate nohighlight">\(\mathbf{k}=(k_x,k_y)\)</span>. The code in this notebook is equivalent to running the command <code class="docutils literal notranslate"><span class="pre">band_structure</span> <span class="pre">-lat</span> <span class="pre">square</span> <span class="pre">-nphi</span> <span class="pre">1</span> <span class="pre">4</span> <span class="pre">-topo</span></code>.</p>
+<ol class="arabic simple">
+<li><p>Import the necessary namespace libraries. Note that library imports are segregated into <code class="docutils literal notranslate"><span class="pre">external</span> <span class="pre">imports</span></code> from the Python environment and <code class="docutils literal notranslate"><span class="pre">internal</span> <span class="pre">imports</span></code> from HT.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- external imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">axes3d</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="c1"># --- internal imports</span>
+<span class="kn">from</span> <span class="nn">HT.functions</span> <span class="kn">import</span> <span class="n">band_structure</span> <span class="k">as</span> <span class="n">fbs</span>
+<span class="kn">from</span> <span class="nn">HT.models.hofstadter</span> <span class="kn">import</span> <span class="n">Hofstadter</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Read in the inputs for the program. On the command line, these arguments are parsed from the input flags. For this notebook, however, we hard-code a minimal set of input values.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Hofstadter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="s2">&quot;square&quot;</span><span class="p">)</span>  <span class="c1"># the model definition</span>
+<span class="n">samp</span> <span class="o">=</span> <span class="mi">101</span>  <span class="c1"># number of samples (the momentum-space resolution)</span>
+<span class="n">bgt</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># band gap threshold (the energy scale to determine a gap)</span>
+<span class="n">show_band</span> <span class="o">=</span> <span class="n">show_group</span> <span class="o">=</span> <span class="n">show_isolated</span> <span class="o">=</span> <span class="n">show_width</span> <span class="o">=</span> <span class="n">show_gap</span> <span class="o">=</span> <span class="n">show_gap_width</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># show basic columns</span>
+<span class="n">show_std_B</span> <span class="o">=</span> <span class="n">show_C</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># show topology columns</span>
+<span class="n">show_std_g</span> <span class="o">=</span> <span class="n">show_av_gxx</span> <span class="o">=</span> <span class="n">show_std_gxx</span> <span class="o">=</span> <span class="n">show_av_gxy</span> <span class="o">=</span> <span class="n">show_std_gxy</span> <span class="o">=</span> <span class="n">show_T</span> <span class="o">=</span> <span class="n">show_D</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># do not show quantum geometry columns</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Define the unit cell.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_bands</span><span class="p">,</span> <span class="n">avec</span><span class="p">,</span> <span class="n">abasisvec</span><span class="p">,</span> <span class="n">bMUCvec</span><span class="p">,</span> <span class="n">sym_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">unit_cell</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Construct the bands.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_bands</span><span class="p">,</span> <span class="n">samp</span><span class="p">,</span> <span class="n">samp</span><span class="p">))</span>  <span class="c1"># real</span>
+<span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_bands</span><span class="p">,</span> <span class="n">num_bands</span><span class="p">,</span> <span class="n">samp</span><span class="p">,</span> <span class="n">samp</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>  <span class="c1"># complex</span>
+<span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_bands</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Band Construction&quot;</span><span class="p">,</span> <span class="n">ascii</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">idx_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samp</span><span class="p">):</span>
+        <span class="n">frac_kx</span> <span class="o">=</span> <span class="n">idx_x</span> <span class="o">/</span> <span class="p">(</span><span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samp</span><span class="p">):</span>
+            <span class="n">frac_ky</span> <span class="o">=</span> <span class="n">idx_y</span> <span class="o">/</span> <span class="p">(</span><span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">frac_kx</span><span class="p">,</span> <span class="n">frac_ky</span><span class="p">]),</span> <span class="n">bMUCvec</span><span class="p">)</span>
+            <span class="n">eigvals</span><span class="p">,</span> <span class="n">eigvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">hamiltonian</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">eigvals</span><span class="p">)</span>
+            <span class="n">eigenvalues</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="n">idx_x</span><span class="p">,</span> <span class="n">idx_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">eigvals</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">band</span><span class="p">]]</span>
+            <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">band</span><span class="p">,</span> <span class="n">idx_x</span><span class="p">,</span> <span class="n">idx_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">eigvecs</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">[</span><span class="n">band</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Band Construction: 100%|##########| 4/4 [00:04&lt;00:00,  1.21s/it]
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Determine the band gaps, and which bands are isolated.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">band_gap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_bands</span><span class="p">)</span>
+<span class="n">isolated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">num_bands</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">band_idx</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bands</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="n">band_idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">band_gap</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;NaN&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">band_gap</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">band</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">band</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">band_gap</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">bgt</span><span class="p">:</span>
+        <span class="n">isolated</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">isolated</span><span class="p">[</span><span class="n">band</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Determine the band groups. Note that the band gaps are a prerequisite, and so this cannot be performed in the above loop.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">band_group</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_bands</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">band_group_val</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_bands</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">band</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">band_group</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">band_gap</span><span class="p">[</span><span class="n">band</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">bgt</span><span class="p">:</span>
+        <span class="n">band_group_val</span> <span class="o">=</span> <span class="n">band_group_val</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">band_group</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="n">band_group_val</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">band_group</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="n">band_group_val</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>Compute the band topology.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">berry_fluxes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_bands</span><span class="p">,</span> <span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># real</span>
+<span class="k">for</span> <span class="n">band</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">band_group</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Band Properties&quot;</span><span class="p">,</span> <span class="n">ascii</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">group_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">band_group</span> <span class="o">==</span> <span class="n">group</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">group</span> <span class="o">!=</span> <span class="n">band_group</span><span class="p">[</span><span class="n">band</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">berry_fluxes</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="n">idx_x</span><span class="p">,</span> <span class="n">idx_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">fbs</span><span class="o">.</span><span class="n">berry_curv</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="n">idx_x</span><span class="p">,</span> <span class="n">idx_y</span><span class="p">,</span> <span class="n">group_size</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">berry_fluxes</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="n">idx_x</span><span class="p">,</span> <span class="n">idx_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">berry_fluxes</span><span class="p">[</span><span class="n">band</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx_x</span><span class="p">,</span> <span class="n">idx_y</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Band Properties: 4it [00:01,  2.12it/s]
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="8">
+<li><p>Compute the band properties of interest.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">band_width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_bands</span><span class="p">)</span>
+<span class="n">std_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_bands</span><span class="p">)</span>
+<span class="n">chern_numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_bands</span><span class="p">)</span>
+<span class="n">std_g</span><span class="p">,</span> <span class="n">av_gxx</span><span class="p">,</span> <span class="n">std_gxx</span><span class="p">,</span> <span class="n">av_gxy</span><span class="p">,</span> <span class="n">std_gxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_bands</span><span class="p">))</span>
+<span class="n">av_TISM</span><span class="p">,</span> <span class="n">av_DISM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_bands</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">band_idx</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bands</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">band_width</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">band</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="n">band</span><span class="p">])</span>
+    <span class="n">chern_numbers</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">berry_fluxes</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">std_B</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">berry_fluxes</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">berry_fluxes</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]))</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="9">
+<li><p>Construct the table.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;band&quot;</span><span class="p">,</span> <span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;isolated&quot;</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">,</span> <span class="s2">&quot;gap/width&quot;</span><span class="p">,</span> <span class="s2">&quot;std_B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;std_g&quot;</span><span class="p">,</span> <span class="s2">&quot;av_gxx&quot;</span><span class="p">,</span> <span class="s2">&quot;std_gxx&quot;</span><span class="p">,</span> <span class="s2">&quot;av_gxy&quot;</span><span class="p">,</span> <span class="s2">&quot;std_gxy&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;T&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;D&gt;&quot;</span><span class="p">]</span>
+<span class="n">bools</span> <span class="o">=</span> <span class="p">[</span><span class="n">show_band</span><span class="p">,</span> <span class="n">show_group</span><span class="p">,</span> <span class="n">show_isolated</span><span class="p">,</span> <span class="n">show_width</span><span class="p">,</span> <span class="n">show_gap</span><span class="p">,</span> <span class="n">show_gap_width</span><span class="p">,</span> <span class="n">show_std_B</span><span class="p">,</span> <span class="n">show_C</span><span class="p">,</span>
+         <span class="n">show_std_g</span><span class="p">,</span> <span class="n">show_av_gxx</span><span class="p">,</span> <span class="n">show_std_gxx</span><span class="p">,</span> <span class="n">show_av_gxy</span><span class="p">,</span> <span class="n">show_std_gxy</span><span class="p">,</span> <span class="n">show_T</span><span class="p">,</span> <span class="n">show_D</span><span class="p">]</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">table</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span> <span class="k">if</span> <span class="n">bools</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bands</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="n">band_group</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">isolated</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">band_width</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">band_gap</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">band_gap</span><span class="p">[</span><span class="n">band</span><span class="p">]</span><span class="o">/</span><span class="n">band_width</span><span class="p">[</span><span class="n">band</span><span class="p">],</span>
+            <span class="n">std_B</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="nb">round</span><span class="p">(</span><span class="n">chern_numbers</span><span class="p">[</span><span class="n">band</span><span class="p">]),</span>
+            <span class="n">std_g</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">av_gxx</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">std_gxx</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">av_gxy</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">std_gxy</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">av_TISM</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">av_DISM</span><span class="p">[</span><span class="n">band</span><span class="p">]]</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="n">bools</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
++------+-------+----------+---------------------+-------------------------+-------------------------+---------------------+----+
+| band | group | isolated |        width        |           gap           |        gap/width        |        std_B        | C  |
++------+-------+----------+---------------------+-------------------------+-------------------------+---------------------+----+
+|  3   |   2   |   True   |  0.214768075399157  |           nan           |           nan           |  0.4341502309703412 | 1  |
+|  2   |   1   |  False   |  1.0811042381594662 |    1.5325548111875673   |    1.4175828353024278   | 0.43413492371213525 | -2 |
+|  1   |   1   |  False   |  1.0811042381594658 | -1.8551886711181855e-16 | -1.7160127632804084e-16 | 0.43413492371213525 | -2 |
+|  0   |   0   |   True   | 0.21476807539915743 |    1.5325548111875675   |    7.135859500250381    |  0.4341502309703413 | 1  |
++------+-------+----------+---------------------+-------------------------+-------------------------+---------------------+----+
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="10">
+<li><p>Construct the figure.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">idx_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">samp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">idx_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">samp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">kx</span><span class="p">,</span> <span class="n">ky</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">idx_x</span><span class="p">,</span> <span class="n">idx_y</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_bands</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">kx</span><span class="p">,</span> <span class="n">ky</span><span class="p">,</span> <span class="n">eigenvalues</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">kx</span><span class="p">,</span> <span class="n">ky</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$k_1/|\mathbf</span><span class="si">{b}</span><span class="s1">_1|$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$k_2/|\mathbf</span><span class="si">{b}</span><span class="s1">_2|$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;$E$&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">tick_number</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;$0$&quot;</span>
+    <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;$1$&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">value</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">samp</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.1g</span><span class="si">}</span><span class="s2">$&quot;</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="n">normalize</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="n">normalize</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_band_structure_21_0.png" src="../_images/tutorials_band_structure_21_0.png" />
+</div>
+</div>
+<p>That’s it! You have successfully plotted the band structure for the Hofstadter model with a flux density of <span class="math notranslate nohighlight">\(n_\phi=1/4\)</span>. Now, we can pause to comment on how the results are presented. First, we note that the bands are numbered from 0 to 3, where 0 is the lowest band. Although this is intuitive when discussing band structures, be aware that eigenvalues in <code class="docutils literal notranslate"><span class="pre">numpy</span></code> may be returned in a different order. Second, we can see that the groups of touching bands have been used to compute the Chern
+numbers. In this case, bands 1 and 2 are touching within the <code class="docutils literal notranslate"><span class="pre">band_gap_threshold</span></code> and have a joint Chern number of -2. Note that the band groups provide more information than the <code class="docutils literal notranslate"><span class="pre">isolated</span></code> column. For example, if all bands were touching in pairs, the isolated column would read all <code class="docutils literal notranslate"><span class="pre">False</span></code>, which is indistinguishable from the case of all bands touching. Finally, we note that in the case of band touching, certain properties that are applicable to the collective band, e.g. the bandwidth, are
+repeated on both rows. The value in each of these rows corresponds to the value for the band group. Moreover, the band gap column shows the gap to the band above and so is N/A for the highest band.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="butterfly.html" class="btn btn-neutral float-right" title="Butterfly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

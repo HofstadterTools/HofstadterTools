@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Butterfly &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorials" href="../tutorials.html" />
+    <link rel="prev" title="Band Structure" href="band_structure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../theory.html">Theory</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="band_structure.html">Band Structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../theory.html">Theory</a></li>
+      <li class="breadcrumb-item active">Butterfly</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/theory/butterfly.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="butterfly">
+<h1>Butterfly<a class="headerlink" href="#butterfly" title="Permalink to this heading"></a></h1>
+<p>The famous butterfly spectrum of the Hofstadter model was first plotted by Douglas Hofstadter in 1976 <span id="id1">[<a class="reference internal" href="../references.html#id15" title="D. R. Hofstadter. Energy levels and wave functions of Bloch electrons in rational and irrational magnetic fields. Physical Review B, 14:2239–2249, Sep 1976. URL: https://link.aps.org/doi/10.1103/PhysRevB.14.2239, doi:10.1103/PhysRevB.14.2239.">Hofstadter76</a>]</span> and later colored in by Joseph Avron in 2003 <span id="id2">[<a class="reference internal" href="../references.html#id18" title="J. E. Avron, D. Osadchy, and R. Seiler. A Topological Look at the Quantum Hall Effect. Physics Today, 56(8):38-42, Aug 2003. URL: https://doi.org/10.1063/1.1611351, doi:10.1063/1.1611351.">Avron03</a>]</span>. The beautiful fractal structure is a result of the incommensurability between the MUC area and the irreducible area occupied by a quantum of flux. In this section, we explain how the Hofstadter butterfly is computed and colored in HofstadterTools.</p>
+<p>The <strong>butterfly spectrum</strong> is a plot of energy <span class="math notranslate nohighlight">\(E\)</span> against flux density <span class="math notranslate nohighlight">\(n_\phi=p/q\)</span>, where <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> are coprime, and is constructed by sweeping over <span class="math notranslate nohighlight">\(p\)</span> at fixed <span class="math notranslate nohighlight">\(q\)</span>. As we have seen in the previous section, the bands in the Hofstadter model generally have a <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>-dependence. However, as we approach the Landau level limit <span class="math notranslate nohighlight">\(q\to\infty\)</span>, the band structure approaches the Landau level spectrum, where the bands are perfectly flat. In HofstadterTools, we plot the butterfly spectrum using the <span class="math notranslate nohighlight">\(\Gamma\)</span>-point of each band at <span class="math notranslate nohighlight">\(\mathbf{k}=(0,0)\)</span>, with the understanding that this is only representative of the band structure when <span class="math notranslate nohighlight">\(q\)</span> is large. Since a large <span class="math notranslate nohighlight">\(q\)</span> needs to be chosen in order to plot a convincing butterfly spectrum in any case, this is a reasonable approximation to make. Alternative methods include, for example, taking an average over <span class="math notranslate nohighlight">\(\mathbf{k}\)</span> for each band and at each flux density, however this increases the computational cost significantly. Moreover, in addition to choosing a large <span class="math notranslate nohighlight">\(q\)</span> for the butterfly computations, it is also most efficient to choose a prime number, since the flux density is defined as a coprime fraction <span class="math notranslate nohighlight">\(n_\phi=p/q\)</span>. If a non-prime <span class="math notranslate nohighlight">\(q\)</span> is chosen, then you will notice gaps in the x-values of the butterfly, since values of <span class="math notranslate nohighlight">\(p\)</span> that yield an inadmissible <span class="math notranslate nohighlight">\(n_\phi\)</span> will be skipped.</p>
+<p>The Hofstadter butterfly may be colored in a variety of ways. For example, we may <strong>color the points</strong> of the butterfly by their Chern number, as shown in the left figure below. The disadvantage of this, is that there will be many points in the butterfly and so the fine details of the coloring may be obscured. Moreover, the Chern number magnitude range will increase with <span class="math notranslate nohighlight">\(q\)</span> and so it is difficult to define a fixed scale. By default, HofstadterTools uses a scale for Chern numbers of magnitude up to 10. An alternative, and usually preferred, method is to <strong>color the plane</strong> of the butterfly by the cumulative Chern numbers of the gaps, as shown in the middle figure below. The cumulative Chern numbers are consistent with increasing <span class="math notranslate nohighlight">\(q\)</span> and they are intimately connected with the Hall conductivity in the quantum Hall effect. As before, HofstadterTools uses a scale for Chern numbers of magnitude up to 10, by default, as well as the color palette made famous by Avron <span id="id3">[<a class="reference internal" href="../references.html#id18" title="J. E. Avron, D. Osadchy, and R. Seiler. A Topological Look at the Quantum Hall Effect. Physics Today, 56(8):38-42, Aug 2003. URL: https://doi.org/10.1063/1.1611351, doi:10.1063/1.1611351.">Avron03</a>]</span>. To complement the butterfly spectra, we may also plot the <strong>Wannier diagram</strong>, which shows the integrated density of states below the gap <span class="math notranslate nohighlight">\(N(E)\)</span> against flux density, as in the right figure below. The size of the points is proportional to the size of the gaps and the color is given by the cumulative Chern number. The gradients of the slopes may be used to infer the Hall conductivity, which is particularly useful for connecting with experiments <span id="id4">[<a class="reference internal" href="../references.html#id10" title="F. Di Colandrea, A. D’Errico, M. Maffei, H. M. Price, M. Lewenstein, L. Marrucci, F. Cardano, A. Dauphin, and P. Massignan. Linking topological features of the Hofstadter model to optical diffraction figures. New Journal of Physics, 24(1):013028, Jan 2022. URL: https://dx.doi.org/10.1088/1367-2630/ac4126, doi:10.1088/1367-2630/ac4126.">DiColandrea22</a>]</span>.</p>
+<a class="reference internal image-reference" href="../_images/butterfly_square_q_97_t_1_col_point_avron.png"><img alt="Butterfly Spectrum (Point)" src="../_images/butterfly_square_q_97_t_1_col_point_avron.png" style="width: 32%;" /></a>
+<a class="reference internal image-reference" href="../_images/butterfly_square_q_97_t_1_col_plane_avron.png"><img alt="Butterfly Spectrum (Plane)" src="../_images/butterfly_square_q_97_t_1_col_plane_avron.png" style="width: 32%;" /></a>
+<a class="reference internal image-reference" href="../_images/wannier_square_q_97_t_1_col_point_avron.png"><img alt="Wannier Diagram" src="../_images/wannier_square_q_97_t_1_col_point_avron.png" style="width: 32%;" /></a>
+<p>In the butterfly spectra, we are computing the band structure with <span class="math notranslate nohighlight">\(q\)</span> bands, up to <span class="math notranslate nohighlight">\(q-1\)</span> times, where we typically have <span class="math notranslate nohighlight">\(10^2&lt;q&lt;10^3\)</span>. These are comparatively large band structures, which are fortunately not excessively computationally expensive, since we are only computing each spectrum at the <span class="math notranslate nohighlight">\(\Gamma\)</span>-point. However, we are coloring the spectra using the Chern numbers of the bands, which for our <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> program was computed using the Fukui formula <span id="id5">[<a class="reference internal" href="../references.html#id2" title="T. Fukui, Y. Hatsugai, and H. Suzuki. Chern numbers in discretized Brillouin zone: efficient method of computing (spin) Hall conductances. Journal of the Physical Society of Japan, 74(6):1674-1677, 2005. URL: https://doi.org/10.1143/JPSJ.74.1674, doi:10.1143/JPSJ.74.1674.">Fukui05</a>]</span>. This formula involves a numerical integration over the entire Brillouin zone, which would be too computationally demanding in this case. Fortunately, for most butterfly spectra, there is a faster way to infer the Chern numbers, known as the <strong>Streda-Widom Diophantine relation</strong>. For a rational flux, it is easy to show that the energy gaps in the Hofstadter spectrum are characterized by the integers <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, which are related by the Diophantine equation,</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[r = qs_r + pt_r, \;\;\; |t_r|\leq\frac{q}{2}, \;\;\; s_r,t_r\in\mathbb{Z},\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> denotes the <span class="math notranslate nohighlight">\(r\)</span>-th energy gap and <span class="math notranslate nohighlight">\(t_r=\sum_{i=0}^r C_i\)</span> is the cumulative Chern number or Hall conductivity. The inequality <span class="math notranslate nohighlight">\(|t_r|\leq\frac{q}{2}\)</span> is known as the <strong>natural window condition</strong>, and for rectangular lattices, it completely resolves any Chern number ambiguity. For non-rectangular lattices, there remains a Chern number ambiguity, which may impact the fine details of the butterfly coloring <span id="id6">[<a class="reference internal" href="../references.html#id16" title="A. Agazzi, J.-P. Eckmann, and G. M. Graf. The colored Hofstadter butterfly for the honeycomb lattice. Journal of Statistical Physics, 156(3):417–426, Aug 2014. URL: https://doi.org/10.1007/s10955-014-0992-0, doi:10.1007/s10955-014-0992-0.">Agazzi14</a>]</span>. In HofstadterTools, we exclusively color the butterfly spectra using the Streda-Widom Diophantine relation with the understanding that, for non-rectangular lattices, this <em>may</em> result in minor undesired numerical artifacts. As with the <span class="math notranslate nohighlight">\(\Gamma\)</span>-point decision for the bands, this is a slight compromise in precision for the sake of a huge gain in efficiency.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="band_structure.html" class="btn btn-neutral float-left" title="Band Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

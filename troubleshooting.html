@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Gallery" href="gallery.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/troubleshooting.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h1>
+<section id="general-questions">
+<h2>General Questions<a class="headerlink" href="#general-questions" title="Permalink to this heading"></a></h2>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I get an argparse error when one of my command line arguments is a negative number. What is the correct syntax so that Python does not interpret my negative numbers as flags?</p>
+</div>
+<p>If you would like to parse negative number arguments to command line flags, it is best to use quotation marks with a preceding space, e.g. <code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">&quot;</span> <span class="pre">-0.25&quot;</span></code>.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>When computing for the <code class="docutils literal notranslate"><span class="pre">square</span></code> or <code class="docutils literal notranslate"><span class="pre">triangular</span></code> lattices, the flags <code class="docutils literal notranslate"><span class="pre">-alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">-theta</span></code> do not seem to do anything. Why not?</p>
+</div>
+<p>The flags <code class="docutils literal notranslate"><span class="pre">-alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">-theta</span></code> specify the anisotropy and obliqueness of the underlying Bravais lattice. In the case of the <code class="docutils literal notranslate"><span class="pre">square</span></code> and <code class="docutils literal notranslate"><span class="pre">triangular</span></code> lattices, both of these values are fixed by definition and so cannot be changed. If you would like to change the anisotropy and obliqueness of a lattice with a single-site basis, you can use the <code class="docutils literal notranslate"><span class="pre">bravais</span></code> lattice parameter instead. For lattices with a multi-site basis, e.g. <code class="docutils literal notranslate"><span class="pre">honeycomb</span></code> or <code class="docutils literal notranslate"><span class="pre">kagome</span></code>, you can use the <code class="docutils literal notranslate"><span class="pre">-alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">-theta</span></code> flags as normal, since the basis sites are defined in fractional coordinates with respect to the lattice vectors.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I have run the code with the <code class="docutils literal notranslate"><span class="pre">-save</span></code>/<code class="docutils literal notranslate"><span class="pre">-log</span></code> flag but I cannot find the output. Where is the output saved?</p>
+</div>
+<p>If you explicitly executed the code in its local directory (e.g. <code class="docutils literal notranslate"><span class="pre">src/HT</span></code> for the programs and <code class="docutils literal notranslate"><span class="pre">src/HT/plot</span></code> for the plot scripts), then the output will be saved by default in the <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">figs</span></code>, and <code class="docutils literal notranslate"><span class="pre">logs</span></code> project directories. If you executed the code in any other location, then all of the output will be saved in the current working directory.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I would like to implement a custom lattice, which has a multi-site basis that is different than <code class="docutils literal notranslate"><span class="pre">honeycomb</span></code> or <code class="docutils literal notranslate"><span class="pre">kagome</span></code>. How can I do this?</p>
+</div>
+<p>In HofstadterTools, the <code class="docutils literal notranslate"><span class="pre">custom</span></code> lattice parameter is used for this purpose and it requires an installation from source (advanced usage). Navigate to the <code class="docutils literal notranslate"><span class="pre">unit_cell</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code> class in <code class="docutils literal notranslate"><span class="pre">src/HT/models/hofstadter.py</span></code> and enter your desired set of basis vectors and high-symmetry/reference points under the <code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">self.lat</span> <span class="pre">==</span> <span class="pre">&quot;custom&quot;:</span></code> clause. By default, the <code class="docutils literal notranslate"><span class="pre">custom</span></code> lattice is identical to <code class="docutils literal notranslate"><span class="pre">kagome</span></code>.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I would like to input a list of hopping parameters from a file. How can I do this?</p>
+</div>
+<p>If you are explicitly executing the code in its local directory (e.g. <code class="docutils literal notranslate"><span class="pre">src/HT</span></code>), then you can edit the configuration file <code class="docutils literal notranslate"><span class="pre">hopping_input.txt</span></code> located in <code class="docutils literal notranslate"><span class="pre">src/HT/configuration</span></code>, and then append the flag <code class="docutils literal notranslate"><span class="pre">-input</span></code> to your program. The file consists of rows with two columns, separated by a tab. The left column is the NN group and the right column is the hopping amplitude. For example, in order to input the flags <code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">&quot;</span> <span class="pre">-0.25&quot;</span></code>, we can create the following file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">1 1</span>
+<span class="go">3 -0.25</span>
+</pre></div>
+</div>
+<p>If you are executing your program from a different location, then the <code class="docutils literal notranslate"><span class="pre">-input</span></code> flag will search for a file called <code class="docutils literal notranslate"><span class="pre">hopping_input.txt</span></code> in the current working directory.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>The progress bar becomes much shorter when I run using the <code class="docutils literal notranslate"><span class="pre">-log</span></code> flag. Why is this?</p>
+</div>
+<p>By default, the tqdm progress bar is streamed to stderr. Hence, the progress bar is shortened to 10 characters when logging to make the log files more readable.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I have adjusted the <code class="docutils literal notranslate"><span class="pre">-alpha</span></code> lattice anisotropy flag and now the band structures and butterfly spectra look odd. Is this expected behavior?</p>
+</div>
+<p>In HofstadterTools, <span class="math notranslate nohighlight">\(\kappa\)</span>-th nearest neighbors are defined as a group of sites that are the same radius from a reference site. We stress that these points lie on a <em>circle</em> and not, for example, on an ellipse that is scaled by the Bravais lattice vector lengths. Hence, by adjusting the lattice anisotropy, you may inadvertently change the number of nearest neighbors. You can easily check this by plotting the lattice using the <code class="docutils literal notranslate"><span class="pre">--plot_lattice</span></code> flag.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>Where can I find the version number of my local copy of HofstadterTools?</p>
+</div>
+<p>The release number can be found in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and follows the standard semantic versioning conventions.</p>
+</section>
+<section id="band-structure-questions">
+<h2>Band Structure Questions<a class="headerlink" href="#band-structure-questions" title="Permalink to this heading"></a></h2>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I would like to analyze the topology / quantum geometry of the bands, but I do not see such data in the output table of the <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> program. How can I do this?</p>
+</div>
+<p>By default, the topology and quantum geometry computations are turned off in the <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> program (for speed reasons). If you would like to turn these on, or configure the output table in any other way, you can use the <code class="docutils literal notranslate"><span class="pre">-topo</span></code>, <code class="docutils literal notranslate"><span class="pre">-geom</span></code>, and <code class="docutils literal notranslate"><span class="pre">-cols</span></code> flags. The basic band structure columns are returned by default. The <code class="docutils literal notranslate"><span class="pre">-topo</span></code> flag will additionally return the topology columns, the <code class="docutils literal notranslate"><span class="pre">geom</span></code> flag will additionally return the quantum geometry columns, and the <code class="docutils literal notranslate"><span class="pre">-cols</span></code> flag will override all settings to return a custom selection of columns. Note that the {basic,topology,geometry} table columns are grouped by computational expense.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I would like to compute the band structure of my custom Hamiltonian but it is running very slowly compared to standard examples. Why is this?</p>
+</div>
+<p>The code for constructing a Hamiltonian matrix for a generalized Hofstadter model on any regular Euclidean lattice is expensive. In light of this, we have hardcoded the most common Hofstadter Hamiltonians, i.e. the Hofstadter Hamiltonians on the square/triangular/honeycomb/kagome lattices with nearest-neighbor hopping. In all other cases, the generic Hamiltonian constructor will be called. If you are interested in one custom Hamiltonian in particular, and really need to compute its <em>complete</em> band structure more quickly, then consider adding it to <code class="docutils literal notranslate"><span class="pre">src/HT/functions/models.py</span></code> in a similar format to the other hardcoded Hamiltonians, e.g. <code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian</span></code>. We note that the <code class="docutils literal notranslate"><span class="pre">butterfly</span></code> program does not suffer from this issue, since the diagonalization is performed only at a single <span class="math notranslate nohighlight">\(k\)</span> point.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I have computed the band structure for a particular model and I have noticed that certain bands are not “touching” when they should be, or vice versa. How can I fix this?</p>
+</div>
+<p>Due to the discrete nature of the <span class="math notranslate nohighlight">\(k\)</span> mesh, it is difficult to declare that certain bands are touching. For this purpose, HofstadterTools uses the band gap threshold flag <code class="docutils literal notranslate"><span class="pre">-bgt</span></code>, which declares bands as touching when they are within this value of each other. If you notice that certain bands should/should not be touching, e.g. by noticing that the Chern numbers do not sum to zero, or you are simply suspicious of bands that are in close proximity, you can try decreasing the mesh size using the <code class="docutils literal notranslate"><span class="pre">-samp</span></code> flag and tweaking this <code class="docutils literal notranslate"><span class="pre">-bgt</span></code> value.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I have computed the band structure for a kagome/custom lattice and it looks incorrect. Why could this be?</p>
+</div>
+<p>When computing the complete band structure, it may be more difficult to spot when the <code class="docutils literal notranslate"><span class="pre">--periodicity</span></code> flag needs to be set. If in doubt, compute the corresponding butterfly spectrum and make sure that it has the correct periodicity.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>For comparison, I would like to compute the regular band structure for my tight-binding model, without an external magnetic field. How can I do this?</p>
+</div>
+<p>The band structure with zero magnetic field can be computed by setting the flux density as <code class="docutils literal notranslate"><span class="pre">-nphi</span> <span class="pre">0</span> <span class="pre">1</span></code>. For example, we can compute the band structure of graphene by using the command <code class="docutils literal notranslate"><span class="pre">band_structure</span> <span class="pre">-lat</span> <span class="pre">honeycomb</span> <span class="pre">-nphi</span> <span class="pre">0</span> <span class="pre">1</span></code>.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I have saved a band structure to file and I would now like to regenerate the output table. How can I do this?</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> program takes an input file via the <code class="docutils literal notranslate"><span class="pre">-load</span></code> argument. By using this flag, the band structure is loaded from file and only the band properties are computed. You can then regenerate and/or reconfigure the output table as usual. Additionally, the output table can be saved to file by running <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> with the <code class="docutils literal notranslate"><span class="pre">-log</span></code> flag. We note that the <code class="docutils literal notranslate"><span class="pre">plot_band_structure</span></code> program is intended for replotting the band structures and modifying their appearance, using the <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> function in <code class="docutils literal notranslate"><span class="pre">src/HT/functions/plotting.py</span></code>. Since <code class="docutils literal notranslate"><span class="pre">plot_band_structure</span></code> calls the plotting function directly, it cannot be used to regenerate the output table. In both cases, 2D/3D band structure data needs to have been saved to file in order to plot the corresponding 2D/3D band structure.</p>
+</section>
+<section id="butterfly-questions">
+<h2>Butterfly Questions<a class="headerlink" href="#butterfly-questions" title="Permalink to this heading"></a></h2>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I have plotted a Hofstadter butterfly for some custom model but there are spurious straggling bands and aperiodicity in the spectrum. What can I do to fix this?</p>
+</div>
+<p>By default, the flux density in HofstadterTools is defined with respect to the lattice unit cell area. However, in some models, the minimal plaquette around which a particle can hop encloses an area that is smaller than the unit cell area. In these cases, in order to both restore periodicity and view the complete butterfly spectrum, you may need to define the flux density with respect to the area of a minimal plaquette. In general, compute the ratio <code class="docutils literal notranslate"><span class="pre">n</span></code> of the effective unit cell area (spanned by the hopping terms) and the area of a minimal hopping plaquette, and then append the flag <code class="docutils literal notranslate"><span class="pre">--periodicity</span> <span class="pre">n</span></code>.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I have plotted a Hofstadter butterfly using the <code class="docutils literal notranslate"><span class="pre">--color</span></code> flag and the code runs surprisingly quickly. How are the Chern numbers computed?</p>
+</div>
+<p>All of the Hofstadter butterflies are colored using the Streda-Widom Diophantine relation (see Appendix C of <span id="id1">[<a class="reference internal" href="references.html#id10" title="F. Di Colandrea, A. D’Errico, M. Maffei, H. M. Price, M. Lewenstein, L. Marrucci, F. Cardano, A. Dauphin, and P. Massignan. Linking topological features of the Hofstadter model to optical diffraction figures. New Journal of Physics, 24(1):013028, Jan 2022. URL: https://dx.doi.org/10.1088/1367-2630/ac4126, doi:10.1088/1367-2630/ac4126.">DiColandrea22</a>]</span> for a derivation). We note that although the formula can unambiguously determine the Chern numbers for the case of the rectangular lattice, the natural window condition is not uniquely resolved in general. This <em>may</em> lead to minor imperfections in the coloring for other lattices, especially when plotting with an extremely high resolution, as scrutinized in Fig.4 of <span id="id2">[<a class="reference internal" href="references.html#id16" title="A. Agazzi, J.-P. Eckmann, and G. M. Graf. The colored Hofstadter butterfly for the honeycomb lattice. Journal of Statistical Physics, 156(3):417–426, Aug 2014. URL: https://doi.org/10.1007/s10955-014-0992-0, doi:10.1007/s10955-014-0992-0.">Agazzi14</a>]</span> or <span id="id3">[<a class="reference internal" href="references.html#id41" title="J. E. Avron, O. Kenneth, and G. Yehoshua. A study of the ambiguity in the solutions to the Diophantine equation for Chern numbers. Journal of Physics A: Mathematical and Theoretical, 47(18):185202, Apr 2014. URL: https://dx.doi.org/10.1088/1751-8113/47/18/185202, doi:10.1088/1751-8113/47/18/185202.">Avron14</a>]</span>. At the time of writing, there is no Diophantine equation that can uniquely determine the Chern numbers in the general case. For the <code class="docutils literal notranslate"><span class="pre">--color</span></code> flag, we make the choice of sacrificing precision for the sake of efficiency.</p>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>I am trying to plot a plane-colored Hofstadter butterfly with high resolution but I find strange interpolated blobs in the fine structure of the spectrum. How can I fix this?</p>
+</div>
+<p>This is an indication that the dpi of the image is too low. Assuming that you have saved the output data for such a high-resolution spectrum (recommended), you can run <code class="docutils literal notranslate"><span class="pre">plot_butterfly</span></code> with a new <code class="docutils literal notranslate"><span class="pre">-dpi</span></code> flag. By default, the dpi is set to 300. This works reasonably well for <span class="math notranslate nohighlight">\(M\)</span> values up to about 300, where <span class="math notranslate nohighlight">\(M\)</span> is the number of bands in the spectrum. In general, we recommend setting a dpi value of greater than <span class="math notranslate nohighlight">\(M\)</span> for best results.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gallery.html" class="btn btn-neutral float-left" title="Gallery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="references.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

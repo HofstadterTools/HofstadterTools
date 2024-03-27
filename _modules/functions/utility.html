@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>functions.utility &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">functions.utility</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for functions.utility</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions for input/output and miscellaneous use.&quot;&quot;&quot;</span>
+
+<span class="c1"># --- external imports</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<div class="viewcode-block" id="read_t_from_file"><a class="viewcode-back" href="../../_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file">[docs]</a><span class="k">def</span> <span class="nf">read_t_from_file</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads the hopping amplitudes from file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    t_list: list</span>
+<span class="sd">        The list of hopping amplitudes in order of ascending NN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">directory</span> <span class="o">=</span> <span class="s2">&quot;configuration/&quot;</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;configuration&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">directory</span><span class="o">+</span><span class="s2">&quot;hopping_input.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">NN</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="n">NN</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">t_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">NN</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">NN</span><span class="p">):</span>
+        <span class="n">t_list</span><span class="p">[</span><span class="n">val</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">t_list</span></div>
+
+
+<div class="viewcode-block" id="create_filename"><a class="viewcode-back" href="../../_autosummary/functions.utility.create_filename.html#functions.utility.create_filename">[docs]</a><span class="k">def</span> <span class="nf">create_filename</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">aux_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the filename string.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    program: str</span>
+<span class="sd">        The name of the program.</span>
+<span class="sd">    args: dict</span>
+<span class="sd">        The arguments passed to the program.</span>
+<span class="sd">    aux_text: str</span>
+<span class="sd">        The auxiliary text passed to the filename.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filename: str</span>
+<span class="sd">        The filename string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># read input arguments</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">read_t_from_file</span><span class="p">()</span> <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;lattice&#39;</span><span class="p">]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">]</span>
+    <span class="n">save</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;save&#39;</span><span class="p">]</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;log&#39;</span><span class="p">]</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;periodicity&#39;</span><span class="p">]</span>
+    <span class="n">dpi</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;dpi&#39;</span><span class="p">]</span>
+
+    <span class="n">aux_str</span> <span class="o">=</span> <span class="n">aux_text</span> <span class="k">if</span> <span class="n">aux_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="n">aux_text</span><span class="o">+</span><span class="s2">&quot;_&quot;</span>
+    <span class="n">a_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;a_</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">t_str</span> <span class="o">=</span> <span class="s2">&quot;t_&quot;</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+    <span class="n">brav_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;alpha_</span><span class="si">{</span><span class="n">alpha</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_theta_</span><span class="si">{</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="k">if</span> <span class="n">lat</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;square&quot;</span><span class="p">,</span> <span class="s2">&quot;triangular&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">per_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;period_</span><span class="si">{</span><span class="n">period</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="k">if</span> <span class="n">period</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">dpi_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dpi_</span><span class="si">{</span><span class="n">dpi</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="k">if</span> <span class="n">dpi</span> <span class="o">!=</span> <span class="mi">300</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">program</span> <span class="o">==</span> <span class="s2">&quot;band_structure&quot;</span><span class="p">:</span>
+        <span class="n">samp</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;samp&#39;</span><span class="p">]</span>
+        <span class="n">wil</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;wilson&#39;</span><span class="p">]</span>
+        <span class="n">disp</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;display&#39;</span><span class="p">]</span>
+        <span class="n">nphi</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;nphi&#39;</span><span class="p">]</span>
+        <span class="n">bgt</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;bgt&#39;</span><span class="p">]</span>
+
+        <span class="n">disp_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disp</span><span class="si">}</span><span class="s2">_&quot;</span>
+        <span class="n">mod_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mod</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="k">if</span> <span class="n">mod</span> <span class="o">!=</span> <span class="s2">&quot;Hofstadter&quot;</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">nphi_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;nphi_</span><span class="si">{</span><span class="n">nphi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">nphi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_&quot;</span>
+        <span class="n">bgt_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;bgt_</span><span class="si">{</span><span class="n">bgt</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_&quot;</span>
+        <span class="n">samp_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;samp_</span><span class="si">{</span><span class="n">samp</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="k">if</span> <span class="n">samp</span> <span class="o">!=</span> <span class="mi">101</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;band_structure_</span><span class="si">{</span><span class="n">aux_str</span><span class="si">}{</span><span class="n">disp_str</span><span class="si">}{</span><span class="n">mod_str</span><span class="si">}{</span><span class="n">lat</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">nphi_str</span><span class="si">}{</span><span class="n">a_str</span><span class="si">}{</span><span class="n">t_str</span><span class="si">}{</span><span class="n">brav_str</span><span class="si">}{</span><span class="n">per_str</span><span class="si">}{</span><span class="n">samp_str</span><span class="si">}{</span><span class="n">dpi_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="n">program</span> <span class="o">==</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">:</span>
+        <span class="n">plt_lat</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;plot_lattice&quot;</span><span class="p">]</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+        <span class="n">pal</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;palette&#39;</span><span class="p">]</span>
+        <span class="n">wan</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;wannier&#39;</span><span class="p">]</span>
+        <span class="n">art</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;art&#39;</span><span class="p">]</span>
+
+        <span class="n">q_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;q_</span><span class="si">{</span><span class="n">q</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">_&quot;</span>
+        <span class="n">col_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;col_</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">pal</span><span class="si">}</span><span class="s2">_&quot;</span> <span class="k">if</span> <span class="n">color</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">art_str</span> <span class="o">=</span> <span class="s2">&quot;art_&quot;</span> <span class="k">if</span> <span class="n">art</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;butterfly_</span><span class="si">{</span><span class="n">aux_str</span><span class="si">}{</span><span class="n">lat</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">q_str</span><span class="si">}{</span><span class="n">a_str</span><span class="si">}{</span><span class="n">t_str</span><span class="si">}{</span><span class="n">brav_str</span><span class="si">}{</span><span class="n">col_str</span><span class="si">}{</span><span class="n">per_str</span><span class="si">}{</span><span class="n">art_str</span><span class="si">}{</span><span class="n">dpi_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;program is not defined.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filename</span></div>
+
+
+<div class="viewcode-block" id="save_data"><a class="viewcode-back" href="../../_autosummary/functions.utility.save_data.html#functions.utility.save_data">[docs]</a><span class="k">def</span> <span class="nf">save_data</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Save data to file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    program: str</span>
+<span class="sd">        The name of the program.</span>
+<span class="sd">    model: Hofstadter.hamiltonian</span>
+<span class="sd">        The Hamiltonian class attribute.</span>
+<span class="sd">    args: dict</span>
+<span class="sd">        The arguments passed to the program.</span>
+<span class="sd">    data: ndarray</span>
+<span class="sd">        The data array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">directory</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;../../data/</span><span class="si">{</span><span class="n">program</span><span class="si">}</span><span class="s2">/&quot;</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../../data/</span><span class="si">{</span><span class="n">program</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">create_filename</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savez_compressed</span><span class="p">(</span><span class="n">directory</span><span class="o">+</span><span class="n">filename</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="load_data"><a class="viewcode-back" href="../../_autosummary/functions.utility.load_data.html#functions.utility.load_data">[docs]</a><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">plotting</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load data from file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    program: str</span>
+<span class="sd">        The name of the program.</span>
+<span class="sd">    filename: str</span>
+<span class="sd">        The name of the file to be loaded.</span>
+<span class="sd">    plotting: bool</span>
+<span class="sd">        The plotting script flag.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rel_path</span> <span class="o">=</span> <span class="s2">&quot;../../..&quot;</span> <span class="k">if</span> <span class="n">plotting</span> <span class="k">else</span> <span class="s2">&quot;../..&quot;</span>
+    <span class="n">directory</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rel_path</span><span class="si">}</span><span class="s2">/data/</span><span class="si">{</span><span class="n">program</span><span class="si">}</span><span class="s2">/&quot;</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rel_path</span><span class="si">}</span><span class="s2">/data/</span><span class="si">{</span><span class="n">program</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">file_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">directory</span><span class="o">+</span><span class="n">filename</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">file_data</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># .item() unpacks 0-dim array</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">file_data</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file_data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Logger"><a class="viewcode-back" href="../../_autosummary/functions.utility.Logger.html#functions.utility.Logger">[docs]</a><span class="k">class</span> <span class="nc">Logger</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stream stdout and stderr to file.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Logger.__init__"><a class="viewcode-back" href="../../_autosummary/functions.utility.Logger.html#functions.utility.Logger.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">program</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+        <span class="n">directory</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;../../logs/</span><span class="si">{</span><span class="n">program</span><span class="si">}</span><span class="s2">/&quot;</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../../logs/</span><span class="si">{</span><span class="n">program</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">create_filename</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">directory</span><span class="o">+</span><span class="n">filename</span><span class="o">+</span><span class="s2">&quot;.log&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># this flush method is needed for python 3 compatibility.</span>
+        <span class="c1"># this handles the flush command by doing nothing.</span>
+        <span class="c1"># you might want to specify some extra behavior here.</span>
+        <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

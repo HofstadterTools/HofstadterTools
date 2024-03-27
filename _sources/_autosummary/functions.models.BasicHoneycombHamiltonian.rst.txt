@@ -1,0 +1,6 @@
+functions.models.BasicHoneycombHamiltonian
+==========================================
+
+.. currentmodule:: functions.models
+
+.. autofunction:: BasicHoneycombHamiltonian

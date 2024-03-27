@@ -1,0 +1,6 @@
+functions.models.Hamiltonian
+============================
+
+.. currentmodule:: functions.models
+
+.. autofunction:: Hamiltonian

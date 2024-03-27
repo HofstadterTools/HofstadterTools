@@ -1,0 +1,6 @@
+functions.utility.read\_t\_from\_file
+=====================================
+
+.. currentmodule:: functions.utility
+
+.. autofunction:: read_t_from_file
