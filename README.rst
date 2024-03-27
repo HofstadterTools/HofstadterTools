@@ -243,18 +243,18 @@ If you have found HofstadterTools useful, it would be greatly appreciated if you
 
 .. code-block:: bibtex
 
-  @article{HofstadterTools,
-  doi = {10.21105/joss.06356},
-  url = {https://doi.org/10.21105/joss.06356},
-  year = {2024},
-  publisher = {The Open Journal},
-  volume = {9},
-  number = {95},
-  pages = {6356},
-  author = {Bartholomew Andrews},
-  title = {HofstadterTools: A Python package for analyzing the Hofstadter model},
-  journal = {Journal of Open Source Software}
-  }
+    @article{HofstadterTools,
+    doi = {10.21105/joss.06356},
+    url = {https://doi.org/10.21105/joss.06356},
+    year = {2024},
+    publisher = {The Open Journal},
+    volume = {9},
+    number = {95},
+    pages = {6356},
+    author = {Bartholomew Andrews},
+    title = {HofstadterTools: A Python package for analyzing the Hofstadter model},
+    journal = {Journal of Open Source Software}
+    }
 
 Acknowledgments
 ---------------
