@@ -135,7 +135,7 @@ Using conda
 
 .. code:: console
 
-    (my_env) user@domain:any/path$ conda update HofstadterTools
+    (my_env) user@domain:any/path$ conda update -c conda-forge HofstadterTools
 
 You can verify the installation by typing ``conda list | grep hofstadtertools``, you can uninstall by typing ``conda remove HofstadterTools``, and you can deactivate the environment by typing ``conda deactivate``. The entire environment can be removed by typing ``conda remove -n my_env --all``.
 
