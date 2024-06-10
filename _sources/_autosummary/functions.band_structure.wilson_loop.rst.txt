@@ -1,0 +1,6 @@
+functions.band\_structure.wilson\_loop
+======================================
+
+.. currentmodule:: functions.band_structure
+
+.. autofunction:: wilson_loop

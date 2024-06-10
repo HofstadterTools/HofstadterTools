@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Theory" href="theory.html" />
+    <link rel="prev" title="HofstadterTools" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Overview</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/overview.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml"><img alt="docs" src="https://github.com/HofstadterTools/HofstadterTools/actions/workflows/docs.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/HofstadterTools/HofstadterTools/actions/workflows/pytests.yml"><img alt="pytests" src="https://github.com/HofstadterTools/HofstadterTools/actions/workflows/pytests.yml/badge.svg" /></a> <a class="reference external" href="https://pypi.org/project/HofstadterTools/"><img alt="pypi" src="https://img.shields.io/pypi/v/HofstadterTools" /></a> <a class="reference external" href="https://anaconda.org/conda-forge/hofstadtertools"><img alt="conda-forge" src="https://img.shields.io/conda/v/conda-forge/hofstadtertools?label=conda-forge" /></a> <a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0"><img alt="license" src="https://img.shields.io/github/license/HofstadterTools/HofstadterTools" /></a></p>
+<ul class="simple">
+<li><p>Paper: <a class="reference external" href="https://doi.org/10.21105/joss.06356">https://doi.org/10.21105/joss.06356</a></p></li>
+<li><p>Documentation: <a class="reference external" href="https://hofstadter.tools">https://hofstadter.tools</a> or <a class="reference external" href="https://hofstadter.tools">hof.tools</a></p></li>
+<li><p>GitHub Repository: <a class="reference external" href="https://github.com/HofstadterTools/HofstadterTools">https://github.com/HofstadterTools/HofstadterTools</a></p></li>
+</ul>
+<p><strong>H</strong>ofstadter<strong>T</strong>ools (<strong>HT</strong>) is a set of Python programs and classes for analyzing the Hofstadter model, which describes the behavior of non-interacting quantum particles hopping on a lattice coupled to a gauge field. This package can be used to compute the band structure of a <em>generalized</em> Hofstadter model on <em>any</em> regular Euclidean lattice, as well as its key properties, such as quantum geometry and topology.</p>
+<div class="admonition-about-the-name admonition">
+<p class="admonition-title">About the name</p>
+<p>Philip Harper first derived the difference equation for the model [<a class="reference external" href="https://dx.doi.org/10.1088/0370-1298/68/10/304">Harper55</a>], which was later analyzed in detail by Mark Azbel [<a class="reference external" href="http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list">Azbel64</a>], and finally plotted by Douglas Hofstadter [<a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.14.2239">Hofstadter76</a>]. Consequently, the formal name for the model is the <em>Harper-Azbel-Hofstadter model</em> to credit its three main contributors.</p>
+</div>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p>Installing HofstadterTools is quick and easy!</p>
+<p>Using pip:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install HofstadterTools</span>
+</pre></div>
+</div>
+<p>Using conda:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda install conda-forge::HofstadterTools</span>
+</pre></div>
+</div>
+<p>You can now access the <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> and <code class="docutils literal notranslate"><span class="pre">butterfly</span></code> programs from any location. The <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> program evaluates the Hofstadter band structure at fixed flux density <span class="math notranslate nohighlight">\(n_\phi=p/q\)</span> for a range of momenta <span class="math notranslate nohighlight">\(\mathbf{k}=(k_x,k_y)\)</span>, whereas the <code class="docutils literal notranslate"><span class="pre">butterfly</span></code> program evaluates the energy spectrum at fixed momentum <span class="math notranslate nohighlight">\(\mathbf{k}=\mathbf{0}\)</span> for a range of <span class="math notranslate nohighlight">\(n_\phi=p/q\)</span>, where <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> are coprime integers.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">band_structure -lat square -nphi 1 4 --display both --wilson</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png?raw=true"><img alt="3D Band Structure" src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/band_structure_3D_both_square_nphi_1_4_t_1.png?raw=true" style="width: 32%;" /></a> <a class="reference internal" href="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true"><img alt="Wilson Loops" src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wilson_both_square_nphi_1_4_t_1.png?raw=true" style="width: 32%;" /></a> <a class="reference internal" href="https://github.com/HofstadterTools/HofstadterTools/blob/fb6764269db9bfb84cf2f0fc7be0a729799db1bc/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true"><img alt="2D Band Structure" src="https://github.com/HofstadterTools/HofstadterTools/blob/fb6764269db9bfb84cf2f0fc7be0a729799db1bc/docs/source/images/overview/band_structure_2D_both_square_nphi_1_4_t_1.png?raw=true" style="width: 32%;" /></a></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">butterfly -lat square -q 97 --color point --wannier --plot_lattice</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png?raw=true"><img alt="Butterfly Spectrum" src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/butterfly_square_q_97_t_1_col_point_avron.png?raw=true" style="width: 32%;" /></a> <a class="reference internal" href="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png?raw=true"><img alt="Wannier Diagram" src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/wannier_square_q_97_t_1_col_point_avron.png?raw=true" style="width: 32%;" /></a> <a class="reference internal" href="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/lattice.png?raw=true"><img alt="Lattice" src="https://github.com/HofstadterTools/HofstadterTools/blob/2abdf3cb7c6ebfcce165e52a8020a329e5895313/docs/source/images/overview/lattice.png?raw=true" style="width: 32%;" /></a></p>
+<p>Voilà! You have just plotted the Hofstadter band structure for nearest-neighbor hopping on the square lattice at flux density <span class="math notranslate nohighlight">\(n_\phi=1/4\)</span>, together with the corresponding butterfly spectrum at <span class="math notranslate nohighlight">\(q=97\)</span>. You can append <code class="docutils literal notranslate"><span class="pre">--help</span></code> to either of these programs to view the list of options. Alternatively, you can explore the <a class="reference external" href="https://hofstadter.tools/gallery.html">gallery</a> and <a class="reference external" href="https://hofstadter.tools/_autosummary/functions.html">code reference</a> to see what HofstadterTools has to offer.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>This package was developed using Ubuntu 20.04.6 (x86_64) with Python=3.10.13, however it is designed to be platform-independent and can work with any Python&gt;=3.9.</p>
+<section id="basic-install">
+<h3>Basic install<a class="headerlink" href="#basic-install" title="Permalink to this heading"></a></h3>
+<p>For basic usage of HofstadterTools, i.e. in cases where you <em>do not</em> plan on editing the source code, you can install the package from a distribution.</p>
+<section id="using-pip">
+<h4>Using pip<a class="headerlink" href="#using-pip" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>[Optional] Create and activate a new venv environment. In the example below, <code class="docutils literal notranslate"><span class="pre">my_env</span></code> is the name of the venv and its parent folder. If needed, you can replace <code class="docutils literal notranslate"><span class="pre">python3</span></code> with <code class="docutils literal notranslate"><span class="pre">python3.xx</span></code> below to create a venv pinned to a particular Python version.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:any/path$ </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>my_env
+<span class="gp">user@domain:any/path$ </span><span class="nb">source</span><span class="w"> </span>path/to/my_env/bin/activate
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install HofstadterTools from PyPI.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(my_env)</span> <span class="gp">user@domain:any/path$ </span>pip<span class="w"> </span>install<span class="w"> </span>HofstadterTools
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>[Optional] Upgrade an existing HofstadterTools installation.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(my_env)</span> <span class="gp">user@domain:any/path$ </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>HofstadterTools
+</pre></div>
+</div>
+<p>You can verify the installation by typing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">HofstadterTools</span></code>, you can uninstall by typing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">HofstadterTools</span></code>, and you can deactivate the environment by typing <code class="docutils literal notranslate"><span class="pre">deactivate</span></code>. The entire environment can be removed by deleting the <code class="docutils literal notranslate"><span class="pre">my_env</span></code> folder.</p>
+</section>
+<section id="using-conda">
+<h4>Using conda<a class="headerlink" href="#using-conda" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>[Optional] Create and activate a new conda environment. In the example below, <code class="docutils literal notranslate"><span class="pre">my_env</span></code> is the name of the conda environment. If needed, you can replace <code class="docutils literal notranslate"><span class="pre">python=3</span></code> with <code class="docutils literal notranslate"><span class="pre">python=3.xx</span></code> below to create a conda environment with a particular Python version pre-installed.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:any/path$ </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>my_env<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>
+<span class="gp">user@domain:any/path$ </span>conda<span class="w"> </span>activate<span class="w"> </span>my_env
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install HofstadterTools from conda-forge.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(my_env)</span> <span class="gp">user@domain:any/path$ </span>conda<span class="w"> </span>install<span class="w"> </span>conda-forge::HofstadterTools
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>[Optional] Update an existing HofstadterTools installation.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(my_env)</span> <span class="gp">user@domain:any/path$ </span>conda<span class="w"> </span>update<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>HofstadterTools
+</pre></div>
+</div>
+<p>You can verify the installation by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">hofstadtertools</span></code>, you can uninstall by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">remove</span> <span class="pre">HofstadterTools</span></code>, and you can deactivate the environment by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code>. The entire environment can be removed by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">remove</span> <span class="pre">-n</span> <span class="pre">my_env</span> <span class="pre">--all</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you pip install HofstadterTools into a conda environment, you may see a <code class="docutils literal notranslate"><span class="pre">libGL</span> <span class="pre">error</span></code> when you run the programs. This is a known problem with the <code class="docutils literal notranslate"><span class="pre">libstdc++.so</span></code> file in Conda and should not affect the functionality of HofstadterTools.</p>
+</div>
+</section>
+</section>
+<section id="advanced-install">
+<h3>Advanced install<a class="headerlink" href="#advanced-install" title="Permalink to this heading"></a></h3>
+<p>For advanced usage of HofstadterTools, i.e. in cases where you <em>do</em> plan on editing the source code, you can install the package from source.</p>
+<ol class="arabic simple">
+<li><p>Clone the HofstadterTools repository.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:any/path$ </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:HofstadterTools/HofstadterTools.git
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Using pip, install the HofstadterTools package. This step can also be done in a virtual environment. The optional <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag below indicates an editable install.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:path/to/HofstadterTools$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Alternatively, if you plan on building the documentation locally, the optional <code class="docutils literal notranslate"><span class="pre">docs</span></code> dependencies need to be installed.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:path/to/HofstadterTools$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[docs]&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>[Optional] Build and view the documentation locally. The optional <code class="docutils literal notranslate"><span class="pre">clean</span></code> argument below removes files from the build directory, and <code class="docutils literal notranslate"><span class="pre">firefox</span></code> can be replaced with any web browser.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:path/to/HofstadterTools/docs$ </span>make<span class="w"> </span>clean<span class="w"> </span>html
+<span class="gp">user@domain:path/to/HofstadterTools/docs$ </span>firefox<span class="w"> </span>build/html/index.html<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Building the documentation locally with the inheritance diagrams requires that the <code class="docutils literal notranslate"><span class="pre">graphviz</span></code> program is installed, so that the <code class="docutils literal notranslate"><span class="pre">dot</span></code> program is in the path. For example, on Debian systems, this can be achieved by typing <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">graphviz</span></code>, and verified by typing <code class="docutils literal notranslate"><span class="pre">dot</span> <span class="pre">-V</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Implementing custom lattices with more than one site per unit cell requires an advanced install.</p>
+</div>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>You can confirm that HofstadterTools is correctly installed by running the pytests.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:any/path$ </span>pytest<span class="w"> </span>--pyargs<span class="w"> </span>HT
+</pre></div>
+</div>
+<p>Once the <em>project</em> <code class="docutils literal notranslate"><span class="pre">HofstadterTools</span></code> is installed, the <em>package</em> <code class="docutils literal notranslate"><span class="pre">HT</span></code> will be available in your Python environment. In addition, you can access the programs <code class="docutils literal notranslate"><span class="pre">band_structure</span></code>, <code class="docutils literal notranslate"><span class="pre">butterfly</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_band_structure</span></code>, and <code class="docutils literal notranslate"><span class="pre">plot_butterfly</span></code>, from any location.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@domain:any/path$ </span>band_structure<span class="w"> </span>--help
+<span class="gp">user@domain:any/path$ </span>butterfly<span class="w"> </span>--help
+<span class="gp">user@domain:any/path$ </span>plot_band_structure<span class="w"> </span>--help
+<span class="gp">user@domain:any/path$ </span>plot_butterfly<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">plot_*</span></code> programs are used to replot band_structures / butterflies that have been saved to file.</p>
+</section>
+</section>
+<section id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>src</strong> – sources root with the <code class="docutils literal notranslate"><span class="pre">HT</span></code> package, along with its configuration settings, subpackages, and programs. A detailed description of the available <a class="reference external" href="https://hofstadter.tools/tutorials.html">programs</a> and <a class="reference external" href="https://hofstadter.tools/_autosummary/functions.html">namespace packages</a> is in the documentation.</p>
+<ul>
+<li><p><strong>HT</strong> – <code class="docutils literal notranslate"><span class="pre">HT</span></code> package.</p>
+<ul>
+<li><p><strong>configuration</strong> – user-defined configuration files for the programs.</p></li>
+<li><p><strong>functions</strong> – helper functions for the programs.</p></li>
+<li><p><strong>models</strong> – model classes for the programs.</p></li>
+<li><p><strong>plot</strong> – location of the plot scripts.</p></li>
+<li><p><strong>tests</strong> – unit tests for the programs.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>data</strong> – output destination for raw data files (if programs are run explicitly from their file location, otherwise the output destination is the current working directory).</p>
+<ul>
+<li><p><strong>band_structure</strong> – data generated by the band_structure program.</p></li>
+<li><p><strong>butterfly</strong> – data generated by the butterfly program.</p></li>
+</ul>
+</li>
+<li><p><strong>docs</strong> – location of the sphinx documentation. To view the documentation locally, compile by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> or <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span> <span class="pre">html</span></code> and then open <code class="docutils literal notranslate"><span class="pre">build/html/index.html</span></code> in a web browser. This assumes that the optional <code class="docutils literal notranslate"><span class="pre">docs</span></code> dependencies are installed.</p>
+<ul>
+<li><p><strong>build</strong> – compiled documentation (once built).</p></li>
+<li><p><strong>source</strong> – documentation source.</p></li>
+</ul>
+</li>
+<li><p><strong>figs</strong> – output destination for the figures (if programs are run explicitly from their file location, otherwise the output destination is the current working directory).</p>
+<ul>
+<li><p><strong>band_structure</strong> – figures generated by the band_structure program.</p></li>
+<li><p><strong>butterfly</strong> – figures generated by the butterfly program.</p></li>
+</ul>
+</li>
+<li><p><strong>logs</strong> – output destination for the log files (if programs are run explicitly from their file location, otherwise the output destination is the current working directory).</p>
+<ul>
+<li><p><strong>band_structure</strong> – logs generated by the band_structure program.</p></li>
+<li><p><strong>butterfly</strong> – logs generated by the butterfly program.</p></li>
+</ul>
+</li>
+<li><p><strong>paper</strong> – summary paper introducing HofstadterTools. The formatted pdf can be downloaded as an <code class="docutils literal notranslate"><span class="pre">artifact</span></code> of the <code class="docutils literal notranslate"><span class="pre">production-pdf</span></code> workflow under the GitHub actions tab.</p></li>
+</ul>
+</section>
+<section id="how-to-cite">
+<h2>How to Cite<a class="headerlink" href="#how-to-cite" title="Permalink to this heading"></a></h2>
+<p>If you have found HofstadterTools useful, it would be greatly appreciated if you could cite us in your work. Please find the bibtex reference below.</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">HofstadterTools</span><span class="p">,</span>
+<span class="na">doi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10.21105/joss.06356}</span><span class="p">,</span>
+<span class="na">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://doi.org/10.21105/joss.06356}</span><span class="p">,</span>
+<span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2024}</span><span class="p">,</span>
+<span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{The Open Journal}</span><span class="p">,</span>
+<span class="na">volume</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{9}</span><span class="p">,</span>
+<span class="na">number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{95}</span><span class="p">,</span>
+<span class="na">pages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{6356}</span><span class="p">,</span>
+<span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Bartholomew Andrews}</span><span class="p">,</span>
+<span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{HofstadterTools: A Python package for analyzing the Hofstadter model}</span><span class="p">,</span>
+<span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Journal of Open Source Software}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="acknowledgments">
+<h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this heading"></a></h2>
+<p>We thank Gunnar Möller, Titus Neupert, Rahul Roy, Alexey Soluyanov, Michael Zaletel, Daniel Parker, Stefan Divic, Johannes Mitscherling, and Mathi Raja, for useful discussions. This project was funded by the Swiss National Science Foundation under Grant No. <a class="reference external" href="https://data.snf.ch/grants/grant/203168">P500PT_203168</a>, and supported by the U.S. Department of Energy, Office of Science, Basic Energy Sciences, under Early Career Award No. DE-SC0022716.</p>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading"></a></h2>
+<p>The Hofstadter model is an active field of research and therefore HofstadterTools will never be complete. Here is a list of some features that we have on the pipeline to be implemented (in no particular order):</p>
+<ul class="simple">
+<li><p>support for hyperbolic lattices [<a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.128.166402">Stegmaier22</a>]</p></li>
+<li><p>support for fractal lattices [<a class="reference external" href="https://doi.org/10.1007/s00220-020-03850-w">Chen20</a>]</p></li>
+<li><p>support for higher-dimensional lattices [<a class="reference external" href="https://dx.doi.org/10.1088/1367-2630/ac4126">DiColandrea22</a>]</p></li>
+<li><p>support for quasicrystals [<a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.106.L201113">Ghadimi22</a>]</p></li>
+<li><p>support for open boundary conditions [<a class="reference external" href="https://doi.org/10.1016/j.rinp.2023.106257">Pena23</a>]</p></li>
+<li><p>interface to quantum chemistry codes [<a class="reference external" href="https://doi.org/10.1038/s41699-023-00378-0">Bodesheim23</a>]</p></li>
+<li><p>capability to compute the non-Abelian <cite>Hofstadter moth</cite> [<a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.95.010403">Osterloh05</a>], [<a class="reference external" href="https://doi.org/10.1038/s41377-020-00384-7">Yang20</a>]</p></li>
+<li><p>capability to compute Chern numbers using bulk-edge correspondence [<a class="reference external" href="https://doi.org/10.1007/s10955-014-0992-0">Agazzi14</a>]</p></li>
+<li><p>capability to generate the potential function corresponding to hopping amplitudes [<a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevA.95.063628">Yilmaz17</a>]</p></li>
+<li><p>implementation of other topological flat-band models for benchmarking (e.g. chiral pi-flux model) [<a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.106.236804">Neupert11</a>]</p></li>
+</ul>
+<p>Contributions are always welcome! The HofstadterTools repository is maintained using <a class="reference external" href="https://github.com/HofstadterTools/HofstadterTools">GitHub</a>. If you would like to contribute, please submit a <a class="reference external" href="https://github.com/HofstadterTools/HofstadterTools/pulls">pull request</a>; if you would like to report an issue or problem, please open an <a class="reference external" href="https://github.com/HofstadterTools/HofstadterTools/issues">issue</a>; and if you need to seek support, please start a <a class="reference external" href="https://github.com/HofstadterTools/HofstadterTools/discussions">discussion</a>. For all other enquires, please contact <a class="reference external" href="https://bartandrews.me">Bart Andrews</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="HofstadterTools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="theory.html" class="btn btn-neutral float-right" title="Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+functions.utility
+=================
+
+.. automodule:: functions.utility
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      create_filename
+      load_data
+      read_t_from_file
+      save_data
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      Logger
+   
+   
+
+   
+   
+   
+
+
+

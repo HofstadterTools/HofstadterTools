@@ -1,0 +1,6 @@
+functions.models.BasicKagomeHamiltonian
+=======================================
+
+.. currentmodule:: functions.models
+
+.. autofunction:: BasicKagomeHamiltonian

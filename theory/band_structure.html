@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Band Structure &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Butterfly" href="butterfly.html" />
+    <link rel="prev" title="Model" href="model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../theory.html">Theory</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../theory.html">Theory</a></li>
+      <li class="breadcrumb-item active">Band Structure</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/theory/band_structure.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="band-structure">
+<h1>Band Structure<a class="headerlink" href="#band-structure" title="Permalink to this heading"></a></h1>
+<p>The band structure for the Hofstadter model is computed by constructing a set of simultaneous time-independent Schrödinger equations for the basis sites, and then using the plane wave ansatz to formulate each equation as a difference relation. For simplicity, we start by discussing the band structure derivation for the conventional Hofstadter model, and then proceed to outline the general case.</p>
+<p>To recap from the previous section, for Landau gauge in the y-direction <span class="math notranslate nohighlight">\(\mathbf{A}=-By \hat{\mathbf{e}}_x\)</span>, the general formula for the <strong>Peirels phase</strong> acquired by an electron hopping from site <span class="math notranslate nohighlight">\(i=(X_i,Y_i)\)</span> to site <span class="math notranslate nohighlight">\(j=(X_j,Y_j)\)</span> is given as</p>
+<div class="math notranslate nohighlight">
+\[\theta_{ij} = -2\pi n_\phi \Delta X \left( Y_i + \frac{\Delta Y}{2} \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta X = X_j - X_i\)</span>, <span class="math notranslate nohighlight">\(\Delta Y = Y_j - Y_i\)</span>, and we have defined the flux density with respect to the UC area, such that <span class="math notranslate nohighlight">\(n_\phi=BA_\mathrm{UC}/\phi_0 = Ba^2/\phi_0\)</span>. In what follows, let us index the UC coordinates using <span class="math notranslate nohighlight">\((m,n)\)</span>. The <strong>time-independent Schrödinger equation</strong> for the conventional nearest-neighbor (NN) square-lattice Hofstadter model is then given as</p>
+<div class="math notranslate nohighlight">
+\[E \Psi_{m,n} = -t e^{-\mathrm{i}2\pi n_\phi n} \Psi_{m+1, n} - t \Psi_{m, n+1} + \mathrm{H.c.},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Psi_{m,n}\)</span> is the wavefunction at unit cell <span class="math notranslate nohighlight">\((m,n)\)</span> and <span class="math notranslate nohighlight">\(t\)</span> is the hopping amplitude. Since we have taken Landau gauge in the y-direction, it is reasonable to assume plane wave behavior in the x-direction. Hence we can simplify the equation further by invoking the <strong>plane wave ansatz</strong> <span class="math notranslate nohighlight">\(\Psi_{m,n} = e^{\mathrm{i}\mathbf{r}\cdot\mathbf{k}}\psi_{n}\)</span>, such that</p>
+<div class="math notranslate nohighlight">
+\[E \psi_{n} = -t e^{-\mathrm{i}2\pi n_\phi n + \mathrm{i}k_x} \psi_{n} - t e^{\mathrm{i} k_y}\psi_{n+1} + \mathrm{H.c.},\]</div>
+<p>which simplifies to</p>
+<div class="math notranslate nohighlight">
+\[E\psi_{n} = B^*\psi_{n-1} + A_n \psi_{n} + B\psi_{n+1},\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+    A_n &amp;= -2t\cos(2\pi n_\phi n - k_x), \\
+    B &amp;= -t e^{\mathrm{i} k_y}.
+\end{align}\end{split}\]</div>
+<p>All distances are measured in units of the lattice constant <span class="math notranslate nohighlight">\(a=1\)</span>. Given that there are <span class="math notranslate nohighlight">\(q\)</span> sites in our MUC, this is a <span class="math notranslate nohighlight">\(q\)</span>-dimensional difference equation, known as the <strong>Harper equation</strong>, which is a special case of an <strong>almost Mathieu operator</strong> <span id="id1">[<a class="reference internal" href="../references.html#id17" title="P. G. Harper. Single band motion of conduction electrons in a uniform magnetic field. Proceedings of the Physical Society. Section A, 68(10):874, Oct 1955. URL: https://dx.doi.org/10.1088/0370-1298/68/10/304, doi:10.1088/0370-1298/68/10/304.">Harper55</a>]</span>. This equation may be readily written in matrix form, such that <span class="math notranslate nohighlight">\(\mathbf{H} \boldsymbol{\psi} = E \boldsymbol{\psi}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is a <span class="math notranslate nohighlight">\(q\times q\)</span> Hamiltonian matrix and <span class="math notranslate nohighlight">\(\boldsymbol{\psi}=(\psi_0, \psi_1, \dots, \psi_{q-1})^\intercal\)</span> is a vector of length <span class="math notranslate nohighlight">\(q\)</span>. For the case of <span class="math notranslate nohighlight">\(n_\phi=1/4\)</span>, the Hamiltonian matrix may be written explicitly as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{H} =
+\begin{pmatrix}
+A_0 &amp; B &amp; 0 &amp; B^* \\
+B^* &amp; A_1 &amp; B &amp; 0 \\
+0 &amp; B^* &amp; A_2 &amp; B \\
+B &amp; 0 &amp; B^* &amp; A_3
+\end{pmatrix},\end{split}\]</div>
+<p>and hence there are 4 energy bands in the spectrum, as shown in the figures below.</p>
+<a class="reference internal image-reference" href="../_images/band_structure_3D_both_square_nphi_1_4_t_1.png"><img alt="3D Band Structure" src="../_images/band_structure_3D_both_square_nphi_1_4_t_1.png" style="width: 32%;" /></a>
+<a class="reference internal image-reference" href="../_images/wilson_both_square_nphi_1_4_t_1.png"><img alt="Wilson Loops" src="../_images/wilson_both_square_nphi_1_4_t_1.png" style="width: 32%;" /></a>
+<a class="reference internal image-reference" href="../_images/band_structure_2D_both_square_nphi_1_4_t_1.png"><img alt="2D Band Structure" src="../_images/band_structure_2D_both_square_nphi_1_4_t_1.png" style="width: 32%;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is not possible to define a high-symmetry path for the generalized Hofstadter model as a continuous function of lattice anisotropy and obliqueness. Instead, we use reference paths to plot the 2D band structures.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Lattice</p></th>
+<th class="head"><p>UC Lattice Vectors</p></th>
+<th class="head"><p>UC Basis Vectors</p></th>
+<th class="head"><p>Reference Path</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">square</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_1 = a (1, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_2=a(0, 1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},1}=(0, 0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma\to X \to M \to Y \to \Gamma\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">triangular</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_1 = a (1, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_2=a (1/2, \sqrt{3}/2)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},1}=(0, 0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma \to K \to M \to K' \to \Gamma\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bravais</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_1 = a (1, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},1}=(0, 0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{cases}\Gamma \to K \to M \to K' \to \Gamma, \;\;\; &amp;\text{when }\theta\text{ is a multiple of }\pi/3\text{ but not }\pi/2 \\ \Gamma \to X \to M \to Y \to \Gamma, \;\;\; &amp;\text{otherwise}\end{cases}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">honeycomb</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_1 = a (1, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},1}=(0, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},2}=(a_{1,x}/2, a_{2,y}/3)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma \to K \to M \to K' \to \Gamma\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kagome</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_1 = a (1, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_2=\alpha a (\cos \theta, \sin \theta)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},1}=(0, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},2}=(a_{1,x}/2, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a}_{\text{b},3}=(a_{2,x}/2, a_{2,y}/2)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Gamma \to K \to M \to K' \to M' \to \Gamma\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>The reference points are defined as: <span class="math notranslate nohighlight">\(\Gamma = (0, 0)\)</span>, <span class="math notranslate nohighlight">\(M = (1/2, 1/2)\)</span>, <span class="math notranslate nohighlight">\(X = (1/2, 0)\)</span>, <span class="math notranslate nohighlight">\(Y = (0, 1/2)\)</span>, <span class="math notranslate nohighlight">\(K = (2/3, 1/3)\)</span>, <span class="math notranslate nohighlight">\(K' = (1/3, 2/3)\)</span>, <span class="math notranslate nohighlight">\(M' = (0, 1/2)\)</span>, in fractional units of the MUC reciprocal lattice vectors <span class="math notranslate nohighlight">\((\mathbf{b}_1, \mathbf{b}_2)\)</span>. The difference between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(M'\)</span> is simply convention, depending on whether we are referring to rectangular or hexagonal Brillouin zones.</p>
+<p>We emphasize that the paths defined above are only <em>high-symmetry paths</em> in special cases, where the corresponding symmetries are present, such as at zero magnetic field. In all other cases, these are simply <em>reference paths</em> through <span class="math notranslate nohighlight">\(k\)</span>-space to facilitate easy comparison, and the full 3D band structure should also be examined.</p>
+</div>
+<p>In the general case, the procedure follows in a similar way. We start by writing down the time-independent Schrödinger equation for each site in the basis, which we index using lowercase Greek letters <span class="math notranslate nohighlight">\(\alpha,\beta\)</span>. This yields a set of <span class="math notranslate nohighlight">\(N_\mathrm{b}\)</span> simultaneous equations, which we can write in matrix form, such that <span class="math notranslate nohighlight">\(\mathbf{H}\boldsymbol{\psi}=E\boldsymbol{\psi}\)</span>, where <span class="math notranslate nohighlight">\(\boldsymbol{\psi}=(\psi^0, \psi^1, \dots, \psi^{N_\mathrm{b}-1})^\intercal\)</span> is a vector of length <span class="math notranslate nohighlight">\(N_\mathrm{b}\)</span>, and the <span class="math notranslate nohighlight">\(N_\mathrm{b}\times N_\mathrm{b}\)</span> Hamiltonian matrix is given as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{H} =
+\begin{pmatrix}
+H^{00} &amp; H^{01} &amp; \dots \\
+H^{10} &amp; H^{11} &amp; \dots \\
+\vdots &amp; \vdots &amp; \ddots
+\end{pmatrix},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(H^{\alpha\beta}\)</span> is the Hamiltonian for hoppings from sublattice <span class="math notranslate nohighlight">\(\alpha\)</span> to sublattice <span class="math notranslate nohighlight">\(\beta\)</span>. Then, for each <span class="math notranslate nohighlight">\(H^{\alpha\beta}\)</span> we can write down a <span class="math notranslate nohighlight">\(q\times q\)</span> Harper matrix, as before. For Landau gauge in the y-direction <span class="math notranslate nohighlight">\(\mathbf{A}=-By \hat{\mathbf{e}}_x\)</span>, the general form of the Harper matrix is given as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{H} = \begin{pmatrix}
+             \Lambda_{0,0} &amp; \Lambda_{0,1} &amp; \dots \\
+             \Lambda_{1,0} &amp; \Lambda_{1,1} &amp; \dots \\
+             \vdots &amp; \vdots &amp; \ddots
+             \end{pmatrix} +
+             \begin{pmatrix}
+             \ddots &amp; \Lambda_{0, q-1}^* &amp; \Lambda_{0, q}^* \\
+             \Lambda_{q-1, 0} &amp; \ddots &amp; \Lambda_{1, q}^* \\
+             \Lambda_{q, 0} &amp; \Lambda_{q, 1} &amp; \ddots
+             \end{pmatrix},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda_{l, n}\)</span> is the diagonal function, and we have dropped the <span class="math notranslate nohighlight">\(\alpha\beta\)</span> superscripts for readability. The second matrix simply accounts for rolled over boundary terms. Since we are working in Landau gauge in the y-direction, the <strong>diagonal function</strong> may be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\Lambda_{l, n} = - \sum_\kappa \sum_{\langle ij \rangle_{\kappa}^l} t_\kappa e^{\\\mathrm{i}\theta_{ij}} e^{\\\mathrm{i}\\\mathbf{k}\cdot\\\mathbf{r}},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\langle \dots \rangle^l_\kappa\)</span> denotes the subset of <span class="math notranslate nohighlight">\(\kappa\)</span>-th nearest neighbors with a net <span class="math notranslate nohighlight">\(y\)</span> unit cell displacement of <span class="math notranslate nohighlight">\(l\)</span>, <span class="math notranslate nohighlight">\(\theta_{ij}\)</span> is the Peierls phase, <span class="math notranslate nohighlight">\(\\\mathbf{k}\)</span> is the momentum vector, and <span class="math notranslate nohighlight">\(\\\mathbf{r}\)</span> is the displacement vector. We emphasize that hoppings that are related by Hermitian conjugation, which are <em>outside the scope of the unit cell</em>, are not included in the diagonal function matrix. For example, for NN hopping on the triangular lattice, we include 3 of the 6 nearest neighbors in the diagonal function matrix, and the rest are captured when we add on the Hermitian conjugate to the Hamiltonian. However, for NN hopping on the kagome lattice, we include all 4 of 4 nearest neighbors for each basis site, since they are all within the same unit cell. Overall, we are left we left with a <span class="math notranslate nohighlight">\(N_\mathrm{b}q\times N_\mathrm{b}q\)</span> block Hamiltonian matrix, which yields <span class="math notranslate nohighlight">\(N_\mathrm{b}q\)</span> bands.</p>
+<p>In HofstadterTools, we can analyze the resulting band structure by computing its key properties, which are listed in the tables below. These <strong>band properties</strong> may be selected by passing flags to the <code class="docutils literal notranslate"><span class="pre">band_structure</span></code> program, and are grouped by computational expense. By default, HofstadterTools prints properties in the basic group only (for speed reasons). When computing topology and quantum geometry properties of bands, it is important to use <em>manifestly gauge invariant</em> expressions, so that we omit spurious Bloch phase factors and can compute the quantities quickly and accurately. To this end, we use the Fukui formula to compute the (first) Chern number <span id="id2">[<a class="reference internal" href="../references.html#id2" title="T. Fukui, Y. Hatsugai, and H. Suzuki. Chern numbers in discretized Brillouin zone: efficient method of computing (spin) Hall conductances. Journal of the Physical Society of Japan, 74(6):1674-1677, 2005. URL: https://doi.org/10.1143/JPSJ.74.1674, doi:10.1143/JPSJ.74.1674.">Fukui05</a>]</span> and the projector formalism to compute the quantum geometric tensor <span id="id3">[<a class="reference internal" href="../references.html#id46" title="B. Mera and J. Mitscherling. Nontrivial quantum geometry of degenerate flat bands. Physical Review B, 106:165133, Oct 2022. URL: https://link.aps.org/doi/10.1103/PhysRevB.106.165133, doi:10.1103/PhysRevB.106.165133.">Mera22</a>]</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Chern numbers of the bands may also be inferred by plotting the <strong>Wilson loops</strong>, which are the products of Berry phases around cycles of the Brillouin zone, as shown in the middle figure above. The magnitude of the Chern number corresponds to the number of windings of the Wilson loop and the sign of the Chern number corresponds to its direction.</p>
+</div>
+<p>In the projector formalism, the <strong>quantum geometric tensor</strong> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{R}_{\mu\nu}(\mathbf{k}) = \mathrm{tr}(\mathcal{P}_\mathbf{k}\partial_{k_\mu}\mathcal{P}_\mathbf{k} \partial_{k_\nu} \mathcal{P}_\mathbf{k}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{P}_\mathbf{k} = \sum_n^{N_\mathrm{g}} \ket{u_n(\mathbf{k})} \bra{u_n(\mathbf{k})}\)</span> is the band projector, <span class="math notranslate nohighlight">\(\ket{u_n(\mathbf{k})}\)</span> is the eigenvector of band <span class="math notranslate nohighlight">\(n\)</span> at momentum <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>, and <span class="math notranslate nohighlight">\(N_\mathrm{g}\)</span> is the number of touching bands in a band group.  The real part of the quantum geometric tensor is given by the Fubini-Study metric <span class="math notranslate nohighlight">\(g_{\mu\nu}(\mathbf{k})=\Re[\mathcal{R}_{\mu\nu}]\)</span>, which corresponds to the distance between eigenstates on the Bloch sphere, whereas the imaginary part of the quantum geometric tensor is given by the Berry curvature <span class="math notranslate nohighlight">\(\mathcal{B}(\mathbf{k})=-2 \Im [\mathcal{R}_{01}(\mathbf{k})]\)</span>. Crucially, since band geometry and topology are components of the same tensor, we can derive relations between them, namely</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathcal{D}(\mathbf{k})&amp;=\text{det}\,g(\mathbf{k}) - \frac{1}{4}|\mathcal{B}(\mathbf{k})|^2 \geq 0, \\
+\mathcal{T}(\mathbf{k})&amp;=\text{tr}\,g(\mathbf{k}) - |\mathcal{B}(\mathbf{k})| \geq 0,
+\end{align}\end{split}\]</div>
+<p>where we define <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> as the <strong>determinant inequality saturation measure (DISM)</strong> and <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> as the <strong>trace inequality saturation measure (TISM)</strong>. It has been shown analytically that when the trace(determinant) inequality is saturated for a Chern band, the algebra of projected density operators is identical(isomorphic) to that in Landau levels <span id="id4">[<a class="reference internal" href="../references.html#id43" title="R. Roy. Band geometry of fractional topological insulators. Physical Review B, 90:165139, Oct 2014. URL: https://link.aps.org/doi/10.1103/PhysRevB.90.165139, doi:10.1103/PhysRevB.90.165139.">Roy14</a>]</span>.</p>
+<p>Using these band properties, we can perform several sanity checks on our computed band structures. In terms of band topology, we know that all of the Chern numbers in a Hofstadter spectrum must sum to zero. In terms of band geometry, we know that as we take the Landau level limit <span class="math notranslate nohighlight">\(q\to\infty\)</span>, the TISM and DISM must monotonically approach zero from above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The band structures can also be checked by comparing against results in the literature. For example, the Chern numbers can be benchmarked against Fig.2.6 of <span id="id5">[<a class="reference internal" href="../references.html#id6" title="M. Aidelsburger. Artificial gauge fields with ultracold atoms in optical lattices. PhD thesis, Ludwig Maximilian University of Munich, 2014. URL: https://edoc.ub.uni-muenchen.de/18148/.">AidelsburgerPhD</a>]</span> and the values of the TISM can be benchmarked against Fig.3 of <span id="id6">[<a class="reference internal" href="../references.html#id3" title="D. Bauer, S. Talkington, F. Harper, B. Andrews, and R. Roy. Fractional Chern insulators with a non-Landau level continuum limit. Physical Review B, 105:045144, Jan 2022. URL: https://link.aps.org/doi/10.1103/PhysRevB.105.045144, doi:10.1103/PhysRevB.105.045144.">Bauer22</a>]</span>.</p>
+</div>
+<table class="docutils align-default" id="id16">
+<caption><span class="caption-text">Basic Properties</span><a class="headerlink" href="#id16" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Alias</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Symbol/Formula</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">band</span></code></p></td>
+<td><p>Band Number</p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p>Bands are numbered in ascending order, with respect to energy, starting from zero.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">group</span></code></p></td>
+<td><p>Band Group</p></td>
+<td><p>N/A</p></td>
+<td><p>Bands are considered grouped when they are touching within the band gap threshold.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">isolated</span></code></p></td>
+<td><p>Isolated Band Flag</p></td>
+<td><p>N/A</p></td>
+<td><p>A band is isolated when it is not touching any other bands, i.e. it is a member of a band group of size one.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">width</span></code></p></td>
+<td><p>Band Width</p></td>
+<td><p><span class="math notranslate nohighlight">\(W = \mathrm{max}(E_n) - \mathrm{min}(E_n)\)</span></p></td>
+<td><p>The band width for an isolated band (group) is the difference between the largest and smallest energies in that band (group).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gap</span></code></p></td>
+<td><p>Band Gap</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta = \mathrm{min}(E_{n+1}) - \mathrm{max}(E_n)\)</span></p></td>
+<td><p>The band gap for an isolated band (group) is the difference between the smallest and largest energies of the subsequent and current bands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gap_width</span></code></p></td>
+<td><p>Gap-to-width Ratio</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta/W\)</span></p></td>
+<td><p>The gap-to-width ratio for an isolated band (group) is defined as the ratio between the band gap and width.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-text">Topology Properties</span><a class="headerlink" href="#id17" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Alias</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Symbol/Formula</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std_B</span></code></p></td>
+<td><p>Berry Curvature Fluctuations</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\sigma}_{\mathcal{B}} = \sigma_\mathcal{B} / \mu_\mathcal{B}\)</span></p></td>
+<td><p>For <span class="math notranslate nohighlight">\(C=1\)</span> bands, this definition is equivalent to Eq.(6) from <span id="id7">[<a class="reference internal" href="../references.html#id45" title="T. S. Jackson, G. Möller, and R. Roy. Geometric stability of topological lattice phases. Nature Communications, 6(1):8629, Nov 2015. URL: https://doi.org/10.1038/ncomms9629, doi:10.1038/ncomms9629.">Jackson15</a>]</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">C</span></code></p></td>
+<td><p>(First) Chern Number</p></td>
+<td><p><span class="math notranslate nohighlight">\(C=\frac{1}{2\pi} \iint_\mathrm{BZ} \mathcal{B}(\mathbf{k}) \mathrm{d}^2 k\)</span></p></td>
+<td><p>The Chern number is an integer and is computed using the Fukui formula <span id="id8">[<a class="reference internal" href="../references.html#id2" title="T. Fukui, Y. Hatsugai, and H. Suzuki. Chern numbers in discretized Brillouin zone: efficient method of computing (spin) Hall conductances. Journal of the Physical Society of Japan, 74(6):1674-1677, 2005. URL: https://doi.org/10.1143/JPSJ.74.1674, doi:10.1143/JPSJ.74.1674.">Fukui05</a>]</span>.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id18">
+<caption><span class="caption-text">Geometry Properties</span><a class="headerlink" href="#id18" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Alias</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Symbol/Formula</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std_g</span></code></p></td>
+<td><p>Fubini-Study Metric Fluctuations</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_{g} = \sqrt{\frac{1}{2}\sum_{ij} \sigma^2_{g_{ij}}}\)</span></p></td>
+<td><p>This definition is equivalent to Eq.(8) from <span id="id9">[<a class="reference internal" href="../references.html#id45" title="T. S. Jackson, G. Möller, and R. Roy. Geometric stability of topological lattice phases. Nature Communications, 6(1):8629, Nov 2015. URL: https://doi.org/10.1038/ncomms9629, doi:10.1038/ncomms9629.">Jackson15</a>]</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">av_gxx</span></code></p></td>
+<td><p>Mean of the Diagonal Fubini-Study Metric</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_{g_{xx}}\)</span></p></td>
+<td><p>This quantity is equal to <span class="math notranslate nohighlight">\(\mu_{g_{yy}}\)</span> and is studied in <span id="id10">[<a class="reference internal" href="../references.html#id44" title="D. Bauer, T. S. Jackson, and R. Roy. Quantum geometry and stability of the fractional quantum Hall effect in the Hofstadter model. Physical Review B, 93:235133, Jun 2016. URL: https://link.aps.org/doi/10.1103/PhysRevB.93.235133, doi:10.1103/PhysRevB.93.235133.">Bauer16</a>]</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">av_gxy</span></code></p></td>
+<td><p>Mean of the Off-diagonal Fubini-Study Metric</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_{g_{xy}}\)</span></p></td>
+<td><p>This quantity is equal to <span class="math notranslate nohighlight">\(\mu_{g_{yx}}\)</span> and is studied in <span id="id11">[<a class="reference internal" href="../references.html#id44" title="D. Bauer, T. S. Jackson, and R. Roy. Quantum geometry and stability of the fractional quantum Hall effect in the Hofstadter model. Physical Review B, 93:235133, Jun 2016. URL: https://link.aps.org/doi/10.1103/PhysRevB.93.235133, doi:10.1103/PhysRevB.93.235133.">Bauer16</a>]</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">std_gxx</span></code></p></td>
+<td><p>Standard Deviation of the Diagonal Fubini-Study Metric</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_{g_{xx}}\)</span></p></td>
+<td><p>This quantity is equal to <span class="math notranslate nohighlight">\(\sigma_{g_{yy}}\)</span> and is studied in <span id="id12">[<a class="reference internal" href="../references.html#id44" title="D. Bauer, T. S. Jackson, and R. Roy. Quantum geometry and stability of the fractional quantum Hall effect in the Hofstadter model. Physical Review B, 93:235133, Jun 2016. URL: https://link.aps.org/doi/10.1103/PhysRevB.93.235133, doi:10.1103/PhysRevB.93.235133.">Bauer16</a>]</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std_gxy</span></code></p></td>
+<td><p>Standard Deviation of the Off-diagonal Fubini-Study Metric</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_{g_{xy}}\)</span></p></td>
+<td><p>This quantity is equal to <span class="math notranslate nohighlight">\(\sigma_{g_{yx}}\)</span> and is studied in <span id="id13">[<a class="reference internal" href="../references.html#id44" title="D. Bauer, T. S. Jackson, and R. Roy. Quantum geometry and stability of the fractional quantum Hall effect in the Hofstadter model. Physical Review B, 93:235133, Jun 2016. URL: https://link.aps.org/doi/10.1103/PhysRevB.93.235133, doi:10.1103/PhysRevB.93.235133.">Bauer16</a>]</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>Brillouin-zone-averaged Trace Inequality Saturation Measure (TISM)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\langle\mathcal{T}\rangle = \langle \mathrm{tr}\,g(\mathbf{k}) - |\mathcal{B}(\mathbf{k})| \rangle\)</span></p></td>
+<td><p>The TISM is non-negative and defined in Eq.(10) of <span id="id14">[<a class="reference internal" href="../references.html#id45" title="T. S. Jackson, G. Möller, and R. Roy. Geometric stability of topological lattice phases. Nature Communications, 6(1):8629, Nov 2015. URL: https://doi.org/10.1038/ncomms9629, doi:10.1038/ncomms9629.">Jackson15</a>]</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">D</span></code></p></td>
+<td><p>Brillouin-zone-averaged Determinant Inequality Saturation Measure (DISM)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\langle\mathcal{D}\rangle = \langle \mathrm{det}\,g(\mathbf{k}) - \mathcal{B}^2(\mathbf{k})/4 \rangle\)</span></p></td>
+<td><p>The DISM is non-negative and defined in Eq.(9) of <span id="id15">[<a class="reference internal" href="../references.html#id45" title="T. S. Jackson, G. Möller, and R. Roy. Geometric stability of topological lattice phases. Nature Communications, 6(1):8629, Nov 2015. URL: https://doi.org/10.1038/ncomms9629, doi:10.1038/ncomms9629.">Jackson15</a>]</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="model.html" class="btn btn-neutral float-left" title="Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="butterfly.html" class="btn btn-neutral float-right" title="Butterfly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

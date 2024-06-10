@@ -1,0 +1,6 @@
+functions.models.diag\_func
+===========================
+
+.. currentmodule:: functions.models
+
+.. autofunction:: diag_func

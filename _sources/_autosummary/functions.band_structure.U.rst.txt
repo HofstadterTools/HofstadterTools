@@ -1,0 +1,6 @@
+functions.band\_structure.U
+===========================
+
+.. currentmodule:: functions.band_structure
+
+.. autofunction:: U

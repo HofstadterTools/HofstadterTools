@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>functions.arguments &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">functions.arguments</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for functions.arguments</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions for argument parsing.&quot;&quot;&quot;</span>
+
+<span class="c1"># --- external imports</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+
+<div class="viewcode-block" id="parse_input_arguments"><a class="viewcode-back" href="../../_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments">[docs]</a><span class="k">def</span> <span class="nf">parse_input_arguments</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse the input arguments for a given program.</span>
+
+<span class="sd">    Each program may be run with a given set of flags. This function parses those command-line arguments and returns them as a dictionary.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    program: string</span>
+<span class="sd">        The name of the program.</span>
+<span class="sd">    description: string</span>
+<span class="sd">        The description of the program.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    args: dict</span>
+<span class="sd">        The dictionary of input arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="n">program</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">)</span>
+
+    <span class="n">general</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;general options&quot;</span><span class="p">)</span>
+    <span class="n">band_structure</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;band_structure options&quot;</span><span class="p">)</span>
+    <span class="n">butterfly</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;butterfly options&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">program</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;plot_band_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;plot_butterfly&quot;</span><span class="p">]:</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-load&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;filename of data to load&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">program</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;band_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">]:</span>
+        <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hofstadter&quot;</span><span class="p">]</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-mod&quot;</span><span class="p">,</span> <span class="s2">&quot;--model&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Hofstadter&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">models</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of model&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-a&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;lattice constant&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;list of hopping amplitudes in ascending order [1NN, 2NN, 3NN, ...]&quot;</span><span class="p">)</span>
+        <span class="n">lattices</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;square&quot;</span><span class="p">,</span> <span class="s2">&quot;triangular&quot;</span><span class="p">,</span> <span class="s2">&quot;bravais&quot;</span><span class="p">,</span> <span class="s2">&quot;honeycomb&quot;</span><span class="p">,</span> <span class="s2">&quot;kagome&quot;</span><span class="p">,</span> <span class="s2">&quot;custom&quot;</span><span class="p">]</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-lat&quot;</span><span class="p">,</span> <span class="s2">&quot;--lattice&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;bravais&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">lattices</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of lattice&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-alpha&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;length of a2 Bravais vector relative to a1 (Bravais lattice anisotropy)&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-theta&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;angle between Bravais basis vectors as a fraction of pi (Bravais lattice obliqueness)&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-input&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;read hopping parameters from hopping_input.txt file&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-period&quot;</span><span class="p">,</span> <span class="s2">&quot;--periodicity&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;factor by which to divide A_UC in the flux density&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-log&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;save the output logs&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">program</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;band_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;plot_band_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;plot_butterfly&quot;</span><span class="p">]:</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-save&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;save the output data and plots&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-plt_lat&quot;</span><span class="p">,</span> <span class="s2">&quot;--plot_lattice&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;plot the lattice&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-dpi&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;dots-per-inch resolution of the saved output image&quot;</span><span class="p">)</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-ps&quot;</span><span class="p">,</span> <span class="s2">&quot;--point_size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;scale factor by which to scale the default point size&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">program</span> <span class="o">==</span> <span class="s2">&quot;band_structure&quot;</span><span class="p">:</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-samp&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;number of samples in linear direction&quot;</span><span class="p">)</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-nphi&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;flux density&quot;</span><span class="p">)</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-bgt&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;band gap threshold&quot;</span><span class="p">)</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-load&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;filename of data to load&quot;</span><span class="p">)</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-topo&quot;</span><span class="p">,</span> <span class="s2">&quot;--topology&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print the topology columns&quot;</span><span class="p">)</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-geom&quot;</span><span class="p">,</span> <span class="s2">&quot;--geometry&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print the basic quantum geometry columns&quot;</span><span class="p">)</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;band&quot;</span><span class="p">,</span> <span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;isolated&quot;</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">,</span> <span class="s2">&quot;gap_width&quot;</span><span class="p">,</span> <span class="s2">&quot;std_B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;std_g&quot;</span><span class="p">,</span> <span class="s2">&quot;av_gxx&quot;</span><span class="p">,</span> <span class="s2">&quot;std_gxx&quot;</span><span class="p">,</span> <span class="s2">&quot;av_gxy&quot;</span><span class="p">,</span> <span class="s2">&quot;std_gxy&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">]</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-cols&quot;</span><span class="p">,</span> <span class="s2">&quot;--columns&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;band&quot;</span><span class="p">,</span> <span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;isolated&quot;</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">,</span> <span class="s2">&quot;gap_width&quot;</span><span class="p">],</span> <span class="n">choices</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;select the table columns individually&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">program</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;band_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;plot_band_structure&quot;</span><span class="p">]:</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-wil&quot;</span><span class="p">,</span> <span class="s2">&quot;--wilson&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;plot the wilson loops&quot;</span><span class="p">)</span>
+        <span class="n">displays</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;3D&quot;</span><span class="p">,</span> <span class="s2">&quot;2D&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">]</span>
+        <span class="n">band_structure</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-disp&quot;</span><span class="p">,</span> <span class="s2">&quot;--display&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;3D&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">displays</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;how to display band structure&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">program</span> <span class="o">==</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">:</span>
+        <span class="n">butterfly</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-q&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">199</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;denominator of flux density (prime integer)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">program</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;plot_butterfly&quot;</span><span class="p">]:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;point&quot;</span><span class="p">,</span> <span class="s2">&quot;plane&quot;</span><span class="p">]</span>
+        <span class="n">butterfly</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-col&quot;</span><span class="p">,</span> <span class="s2">&quot;--color&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;how to color the Hofstadter butterfly&quot;</span><span class="p">)</span>
+        <span class="n">palettes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;avron&quot;</span><span class="p">,</span> <span class="s2">&quot;jet&quot;</span><span class="p">,</span> <span class="s2">&quot;red-blue&quot;</span><span class="p">]</span>
+        <span class="n">butterfly</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-pal&quot;</span><span class="p">,</span> <span class="s2">&quot;--palette&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;avron&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">palettes</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;color palette&quot;</span><span class="p">)</span>
+        <span class="n">butterfly</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-wan&quot;</span><span class="p">,</span> <span class="s2">&quot;--wannier&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;plot the Wannier diagram&quot;</span><span class="p">)</span>
+        <span class="n">butterfly</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-art&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;remove all plot axes and labels&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">args</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

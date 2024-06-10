@@ -1,0 +1,6 @@
+functions.models.nearest\_neighbor\_finder
+==========================================
+
+.. currentmodule:: functions.models
+
+.. autofunction:: nearest_neighbor_finder

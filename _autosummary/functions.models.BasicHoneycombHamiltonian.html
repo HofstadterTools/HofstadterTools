@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>functions.models.BasicHoneycombHamiltonian &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="functions.models.BasicKagomeHamiltonian" href="functions.models.BasicKagomeHamiltonian.html" />
+    <link rel="prev" title="functions.models" href="functions.models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="functions.html">functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="functions.models.html">functions.models</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="functions.html">functions</a></li>
+          <li class="breadcrumb-item"><a href="functions.models.html">functions.models</a></li>
+      <li class="breadcrumb-item active">functions.models.BasicHoneycombHamiltonian</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/_autosummary/functions.models.BasicHoneycombHamiltonian.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="functions-models-basichoneycombhamiltonian">
+<h1>functions.models.BasicHoneycombHamiltonian<a class="headerlink" href="#functions-models-basichoneycombhamiltonian" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.models.BasicHoneycombHamiltonian">
+<span class="sig-name descname"><span class="pre">BasicHoneycombHamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/functions/models.html#BasicHoneycombHamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.models.BasicHoneycombHamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>The basic honeycomb lattice Hofstadter Hamiltonian.</p>
+<p>The Hofstadter Hamiltonian for the honeycomb lattice with nearest-neighbor hopping.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We have hardcoded this Hamiltonian because it is commonly used and this function is faster than calling the generic Hamiltonian method.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – The list of hopping amplitudes in order of ascending NN.</p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The numerator of the flux density.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The denominator of the flux density.</p></li>
+<li><p><strong>k</strong> (<em>ndarray</em>) – The momentum vector.</p></li>
+<li><p><strong>period</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The factor by which to divide A_UC in the flux density.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Hamiltonian</strong> – The Hofstadter Hamiltonian matrix of dimension <span class="math notranslate nohighlight">\(2q \times 2q\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="functions.models.html" class="btn btn-neutral float-left" title="functions.models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions.models.BasicKagomeHamiltonian.html" class="btn btn-neutral float-right" title="functions.models.BasicKagomeHamiltonian" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+functions.models
+================
+
+.. automodule:: functions.models
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      BasicHoneycombHamiltonian
+      BasicKagomeHamiltonian
+      BasicSquareHamiltonian
+      BasicTriangularHamiltonian
+      Hamiltonian
+      diag_func
+      nearest_neighbor_finder
+      nearest_neighbor_sorter
+      peierls_factor
+      reciprocal_vectors
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

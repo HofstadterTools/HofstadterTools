@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model &mdash; HofstadterTools 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Band Structure" href="band_structure.html" />
+    <link rel="prev" title="Theory" href="../theory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            HofstadterTools
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#basic-install">Basic install</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-pip">Using pip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview.html#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#advanced-install">Advanced install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#how-to-cite">How to Cite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview.html#contributing">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../theory.html">Theory</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/band_structure.html">Band Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/butterfly.html">Butterfly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#square-lattice">Square Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#triangular-lattice">Triangular Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#bravais-lattice">Bravais Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#honeycomb-lattice">Honeycomb Lattice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gallery.html#kagome-lattice">Kagome Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#general-questions">General Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#band-structure-questions">Band Structure Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#butterfly-questions">Butterfly Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/functions.html">functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.arguments.html">functions.arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html">functions.arguments.parse_input_arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.arguments.parse_input_arguments.html#functions.arguments.parse_input_arguments"><code class="docutils literal notranslate"><span class="pre">parse_input_arguments()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.band_structure.html">functions.band_structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html">functions.band_structure.U</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.U.html#functions.band_structure.U"><code class="docutils literal notranslate"><span class="pre">U()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html">functions.band_structure.berry_curv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.berry_curv.html#functions.band_structure.berry_curv"><code class="docutils literal notranslate"><span class="pre">berry_curv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html">functions.band_structure.geom_tensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.geom_tensor.html#functions.band_structure.geom_tensor"><code class="docutils literal notranslate"><span class="pre">geom_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html">functions.band_structure.wilson_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.band_structure.wilson_loop.html#functions.band_structure.wilson_loop"><code class="docutils literal notranslate"><span class="pre">wilson_loop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.butterfly.html">functions.butterfly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html">functions.butterfly.chern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.butterfly.chern.html#functions.butterfly.chern"><code class="docutils literal notranslate"><span class="pre">chern()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.models.html">functions.models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html">functions.models.BasicHoneycombHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicHoneycombHamiltonian.html#functions.models.BasicHoneycombHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicHoneycombHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html">functions.models.BasicKagomeHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicKagomeHamiltonian.html#functions.models.BasicKagomeHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicKagomeHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html">functions.models.BasicSquareHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicSquareHamiltonian.html#functions.models.BasicSquareHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicSquareHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html">functions.models.BasicTriangularHamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.BasicTriangularHamiltonian.html#functions.models.BasicTriangularHamiltonian"><code class="docutils literal notranslate"><span class="pre">BasicTriangularHamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html">functions.models.Hamiltonian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.Hamiltonian.html#functions.models.Hamiltonian"><code class="docutils literal notranslate"><span class="pre">Hamiltonian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html">functions.models.diag_func</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.diag_func.html#functions.models.diag_func"><code class="docutils literal notranslate"><span class="pre">diag_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html">functions.models.nearest_neighbor_finder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_finder.html#functions.models.nearest_neighbor_finder"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_finder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html">functions.models.nearest_neighbor_sorter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.nearest_neighbor_sorter.html#functions.models.nearest_neighbor_sorter"><code class="docutils literal notranslate"><span class="pre">nearest_neighbor_sorter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html">functions.models.peierls_factor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.peierls_factor.html#functions.models.peierls_factor"><code class="docutils literal notranslate"><span class="pre">peierls_factor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html">functions.models.reciprocal_vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.models.reciprocal_vectors.html#functions.models.reciprocal_vectors"><code class="docutils literal notranslate"><span class="pre">reciprocal_vectors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.plotting.html">functions.plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html">functions.plotting.band_structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.band_structure.html#functions.plotting.band_structure"><code class="docutils literal notranslate"><span class="pre">band_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html">functions.plotting.butterfly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.plotting.butterfly.html#functions.plotting.butterfly"><code class="docutils literal notranslate"><span class="pre">butterfly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/functions.utility.html">functions.utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html">functions.utility.create_filename</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.create_filename.html#functions.utility.create_filename"><code class="docutils literal notranslate"><span class="pre">create_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html">functions.utility.load_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.load_data.html#functions.utility.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html">functions.utility.read_t_from_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.read_t_from_file.html#functions.utility.read_t_from_file"><code class="docutils literal notranslate"><span class="pre">read_t_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html">functions.utility.save_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.save_data.html#functions.utility.save_data"><code class="docutils literal notranslate"><span class="pre">save_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html">functions.utility.Logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/functions.utility.Logger.html#functions.utility.Logger"><code class="docutils literal notranslate"><span class="pre">Logger</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_autosummary/models.html">models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/models.hofstadter.html">models.hofstadter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html">models.hofstadter.Hofstadter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/models.hofstadter.Hofstadter.html#models.hofstadter.Hofstadter"><code class="docutils literal notranslate"><span class="pre">Hofstadter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HofstadterTools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../theory.html">Theory</a></li>
+      <li class="breadcrumb-item active">Model</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bartandrews/HofstadterTools/blob/main/docs/source/theory/model.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="model">
+<h1>Model<a class="headerlink" href="#model" title="Permalink to this heading"></a></h1>
+<p>We consider a system of non-interacting quantum particles hopping on a lattice in the xy-plane and coupled to a gauge field. For the sake of concreteness, we discuss electrons of charge <span class="math notranslate nohighlight">\(-e\)</span> and mass <span class="math notranslate nohighlight">\(m_\mathrm{e}\)</span> in this section, governed by a 2D tight-binding model and coupled to a perpendicular magnetic field <span class="math notranslate nohighlight">\(\mathbf{B}=B\hat{\mathbf{e}}_z\)</span>. However, the theory is readily generalizable.</p>
+<p>The <strong>generalized Hofstadter model</strong> describing the electron motion is given by</p>
+<div class="math notranslate nohighlight">
+\[H = -\sum_{\kappa} \sum_{\langle ij \rangle_\kappa} t_\kappa e^{\mathrm{i}\theta_{ij}} c^\dagger_i c_j + \mathrm{H.c.},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\langle \dots \rangle_\kappa\)</span> denotes <span class="math notranslate nohighlight">\(\kappa\)</span>-th nearest neighbors on some regular Euclidean lattice (defined below) with corresponding hopping amplitudes <span class="math notranslate nohighlight">\(t_\kappa\)</span>, <span class="math notranslate nohighlight">\(e^{\mathrm{i}\theta_{ij}}\)</span> is the Peierls phase acquired by hopping from site <span class="math notranslate nohighlight">\(i\)</span> to site <span class="math notranslate nohighlight">\(j\)</span>, and <span class="math notranslate nohighlight">\(c^{(\dagger)}\)</span> is the electron (creation)annihilation operator <span id="id1">[<a class="reference internal" href="../references.html#id20" title="M. Y. Azbel. Energy spectrum of a conduction electron in a magnetic field. Journal of Experimental and Theoretical Physics, 19(3):634-645, 1964. URL: http://jetp.ras.ru/cgi-bin/e/index/e/19/3/p634?a=list.">Azbel64</a>, <a class="reference internal" href="../references.html#id17" title="P. G. Harper. Single band motion of conduction electrons in a uniform magnetic field. Proceedings of the Physical Society. Section A, 68(10):874, Oct 1955. URL: https://dx.doi.org/10.1088/0370-1298/68/10/304, doi:10.1088/0370-1298/68/10/304.">Harper55</a>, <a class="reference internal" href="../references.html#id15" title="D. R. Hofstadter. Energy levels and wave functions of Bloch electrons in rational and irrational magnetic fields. Physical Review B, 14:2239–2249, Sep 1976. URL: https://link.aps.org/doi/10.1103/PhysRevB.14.2239, doi:10.1103/PhysRevB.14.2239.">Hofstadter76</a>]</span>. We note that a set of nearest neighbors in HofstadterTools is defined as a set of sites that are <em>equidistant</em> from an origin site, i.e. a group of points that lie on a circle.</p>
+<p>The <strong>Peierls phase</strong> is the lattice-analogue of the Aharonov-Bohm phase and is given as</p>
+<div class="math notranslate nohighlight">
+\[\theta_{ij} = \frac{2\pi}{\phi_0} \int_i^j \mathbf{A}\cdot \mathrm{d}\mathbf{l},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_0\)</span> is the flux quantum, <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the vector potential, and <span class="math notranslate nohighlight">\(\mathrm{d}\mathbf{l}=(\mathrm{d}x,\mathrm{d}y)\)</span> is an infinitesimal line element from site <span class="math notranslate nohighlight">\(i=(X_i, Y_i)\)</span> to site <span class="math notranslate nohighlight">\(j=(X_j, Y_j)\)</span> <span id="id2">[<a class="reference internal" href="../references.html#id25" title="R. Peierls. Zur Theorie des Diamagnetismus von Leitungselektronen. Zeitschrift für Physik, 80(11):763-791, Nov 1933. URL: https://doi.org/10.1007/BF01342591, doi:10.1007/BF01342591.">Peierls33</a>]</span>. There is freedom in choosing the vector potential, such that <span class="math notranslate nohighlight">\(\mathbf{B} = \nabla \times \mathbf{A} = B\hat{\mathbf{e}}_z\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although there is freedom in choosing the vector potential, there may be strategy involved. Several investigations define an artificial Cartesian coordinate system to set up the Harper equation, instead of constructing separate equations for the basis sites <span id="id3">[<a class="reference internal" href="../references.html#id40" title="G.-Y. Oh. Energy spectrum of a triangular lattice in a uniform magnetic field: effect of next-nearest-neighbor hopping. Journal of the Korean Physical Society, 37:534-539, 11 2000. doi:10.3938/jkps.37.534.">Oh00</a>]</span>. For example, for the honeycomb lattice with lattice constant <span class="math notranslate nohighlight">\(a\)</span>, physicists often define the coordinates <span class="math notranslate nohighlight">\((x,y)=(mb,nc)\)</span>, where <span class="math notranslate nohighlight">\(b=a/2\)</span> and <span class="math notranslate nohighlight">\(c=\sqrt{3}a/6\)</span> <span id="id4">[<a class="reference internal" href="../references.html#id9" title="B. Andrews and A. Soluyanov. Fractional quantum Hall states for moiré superstructures in the Hofstadter regime. Physical Review B, 101:235312, Jun 2020. URL: https://link.aps.org/doi/10.1103/PhysRevB.101.235312, doi:10.1103/PhysRevB.101.235312.">Andrews20</a>]</span>. The advantage of this approach is that it allows you to address every site on the lattice using a single discrete coordinate system. In order to construct the Harper equation, we then eliminate one of these coordinates using the plane wave ansatz, and are left with a difference equation in the remaining direction. If it is not possible to construct a discrete coordinate system in one direction because, for example, the ratio of site spacings is irrational, then it is strategic to choose the vector potential in the orthogonal direction. Moreover, when the Harper equation is defined using such artificial coordinates, then the gauge may have an impact on the periodicity of the spectrum. The simplest example of this is for the nearest-neighbor Hofstadter model on the triangular lattice with <span class="math notranslate nohighlight">\(b=a/2\)</span> and <span class="math notranslate nohighlight">\(c=\sqrt{3}a/2\)</span>. A vector potential with a magentic unit cell extended in the x-direction yields an aperiodic spectrum, when <span class="math notranslate nohighlight">\(n_\phi=BA_\mathrm{UC}/\phi_0\)</span>, whereas a vector potential with a magnetic unit cell extended in the y-direction yields a periodic spectrum (try it!). We note that when addressing the lattice in terms of unit cells and basis sites, as in HofstadterTools, the vector potential is a genuine gauge choice with no unintended side-effects. Nevertheless, inspired by this observation, since our <span class="math notranslate nohighlight">\(\mathbf{a}_1=(a, 0)\)</span> vector is fixed, our angle <span class="math notranslate nohighlight">\(\theta\)</span> is defined in the positive direction, and hence a discrete coordinate system in the x-direction is generally impossible to construct for the underlying Bravais lattice, we work with the Landau gauge in the y-direction, with conserved <span class="math notranslate nohighlight">\(k_x\)</span> momentum.</p>
+</div>
+<p>In HofstadterTools, we choose <strong>Landau gauge</strong> in the y-direction, with a conserved <span class="math notranslate nohighlight">\(k_x\)</span> momentum, such that <span class="math notranslate nohighlight">\(\mathbf{A}=-By\hat{\mathbf{e}}_x\)</span>. We note that this is sometimes referred to as Landau gauge in the x-direction, depending on whether you are referring to the dimensions of the magnetic unit cell or the components of the vector potential. Parameterizing the expression for the Peierls phase allows us to write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\theta_{ij} = -\frac{2\pi B}{\phi_0} \int_0^1
+\begin{pmatrix} Y_i + (Y_j - Y_i)\tau \\ 0 \end{pmatrix} \cdot \begin{pmatrix} X_j - X_i \\ Y_j - Y_i \end{pmatrix} \mathrm{d}\tau,\end{split}\]</div>
+<p>which reduces to</p>
+<div class="math notranslate nohighlight">
+\[\theta_{ij} = -\frac{2\pi B}{\phi_0} \Delta X \left( Y_i + \frac{\Delta Y}{2} \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta X = X_j - X_i\)</span> and <span class="math notranslate nohighlight">\(\Delta Y = Y_j - Y_i\)</span>. Notice that this expression depends on <em>absolute</em> y-coordinates but only <em>relative</em> x-coordinates. The effect of the Peierls transformation is that it enlarges the unit cell (UC) of dimensions <span class="math notranslate nohighlight">\(1\times 1\)</span> to a <strong>magnetic unit cell (MUC)</strong> of dimensions <span class="math notranslate nohighlight">\(1\times q\)</span>. The lattice translation operators then form the <strong>magnetic translation group</strong> <span id="id5">[<a class="reference internal" href="../references.html#id23" title="J. Zak. Magnetic translation group. Physical Review, 134:A1602–A1606, Jun 1964. URL: https://link.aps.org/doi/10.1103/PhysRev.134.A1602, doi:10.1103/PhysRev.134.A1602.">Zak64</a>]</span>. We note that although the dimensions of the MUC is a gauge choice, its area, <span class="math notranslate nohighlight">\(q\)</span>, is not.</p>
+<p>In the Hofstadter model, the magnetic field strength is often expressed in terms of a <strong>flux density</strong> <span class="math notranslate nohighlight">\(n_\phi\)</span>. Typically, this density is defined with respect to the UC area <span class="math notranslate nohighlight">\(A_\mathrm{UC}\)</span>, such that <span class="math notranslate nohighlight">\(n_\phi=B A_{\mathrm{UC}}/\phi_0\)</span>. However, this is not always the case. In cases where the minimal area enclosed by electron hopping <span class="math notranslate nohighlight">\(A_\mathrm{min}\)</span> is smaller than <span class="math notranslate nohighlight">\(A_\mathrm{UC}\)</span> or an effective UC area spanned by the hopping terms, then it is necessary to define the flux density with respect to <span class="math notranslate nohighlight">\(A_\mathrm{min}\)</span> in order to guarantee the correct periodicity and reveal the entire spectrum. For example, for the nearest-neighbor Hofstadter model on the triangular lattice we have <span class="math notranslate nohighlight">\(A_\mathrm{UC}=a^2\)</span> but <span class="math notranslate nohighlight">\(A_\mathrm{min}=a^2/2\)</span>, and so we need to define <span class="math notranslate nohighlight">\(n_\phi=B A_{\mathrm{min}}/\phi_0\)</span> in order to reveal the entire spectrum. This equates to dividing the flux density by a <strong>periodicity factor</strong> of 2.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alternatively, the periodicity of the spectrum may be recovered by performing a unitary transformation of the wavefunctions in the Schrödinger equation. This is sometimes referred to a Rammal transformation <span id="id6">[<a class="reference internal" href="../references.html#id14" title="R. Rammal. Landau level spectrum of Bloch electrons in a honeycomb lattice. Journal De Physique, 46(8):1345-1354, 1985. URL: https://doi.org/10.1051/jphys:019850046080134500, doi:10.1051/jphys:019850046080134500.">Rammal85</a>]</span>. For the sake of simplicity, we have made the decision not to enforce periodicity in this way in HofstadterTools.</p>
+</div>
+<p>Following a suitable definition of <span class="math notranslate nohighlight">\(n_\phi\)</span>, we can substitute this into our expression for the Peierls phase. Since the Peierls factor is a complex phase factor, we consider rational flux densities <span class="math notranslate nohighlight">\(n_\phi=p/q\)</span>, where <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> are coprime integers. Moreover, since the denominator of the flux density <span class="math notranslate nohighlight">\(q\)</span> is the MUC area in units of UCs, there will ultimately be <span class="math notranslate nohighlight">\(N_\mathrm{b}q\)</span> bands in the spectrum, where <span class="math notranslate nohighlight">\(N_\mathrm{b}\)</span> is the number of sites in the basis.</p>
+<a class="reference internal image-reference" href="../_images/lattice.png"><img alt="../_images/lattice.png" class="align-center" src="../_images/lattice.png" style="width: 60%;" /></a>
+<p>In the figure above, we show an example lattice annotated with the relevant unit cells. This figure also serves to define the variables in HofstadterTools. We construct a lattice by repeating some basis in multiples of the Bravais vectors <span class="math notranslate nohighlight">\(\mathbf{a}_1=(a,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{a}_2=\alpha a (\cos\theta, \sin\theta)\)</span>, where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span> (not to be confused with the Peierls phase) are measures of the Bravais lattice <strong>anisotropy</strong> and <strong>obliqueness</strong>, respectively. In addition, the Bravais lattice has a collection of <span class="math notranslate nohighlight">\(N_\mathrm{b}\)</span> basis sites at positions <span class="math notranslate nohighlight">\(\{\mathbf{a}_\mathrm{b}\}\)</span> relative to the UC origin. The UC is defined as the span of <span class="math notranslate nohighlight">\(\{\mathbf{a}_1, \mathbf{a}_2\}\)</span> and the MUC is defined as the span of <span class="math notranslate nohighlight">\(\{\mathbf{a}_{\mathrm{MUC},1}, \mathbf{a}_{\mathrm{MUC},2}\}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{a}_{\mathrm{MUC},1}=\mathbf{a}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{a}_{\mathrm{MUC},2}=q\mathbf{a}_2\)</span>. If the appropriate hoppings exist, there may be a distinct minimal hopping plaquette area <span class="math notranslate nohighlight">\(A_\mathrm{min}\)</span>, as shown in the example. By choosing the lattice constant, anisotropy, obliqueness, and a set of basis vectors, we can construct any regular Euclidean lattice.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../theory.html" class="btn btn-neutral float-left" title="Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="band_structure.html" class="btn btn-neutral float-right" title="Band Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bartholomew Andrews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

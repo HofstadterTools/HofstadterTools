@@ -1,0 +1,6 @@
+functions.plotting.band\_structure
+==================================
+
+.. currentmodule:: functions.plotting
+
+.. autofunction:: band_structure
