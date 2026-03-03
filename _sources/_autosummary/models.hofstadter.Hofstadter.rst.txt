@@ -1,0 +1,54 @@
+models.hofstadter.Hofstadter
+============================
+
+- full name: models.hofstadter.Hofstadter
+- parent module: :mod:`models.hofstadter`
+- type: class
+
+.. currentmodule:: models.hofstadter
+
+.. rubric:: Inheritance Diagram
+
+.. inheritance-diagram:: models.hofstadter.Hofstadter
+    :parts: 1
+
+|
+
+.. autoclass:: Hofstadter
+   :members:
+   :inherited-members:
+   :show-inheritance:
+   :special-members: __init__
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Hofstadter.__init__
+      ~Hofstadter.hamiltonian
+      ~Hofstadter.plot_lattice
+      ~Hofstadter.unit_cell
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Hofstadter.p
+      ~Hofstadter.q
+      ~Hofstadter.a0
+      ~Hofstadter.t
+      ~Hofstadter.lat
+      ~Hofstadter.alpha
+      ~Hofstadter.theta0
+      ~Hofstadter.theta1
+      ~Hofstadter.theta
+      ~Hofstadter.period
+   
+   
