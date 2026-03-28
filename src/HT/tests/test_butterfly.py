@@ -41,8 +41,8 @@ def butterfly(q, t, lat, alpha=1, theta=(1, 3), period=1):
         model = Hofstadter(p, q, t=t, lat=lat, alpha=alpha, theta=theta, period=period)
 
         # define flux density
-        if gcd(p, q) != 1:  # nphi must be a coprime fraction
-            continue
+        if gcd(p, q) != 1:  # p, q are coprime integers by definition
+            continue  # all rational nphi are allowed, but we choose to fix q
         nphi = p / q
 
         # diagonalize Hamiltonian

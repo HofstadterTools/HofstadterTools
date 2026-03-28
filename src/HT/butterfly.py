@@ -62,8 +62,8 @@ def main():
             raise ValueError("model is not defined.")
 
         # define flux density
-        if gcd(p, q) != 1:  # nphi must be a coprime fraction
-            continue
+        if gcd(p, q) != 1:  # p, q are coprime integers by definition
+            continue  # all rational nphi are allowed, but we choose to fix q
         nphi = p / q
 
         # diagonalize Hamiltonian
