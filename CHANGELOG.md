@@ -28,3 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## v1.0.5
 
 - Minor corrections and updates. See the commit history for further details.
+
+## v1.0.6
+
+- Minor corrections and updates. See the commit history for further details.
