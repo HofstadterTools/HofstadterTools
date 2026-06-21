@@ -1,0 +1,38 @@
+functions.utility.Logger
+========================
+
+- full name: functions.utility.Logger
+- parent module: :mod:`functions.utility`
+- type: class
+
+.. currentmodule:: functions.utility
+
+.. rubric:: Inheritance Diagram
+
+.. inheritance-diagram:: functions.utility.Logger
+    :parts: 1
+
+|
+
+.. autoclass:: Logger
+   :members:
+   :inherited-members:
+   :show-inheritance:
+   :special-members: __init__
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Logger.__init__
+      ~Logger.flush
+      ~Logger.write
+   
+   
+
+   
+   
+   

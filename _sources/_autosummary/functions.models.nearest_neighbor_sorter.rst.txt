@@ -1,0 +1,6 @@
+functions.models.nearest\_neighbor\_sorter
+==========================================
+
+.. currentmodule:: functions.models
+
+.. autofunction:: nearest_neighbor_sorter

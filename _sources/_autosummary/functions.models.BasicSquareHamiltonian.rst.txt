@@ -1,0 +1,6 @@
+functions.models.BasicSquareHamiltonian
+=======================================
+
+.. currentmodule:: functions.models
+
+.. autofunction:: BasicSquareHamiltonian

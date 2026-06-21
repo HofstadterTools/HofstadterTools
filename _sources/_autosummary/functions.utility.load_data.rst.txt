@@ -1,0 +1,6 @@
+functions.utility.load\_data
+============================
+
+.. currentmodule:: functions.utility
+
+.. autofunction:: load_data

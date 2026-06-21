@@ -1,0 +1,33 @@
+functions.band\_structure
+=========================
+
+.. automodule:: functions.band_structure
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      U
+      berry_curv
+      geom_tensor
+      wilson_loop
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

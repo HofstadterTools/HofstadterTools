@@ -1,0 +1,6 @@
+functions.arguments.parse\_input\_arguments
+===========================================
+
+.. currentmodule:: functions.arguments
+
+.. autofunction:: parse_input_arguments

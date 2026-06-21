@@ -1,0 +1,31 @@
+functions.plotting
+==================
+
+.. automodule:: functions.plotting
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+   
+      band_structure
+      butterfly
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

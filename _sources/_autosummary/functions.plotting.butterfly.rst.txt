@@ -1,0 +1,6 @@
+functions.plotting.butterfly
+============================
+
+.. currentmodule:: functions.plotting
+
+.. autofunction:: butterfly
