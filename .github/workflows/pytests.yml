@@ -16,7 +16,7 @@ jobs:
       - uses: ts-graphviz/setup-graphviz@v2
       - name: Install dependencies
         run: |
-          pip install .
+          pip install ".[dev]"
       - name: Set the PYTHONPATH
         run: |
           echo "PYTHONPATH=$PYTHONPATH:src" >> "$GITHUB_ENV"

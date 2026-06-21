@@ -160,11 +160,11 @@ For advanced usage of HofstadterTools, i.e. in cases where you *do* plan on edit
 
     user@domain:path/to/HofstadterTools$ pip install -e .
 
-Alternatively, if you plan on building the documentation locally, the optional ``docs`` dependencies need to be installed.
+Note that if you plan on running the tests, the optional ``dev`` dependencies need to be installed. Additionally, if you plan on building the documentation locally, the optional ``docs`` dependencies need to be installed.
 
 .. code:: console
 
-    user@domain:path/to/HofstadterTools$ pip install -e ".[docs]"
+    user@domain:path/to/HofstadterTools$ pip install -e ".[dev,docs]"
 
 3. [Optional] Build and view the documentation locally. The optional ``clean`` argument below removes files from the build directory, and ``firefox`` can be replaced with any web browser.
 
@@ -184,7 +184,7 @@ Alternatively, if you plan on building the documentation locally, the optional `
 Testing
 ~~~~~~~
 
-You can confirm that HofstadterTools is correctly installed by running the pytests.
+You can confirm that HofstadterTools is correctly installed by running the pytests. This assumes that the optional ``dev`` dependencies are installed.
 
 .. code:: console
 

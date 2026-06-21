@@ -23,7 +23,6 @@ dependencies = [
     "matplotlib",
     "prettytable",
     "tqdm",
-    "pytest",
     "ipython",
     "jupyter",
     "PyQt5"
@@ -51,6 +50,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
+dev = ["pytest"]
 docs = [
     "sphinx==5.3.0",
     "sphinx-rtd-theme",
