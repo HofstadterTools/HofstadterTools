@@ -2,9 +2,6 @@
 
 # --- external imports
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-from matplotlib.patches import Polygon
 from math import gcd
 # --- internal imports
 from HT.functions import models as fm
@@ -267,6 +264,10 @@ class Hofstadter:
 
     def plot_lattice(self):
         """Plot the lattice."""
+
+        import matplotlib.pyplot as plt
+        import matplotlib.ticker as ticker
+        from matplotlib.patches import Polygon
 
         # extract parameters
         _, avec, abasisvec, _, _ = self.unit_cell()
