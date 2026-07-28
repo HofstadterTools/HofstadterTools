@@ -2,8 +2,6 @@
 
 # --- external imports
 import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import axes3d
 from copy import deepcopy
 
 
@@ -679,6 +677,9 @@ def BasicKagomeHamiltonian(t, p, q, k, period):
 
 
 if __name__ == '__main__':
+
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import axes3d
 
     t = [1, 0, -0.25]
 
